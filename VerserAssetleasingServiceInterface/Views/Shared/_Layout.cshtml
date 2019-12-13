@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type='text/javascript'>
+        var appInsights=window.appInsights||function(config)
+        {
+            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
+            var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f; for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js',
+                u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax']; i.length;) r('track' + i.pop());
+            return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o)
+            { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey:'93a0c5df-77c5-4c09-ad45-fbdecd2c6578'
+        });
+
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("VERSER ASSET LEASING", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            TASKS
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li> @Html.ActionLink("Create End Users", "Index", "RegisterEndUsers")</li>
+                            <li> @Html.ActionLink("Create Company", "Index", "RegisterCompany")</li>
+                            <li>@Html.ActionLink("Create Assets", "Index", "RegisterAssets")</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            LISTS
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>  @Html.ActionLink("Company List", "Index", "Company")</li>
+
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            MASTER  DATA
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Assets", "Index", "assets")</li>
+                            <li>@Html.ActionLink("EndUsers", "Index", "EndUsers")</li>
+                            <li>@Html.ActionLink("Contracts", "Index", "Contracts")</li>
+                            <li>@Html.ActionLink("Carriers", "Index", "Carriers")</li>
+                            <li>@Html.ActionLink("Colours", "Index", "Colours")</li>
+                            <li>@Html.ActionLink("DeviceCategories", "Index", "DeviceCategories")</li>
+                            <li>@Html.ActionLink("InventoryItems", "Index", "InventoryItems")</li>
+                        </ul>
+                    </li>
+                    <ul class="nav navbar-nav" style="float:right">
+                        @if (Session["FullUserName"] != null)
+                        {
+                            <li style="font-size:small;color:white;font-weight:100;float:right">@Html.ActionLink("Logout", "Login", "Login")</li>
+                        }
+                        @*else
+                        {
+                            <li style="font-size:small;color:white;font-weight:100;float:right">@Html.ActionLink("Login", "Login", "Login")</li>
+                        }*@
+                    </ul>
+                    @*
+        <li><a href="Catalogue">Catalogue</a></li>
+        <li><a href="LifecycleStatus">Lifecycle Status</a></li>
+        <li><a href="Oem">OEMs</a></li>
+        <li><a href="OperatingSystems">Operating Systems</a></li>
+        <li><a href="Plans">Plans</a></li>
+        <li><a href="FormFactors">Form Factors</a></li>
+        <li><a href="Assets">Assets</a></li>   *@
+                </ul>
+                @*@Html.Partial("_LoginPartial")*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<style>
+
+
+    .navbar-inverse {
+        background-color: #e2e2e2 !important;
+        border-color: #D3D3D3 !important;
+    }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #959ca1;
+            font-family: sans-serif;
+            font-weight: 600;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover {
+                color: #f79636;
+            }
+
+    a {
+        color: #959ca1;
+    }
+
+    .navbar, .navbar div {
+        min-height: 40px;
+        max-height: 60px;
+        height: 50px;
+        /*// margin-left: 60px;*/
+    }
+    /* Additional styles to style some of your child elements */
+    .navbar-brand {
+        padding: 10px;
+    }
+
+    .navbar .navbar-toggle {
+        padding: 4px 10px;
+    }
+</style>

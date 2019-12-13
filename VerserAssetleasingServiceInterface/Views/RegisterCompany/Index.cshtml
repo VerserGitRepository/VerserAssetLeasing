@@ -1,0 +1,184 @@
+﻿@model VerserAssetleasingServiceInterface.Models.CompanyListViewModel
+
+@{
+    ViewBag.Title = "Register Company";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<div class="table-bordered" style="margin:20px; width:800px">
+    <div class="panel-heading" align="center" style="height:30PX;background-color:#FFA500;color:white; vertical-align:top">
+        <h3 class="panel-title">REGISTER NEW COMPANY</h3>
+    </div>
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
+        <form>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Company Name", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group col-md-5 col-md-offset-1">
+                    @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.addressLine1, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group col-md-5 col-md-offset-1">
+                    @Html.Label("Suburb", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.suburb, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.suburb, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group col-md-5 col-md-offset-1">
+                    @Html.Label("Postcode", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.postcode, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.postcode, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Phone", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group col-md-5 col-md-offset-1">
+                    @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Service Start Date", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.EditorFor(model => model.serviceStartDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.serviceStartDate, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group col-md-5 col-md-offset-1">
+                    @Html.Label("Service End Date", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.EditorFor(model => model.serviceEndDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.serviceEndDate, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
+        <input type="submit" value="REGISTER" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<style>
+    .form-group {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        margin: 0px;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
+
+    .col-md-6 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .row.no-pad > [class*='col-'] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .btn-warning {
+        background-color: #FFA500;
+        font-size: 14px;
+    }
+
+    .form-control {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
+
+    .panel-footer {
+        padding: 3px 30px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #dddddd;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    .form-group.required .control-label:after {
+        content: "*";
+        color: red;
+        padding-bottom: 15px;
+</style>

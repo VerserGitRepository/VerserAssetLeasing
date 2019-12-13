@@ -1,0 +1,219 @@
+﻿@model IEnumerable<VerserAssetleasingServiceInterface.Models.EndUsersListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<h4 align="center" style="color:GrayText;font-weight:600;"></h4>
+<br>
+
+<div class="container" style="margin-left:12px;padding-top:2px">
+    <div class="row" style="width:120%">
+        <div class="col-md-12">
+            <table class="table table-bordered  table-responsive table-hover" id="mainTable" @*style="font-size:14px;width:132%;margin-right:10px;color:black"*@>
+                <thead style="background-color:#FFA500; color:white">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.firstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.employeeNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.department)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.costCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.endUserStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.commencementDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.terminationDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.userName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.createdBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.created)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modifiedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modified)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.endUser_Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.endUser_Site)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.firstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.department)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.costCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.endUserStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.commencementDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.terminationDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.userName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.createdBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.modifiedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.modified)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.endUser_Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.endUser_Site)
+                            </td>
+                            @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                </td>*@
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="~/Scripts/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mainTable').DataTable();
+        });
+                //  ExportTimesSheetToExcel", "Candidates"
+
+    </script>
+    <body>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
+    </body>
+}
+
+    <style>
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #FFA500;
+            border-color: white;
+        }
+
+        .btn-warning {
+            background-color: #FFA500;
+            font-size: 11px;
+        }
+
+        .black {
+            color: black;
+        }
+
+        body {
+            padding-top: 50px;
+            padding-bottom: 5px;
+            /*margin-left:5px;*/
+        }
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 5px;
+            margin-left: 5px;
+        }
+
+        .dataTables_filter {
+            float: right;
+        }
+
+        .container {
+            font-size: 12px;
+            padding-left: 50px;
+            padding-right: 5px;
+        }
+
+        .page-item.active .page-link {
+            color: white !important;
+            background-color: orange !important;
+            border-color: gray !important;
+        }
+
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #FFA500;
+            border-color: white;
+        }
+
+        .glyphicon {
+            font-size: 15px;
+            color: lightgray;
+        }
+
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #FFA500;
+            border-color: white;
+        }
+
+
+        .page-item.active .page-link {
+            color: white !important;
+            background-color: orange !important;
+            border-color: gray !important;
+        }
+    </style>

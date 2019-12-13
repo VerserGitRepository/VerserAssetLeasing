@@ -1,0 +1,123 @@
+﻿@model IEnumerable<VerserAssetleasingServiceInterface.Models.InventoryItemsListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.warrantyPeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maintenancePeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierLeadTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItem_Colour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItem_DeviceCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItem_FormFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItem_OEM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventoryItem_OperatingSystem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.warrantyPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maintenancePeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplierLeadTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItem_Colour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItem_DeviceCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItem_FormFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItem_OEM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventoryItem_OperatingSystem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createdBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
