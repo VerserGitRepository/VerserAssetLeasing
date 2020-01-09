@@ -172,6 +172,7 @@
     <Compile Include="Models\AssetsListViewModel.cs" />
     <Compile Include="Models\CarriersListViewModel.cs" />
     <Compile Include="Models\ColoursListViewModel.cs" />
+    <Compile Include="Models\CompanyEntryModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
     <Compile Include="Models\ContractsListViewModel.cs" />
     <Compile Include="Models\datetime.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ReturnModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CarriersServicehelper.cs" />
@@ -202,6 +204,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\download.png" />
+    <Content Include="Images\Verser.png" />
+    <Content Include="Images\VerserLogo.png" />
     <Content Include="Logo\Verser.png" />
     <Content Include="Logo\VerserLogo1.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -299,7 +304,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace VerserAssetleasingServiceInterface.Models
 {
-    public class AssetsListViewModel
+    public class AssetEntryModel
     {
         public int id { get; set; }
         public string AssetID { get; set; }

@@ -4,9 +4,20 @@
     ViewBag.Title = "Register Assets";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <style type="text/css">
 
     #deceased {
@@ -27,9 +38,6 @@
 </style>
 
 
-
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -43,7 +51,7 @@
 
         <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
             <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.AssetID, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.AssetID, "", new { @class = "text-danger" })
@@ -51,7 +59,7 @@
             </div>
 
             <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.SerialNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
@@ -59,7 +67,7 @@
             </div>
 
             <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_Company, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Asset_Company, "", new { @class = "text-danger" })
@@ -67,7 +75,7 @@
             </div>
 
             <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.IMEI, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.IMEI, "", new { @class = "text-danger" })
@@ -109,7 +117,7 @@
             <div class="form-group col-md-6" style="padding-top:5px;">
                 @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.DecomissionDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DecomissionDate, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DatePickId" } })
                     @Html.ValidationMessageFor(model => model.DecomissionDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -170,141 +178,67 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Modified, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Modified, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Modified, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_Contract, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_Contract, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Asset_Contract, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_EndUser, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_EndUser, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Asset_EndUser, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_LifecycleStatus, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_LifecycleStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Asset_LifecycleStatus, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_InventoryItem, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_InventoryItem, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Asset_InventoryItem, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6" style="padding-top:5px;">
-                @Html.LabelFor(model => model.Asset_OSVersion, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_OSVersion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Asset_OSVersion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            
         </div>
-            <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
-                <input type="submit" value="REGISTER" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
-            </div>
+        <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
+            <input type="submit" value="REGISTER" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
         </div>
-        }
+    </div>
+}
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .form-group {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        margin: 0px;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        <style>
-            .form-group {
-                margin-bottom: 2px;
-                padding-right: 0;
-                padding-left: 0;
-                margin: 0px;
-                font-size: 12px;
-                border-radius: 9px;
-                padding-bottom: 5px;
-                margin-top: 2px;
-            }
+    .col-md-6 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
 
-            .col-md-6 {
-                position: relative;
-                min-height: 1px;
-                padding-right: 0px;
-                padding-left: 0px;
-            }
+    .row.no-pad > [class*='col-'] {
+        padding-right: 0;
+        padding-left: 0;
+    }
 
-            .row.no-pad > [class*='col-'] {
-                padding-right: 0;
-                padding-left: 0;
-            }
+    .btn-warning {
+        background-color: #FFA500;
+        font-size: 14px;
+    }
 
-            .btn-warning {
-                background-color: #FFA500;
-                font-size: 14px;
-            }
+    .form-control {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
 
-            .form-control {
-                margin-bottom: 2px;
-                padding-right: 0;
-                padding-left: 0;
-                font-size: 12px;
-                border-radius: 9px;
-                padding-bottom: 5px;
-                margin-top: 2px;
-            }
+    .panel-footer {
+        padding: 3px 30px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #dddddd;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
 
-            .panel-footer {
-                padding: 3px 30px;
-                background-color: #f5f5f5;
-                border-top: 1px solid #dddddd;
-                border-bottom-right-radius: 3px;
-                border-bottom-left-radius: 3px;
-            }
-
-            .form-group.required .control-label:after {
-                content: "*";
-                color: red;
-                padding-bottom: 15px;
-        </style>
+    .form-group.required .control-label:after {
+        content: "*";
+        color: red;
+        padding-bottom: 15px;
+</style>

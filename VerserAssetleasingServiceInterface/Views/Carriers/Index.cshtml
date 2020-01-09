@@ -33,12 +33,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.created)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.modifiedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.modified)
-                        </th>
+                
 
                     </tr>
                 </thead>
@@ -56,12 +51,12 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.created)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.modifiedBy)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.modified)
-                            </td>
+                            </td>*@
                             @*<td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.id }) |

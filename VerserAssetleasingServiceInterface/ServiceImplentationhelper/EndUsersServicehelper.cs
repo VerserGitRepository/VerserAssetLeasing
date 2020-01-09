@@ -34,5 +34,39 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return projectsList;
         }
+        public static async Task<ReturnModel> AddEndUser(EndUsersListViewModel theModel)
+        {
+            List<EndUsersListViewModel> projectsList = new List<EndUsersListViewModel>();
+            HttpResponseMessage response = new HttpResponseMessage();
+            ReturnModel ReturnResult = new ReturnModel();
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(BaseUri);
+                    response = client.PostAsJsonAsync(string.Format("CreateEndUsers/Create"), theModel).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();
+                        if (ReturnResult.Message == null || ReturnResult.Message == string.Empty)
+                        {
+                            ReturnResult.Message = "User has been registered successfully.";
+                            
+                        }
+                        
+                    }
+                    else
+                    {
+                        ReturnResult.Message = "There is an issue with registration. The detail are " + response.ReasonPhrase;
+                        
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ReturnResult.Message = "There is an issue with registration. The detail are " + ex.Message;
+                }
+            }
+            return ReturnResult;
+        }
     }
 }

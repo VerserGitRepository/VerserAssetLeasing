@@ -35,5 +35,25 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
         }
 
 
+        public static async Task<ReturnModel> CompanyAdd(CompanyEntryModel CompanyEntryRecord)
+        {
+            ReturnModel ReturnResult = new ReturnModel();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.PostAsJsonAsync(string.Format("Company/Create"), CompanyEntryRecord).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();
+                    HttpContext.Current.Session["ResultMessage"] = ReturnResult.Message;
+                }
+                else
+                {
+                    HttpContext.Current.Session["ErrorMessage"] = ReturnResult.Message;
+                }
+            }
+            return ReturnResult;
+        }
+
     }
 }

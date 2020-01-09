@@ -9,7 +9,7 @@ namespace VerserAssetleasingServiceInterface.Models
     {
         public int id { get; set; }
         public byte[] image { get; set; }
-        public int inventoryItemID { get; set; }
+        public string inventoryItemID { get; set; }
         public string inventoryItemName { get; set; }
         public string model { get; set; }
         public string warrantyPeriod { get; set; }

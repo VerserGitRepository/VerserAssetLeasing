@@ -19,5 +19,12 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return View(enduserdata);
         }
+        //[HttpPost]
+        //public ActionResult AddEndUser(EndUsersListViewModel theModel)
+        //{
+        //    ReturnModel model = EndUsersServicehelper.AddEndUser(theModel).Result;
+        //    TempData["StatusMessage"] = model.Message;
+        //    return View("Index");
+        //}
     }
 }

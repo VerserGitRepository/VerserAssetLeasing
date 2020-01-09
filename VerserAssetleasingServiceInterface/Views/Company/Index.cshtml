@@ -6,7 +6,13 @@
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
+@*<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>*@
+@*<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
@@ -14,116 +20,135 @@
 <h4 align="center" style="color:GrayText;font-weight:600;"></h4>
 <br>
 
-<div class="container" style="margin-left:12px;padding-top:2px">
-    <div class="row" style="width:120%">
-        <div class="col-md-12">
+<div class="container-fluid" style="margin-left:12px;padding-top:2px">
+    <div class="row" style="width:80%">
+        <div class="col-md-6">
             <table class="table table-bordered  table-responsive table-hover" id="mainTable" @*style="font-size:14px;width:132%;margin-right:10px;color:black"*@>
                 <thead style="background-color:#FFA500; color:white">
                     <tr>
                         <th>
-                            @Html.DisplayName("Company Name")
+                            @Html.DisplayName("Company")
                         </th>
-                        <th>
-                            @Html.DisplayName("Address Line 1")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Address Line 2")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Suburb")
-                        </th>
-                        <th>
-                            @Html.DisplayName("State")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Postcode")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Phone")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Email")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Web")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Login")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Created By")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Service Start Date")
-                        </th>
-                        <th>
-                            @Html.DisplayName("ServiceEndDate")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Created")
-                        </th>
-
-                    </tr>
+                                           </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-
-                        <tr>
+                                                <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.companyName)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.addressLine1)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.addressLine2)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.suburb)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.state)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.postcode)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.phone)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.web)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.login)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.createdBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.serviceStartDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.serviceEndDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.created)
-                            </td>
-                            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                </td>*@
+                         
                         </tr>
                     }
                 </tbody>
-               
-                </table>
+
+            </table>
         </div>
-    </div>
+        <div class="container-fluid">
+            <div class="col-md-6">
+                @*<div class="page-header">
+                    <h2>Details</h2>
+                </div>*@
+                <div class="row">
+                    <div class="container table-bordered" style="margin:20px; width:700px">
+                        <br>
+                        <form>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
+                                <div class="col-sm-10">
+                                    <img id="img1" alt="Image1.png" src="@Url.Content("~/Images/VerserLogo.png")">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Company">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Address">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Fax">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <br>
+                    <div class="row grid-divider">
+                        <table class="table-bordered" style="margin:20px; width:1000px" id="mainTable1">
+                            <thead style="background-color:#FFA500; color:white">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("SiteName")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Address")
+                                    </th>
+                                    @*<th>
+                                        @Html.DisplayName("AddressLine 2")
+                                    </th>*@
+                                    <th>
+                                        @Html.DisplayName("Suburb")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("State")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Postcode")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Company")
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kimberley</td>
+                                    <td>Police Complex 21 MArine Terrace</td>
+                                    <td>Broome</td>
+                                    <td>WA</td>
+                                    <td>6155</td>
+                                    <td>Brightstar</td>
+                                 
+                                </tr>
+                                <tr>
+                                    <td>Pilbara</td>
+                                    <td>Police Complex 21 MArine Terrace</td>
+                                    <td>CBD</td>
+                                    <td>NSW</td>
+                                    <td>6155</td>
+                                    <td>Brightstar</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 @section Scripts {
@@ -133,8 +158,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
+            $('#mainTable1').DataTable();
         });
-            //  ExportTimesSheetToExcel", "Candidates"
+                    //  ExportTimesSheetToExcel", "Candidates"
 
     </script>
     <body>
@@ -144,6 +170,43 @@
     </body>
 }
 <style>
+    .row.vdivide [class*='col-']:not(:last-child):after {
+        background: #e0e0e0;
+        width: 1px;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        min-height: 70px;
+    }
+    .col-padding {
+        padding: 0 15px;
+    }
+
+    .grid-divider {
+        position: relative;
+        padding: 0;
+        width: 1000px;
+    }
+
+        .grid-divider > [class*='col-'] {
+            position: static;
+        }
+
+            .grid-divider > [class*='col-']:nth-child(n+2):before {
+                content: "";
+                border-left: 1px solid #DDD;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+            }
+
+    .col-padding {
+        padding: 0 15px;
+    }
+
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
         background-color: #FFA500;
         border-color: white;
@@ -207,6 +270,21 @@
         color: white !important;
         background-color: orange !important;
         border-color: gray !important;
+    }
+    .col-md-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-md-6
+   
+    {
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px
     }
 </style>
 
