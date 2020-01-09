@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VerserAssetleasingServiceInterface.Models;
+using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
@@ -17,7 +18,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [HttpPost]
         public ActionResult Index(AssetsListViewModel AssetsRegisterdata)
         {
-            return View();
+            ReturnModel model = AssetsServicehelper.AddAsset(AssetsRegisterdata).Result;
+            TempData["StatusMessage"] = model.Message;
+            return View("Index");
         }
     }
 }

@@ -38,7 +38,7 @@
 </style>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "RegisterAssets", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
