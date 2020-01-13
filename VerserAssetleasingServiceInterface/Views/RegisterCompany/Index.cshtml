@@ -31,14 +31,13 @@
     <div class="tab-content" style="border-width:thin;border-style:solid;border-color:gray;width:100%;padding-top:10px;border-width:thin;margin-right:0px;border-color:lightgray">
 
         <div id="tblCustomers" class="tab-pane fade  in active" role="tabpanel">
-            <div class="table-bordered" style="margin:20px; width:800px">
+            @*<div class="table-bordered" style="margin:20px; width:800px">*@
                 @using (Html.BeginForm("Index", "RegisterCompany", FormMethod.Post))
-
                 {
 
-                    <div class="panel-heading" align="center" style="height:30PX;background-color:#FFA500;color:white; vertical-align:top">
+                    @*<div class="panel-heading" align="center" style="height:30PX;background-color:#FFA500;color:white; vertical-align:top">
                         <h3 class="panel-title">REGISTER NEW COMPANY</h3>
-                    </div>
+                    </div>*@
                     <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
 
 
@@ -136,7 +135,7 @@
                         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
                     </div>
                 }
-            </div>
+            @*</div>*@
         </div>
 
         <div id="MANAGEPROJECTS" class="tab-pane fade" role="tabpanel">

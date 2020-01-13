@@ -41,7 +41,7 @@
                 @if (@Session["Username"] != null)
                 {
                 <ul class="nav navbar-nav">
-                    @Html.ActionLink("VERSER ASSET LEASING", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @*@Html.ActionLink("VERSER ASSET LEASING", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             TASKS
@@ -77,8 +77,8 @@
                             <li>@Html.ActionLink("Contracts", "Index", "Contracts")</li>
                             <li>@Html.ActionLink("Carriers", "Index", "Carriers")</li>
                             <li>@Html.ActionLink("Colours", "Index", "Colours")</li>
-                            <li>@Html.ActionLink("DeviceCategories", "Index", "DeviceCategories")</li>
-                            <li>@Html.ActionLink("InventoryItems", "Index", "InventoryItems")</li>
+                            <li>@Html.ActionLink("DeviceCategories", "Index", "Categories")</li>
+                            <li>@Html.ActionLink("InventoryItems", "Index", "Inventory")</li>
                         </ul>
                     </li>
                     <ul class="nav navbar-nav" style="float:right">
