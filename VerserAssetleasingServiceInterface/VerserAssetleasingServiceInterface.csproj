@@ -205,6 +205,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\download.png" />
+    <Content Include="Images\excel.png" />
+    <Content Include="Images\pencil.png" />
+    <Content Include="Images\plus.png" />
     <Content Include="Images\Verser.png" />
     <Content Include="Images\VerserLogo.png" />
     <Content Include="Logo\Verser.png" />

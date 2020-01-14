@@ -6,20 +6,39 @@
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
-@*<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>*@
-@*<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<h4 align="center" style="color:GrayText;font-weight:600;"></h4>
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <br>
 
+<div class="container" style="padding-top:2px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
+
+    <div class="row pull-left">
+        <div class="col-md-1">
+            @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+            {
+                <input type="image" src="~/Images/excel.png" alt="Submit" width="28" height="28">
+            }
+        </div>
+        @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
+        @*<button type="submit" class="btn btn-default btn-sm" style="padding-left:5px;padding-top:2px;margin-left:5px;background-color:lightgray">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
+        <div class="col-md-1">
+            <a href="@Url.Action("Index", "RegisterCompany")">
+                 <input type="image" src="~/Images/plus.png" alt="Submit" width="28" height="28">
+            </a>
+        </div>
+    </div>
+    </div>
 <div class="container-fluid" style="margin-left:12px;padding-top:2px">
     <div class="row" style="width:80%;">
         <div class="col-md-6">
@@ -35,19 +54,19 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        
-                        <td>
-                            <a href="@Url.Action("#", new { id=item.id})">
-                                <font style="font-weight:1000;color:#515151">
-                                    @Html.DisplayFor(modelItem => item.companyName)
-                                </font> <br />
-                                <font style="color:gray">
-                                    @Html.DisplayFor(modelItem => item.addressLine1)
-                                </font>
-                            </a>
-                        </td>                       
-                    </tr>
+                        <tr>
+
+                            <td>
+                                <a href="@Url.Action("#", new { id=item.id})">
+                                    <font style="font-weight:900px;color:#515151">
+                                        @Html.DisplayFor(modelItem => item.companyName)
+                                    </font> <br />
+                                    <font style="color:gray">
+                                        @Html.DisplayFor(modelItem => item.addressLine1)
+                                    </font>
+                                </a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
 
@@ -56,185 +75,216 @@
         <div class="container-fluid">
             <div class="col-md-6">
                 @*<div class="page-header">
-                    <h2>Details</h2>
-                </div>*@
+            <h2>Details</h2>
+        </div>*@
                 <div class="row">
-                    <div class="container table-bordered" style="margin:20px; width:800px">
+                    <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
                         <br>
                         <form>
-                            <div class="form-group row" >
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
-                                <div class="col-sm-1" >
+                            <div class="form-group row">
+
+                                <div class="col-sm-1">
                                     <img id="img1" width="100px" height="50px" alt="Image1.png" src="@Url.Content("~/Images/VerserLogo.png")">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company Name:</label>
+                            <div class="col-md-6">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company:</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Company">
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="col-md-6">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Address">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="col-md-6">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Phone">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="col-md-6">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Fax">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="col-md-6">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <input type="submit" value="Asset List" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+                            </div>
                         </form>
+
+                        <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+                        <br>
                     </div>
-                </div>
                     <br>
-                    <div class="row grid-divider">
-                        <table class="table-bordered" style="margin:20px; width:1000px" id="mainTable1">
-                            <thead style="background-color:#FFA500; color:white">
-                                <tr>
-                                    <th>
-                                        @Html.DisplayName("Site")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("Address")
-                                    </th>
-                                    @*<th>
-                                        @Html.DisplayName("AddressLine 2")
-                                    </th>*@
-                                    <th>
-                                        @Html.DisplayName("Suburb")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("State")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("Postcode")
-                                    </th>
-                                    @*<th>
-                                        @Html.DisplayName("Company")
-                                    </th>*@
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+                
+                <br>
+                <div class="row grid-divider">
+                    <div class="row pull-right">
+                        <div class="col-md-1">
+                            @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+                            {
+                                <input type="image" src="~/Images/excel.png" alt="Submit" width="28" height="28">
+                            }
+                        </div>
+                        @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
+                        @*<button type="submit" class="btn btn-default btn-sm" style="padding-left:5px;padding-top:2px;margin-left:5px;background-color:lightgray">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
+                        <div class="col-md-1">
+                            <a href="@Url.Action("Index", "RegisterCompany")">
+                                <input type="image" src="~/Images/plus.png" alt="Submit" width="28" height="28">
+                            </a>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="@Url.Action("Index", "RegisterCompany")">
+                                <input type="image" src="~/Images/pencil.png" alt="Submit" width="28" height="28">
+                            </a>
+                        </div>
                     </div>
+                    <table class="table-bordered" style="margin:20px; width:1000px" id="mainTable1">
+                        <thead style="background-color:#FFA500; color:white">
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("Site")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Address")
+                                </th>
+                                @*<th>
+                        @Html.DisplayName("AddressLine 2")
+                    </th>*@
+                                <th>
+                                    @Html.DisplayName("Suburb")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("State")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Postcode")
+                                </th>
+                                @*<th>
+                        @Html.DisplayName("Company")
+                    </th>*@
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+
+                            </tr>
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+
+                            </tr>
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+                            </tr>
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+                            </tr>
+                            <tr>
+                                <td>Kimberley</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>Broome</td>
+                                <td>WA</td>
+                                <td>6155</td>
+                            </tr>
+                            <tr>
+                                <td>Pilbara</td>
+                                <td>Police Complex 21 MArine Terrace</td>
+                                <td>CBD</td>
+                                <td>NSW</td>
+                                <td>6155</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -246,7 +296,7 @@
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
         });
-                    //  ExportTimesSheetToExcel", "Candidates"
+                                            //  ExportTimesSheetToExcel", "Candidates"
 
     </script>
     <body>
@@ -267,8 +317,14 @@
         right: 0;
         min-height: 70px;
     }
+
     .col-padding {
         padding: 0 15px;
+    }
+
+    .glyphicon {
+        font-size: 14px;
+        color: black;
     }
 
     .grid-divider {
@@ -277,11 +333,11 @@
         width: 1000px;
     }
 
-        .grid-divider > [class*='col-'] {
+   .grid-divider > [class*='col-'] {
             position: static;
         }
 
-            .grid-divider > [class*='col-']:nth-child(n+2):before {
+    .grid-divider > [class*='col-']:nth-child(n+2):before {
                 content: "";
                 border-left: 1px solid #DDD;
                 position: absolute;
@@ -341,11 +397,6 @@
         border-color: white;
     }
 
-    .glyphicon {
-        font-size: 15px;
-        color: lightgray;
-    }
-
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
         background-color: #FFA500;
         border-color: white;
@@ -357,25 +408,28 @@
         background-color: orange !important;
         border-color: gray !important;
     }
+
     .col-md-6 {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%
     }
-    .col-md-6
-   
-    {
+
+    .col-md-6 {
         position: relative;
         width: 100%;
         min-height: 1px;
+        padding-top:10px;
+        padding-bottom:10px;
         padding-right: 15px;
-        padding-left: 15px
+        padding-left: 5px
     }
 
     .table-hover tbody tr:hover > td {
         background-color: #53d0ba;
     }
 
+ 
 </style>
 
