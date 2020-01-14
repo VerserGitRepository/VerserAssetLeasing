@@ -171,11 +171,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssetEntryModel.cs" />
     <Compile Include="Models\AssetsListViewModel.cs" />
     <Compile Include="Models\CarriersListViewModel.cs" />
     <Compile Include="Models\ColoursListViewModel.cs" />
+    <Compile Include="Models\CompanyAndSiteListViewModel.cs" />
     <Compile Include="Models\CompanyEntryModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
+    <Compile Include="Models\CompanySitesListViewModel.cs" />
     <Compile Include="Models\ContractsListViewModel.cs" />
     <Compile Include="Models\datetime.cs" />
     <Compile Include="Models\DeviceCategoriesListViewModel.cs" />
