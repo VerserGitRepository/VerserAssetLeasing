@@ -24,7 +24,7 @@
         <div class="col-md-1">
             @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
             {
-                <input type="image" src="~/Images/excel.png" alt="Submit" width="28" height="28">
+                <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
             }
         </div>
         @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
@@ -34,7 +34,7 @@
         @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
         <div class="col-md-1">
             <a href="@Url.Action("Index", "RegisterCompany")">
-                 <input type="image" src="~/Images/plus.png" alt="Submit" width="28" height="28">
+                 <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
             </a>
         </div>
     </div>
@@ -80,13 +80,13 @@
         </div>*@
                 <div class="row">
                     <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
-                        <br>
+                      
                         <form>
                             <div class="form-group row" >
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
                                 <div class="col-sm-1">
                                     <img id="image">
-                                    <label for="file">Upload Image:</label>
+                                  
                                     <input type="file" name="file" id="file" />
                                     <input type="submit" value="Upload" class="submit" />
                                 </div>
@@ -123,16 +123,13 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
                                 <input type="submit" value="Asset List" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
                             </div>
                         </form>
-
-                        <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-                        <br>
                     </div>
                     <br>
                 </div>
-                    <br>
 
                     <div class="row grid-divider">
                         <div class="row pull-right">
@@ -159,7 +156,7 @@
                                     </a>
                                 </div>
                                 </div>
-                                <table class="table-bordered" style="margin:20px; width:1000px" id="mainTable1">
+                                <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
                                     <thead style="background-color:#FFA500; color:white">
                                         <tr>
                                             <th>
@@ -345,7 +342,7 @@
     }
 
     body {
-        padding-top: 50px;
+        padding-top: 40px;
         padding-bottom: 5px;
         /*margin-left:5px;*/
     }
