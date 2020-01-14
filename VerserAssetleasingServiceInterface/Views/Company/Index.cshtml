@@ -61,11 +61,18 @@
                                 @Html.DisplayFor(modelItem => item.companyName)
                                 <input type="hidden" value="@item.id" id="hiddenId" />
                                 <input type="hidden" value="@item" id="hiddenModelId" />
+
                             </font> <br />
-                                <font style="color:gray">
-                                    @Html.DisplayFor(modelItem => item.addressLine1)
-                                </font>
-                           
+                            <font style="color:gray">
+                                @Html.DisplayFor(modelItem => item.addressLine1)
+                            </font>
+                            @if (Convert.ToBase64String(@item.logo).Length > 0)
+                            {
+                                <br />
+                                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(@item.logo))" style="height:42px; width:42px;">
+                                <input type="hidden" value="@item.logo" id="hiddenLogo" />
+                            }
+
                         </td>                       
                     </tr>
                     }
@@ -89,6 +96,7 @@
                                     <label for="file">Upload Image:</label>
                                     <input type="file" name="file" id="file" />
                                     <input type="submit" value="Upload" class="submit" />
+                                  
                                 </div>
                             </div>
                             <div class="col-md-6">
