@@ -13,12 +13,26 @@ namespace VerserAssetleasingServiceInterface.Controllers
         // GET: Company
         public ActionResult Index()
         {
-            List<CompanyListViewModel> companydata = new List<CompanyListViewModel>();
+            CompanyAndSiteListViewModel model = new CompanyAndSiteListViewModel();
+            model.CompanyListViewModel = new List<CompanyListViewModel>();
+            model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
 
-            companydata = CompanyServicehelper.Projects().Result;
+            model.CompanyListViewModel = CompanyServicehelper.Projects().Result;
+            model.CompanySitesListViewModel = CompanyServicehelper.GetCompanies().Result;
 
-            return View(companydata);
+
+            return View(model);
         }
+
+        [HttpGet]
+        public ActionResult GetCompanyData(int Id)
+        {
+            List<CompanySitesListViewModel> companydata = new List<CompanySitesListViewModel>();
+
+            companydata = CompanyServicehelper.GetCompanyData(Id).Result;
+
+            return Json(companydata, JsonRequestBehavior.AllowGet);
+        }       
 
     }
 }

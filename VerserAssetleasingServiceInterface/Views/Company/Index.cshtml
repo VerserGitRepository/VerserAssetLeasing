@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VerserAssetleasingServiceInterface.Models.CompanyListViewModel>
+﻿@model VerserAssetleasingServiceInterface.Models.CompanyAndSiteListViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -33,19 +33,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.CompanyListViewModel)
                     {
                     <tr>
                         
-                        <td>
-                            <a href="@Url.Action("#", new { id=item.id})">
-                                <font style="font-weight:1000;color:#515151">
-                                    @Html.DisplayFor(modelItem => item.companyName)
-                                </font> <br />
+                        <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@item.logo.ToString()');">
+                            <font style="font-weight:1000;color:#515151">
+                                @Html.DisplayFor(modelItem => item.companyName)
+                                <input type="hidden" value="@item.id" id="hiddenId" />
+                                <input type="hidden" value="@item" id="hiddenModelId" />
+                            </font> <br />
                                 <font style="color:gray">
                                     @Html.DisplayFor(modelItem => item.addressLine1)
                                 </font>
-                            </a>
+                           
                         </td>                       
                     </tr>
                     }
@@ -64,39 +65,42 @@
                         <form>
                             <div class="form-group row" >
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
-                                <div class="col-sm-1" >
-                                    <img id="img1" width="100px" height="50px" alt="Image1.png" src="@Url.Content("~/Images/VerserLogo.png")">
+                                <div class="col-sm-1">
+                                    <img id="image">
+                                    <label for="file">Upload Image:</label>
+                                    <input type="file" name="file" id="file" />
+                                    <input type="submit" value="Upload" class="submit" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Company">
+                                    <input type="text" class="form-control form-control-sm" id="txtCompany" placeholder="Company">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Address">
+                                    <input type="text" class="form-control form-control-sm" id="txtAddress" placeholder="Address">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Phone">
+                                    <input type="text" class="form-control form-control-sm" id="txtPhone" placeholder="Phone">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Fax">
+                                    <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email">
+                                    <input type="text" class="form-control form-control-sm" id="txtEmail" placeholder="Email">
                                 </div>
                             </div>
                         </form>
@@ -114,8 +118,8 @@
                                         @Html.DisplayName("Address")
                                     </th>
                                     @*<th>
-                                        @Html.DisplayName("AddressLine 2")
-                                    </th>*@
+                    @Html.DisplayName("AddressLine 2")
+                </th>*@
                                     <th>
                                         @Html.DisplayName("Suburb")
                                     </th>
@@ -126,110 +130,33 @@
                                         @Html.DisplayName("Postcode")
                                     </th>
                                     @*<th>
-                                        @Html.DisplayName("Company")
-                                    </th>*@
-                                    
+                    @Html.DisplayName("Company")
+                </th>*@
+
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach (var item in Model.CompanySitesListViewModel)
+                                {
                                 <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
+                                    <td>
+                                        @Html.DisplayName(item.siteName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.addressLine1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.suburb)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.state)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.postCode)
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Kimberley</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>Broome</td>
-                                    <td>WA</td>
-                                    <td>6155</td>
-                                </tr>
-                                <tr>
-                                    <td>Pilbara</td>
-                                    <td>Police Complex 21 MArine Terrace</td>
-                                    <td>CBD</td>
-                                    <td>NSW</td>
-                                    <td>6155</td>
-
-                                </tr>
-                            </tbody>
+                                }
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -247,7 +174,60 @@
             $('#mainTable1').DataTable();
         });
                     //  ExportTimesSheetToExcel", "Candidates"
+        function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo) {
+           // alert(data);
+          
+            $("#txtCompany").val(companyName);
+            $("#txtAddress").val(addressLine1);
+            $("#txtPhone").val(phone);
+            $("#txtFax").val(fax);
+            $("#txtEmail").val(email);
+            $("#image").val(logo);
+            
+           
 
+             var loadUrl = '@Url.Action("GetCompanyData", "Company")';
+                  
+            $.ajax({
+
+                type: "GET",
+                url: loadUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": theId },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    populateDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }
+
+        function populateDataTable(data) {
+            console.log("populating data table...");
+            // clear the table before populating it with more data
+            $("#mainTable1").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable1').dataTable().fnAddData(["", "", "", "", ""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var customer = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+                    $('#mainTable1').dataTable().fnAddData([
+                        customer.siteName,
+                        customer.addressLine1,
+                        customer.suburb,
+                        customer.state,
+                        customer.postCode
+                    ]);
+                }
+            }
+        }
     </script>
     <body>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
