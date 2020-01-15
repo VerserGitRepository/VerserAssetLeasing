@@ -15,7 +15,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
 
-            assetsdata = AssetsServicehelper.Projects().Result;
+            assetsdata = AssetsServicehelper.AssetsList().Result;
 
             return View(assetsdata);
         }
