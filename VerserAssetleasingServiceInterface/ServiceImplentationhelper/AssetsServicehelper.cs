@@ -16,13 +16,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
     {
         public static string BaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
 
-        public static async Task<List<AssetsListViewModel>> Projects()
+        public static async Task<List<AssetsListViewModel>> AssetsList()
         {
             List<AssetsListViewModel> projectsList = new List<AssetsListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("assets/ssn")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("assets/AssetsList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
