@@ -65,5 +65,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             return RedirectToAction("Index", "Company");
         }
+        [HttpPost]
+        public ActionResult UpdateCompanyData(CompanyListViewModel theModel)
+        {
+            var result = CompanyServicehelper.UpdateCompany(theModel);
+            return Json(result);
+        }
     }
 }

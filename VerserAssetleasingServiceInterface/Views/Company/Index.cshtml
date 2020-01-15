@@ -4,7 +4,6 @@
 }
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -14,8 +13,9 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-<script src="~/Scripts/bootstrap-multiselect.js"></script>
-<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <br>
 
 <div class="container" style="padding-top:2px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
@@ -29,16 +29,16 @@
         </div>
         @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
         @*<button type="submit" class="btn btn-default btn-sm" style="padding-left:5px;padding-top:2px;margin-left:5px;background-color:lightgray">
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
         <div class="col-md-1">
             <a href="@Url.Action("Index", "RegisterCompany")">
-                 <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
+                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
             </a>
         </div>
     </div>
-    </div>
+</div>
 <div class="container-fluid" style="margin-left:12px;padding-top:2px">
     <div class="row" style="width:80%;">
         <div class="col-md-6">
@@ -54,27 +54,27 @@
                 <tbody>
                     @foreach (var item in Model.CompanyListViewModel)
                     {
-                    <tr>
-                        
-                        <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@item.logo.ToString()');">
-                            <font style="font-weight:1000;color:#515151">
-                                @Html.DisplayFor(modelItem => item.companyName)
-                                <input type="hidden" value="@item.id" id="hiddenId" />
-                                <input type="hidden" value="@item" id="hiddenModelId" />
+                        <tr>
 
-                            </font> <br />
-                            <font style="color:gray">
-                                @Html.DisplayFor(modelItem => item.addressLine1)
-                            </font>
-                            @if (Convert.ToBase64String(@item.logo).Length > 0)
-                            {
-                                <br />
-                                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(@item.logo))" style="height:42px; width:42px;">
-                                <input type="hidden" value="@item.logo" id="hiddenLogo" />
-                            }
+                            <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@Convert.ToBase64String(@item.logo)','@item.state','@item.suburb','@item.postcode');">
+                                <font style="font-weight:1000;color:#515151">
+                                    @Html.DisplayFor(modelItem => item.companyName)
 
-                        </td>                       
-                    </tr>
+                                    <input type="hidden" value="@item" id="hiddenModelId" />
+
+                                </font> <br />
+                                <font style="color:gray">
+                                    @Html.DisplayFor(modelItem => item.addressLine1)
+                                </font>
+                                @if (Convert.ToBase64String(@item.logo).Length > 0)
+                                {
+                                    <br />
+                                    <img src="data:image/jpeg;base64,@(Convert.ToBase64String(@item.logo))" style="height:42px; width:42px;" class="image-border">
+                                    <input type="hidden" value="@Convert.ToBase64String(@item.logo)" id="hiddenLogo" />
+                                }
+
+                            </td>
+                        </tr>
                     }
                 </tbody>
 
@@ -83,167 +83,192 @@
         <div class="container-fluid">
             <div class="col-md-6">
                 @*<div class="page-header">
-            <h2>Details</h2>
-        </div>*@
+                        <h2>Details</h2>
+                    </div>*@
                 <div class="row">
                     <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
-                      
+
                         <form>
-                            <div class="form-group row" >
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
-                                <div class="col-sm-1">
-                                    <img id="image">
-                                  
-                                    <input type="file" name="file" id="file" />
-                                    <input type="submit" value="Upload" class="submit" />
-                                  
+                            <div class="form-group row">
+                                <input type="hidden" value="" id="hiddenId" />
+                                <input type="hidden" value="" id="hiddenState" />
+                                <input type="hidden" value="" id="hiddenSuburb" />
+                                <input type="hidden" value="" id="hiddenPostcode" />
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>
+                                    <div class="col-sm-10">
+                                        <img id="image" class="image-border form-control form-control-sm">
+
+                                        <input type="file" id="imgupload" style="display:none" onchange="readURL(this);" />
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="txtCompany" placeholder="Company">
+
+                                <div class="col-md-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-sm" id="txtCompany" placeholder="Company">
+                                    </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-sm" id="txtAddress" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-sm" id="txtPhone" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control form-control-sm" id="txtEmail" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" id="updateBtn" />
+                                    <input type="submit" value="Asset List" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+                                </div>
+
+
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="txtAddress" placeholder="Address">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="txtPhone" placeholder="Phone">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="txtEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-                                <input type="submit" value="Asset List" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-                            </div>
-                        </form>
                     </div>
                     <br>
+                    <div class="panel-footer primary" align="left" style="height:30px;vertical-align:top;">
+                        <a href="@Url.Action("Index", "Assets")">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-lg">Assets</label>
+                        </a>
+                        <a href="@Url.Action("Index", "Contracts")">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Contracts</label>
+                        </a>
+                        <a href="@Url.Action("Index", "Assets")">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Catalogue</label>
+                        </a>
+                    </div>
+                    </form>
                 </div>
 
-                    <div class="row grid-divider">
+                <div class="row grid-divider">
+                    <div class="row pull-right">
                         <div class="row pull-right">
-                            <div class="row pull-right">
-                                <div class="col-md-1">
-                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
-                                    {
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
-                                    }
-                                </div>
-                                @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
-                                @*<button type="submit" class="btn btn-default btn-sm" style="padding-left:5px;padding-top:2px;margin-left:5px;background-color:lightgray">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-            @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
-                                <div class="col-md-1">
-                                    <a href="@Url.Action("Index", "RegisterCompany")">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
-                                    </a>
-                                </div>
-                                <div class="col-md-1">
-                                    <a href="@Url.Action("Index", "RegisterCompany")">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20">
-                                    </a>
-                                </div>
-                                </div>
-                                <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
-                                    <thead style="background-color:#FFA500; color:white">
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayName("Site")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Address")
-                                            </th>
-                                            @*<th>
-                            @Html.DisplayName("AddressLine 2")
-                        </th>*@
-                                            <th>
-                                                @Html.DisplayName("Suburb")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("State")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Postcode")
-                                            </th>
-                                            @*<th>
-                            @Html.DisplayName("Company")
-                        </th>*@
+                            <div class="col-md-1">
+                                @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+                                {
+                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                }
+                            </div>
+                            @*<input type="image" src="~/Images/VerserLogo.png" alt="Submit" width="48" height="28">*@
+                            @*<button type="submit" class="btn btn-default btn-sm" style="padding-left:5px;padding-top:2px;margin-left:5px;background-color:lightgray">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                @Html.ActionLink("Create Company", "Index", "RegisterCompany", null, new { @class = "btn btn-primary btn-large" })*@
+                            <div class="col-md-1">
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.CompanySitesListViewModel)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayName(item.siteName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayName(item.addressLine1)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayName(item.suburb)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayName(item.state)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayName(item.postCode)
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+
+                            </div>
+                            <div class="col-md-1">
+                                <a href="@Url.Action("Index", "RegisterCompany")">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20">
+                                </a>
                             </div>
                         </div>
+                        <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
+                            <thead style="background-color:#FFA500; color:white">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("Site")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Address")
+                                    </th>
+                                    @*<th>
+                                            @Html.DisplayName("AddressLine 2")
+                                        </th>*@
+                                    <th>
+                                        @Html.DisplayName("Suburb")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("State")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Postcode")
+                                    </th>
+                                    @*<th>
+                                            @Html.DisplayName("Company")
+                                        </th>*@
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CompanySitesListViewModel)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayName(item.siteName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayName(item.addressLine1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayName(item.suburb)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayName(item.state)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayName(item.postCode)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-</div>
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
-    <script src="~/Scripts/datatables.min.js"></script>
-    <script type="text/javascript">
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+        <script src="~/Scripts/datatables.min.js"></script>
+        <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
         });
                     //  ExportTimesSheetToExcel", "Candidates"
-        function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo) {
+        function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo,state,suburb,postcode) {
            // alert(data);
-          
+
             $("#txtCompany").val(companyName);
             $("#txtAddress").val(addressLine1);
             $("#txtPhone").val(phone);
             $("#txtFax").val(fax);
             $("#txtEmail").val(email);
-            $("#image").val(logo);
-            
-           
+            $("#hiddenId").val(theId);
+            $("#hiddenState").val(state);
+            $("#hiddenSuburb").val(suburb);
+            $("#hiddenPostcode").val(postcode);
+            $("#image").attr("src", "data:image/jpeg;base64," + logo + "").height(80).width(80);;
+
+
+
 
              var loadUrl = '@Url.Action("GetCompanyData", "Company")';
-                  
+
             $.ajax({
 
                 type: "GET",
@@ -260,6 +285,7 @@
                 }
             });
         }
+        $('#image').click(function () { $('#imgupload').trigger('click'); });
 
         function populateDataTable(data) {
             console.log("populating data table...");
@@ -284,46 +310,133 @@
                 }
             }
         }
-    </script>
-    <body>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-        <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
-    </body>
-}
-<style>
-    .row.vdivide [class*='col-']:not(:last-child):after {
-        background: #e0e0e0;
-        width: 1px;
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        min-height: 70px;
-    }
 
-    .col-padding {
-        padding: 0 15px;
-    }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-    .glyphicon {
-        font-size: 14px;
-        color: black;
-    }
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result);
+                };
 
-    .grid-divider {
-        position: relative;
-        padding: 0;
-        width: 1000px;
-    }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#updateBtn').on('click', function (e) {
+            {
+                // alert(data);
+                var CompanyEdit = {};
 
-   .grid-divider > [class*='col-'] {
+                CompanyEdit.companyName = $("#txtCompany").val();
+                CompanyEdit.addressLine1 = $("#txtAddress").val();
+                CompanyEdit.phone = $("#txtPhone").val();
+                CompanyEdit.fax = $("#txtFax").val();
+                CompanyEdit.email = $("#txtEmail").val();
+                CompanyEdit.logo = $("#image")[0].src.split(',')[1];
+                CompanyEdit.Id = $("#hiddenId").val();
+                CompanyEdit.state = $("#hiddenState").val();
+                CompanyEdit.suburb = $("#hiddenSuburb").val();
+                e.preventDefault();
+                e.stopPropagation();
+
+                var loadUrl = '@Url.Action("UpdateCompanyData", "Company")';
+
+                $.ajax({
+
+                    type: "POST",
+                    url: loadUrl,
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(CompanyEdit),
+                    datatype: "json",
+                    success: function (result) {
+
+                        debugger;
+                        $("#txtCompany").text(result);
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            }
+            });
+            $('#addSite').click(function () {
+                var AddSiteURL = '@Url.Action("AddSite", "Sites")'
+                $.ajax({
+                    type: "GET",
+                    url: AddSiteURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '600px',
+                            useBootstrap: false,
+                            title: '`',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                yes: { isHidden: true }
+                            }
+                        });
+
+                    }
+                });
+            });
+        </script>
+        <body>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+            <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
+        </body>
+    }
+    <style>
+        .row.vdivide [class*='col-']:not(:last-child):after {
+            background: #e0e0e0;
+            width: 1px;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            min-height: 70px;
+        }
+
+        .col-padding {
+            padding: 0 15px;
+        }
+
+        .panel-footer {
+            padding: 3px 30px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #dddddd;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            width: 100%
+        }
+
+        .glyphicon {
+            font-size: 14px;
+            color: black;
+        }
+
+        .grid-divider {
+            position: relative;
+            padding: 0;
+            width: 1000px;
+        }
+
+        image-border {
+            padding: 1px;
+            border: 1px solid #021a40;
+        }
+
+        .grid-divider > [class*='col-'] {
             position: static;
         }
 
-    .grid-divider > [class*='col-']:nth-child(n+2):before {
+            .grid-divider > [class*='col-']:nth-child(n+2):before {
                 content: "";
                 border-left: 1px solid #DDD;
                 position: absolute;
@@ -331,91 +444,89 @@
                 bottom: 0;
             }
 
-    .col-padding {
-        padding: 0 15px;
-    }
+        .col-padding {
+            padding: 0 15px;
+        }
 
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-        background-color: #FFA500;
-        border-color: white;
-    }
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #FFA500;
+            border-color: white;
+        }
 
-    .btn-warning {
-        background-color: #FFA500;
-        font-size: 11px;
-    }
+        .btn-warning {
+            background-color: #FFA500;
+            font-size: 11px;
+        }
 
-    .black {
-        color: black;
-    }
+        .black {
+            color: black;
+        }
 
-    body {
-        padding-top: 40px;
-        padding-bottom: 5px;
-        /*margin-left:5px;*/
-    }
+        body {
+            padding-top: 40px;
+            padding-bottom: 5px;
+            /*margin-left:5px;*/
+        }
 
-    /* Set padding to keep content from hitting the edges */
-    .body-content {
-        padding-left: 0px;
-        padding-right: 5px;
-        margin-left: 5px;
-    }
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 5px;
+            margin-left: 5px;
+        }
 
-    .dataTables_filter {
-        float: right;
-    }
+        .dataTables_filter {
+            float: right;
+        }
 
-    .container {
-        font-size: 12px;
-        padding-left: 50px;
-        padding-right: 5px;
-    }
+        .container {
+            font-size: 12px;
+            padding-left: 50px;
+            padding-right: 5px;
+        }
 
-    .page-item.active .page-link {
-        color: white !important;
-        background-color: orange !important;
-        border-color: gray !important;
-    }
+        .page-item.active .page-link {
+            color: white !important;
+            background-color: orange !important;
+            border-color: gray !important;
+        }
 
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-        background-color: #FFA500;
-        border-color: white;
-    }
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+            background-color: #FFA500;
+            border-color: white;
+        }
 
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-        background-color: #FFA500;
-        border-color: white;
-    }
+            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+                background-color: #FFA500;
+                border-color: white;
+            }
 
 
-    .page-item.active .page-link {
-        color: white !important;
-        background-color: orange !important;
-        border-color: gray !important;
-    }
+        .page-item.active .page-link {
+            color: white !important;
+            background-color: orange !important;
+            border-color: gray !important;
+        }
 
-    .col-md-6 {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 50%;
-        flex: 0 0 50%;
-        max-width: 50%
-    }
+        .col-md-6 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%
+        }
 
-    .col-md-6 {
-        position: relative;
-        width: 100%;
-        min-height: 1px;
-        padding-top:10px;
-        padding-bottom:10px;
-        padding-right: 15px;
-        padding-left: 5px
-    }
+        .col-md-6 {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 15px;
+            padding-left: 5px
+        }
 
-    .table-hover tbody tr:hover > td {
-        background-color: #53d0ba;
-    }
-
- 
-</style>
+        .table-hover tbody tr:hover > td {
+            background-color: #53d0ba;
+        }
+    </style>
 

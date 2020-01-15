@@ -86,5 +86,24 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return companyList;
         }
+        public static async Task<ReturnModel> UpdateCompany(CompanyListViewModel theModel)
+        {
+            ReturnModel ReturnResult = new ReturnModel();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.PostAsJsonAsync(string.Format("Company/UpdateCompany"), theModel).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();
+                    HttpContext.Current.Session["ResultMessage"] = ReturnResult.Message;
+}
+                else
+                {
+                    HttpContext.Current.Session["ErrorMessage"] = ReturnResult.Message;
+                }
+            }
+            return ReturnResult;
+        }
     }
 }
