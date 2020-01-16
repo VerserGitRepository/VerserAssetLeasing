@@ -19,7 +19,12 @@ namespace VerserAssetleasingServiceInterface.Controllers
             CompanyAndSiteListViewModel model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
-
+            model.AssetsListViewModel = new List<AssetsListViewModel>();
+            model.EndUsersListViewModel = new List<EndUsersListViewModel>();
+            model.ContractsListViewModel = new List<ContractsListViewModel>();
+            model.AssetsListViewModel = CompanyServicehelper.Assets().Result;
+            model.EndUsersListViewModel = CompanyServicehelper.EndUsers().Result;
+            model.ContractsListViewModel = CompanyServicehelper.Contracts().Result;
             model.CompanyListViewModel = CompanyServicehelper.Projects().Result;
             model.CompanySitesListViewModel = CompanyServicehelper.GetCompanies().Result;
 

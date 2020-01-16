@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
@@ -11,13 +12,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <br>
 
-<div class="container" style="padding-top:1px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
+@*<div class="container" style="padding-top:1px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
 
     <div class="row pull-left">
         <div class="col-md-1">
@@ -32,12 +32,14 @@
             </a>
         </div>
     </div>
-</div>
-<div class="container-fluid" style="margin-left:12px;padding-top:1px">
-    <div class="row" style="width:80%;">
+</div>*@
+<div class="container-fluid" style="margin-left:2px;padding-top:0px">
+
+
+    <div class="container" style="width:170%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:1px">
         <div class="col-md-6">
             <table class="table table-bordered  table-responsive table-hover table-dark" id="mainTable">
-                <thead style="background-color: #fdb663; color:white">
+                <thead style="background-color: #428bca; color:white">
                     @*#FFA500*@
                     <tr>
                         <th>
@@ -71,175 +73,411 @@
                 </tbody>
             </table>
         </div>
-        <div class="container-fluid">
-            <div class="col-md-6">           
-                <div class="row">
-                    <form>
-                        <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
-                            <div class="form-group row">
-                                <input type="hidden" value="" id="hiddenId" />
-                                <input type="hidden" value="" id="hiddenState" />
-                                <input type="hidden" value="" id="hiddenSuburb" />
-                                <input type="hidden" value="" id="hiddenPostcode" />
 
-                                <div class="col-sm-6">
-                                    @*<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Logo:</label>*@
-                                    <div class="col-sm-10">
-                                        <img id="image" class="image-border form-control form-control-sm">
-                                        <input type="file" id="imgupload" style="display:none" onchange="readURL(this);" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtCompany" placeholder="Company">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtAddress" placeholder="Address">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtPhone" placeholder="Phone">
-                                    </div>
-                                </div>
-                                @*<div class="col-md-6">
-                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+        <div class="col-md-6">
+            <div class="panel with-nav-tabs panel-default"style="width:200%">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1default" data-toggle="tab">COMPANY DETAILS</a></li>
+                        <li><a href="#tab2default" data-toggle="tab">ASSETS</a></li>
+                        <li><a href="#tab3default" data-toggle="tab">CONTRACTS</a></li>
+                        <li><a href="#tab4default" data-toggle="tab">CATALOUGES</a></li>
+                        <li><a href="#tab5default" data-toggle="tab">END USERS</a></li>
+                    
+                    </ul>
                 </div>
-            </div>*@
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">State</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1default">
+
+                            <div class="col-md-6" style="padding-left:0px">
+                                <div class="row">
+                                    <form>
+                                        <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
+                                            <div class="form-group row">
+                                                <input type="hidden" value="" id="hiddenId" />
+                                                <input type="hidden" value="" id="hiddenState" />
+                                                <input type="hidden" value="" id="hiddenSuburb" />
+                                                <input type="hidden" value="" id="hiddenPostcode" />
+
+                                                <div class="col-sm-6">
+
+                                                    <div class="col-sm-10">
+                                                        <img id="image" class="image-border form-control form-control-sm">
+                                                        <input type="file" id="imgupload" style="display:none" onchange="readURL(this);" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtCompany" placeholder="Company">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtAddress" placeholder="Address">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtPhone" placeholder="Phone">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">State</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">PostCode</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control form-control-sm" id="txtEmail" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="submit" value="UPDATE" class="btn btn-outline-secondary" style="height:32px;vertical-align:top" id="updateBtn" />
+                                                </div>
+                                            </div>
+                                            <div style="font-size:smaller;color:deepskyblue">
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row grid-divider">
+                                    <div class="row pull-right">
+                                        <div class="row pull-right">
+                                            <div class="col-md-1">
+                                                @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+                                                {
+                                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                                }
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                            </div>
+                                        </div>
+                                        <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
+                                            <thead style="background-color:#428bca; color:white">
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayName("Site")
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("Address")
+                                                    </th>
+
+                                                    <th>
+                                                        @Html.DisplayName("Suburb")
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("State")
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("Postcode")
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.CompanySitesListViewModel)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <a href="@Url.Action("Index", "RegisterCompany")">
+                                                                @Html.DisplayName(item.siteName)
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.addressLine1)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.suburb)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.state)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.postCode)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">PostCode</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtEmail" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="submit" value="UPDATE" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" id="updateBtn" />
-                                </div>
-                            </div>
-                            <div style="font-size:smaller;color:deepskyblue">
-                                <a href="@Url.Action("Index", "Assets")">
-                                    <label for="colFormLabelSm" class="col-sm-1 col-form-label col-form-label-lg">ASSETS</label>
-                                </a>
-                                <a href="@Url.Action("Index", "Contracts")">
-                                    <label for="colFormLabelSm" class="col-sm-1 col-form-label col-form-label-sm">CONTRACTS</label>
-                                </a>
-                                <a href="@Url.Action("Index", "Assets")">
-                                    <label for="colFormLabelSm" class="col-sm-1 col-form-label col-form-label-sm">CATALOGUES</label>
-                                </a>
-                                <a href="@Url.Action("Index", "Assets")">
-                                    <label for="colFormLabelSm" class="col-sm-1 col-form-label col-form-label-sm">ENDUSERS</label>
-                                </a>
-                            </div>
-                        </div>                       
-                    </form>
-                </div>
-                <div class="row grid-divider">
-                    <div class="row pull-right">
-                        <div class="row pull-right">
-                            <div class="col-md-1">
-                                @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
-                                {
-                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
-                                }
-                            </div>                        
-                            <div class="col-md-1">
-                                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
-                            </div>
-                            <div class="col-md-1">                                
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">                               
                             </div>
                         </div>
-                        <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
-                            <thead style="background-color:#FFA500; color:white">
-                                <tr>
-                                    <th>
-                                        @Html.DisplayName("Site")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("Address")
-                                    </th>
 
-                                    <th>
-                                        @Html.DisplayName("Suburb")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("State")
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("Postcode")
-                                    </th>
-                                    <th style="display:none"></th>
-                                    <th style="display:none"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.CompanySitesListViewModel)
-                                {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayName(item.siteName)
+                        <div class="tab-pane fade" id="tab2default">
+                            <div class="row pull-right">
+                                <div class="col-md-1">
+                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                    {
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                    }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                </div>
+                            </div>
+                            <div class="row pull-left" style="margin-left:-1px">
+                                <table class="table-bordered" style="margin:10px; width:980px" id="mainTable2">
+                                    <thead style="background-color:#428bca; color:white">
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayName("Asset ID")
+                                            </th>
+                                            @*<th>
+                            @Html.DisplayName("Serial No")
+                        </th>*@
 
-                                    </td>
-                                    <td>
-                                        @Html.DisplayName(item.addressLine1)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayName(item.suburb)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayName(item.state)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayName(item.postCode)
-                                    </td>
-                                    <td style="display:none">
-                                        @Html.DisplayName(item.site_Company)
+                                            <th>
+                                                @Html.DisplayName("IMEI")
+                                            </th>
+                                            @*<th>
+                            @Html.DisplayName("SIM NO")
+                        </th>*@
+                                            <th>
+                                                @Html.DisplayName("Purchase Order No")
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.AssetsListViewModel)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayName(item.AssetID)
+                                                </td>
+                                                @*<td>
+                                @Html.DisplayName(item.SerialNo)
+                            </td>*@
+                                                <td>
+                                                    @Html.DisplayName(item.IMEI)
+                                                </td>
+                                                @*<td>
+                                @Html.DisplayName(item.SIMNo)
+                            </td>*@
+                                                <td>
+                                                    @Html.DisplayName(item.PurchaseOrderNo)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-                                    </td>
-                                    <td style="display:none">
-                                        @Html.DisplayName(item.id.ToString())
-                                    </td>
-                                </tr>
-                                }
-                            </tbody>
-                        </table>
+                        <div class="tab-pane fade" id="tab3default">
+                            <div class="row pull-right" style="margin-bottom:5px">
+                                <div class="col-md-1">
+                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                    {
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                    }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row pull-left" style="margin-left:-1px">
+
+                                <table class="table-bordered" style="margin:10px; width:980px" id="mainTable3">
+                                    <thead style="background-color:#428bca; color:white">
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayName("Start Date")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("End Date")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("Service No")
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ContractsListViewModel)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.startDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.endDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.serviceNo)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab4default">
+                            <div class="row pull-right">
+                                <div class="row pull-right">
+                                    <div class="col-md-1">
+                                        @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                        {
+                                            <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                        }
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab5default">
+                            <div class="row pull-right">
+                                <div class="col-md-1">
+                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                    {
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                    }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                </div>
+                            </div>
+                            <div class="row pull-left" style="margin-left:-1px">
+                                <table class="table-bordered" style="margin:5px; width:980px" id="mainTable5">
+                                    <thead style="background-color:#428bca; color:white">
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayName("FirstName")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("LastName")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("EmployeeNo")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("Department")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("CostCode")
+                                            </th>
+
+                                            <th>
+                                                @Html.DisplayName("EndUserStatus")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("CommencementDate")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("TerminationDate")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("UserName")
+
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.EndUsersListViewModel)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LastName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.EmployeeNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Department)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CostCode)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.EndUserStatus)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CommencementDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.TerminationDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.UserName)
+                                                </td>
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
-</div>
+    </div>
+
+
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
        <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
+            $('#mainTable2').DataTable();
+            $('#mainTable3').DataTable();
+            $('#mainTable4').DataTable();
+            $('#mainTable5').DataTable();
 
             var table = $('#mainTable1').DataTable();
 
@@ -547,7 +785,8 @@
                 border-color: white;
             }
 
-
+        .tab-pane {border-color:lightgray
+        }
         .page-item.active .page-link {
             color: white !important;
             background-color: orange !important;
@@ -572,7 +811,7 @@
         }
 
         .table-hover tbody tr:hover > td {
-            background-color: #53d0ba;
+            background-color: gra;
         }
         .datatable tr:nth-child(odd) {
             background-color: #dfe7f2;
@@ -586,6 +825,97 @@
         }
             table.dataTable tbody th, table.dataTable tbody td {
                 padding: 8px 10px;
+            }
+        .with-nav-tabs.panel-default .nav-tabs > li > a,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+            color: #777;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > .open > a,
+            .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+            .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+                color: #777;
+                background-color: #ddd;
+                border-color: transparent;
+            }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a,
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+            color: #555;
+            background-color: #BCBABE;
+            border-color: #ddd;
+            border-bottom-color: transparent;
+        }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+                color: #777;
+            }
+
+                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                    background-color: #ddd;
+                }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+                color: #fff;
+                background-color: #555;
+            }
+        /********************************************************************/
+        /*** PANEL PRIMARY ***/
+        .with-nav-tabs.panel-primary .nav-tabs > li > a,
+        .with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+            color: #fff;
+        }
+
+            .with-nav-tabs.panel-primary .nav-tabs > .open > a,
+            .with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+            .with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+            .with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+            .with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+                color: #fff;
+                background-color: #3071a9;
+                border-color: transparent;
+            }
+
+        .with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+        .with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+        .with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+            color: #428bca;
+            background-color: #fff;
+            border-color: #428bca;
+            border-bottom-color: transparent;
+        }
+
+        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
+            background-color: #428bca;
+            border-color: #3071a9;
+        }
+
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
+                color: #fff;
+            }
+
+                .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+                .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+                    background-color: #3071a9;
+                }
+
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+                background-color: #4a9fe9;
             }
     </style>
 
