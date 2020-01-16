@@ -13,11 +13,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class CompanyController : Controller
     {
-        // int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
-        int CompanyID = 7;
+       int CompanyID = 100000;
         public ActionResult Index()
         {
-           
+            CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
             var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
