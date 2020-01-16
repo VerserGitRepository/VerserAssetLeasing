@@ -9,6 +9,7 @@ namespace VerserAssetleasingServiceInterface.ServiceHelper
 {
     public class LoginService
     {
+        public static string AssetLeaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
         public async static Task<LoginModel> Login(LoginModel login)
         {
             LoginModel returnmessage = new LoginModel();
@@ -26,5 +27,21 @@ namespace VerserAssetleasingServiceInterface.ServiceHelper
             }
             return returnmessage;
         }
+        public async static Task<int> UserCompanyId(string userId)
+        {
+            int ReturnID = 0;
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(AssetLeaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format($"MasteData/{userId}/UserCompanyID")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                     ReturnID = await response.Content.ReadAsAsync<int>();
+                }
+            }
+            return ReturnID;
+        }
     }
 }
+            
+       

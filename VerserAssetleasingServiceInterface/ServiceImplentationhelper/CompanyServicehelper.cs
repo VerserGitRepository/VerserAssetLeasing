@@ -15,12 +15,12 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
     {
     public static string BaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
 
-        public static async Task<List<CompanyListViewModel>> Projects()
+        public static async Task<List<CompanyListViewModel>> Projects(int CompanyID)
         {            List<CompanyListViewModel> projectsList = new List<CompanyListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("Company/CompanyList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"Company/{CompanyID}/CompanyList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<CompanyListViewModel>>();                  
@@ -33,8 +33,6 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return projectsList;
         }
-
-
         public static async Task<ReturnModel> CompanyAdd(CompanyEntryModel CompanyEntryRecord)
         {
             ReturnModel ReturnResult = new ReturnModel();
@@ -54,18 +52,16 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ReturnResult;
         }
-        public static async Task<List<CompanySitesListViewModel>> GetCompanies()
+        public static async Task<List<CompanySitesListViewModel>> CompanySites(int CompanyID)
         {
             List<CompanySitesListViewModel> companyList = new List<CompanySitesListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("MasteData/CompanySites")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"MasteData/{CompanyID}/CompanySites")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     companyList = await response.Content.ReadAsAsync<List<CompanySitesListViewModel>>();
-
-
                 }
             }
             return companyList;

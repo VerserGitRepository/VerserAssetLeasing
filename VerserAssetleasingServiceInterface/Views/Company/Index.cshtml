@@ -52,9 +52,7 @@
                             <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@Convert.ToBase64String(@item.logo)','@item.state','@item.suburb','@item.postcode');">
                                 <font style="font-weight:1000;color:#515151">
                                     @Html.DisplayFor(modelItem => item.companyName)
-
                                     <input type="hidden" value="@item" id="hiddenModelId" />
-
                                 </font> <br />
                                 <font style="color:gray">
                                     @Html.DisplayFor(modelItem => item.addressLine1)
@@ -116,19 +114,19 @@
                                 <div class="col-md-6">
                                     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">State</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="State">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Suburb">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">PostCode</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="Fax">
+                                        <input type="text" class="form-control form-control-sm" id="txtFax" placeholder="PostCode">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -13,16 +13,17 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class CompanyController : Controller
     {
-        // GET: Company
+        // int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+        int CompanyID = 7;
         public ActionResult Index()
         {
-            CompanyAndSiteListViewModel model = new CompanyAndSiteListViewModel();
+           
+            var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
-
-            model.CompanyListViewModel = CompanyServicehelper.Projects().Result;
-            model.CompanySitesListViewModel = CompanyServicehelper.GetCompanies().Result;
-
+            model.CompanyListViewModel = CompanyServicehelper.Projects(CompanyID).Result;
+            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(CompanyID).Result;
+       // model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(7).Result;
 
             return View(model);
         }
@@ -47,7 +48,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                Companymodel = CompanyServicehelper.Projects().Result;
+                Companymodel = CompanyServicehelper.Projects(CompanyID).Result;
                 GridView gv = new GridView();
                 gv.DataSource = Companymodel;
                 gv.DataBind();
