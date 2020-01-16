@@ -13,22 +13,22 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class CompanyController : Controller
     {
-        // GET: Company
+       int CompanyID = 100000;
         public ActionResult Index()
         {
-            CompanyAndSiteListViewModel model = new CompanyAndSiteListViewModel();
+            CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+            var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
+            model.CompanyListViewModel = CompanyServicehelper.Projects(CompanyID).Result;
+            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(CompanyID).Result;
+       // model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(7).Result;
             model.AssetsListViewModel = new List<AssetsListViewModel>();
             model.EndUsersListViewModel = new List<EndUsersListViewModel>();
             model.ContractsListViewModel = new List<ContractsListViewModel>();
             model.AssetsListViewModel = CompanyServicehelper.Assets().Result;
             model.EndUsersListViewModel = CompanyServicehelper.EndUsers().Result;
-            model.ContractsListViewModel = CompanyServicehelper.Contracts().Result;
-            model.CompanyListViewModel = CompanyServicehelper.Projects().Result;
-            model.CompanySitesListViewModel = CompanyServicehelper.GetCompanies().Result;
-
-
+            model.ContractsListViewModel = CompanyServicehelper.Contracts().Result;          
             return View(model);
         }
 
@@ -52,7 +52,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                Companymodel = CompanyServicehelper.Projects().Result;
+                Companymodel = CompanyServicehelper.Projects(CompanyID).Result;
                 GridView gv = new GridView();
                 gv.DataSource = Companymodel;
                 gv.DataBind();
