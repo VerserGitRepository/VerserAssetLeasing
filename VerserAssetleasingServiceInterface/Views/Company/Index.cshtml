@@ -177,13 +177,13 @@
                         <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
                             <thead style="background-color:#FFA500; color:white">
                                 <tr>
-                                    <th>                             
-                                            @Html.DisplayName("Site")                                       
+                                    <th>
+                                        @Html.DisplayName("Site")
                                     </th>
                                     <th>
                                         @Html.DisplayName("Address")
                                     </th>
-                                   
+
                                     <th>
                                         @Html.DisplayName("Suburb")
                                     </th>
@@ -193,29 +193,38 @@
                                     <th>
                                         @Html.DisplayName("Postcode")
                                     </th>
+                                    <th style="display:none"></th>
+                                    <th style="display:none"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.CompanySitesListViewModel)
                                 {
-                                    <tr>
-                                        <td>
-                                            <a href="@Url.Action("Index", "RegisterCompany")">
-                                                @Html.DisplayName(item.siteName) </a>
-                                        </td>
-                                        <td>
-                                            @Html.DisplayName(item.addressLine1)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayName(item.suburb)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayName(item.state)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayName(item.postCode)
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayName(item.siteName)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.addressLine1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.suburb)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.state)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.postCode)
+                                    </td>
+                                    <td style="display:none">
+                                        @Html.DisplayName(item.site_Company)
+
+                                    </td>
+                                    <td style="display:none">
+                                        @Html.DisplayName(item.id.ToString())
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -361,14 +370,17 @@
                     success: function (data) {
 
                         $.confirm({
-                            boxWidth: '600px',
+                            boxWidth: '800px',
                             useBootstrap: false,
-                            title: '&nbsp;&nbsp;',
+                            title: 'Add Site',
                             content: data,
                             closeIcon: true,
 
                             buttons: {
-                                yes: { isHidden: true }
+                                Add: function () {
+
+                                    return true;
+                                }
                             }
                         });
 
@@ -377,27 +389,45 @@
            });
 
            $('#editSite').click(function () {
-                var AddSiteURL = '@Url.Action("AddSite", "Sites")'
+                var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
                 $.ajax({
                     type: "GET",
-                    url: AddSiteURL,
+                    url: updateSiteURL,
 
                     success: function (data) {
 
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: '&nbsp;&nbsp;',
+                            title: 'Add Site',
                             content: data,
                             closeIcon: true,
 
                             buttons: {
-                                yes: { isHidden: true }
+                                Add: function () {
+                                   
+                                    return true;
+                                }
+                            },
+                            onOpen: function () {
+                                // after the modal is displayed.
+                                var table = $('#mainTable1').DataTable();
+                                var selData = table.rows(".selected").data();
+                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
+
+                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                                $(".jconfirm").find($("#state")).val(selData[0][3]);
+                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
                             }
                         });
+                        
 
                     }
-                });
+               });
+               
             });
         </script>
         <body>
