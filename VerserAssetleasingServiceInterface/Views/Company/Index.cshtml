@@ -608,14 +608,17 @@
                     success: function (data) {
 
                         $.confirm({
-                            boxWidth: '600px',
+                            boxWidth: '800px',
                             useBootstrap: false,
-                            title: '&nbsp;&nbsp;',
+                            title: 'Add Site',
                             content: data,
                             closeIcon: true,
 
                             buttons: {
-                                yes: { isHidden: true }
+                                Add: function () {
+
+                                    return true;
+                                }
                             }
                         });
 
@@ -624,27 +627,45 @@
            });
 
            $('#editSite').click(function () {
-                var AddSiteURL = '@Url.Action("AddSite", "Sites")'
+                var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
                 $.ajax({
                     type: "GET",
-                    url: AddSiteURL,
+                    url: updateSiteURL,
 
                     success: function (data) {
 
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: '&nbsp;&nbsp;',
+                            title: 'Add Site',
                             content: data,
                             closeIcon: true,
 
                             buttons: {
-                                yes: { isHidden: true }
+                                Add: function () {
+                                   
+                                    return true;
+                                }
+                            },
+                            onOpen: function () {
+                                // after the modal is displayed.
+                                var table = $('#mainTable1').DataTable();
+                                var selData = table.rows(".selected").data();
+                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
+
+                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                                $(".jconfirm").find($("#state")).val(selData[0][3]);
+                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
                             }
                         });
+                        
 
                     }
-                });
+               });
+               
             });
         </script>
         <body>

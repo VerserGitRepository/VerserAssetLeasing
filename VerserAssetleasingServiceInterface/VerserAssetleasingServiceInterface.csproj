@@ -197,6 +197,7 @@
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CarriersServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\ColoursServicehelper.cs" />
+    <Compile Include="ServiceImplentationhelper\SitesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CompanyServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\DeviceCategoriesServicehelper.cs" />
