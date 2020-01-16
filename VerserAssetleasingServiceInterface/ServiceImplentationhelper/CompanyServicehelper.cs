@@ -33,6 +33,65 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return projectsList;
         }
+
+        public static async Task<List<AssetsListViewModel>> Assets()
+        {
+            List<AssetsListViewModel> projectsList = new List<AssetsListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("assets/AssetsList")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        projectsList.Add(p);
+                    }
+                }
+            }
+            return projectsList;
+        }
+
+        public static async Task<List<EndUsersListViewModel>> EndUsers()
+        {
+            List<EndUsersListViewModel> projectsList = new List<EndUsersListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("EndUsers/EndUsersList")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<EndUsersListViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        projectsList.Add(p);
+                    }
+                }
+            }
+            return projectsList;
+        }
+        public static async Task<List<ContractsListViewModel>> Contracts()
+        {
+            List<ContractsListViewModel> projectsList = new List<ContractsListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("Contracts/ContractsList")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<ContractsListViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        projectsList.Add(p);
+                    }
+                }
+            }
+            return projectsList;
+        }
         public static async Task<ReturnModel> CompanyAdd(CompanyEntryModel CompanyEntryRecord)
         {
             ReturnModel ReturnResult = new ReturnModel();
@@ -75,9 +134,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 HttpResponseMessage response = client.GetAsync(string.Format("MasteData/{0}/CompanySitesById",id)).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    companyList = await response.Content.ReadAsAsync<List<CompanySitesListViewModel>>();
-
-                    
+                    companyList = await response.Content.ReadAsAsync<List<CompanySitesListViewModel>>();                    
                 }
             }
             return companyList;
