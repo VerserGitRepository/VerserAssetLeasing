@@ -18,75 +18,57 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.AssetID)
+                            AssetID
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SerialNo)
+                            SerialNo
                         </th>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.IMEI)
+                            IMEI
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SIMNo)
+                            SIM
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PurchaseOrderNo)
+                           OrderNo
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PurchaseDate)
+                            PurchaseDate
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PurchasePrice)
+                            PurchasePrice
+                        </th>
+                        
+                        <th>
+                            Conditions
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DecomissionDate)
+                            BuyBackPrice
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Condition)
+                           AquisitionDate
                         </th>
+                      
                         <th>
-                            @Html.DisplayNameFor(model => model.BuyBackPrice)
+                            CommissionDate
+                        </th>                   
+                        <th>
+                           RepairDate
                         </th>
+                       
                         <th>
-                            @Html.DisplayNameFor(model => model.AquisitionDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SPMD)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstCommissionDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LastCommissionDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LastRepairDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CreatedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Created)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ModifiedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Modified)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Asset_Contract)
+                           Contract
                         </th>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.Asset_LifecycleStatus)
+                           Status
                         </th>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.Asset_OSVersion)
+                           OSVersion
                         </th>
-                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -99,9 +81,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.SerialNo)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Asset_Company)
-                            </td>
+                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.IMEI)
                             </td>
@@ -117,9 +97,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.PurchasePrice)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DecomissionDate)
-                            </td>
+                           
                             <td>
                                 @Html.DisplayFor(modelItem => item.Condition)
                             </td>
@@ -129,30 +107,15 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.AquisitionDate)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SPMD)
-                            </td>
+                          
                             <td>
                                 @Html.DisplayFor(modelItem => item.FirstCommissionDate)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastCommissionDate)
-                            </td>
+                      
                             <td>
                                 @Html.DisplayFor(modelItem => item.LastRepairDate)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreatedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Created)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ModifiedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Modified)
-                            </td>
+                        
                             <td>
                                 @Html.DisplayFor(modelItem => item.Asset_Contract)
                             </td>

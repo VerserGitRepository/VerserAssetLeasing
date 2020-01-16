@@ -36,7 +36,7 @@
             }
     </style>
 
-    <div class="table-bordered" style="margin:20px; width:850px">
+    <div class="table-bordered" style="margin:20px; width:750px">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @if (TempData["StatusMessage"] != null)
@@ -46,14 +46,14 @@
         <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
 
             <div class="col-md-8 col-sm-8">
-                <div class="form-group col-md-5 col-sm-6">
-                    @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="form-group col-md-4 col-sm-5">
+                    @Html.Label("SiteName", htmlAttributes: new { @class = "control-label col-md-7" })
                     @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
 
                 </div>
-                <div class="form-group col-md-5 col-md-offset-1">
-                    @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="form-group col-md-4 col-md-offset-1">
+                    @Html.Label("AddressLine1", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.addressLine1, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-8 col-sm-8">
                 <div class="form-group col-md-5 col-sm-6">
-                    @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label col-md-7" })
+                    @Html.Label("AddressLine2", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
@@ -82,23 +82,23 @@
                     @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group col-md-5 col-md-offset-1 col-sm-6">
-                    @Html.Label("Post Code", htmlAttributes: new { @class = "control-label col-md-7" })
+                    @Html.Label("PostCode", htmlAttributes: new { @class = "control-label col-md-7" })
                     @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-8 col-sm-8">
                 <div class="form-group col-md-5 col-sm-6">
-                    @Html.Label("Site Company", htmlAttributes: new { @class = "control-label col-md-7" })
+                    @Html.Label("Company", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.site_Company, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.site_Company, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
-            <input type="submit" value="ADD" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-            @Html.ActionLink("CANCEL", "Index", null, new { @class = "btn btn-primary btn-large" })
+        <div class="panel-footer primary" align="left" style="height:30px;vertical-align:top;">
+            <input type="submit" value="ADD" class="btn btn-default btn-warning" style="height:25px;vertical-align:top" />
+            @*@Html.ActionLink("CANCEL", "Index", null, new { @class = "btn btn-primary btn-large" })*@
         </div>
 
     </div>
