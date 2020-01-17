@@ -19,7 +19,7 @@
     <div class="row" style="width:120%">
         <div class="col-md-12">
             <table class="table table-bordered  table-responsive table-hover" id="mainTable" @*style="font-size:14px;width:132%;margin-right:10px;color:black"*@>
-                <thead style="background-color:#FFA500; color:white">
+                <thead style="background-color: #428bca; color:white">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.startDate)
@@ -40,20 +40,20 @@
                             @Html.DisplayNameFor(model => model.created)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.modifiedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.modified)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.contract_Company)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.contract_EndUser)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.contract_Plan)
-                        </th>*@
+                    @Html.DisplayNameFor(model => model.modifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.contract_Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.contract_EndUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.contract_Plan)
+                </th>*@
 
                     </tr>
                 </thead>
@@ -81,25 +81,25 @@
                                 @Html.DisplayFor(modelItem => item.created)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.modifiedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.modified)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.contract_Company)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.contract_EndUser)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.contract_Plan)
-                            </td>*@
+                        @Html.DisplayFor(modelItem => item.modifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contract_Company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contract_EndUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contract_Plan)
+                    </td>*@
                             @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                                </td>*@
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>*@
                         </tr>
                     }
                 </tbody>

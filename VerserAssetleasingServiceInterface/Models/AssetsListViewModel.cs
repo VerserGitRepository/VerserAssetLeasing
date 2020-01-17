@@ -15,11 +15,17 @@ namespace VerserAssetleasingServiceInterface.Models
         public string IMEI { get; set; }
         public string SIMNo { get; set; }
         public string PurchaseOrderNo { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> PurchaseDate { get; set; }
         public decimal? PurchasePrice { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DecomissionDate { get; set; }
         public string Condition { get; set; }
         public decimal? BuyBackPrice { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> AquisitionDate { get; set; }
         public string SPMD { get; set; }
         [DataType(DataType.Date)]

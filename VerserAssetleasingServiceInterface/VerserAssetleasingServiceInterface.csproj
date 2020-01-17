@@ -362,6 +362,10 @@
     <Content Include="Views\Sites\UpdateSite.cshtml" />
     <Content Include="Views\RegisterAssets\AddAssets.cshtml" />
     <Content Include="Views\RegisterAssets\UpdateAssets.cshtml" />
+    <Content Include="Views\RegisterContract\AddContract.cshtml" />
+    <Content Include="Views\RegisterContract\UpdateContract.cshtml" />
+    <Content Include="Views\RegisterEndUsers\AddEndUser.cshtml" />
+    <Content Include="Views\RegisterEndUsers\UpdateEndUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

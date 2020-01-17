@@ -15,6 +15,17 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             return View();
         }
+        // GET: Assets
+        public ActionResult AddEnduser()
+        {
+
+            return PartialView();
+        }
+        public ActionResult UpdateEnduser()
+        {
+
+            return PartialView();
+        }
         [HttpPost]
         public ActionResult Index(EndUsersListViewModel EndUsersRegisterdata)
         {

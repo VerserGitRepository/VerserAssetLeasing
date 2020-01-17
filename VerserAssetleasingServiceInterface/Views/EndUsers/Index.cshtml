@@ -19,7 +19,7 @@
     <div class="row" style="width:120%">
         <div class="col-md-12">
             <table class="table table-bordered  table-responsive table-hover" id="mainTable" @*style="font-size:14px;width:132%;margin-right:10px;color:black"*@>
-                <thead style="background-color:#FFA500; color:white">
+                <thead style="background-color: #428bca; color:white">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.FirstName)
@@ -55,17 +55,17 @@
                             @Html.DisplayNameFor(model => model.Created)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.ModifiedBy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Modified)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.EndUser_Company)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.EndUser_Site)
-                        </th>*@
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndUser_Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndUser_Site)
+                </th>*@
 
                     </tr>
                 </thead>
@@ -108,18 +108,18 @@
                                 @Html.DisplayFor(modelItem => item.Created)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.modifiedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.modified)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.endUser_Company)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.endUser_Site)
-                            </td>*@
-                        
+                        @Html.DisplayFor(modelItem => item.modifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.endUser_Company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.endUser_Site)
+                    </td>*@
+
                         </tr>
                     }
                 </tbody>
