@@ -34,6 +34,26 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             return projectsList;
         }
 
+
+        public static async Task<List<ListItemViewModel>> CompanyList()
+        {
+            var companies = new List<ListItemViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("MasteData/CompanyList")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<ListItemViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        companies.Add(new ListItemViewModel() { Id = p.Id, Value = p.Value });
+                    }
+                }
+            }            
+            return companies;
+        }
         public static async Task<List<AssetsListViewModel>> Assets()
         {
             List<AssetsListViewModel> projectsList = new List<AssetsListViewModel>();

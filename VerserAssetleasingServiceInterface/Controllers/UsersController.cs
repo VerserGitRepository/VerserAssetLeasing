@@ -13,11 +13,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            var _userroles=new List<UserRoleModel>();
-            var _users = AdminHelperService.Users().Result;
-            var _roles = AdminHelperService.Roles().Result;       
-
-            return View(_users);
+            var _userroles=new UserRoleModel();
+            _userroles.Usermodel = AdminHelperService.Users().Result;
+            _userroles.Rolemodel = AdminHelperService.Roles().Result;
+            _userroles.Companylist=CompanyServicehelper.CompanyList().Result;
+            return View(_userroles);
         }
     }
 }

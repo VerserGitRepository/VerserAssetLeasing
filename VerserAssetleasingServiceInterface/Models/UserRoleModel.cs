@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace VerserAssetleasingServiceInterface.Models
 {
     public class UserRoleModel
     {
-        public UserModel Usermodel { get; set; }
-        public RolesModel Rolemodel { get; set; }
+        public List<UserModel> Usermodel { get; set; }
+        public List<RolesModel> Rolemodel { get; set; }
+        public List<ListItemViewModel> Companylist { get; set; }
     }
 }
