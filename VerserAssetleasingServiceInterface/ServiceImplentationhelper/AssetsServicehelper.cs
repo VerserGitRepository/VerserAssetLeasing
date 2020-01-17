@@ -69,5 +69,19 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ReturnResult;
         }
+        public static async Task<List<AssetsListViewModel>> GetAssetsData(int id)
+        {
+            List<AssetsListViewModel> assetsList = new List<AssetsListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("Assets/{0}/CompanyAssets", id)).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    assetsList = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
+                }
+            }
+            return assetsList;
+        }
     }
 }
