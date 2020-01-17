@@ -10,6 +10,17 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class RegisterAssetsController : Controller
     {
+        // GET: Assets
+        public ActionResult AddAssets()
+        {
+
+            return PartialView();
+        }
+        public ActionResult UpdateAssets()
+        {
+
+            return PartialView();
+        }
         // GET: RegisterAssets
         public ActionResult Index()
         {

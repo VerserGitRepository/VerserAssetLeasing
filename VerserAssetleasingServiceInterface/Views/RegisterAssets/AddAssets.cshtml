@@ -1,0 +1,216 @@
+﻿@model VerserAssetleasingServiceInterface.Models.AssetsListViewModel
+
+@{
+    ViewBag.Title = "AddAssets";
+}
+
+
+
+<div class="table-bordered" style="margin:20px; width:900px">
+    <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
+        <h3 class="panel-title">ADD ASSETS</h3>
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssetID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Asset_Company, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IMEI, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SIMNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.DecomissionDate, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DatePickId" } })
+                @Html.ValidationMessageFor(model => model.DecomissionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.BuyBackPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BuyBackPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.AquisitionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AquisitionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.SPMD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SPMD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FirstCommissionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstCommissionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.LastCommissionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastCommissionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-5 col-sm-6">
+            @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.LastRepairDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastRepairDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .form-group {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        margin: 0px;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
+    /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
+    }*/
+    .col-md-6 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .inline style {
+        height: 400.7px;
+        max-height: 492.85px;
+        transition-duration: 0.4s;
+        transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
+    }
+
+    .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+        overflow: hidden;
+    }
+
+    .row.no-pad > [class*='col-'] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .btn-warning {
+        background-color: #FFA500;
+        font-size: 14px;
+    }
+
+    .form-control {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 12px;
+        border-radius: 9px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+    }
+
+    .panel-footer {
+        padding: 3px 30px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #dddddd;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    .form-group.required .control-label:after {
+        content: "*";
+        color: red;
+        padding-bottom: 15px;
+</style>

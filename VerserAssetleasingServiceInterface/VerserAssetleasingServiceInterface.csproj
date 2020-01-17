@@ -360,6 +360,8 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Sites\AddSite.cshtml" />
     <Content Include="Views\Sites\UpdateSite.cshtml" />
+    <Content Include="Views\RegisterAssets\AddAssets.cshtml" />
+    <Content Include="Views\RegisterAssets\UpdateAssets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
