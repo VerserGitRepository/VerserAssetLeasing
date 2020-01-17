@@ -19,5 +19,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return View(assetsdata);
         }
+
+        [HttpGet]
+        public ActionResult GetAssetsData(int Id)
+        {
+            List<AssetsListViewModel> companydata = new List<AssetsListViewModel>();
+
+            companydata = AssetsServicehelper.GetAssetsData(Id).Result;
+
+            return Json(companydata, JsonRequestBehavior.AllowGet);
+        }
     }
 }
