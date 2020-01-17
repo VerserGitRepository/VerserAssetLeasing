@@ -224,7 +224,7 @@
                                 </div>
                             </div>
                         </div>
-
+                 
                         <div class="tab-pane fade" id="tab2default">
                             <div class="row pull-right">
                                 <div class="col-md-1">
@@ -232,6 +232,12 @@
                                     {
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
                                     }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset">
                                 </div>
                             </div>
 
@@ -244,15 +250,15 @@
                                                 @Html.DisplayName("Asset ID")
                                             </th>
                                             @*<th>
-                                                    @Html.DisplayName("Serial No")
-                                                </th>*@
+                                @Html.DisplayName("Serial No")
+                            </th>*@
 
                                             <th>
                                                 @Html.DisplayName("IMEI")
                                             </th>
                                             @*<th>
-                                                    @Html.DisplayName("SIM NO")
-                                                </th>*@
+                                @Html.DisplayName("SIM NO")
+                            </th>*@
                                             <th>
                                                 @Html.DisplayName("Purchase Order No")
                                             </th>
@@ -266,14 +272,14 @@
                                                     @Html.DisplayName(item.AssetID)
                                                 </td>
                                                 @*<td>
-                                                        @Html.DisplayName(item.SerialNo)
-                                                    </td>*@
+                                    @Html.DisplayName(item.SerialNo)
+                                </td>*@
                                                 <td>
                                                     @Html.DisplayName(item.IMEI)
                                                 </td>
                                                 @*<td>
-                                                        @Html.DisplayName(item.SIMNo)
-                                                    </td>*@
+                                    @Html.DisplayName(item.SIMNo)
+                                </td>*@
                                                 <td>
                                                     @Html.DisplayName(item.PurchaseOrderNo)
                                                 </td>
@@ -688,7 +694,75 @@
                                 var selData = table.rows(".selected").data();
                                 $(".jconfirm").find($("#siteName")).val(selData[0][0]);
                                 $(".jconfirm").find($("#address1")).val(selData[0][1]);
+                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                                $(".jconfirm").find($("#state")).val(selData[0][3]);
+                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
+                            }
+                        });
 
+
+                    }
+               });
+
+        });
+
+
+         $('#addAsset').click(function () {
+                var AddSiteURL = '@Url.Action("AddAssets", "RegisterAssets")'
+                $.ajax({
+                    type: "GET",
+                    url: AddSiteURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: '',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            }
+                        });
+
+                    }
+                });
+           });
+
+           $('#editAsset').click(function () {
+                var updateSiteURL = '@Url.Action("UpdateAssets", "RegisterAssets")'
+                $.ajax({
+                    type: "GET",
+                    url: updateSiteURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: '',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            },
+                            onOpen: function () {
+                                // after the modal is displayed.
+                                var table = $('#mainTable1').DataTable();
+                                var selData = table.rows(".selected").data();
+                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
                                 $(".jconfirm").find($("#suburb")).val(selData[0][2]);
                                 $(".jconfirm").find($("#state")).val(selData[0][3]);
                                 $(".jconfirm").find($("#postcode")).val(selData[0][4]);
