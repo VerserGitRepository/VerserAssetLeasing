@@ -4,9 +4,6 @@
     ViewBag.Title = "Register End Users";
 }
 
-
-
-
 @using (Html.BeginForm("UpdateSiteInformation", "Sites", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -36,69 +33,72 @@
             }
     </style>
 
-    <div class="table-bordered" style="margin:20px; width:850px">
+    <div class="container" style="margin:20px; width:800px">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @if (TempData["StatusMessage"] != null)
         {
             <p><h6> @TempData["StatusMessage"].ToString()</h6></p>
         }
-            <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
+        <div class="row" style="font-size:x-small;color:grey;border-color:gray">
 
-                <div class="col-md-8 col-sm-8">
-                    <div class="form-group col-md-5 col-sm-6">
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
 
-                        @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-7" })
-                        @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteName" } })
-                        @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
+                    @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteName" } })
+                    @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
 
-                    </div>
-                    <div class="form-group col-md-5 col-md-offset-1">
-                        @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label col-md-7" })
-
-                        @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address1" } })
-                        @Html.ValidationMessageFor(model => model.addressLine1, "", new { @class = "text-danger" })
-                    </div>
                 </div>
-                <div class="col-md-8 col-sm-8">
-                    <div class="form-group col-md-5 col-sm-6">
-                        @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label col-md-5" })
 
-                        @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address2" } })
-                        @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group col-md-5 col-md-offset-1 col-sm-6">
-                        @Html.Label("Suburb", htmlAttributes: new { @class = "control-label col-md-7" })
-
-                        @Html.EditorFor(model => model.suburb, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "suburb" } })
-                        @Html.ValidationMessageFor(model => model.suburb, "", new { @class = "text-danger" })
-
-                    </div>
+                    @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address1" } })
+                    @Html.ValidationMessageFor(model => model.addressLine1, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-8 col-sm-8">
-                    <div class="form-group col-md-5 col-sm-6">
-                        @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-7" })
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label col-md-5" })
 
-                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "state" } })
-                        @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group col-md-5 col-md-offset-1 col-sm-6">
-                        @Html.Label("Post Code", htmlAttributes: new { @class = "control-label col-md-7" })
-                        @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "postcode" } })
-                        @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address2" } })
+                    @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-8 col-sm-8">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Suburb", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.suburb, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "suburb" } })
+                    @Html.ValidationMessageFor(model => model.suburb, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-7" })
+
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "state" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Post Code", htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "postcode" } })
+                    @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Site Company", htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.EditorFor(model => model.site_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteCompany" } })
+                    </div>
                     <div class="form-group col-md-5 col-sm-6">
-                        @Html.Label("Site Company", htmlAttributes: new { @class = "control-label col-md-7" })
-                        @Html.EditorFor(model => model.site_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteCompany" } })
                         @Html.Label("Site Id", htmlAttributes: new { @class = "control-label col-md-7" })
                         @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteId" } })
                     </div>
                 </div>
-                <input type="submit" value="UPDATE" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-            </div>
+            @*<input type="submit" value="UPDATE" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />*@
         </div>
+
+    </div>
 
 }
 
@@ -107,6 +107,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
 
 <style>
     .form-group {
@@ -119,12 +120,24 @@
         padding-bottom: 5px;
         margin-top: 2px;
     }
-
+    /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
+    }*/
     .col-md-6 {
         position: relative;
         min-height: 1px;
         padding-right: 0px;
         padding-left: 0px;
+    }
+
+    .inline style {
+        height: 400.7px;
+        max-height: 492.85px;
+        transition-duration: 0.4s;
+        transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
+    }
+
+    .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+        overflow: hidden;
     }
 
     .row.no-pad > [class*='col-'] {

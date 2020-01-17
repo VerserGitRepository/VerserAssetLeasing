@@ -19,20 +19,20 @@
 
 @*<div class="container" style="padding-top:1px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
 
-    <div class="row pull-left">
-        <div class="col-md-1">
-            @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
-            {
-                <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
-            }
-        </div>     
-        <div class="col-md-1">
-            <a href="@Url.Action("Index", "RegisterCompany")">
-                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
-            </a>
+        <div class="row pull-left">
+            <div class="col-md-1">
+                @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+                {
+                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                }
+            </div>
+            <div class="col-md-1">
+                <a href="@Url.Action("Index", "RegisterCompany")">
+                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
+                </a>
+            </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 <div class="container-fluid" style="margin-left:0px;padding-top:0px">
 
 
@@ -73,7 +73,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="panel with-nav-tabs panel-default"style="width:200%">
+            <div class="panel with-nav-tabs panel-default" style="width:200%">
                 <div class="panel-heading">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab1default" data-toggle="tab">COMPANY DETAILS</a></li>
@@ -81,7 +81,7 @@
                         <li><a href="#tab3default" data-toggle="tab">CONTRACTS</a></li>
                         <li><a href="#tab4default" data-toggle="tab">CATALOUGES</a></li>
                         <li><a href="#tab5default" data-toggle="tab">END USERS</a></li>
-                    
+
                     </ul>
                 </div>
                 <div class="panel-body">
@@ -233,9 +233,9 @@
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
                                     }
                                 </div>
-                                </div>
-                                
-                               
+                            </div>
+
+
                             <div class="row pull-left" style="margin-left:-1px">
                                 <table class="table-bordered" style="margin:10px; width:980px" id="mainTable2">
                                     <thead style="background-color:#428bca; color:white">
@@ -244,15 +244,15 @@
                                                 @Html.DisplayName("Asset ID")
                                             </th>
                                             @*<th>
-                            @Html.DisplayName("Serial No")
-                        </th>*@
+                                                    @Html.DisplayName("Serial No")
+                                                </th>*@
 
                                             <th>
                                                 @Html.DisplayName("IMEI")
                                             </th>
                                             @*<th>
-                            @Html.DisplayName("SIM NO")
-                        </th>*@
+                                                    @Html.DisplayName("SIM NO")
+                                                </th>*@
                                             <th>
                                                 @Html.DisplayName("Purchase Order No")
                                             </th>
@@ -266,14 +266,14 @@
                                                     @Html.DisplayName(item.AssetID)
                                                 </td>
                                                 @*<td>
-                                @Html.DisplayName(item.SerialNo)
-                            </td>*@
+                                                        @Html.DisplayName(item.SerialNo)
+                                                    </td>*@
                                                 <td>
                                                     @Html.DisplayName(item.IMEI)
                                                 </td>
                                                 @*<td>
-                                @Html.DisplayName(item.SIMNo)
-                            </td>*@
+                                                        @Html.DisplayName(item.SIMNo)
+                                                    </td>*@
                                                 <td>
                                                     @Html.DisplayName(item.PurchaseOrderNo)
                                                 </td>
@@ -293,10 +293,10 @@
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addContract">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editContract">
                                 </div>
                             </div>
                             <br>
@@ -349,13 +349,13 @@
                                         }
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset">
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -368,10 +368,10 @@
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEnduser">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
                                 </div>
                             </div>
                             <div class="row pull-left" style="margin-left:-1px">
@@ -459,12 +459,12 @@
 
 
     </div>
-    </div>
+</div>
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-       <script type="text/javascript">
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
@@ -473,14 +473,13 @@
             $('#mainTable4').DataTable();
             $('#mainTable5').DataTable();
 
-            var table = $('#mainTable1').DataTable();
 
-            $('#mainTable1 tbody').on('click', 'tr', function () {
+            $('#mainTable1,#mainTable2,#mainTable3,#mainTable4,#mainTable5 tbody').on('click', 'tr', function () {
                 if ($(this).hasClass('selected')) {
                     $(this).removeClass('selected');
                 }
                 else {
-                    table.$('tr.selected').removeClass('selected');
+                    $('#mainTable1,#mainTable2,#mainTable3,#mainTable4,#mainTable5').DataTable().$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
             });
@@ -500,7 +499,11 @@
             $("#hiddenPostcode").val(postcode);
             $("#image").attr("src", "data:image/jpeg;base64," + logo + "").height(80).width(80);
 
-             var loadUrl = '@Url.Action("GetCompanyData", "Company")';
+            var loadUrl = '@Url.Action("GetCompanyData", "Company")';
+            var loadAssetsUrl = '@Url.Action("GetAssetsData", "Assets")';
+           var loadContractsUrl = '@Url.Action("GetContractsData", "Contracts")';
+            var loadCatalogueUrl = '@Url.Action("GetCatalogueData", "Catalogue")';
+            var loadEndusersUrl = '@Url.Action("GetEndusersData", "Endusers")';
 
             $.ajax({
 
@@ -512,6 +515,22 @@
                 success: function (data) {
                     // debugger;
                     populateDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+            $.ajax({
+
+                type: "GET",
+                url: loadAssetsUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": theId },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    populateAssetsDataTable(data);
                 },
                 error: function () {
                     alert("Dynamic content load failed.");
@@ -542,7 +561,29 @@
                     ]);
                 }
             }
-        }
+           }
+
+        function populateAssetsDataTable(data) {
+               console.log("populating data table...");
+               // clear the table before populating it with more data
+            $("#mainTable2").DataTable().clear();
+               var length = Object.keys(data).length;
+               if (length == 0) {
+                   $('#mainTable2').dataTable().fnAddData(["", "", ""]);
+               }
+               else {
+                   for (var i = 0; i <= length; i++) {
+                       var customer = data[i];
+
+                       // You could also use an ajax property on the data table initialization
+                       $('#mainTable2').dataTable().fnAddData([
+                           customer.AssetID,
+                           customer.IMEI,
+                           customer.PurchaseOrderNo
+                       ]);
+                   }
+               }
+           }
 
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -604,7 +645,7 @@
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: 'Add Site',
+                            title: '',
                             content: data,
                             closeIcon: true,
 
@@ -631,13 +672,13 @@
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: 'Add Site',
+                            title: '',
                             content: data,
                             closeIcon: true,
 
                             buttons: {
                                 Add: function () {
-                                   
+
                                     return true;
                                 }
                             },
@@ -655,261 +696,337 @@
                                 $(".jconfirm").find($("#siteId")).val(selData[0][6]);
                             }
                         });
-                        
+
 
                     }
                });
-               
+
+           });
+
+           $('#addContract').click(function () {
+                var AddContractURL = '@Url.Action("AddContract", "RegisterContract")'
+                $.ajax({
+                    type: "GET",
+                    url: AddContractURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: 'Add Site',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            }
+                        });
+
+                    }
+                });
+           });
+
+           $('#editContract').click(function () {
+                var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
+                $.ajax({
+                    type: "GET",
+                    url: updateSiteURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: 'Add Site',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            },
+                            onOpen: function () {
+                                // after the modal is displayed.
+                                var table = $('#mainTable1').DataTable();
+                                var selData = table.rows(".selected").data();
+                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
+
+                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                                $(".jconfirm").find($("#state")).val(selData[0][3]);
+                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
+                            }
+                        });
+
+
+                    }
+               });
+
             });
-        </script>
-        <body>
-           
-            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-            <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
-        </body>
+    </script>
+    <body>
+
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
+    </body>
+}
+<style>
+    .row.vdivide [class*='col-']:not(:last-child):after {
+        background: #e0e0e0;
+        width: 1px;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        min-height: 70px;
     }
-    <style>
-        .row.vdivide [class*='col-']:not(:last-child):after {
-            background: #e0e0e0;
-            width: 1px;
+
+    .col-padding {
+        padding: 0 15px;
+    }
+
+    .panel-footer {
+        padding: 3px 30px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #dddddd;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        width: 100%
+    }
+
+    .glyphicon {
+        font-size: 14px;
+        color: black;
+    }
+
+    .grid-divider {
+        position: relative;
+        padding: 0;
+        width: 1000px;
+    }
+
+    image-border {
+        padding: 1px;
+        border: 1px solid #021a40;
+    }
+
+    .grid-divider > [class*='col-'] {
+        position: static;
+    }
+
+        .grid-divider > [class*='col-']:nth-child(n+2):before {
             content: "";
-            display: block;
+            border-left: 1px solid #DDD;
             position: absolute;
             top: 0;
             bottom: 0;
-            right: 0;
-            min-height: 70px;
         }
 
-        .col-padding {
-            padding: 0 15px;
-        }
+    .col-padding {
+        padding: 0 15px;
+    }
 
-        .panel-footer {
-            padding: 3px 30px;
-            background-color: #f5f5f5;
-            border-top: 1px solid #dddddd;
-            border-bottom-right-radius: 0px;
-            border-bottom-left-radius: 0px;
-            width: 100%
-        }
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+    }
 
-        .glyphicon {
-            font-size: 14px;
-            color: black;
-        }
+    .btn-warning {
+        background-color: #FFA500;
+        font-size: 11px;
+    }
 
-        .grid-divider {
-            position: relative;
-            padding: 0;
-            width: 1000px;
-        }
+    .black {
+        color: black;
+    }
 
-        image-border {
-            padding: 1px;
-            border: 1px solid #021a40;
-        }
+    body {
+        padding-top: 40px;
+        padding-bottom: 5px;
+        /*margin-left:5px;*/
+    }
 
-        .grid-divider > [class*='col-'] {
-            position: static;
-        }
+    /* Set padding to keep content from hitting the edges */
+    .body-content {
+        padding-left: 0px;
+        padding-right: 5px;
+        margin-left: 5px;
+    }
 
-            .grid-divider > [class*='col-']:nth-child(n+2):before {
-                content: "";
-                border-left: 1px solid #DDD;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-            }
+    .dataTables_filter {
+        float: right;
+    }
 
-        .col-padding {
-            padding: 0 15px;
-        }
+    .container {
+        font-size: 12px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 
-        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-            background-color: #FFA500;
-            border-color: white;
-        }
+    .page-item.active .page-link {
+        color: white !important;
+        background-color: orange !important;
+        border-color: gray !important;
+    }
 
-        .btn-warning {
-            background-color: #FFA500;
-            font-size: 11px;
-        }
-
-        .black {
-            color: black;
-        }
-
-        body {
-            padding-top: 40px;
-            padding-bottom: 5px;
-            /*margin-left:5px;*/
-        }
-
-        /* Set padding to keep content from hitting the edges */
-        .body-content {
-            padding-left: 0px;
-            padding-right: 5px;
-            margin-left: 5px;
-        }
-
-        .dataTables_filter {
-            float: right;
-        }
-
-        .container {
-            font-size: 12px;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-
-        .page-item.active .page-link {
-            color: white !important;
-            background-color: orange !important;
-            border-color: gray !important;
-        }
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+    }
 
         .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
             background-color: #FFA500;
             border-color: white;
         }
 
-            .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-                background-color: #FFA500;
-                border-color: white;
-            }
+    .tab-pane {
+        border-color: lightgray
+    }
 
-        .tab-pane {border-color:lightgray
-        }
-        .page-item.active .page-link {
-            color: white !important;
-            background-color: orange !important;
-            border-color: gray !important;
+    .page-item.active .page-link {
+        color: white !important;
+        background-color: orange !important;
+        border-color: gray !important;
+    }
+
+    .col-md-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+
+    .col-md-6 {
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 15px;
+        padding-left: 5px
+    }
+
+    .table-hover tbody tr:hover > td {
+        background-color: gra;
+    }
+
+    .datatable tr:nth-child(odd) {
+        background-color: #dfe7f2;
+        color: #000;
+    }
+
+    table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+        border-top: 1px solid #ddd;
+    }
+
+    table.dataTable, table.dataTable th, table.dataTable td {
+        box-sizing: content-box;
+    }
+
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 8px 10px;
         }
 
-        .col-md-6 {
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 50%;
-            flex: 0 0 50%;
-            max-width: 50%
-        }
+    .with-nav-tabs.panel-default .nav-tabs > li > a,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+        color: #777;
+    }
 
-        .col-md-6 {
-            position: relative;
-            width: 100%;
-            min-height: 1px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 15px;
-            padding-left: 5px
-        }
-
-        .table-hover tbody tr:hover > td {
-            background-color: gra;
-        }
-        .datatable tr:nth-child(odd) {
-            background-color: #dfe7f2;
-            color: #000;
-        }
-        table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
-            border-top: 1px solid #ddd;
-        }
-        table.dataTable, table.dataTable th, table.dataTable td {
-            box-sizing: content-box;
-        }
-            table.dataTable tbody th, table.dataTable tbody td {
-                padding: 8px 10px;
-            }
-        .with-nav-tabs.panel-default .nav-tabs > li > a,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
         .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
         .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
             color: #777;
+            background-color: #ddd;
+            border-color: transparent;
         }
 
-            .with-nav-tabs.panel-default .nav-tabs > .open > a,
-            .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
-            .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
-            .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
-            .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
-                color: #777;
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+    .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+        color: #555;
+        background-color: #BCBABE;
+        border-color: #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+            color: #777;
+        }
+
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
                 background-color: #ddd;
-                border-color: transparent;
             }
 
-        .with-nav-tabs.panel-default .nav-tabs > li.active > a,
-        .with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
-        .with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
-            color: #555;
-            background-color: #BCBABE;
-            border-color: #ddd;
-            border-bottom-color: transparent;
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+            color: #fff;
+            background-color: #555;
         }
+    /********************************************************************/
+    /*** PANEL PRIMARY ***/
+    .with-nav-tabs.panel-primary .nav-tabs > li > a,
+    .with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+    .with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+        color: #fff;
+    }
 
-        .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
-            background-color: #f5f5f5;
-            border-color: #ddd;
-        }
-
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
-                color: #777;
-            }
-
-                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-                .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
-                    background-color: #ddd;
-                }
-
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-            .with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
-                color: #fff;
-                background-color: #555;
-            }
-        /********************************************************************/
-        /*** PANEL PRIMARY ***/
-        .with-nav-tabs.panel-primary .nav-tabs > li > a,
+        .with-nav-tabs.panel-primary .nav-tabs > .open > a,
+        .with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
         .with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
         .with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
             color: #fff;
+            background-color: #3071a9;
+            border-color: transparent;
         }
 
-            .with-nav-tabs.panel-primary .nav-tabs > .open > a,
-            .with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
-            .with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
-            .with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
-            .with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
-                color: #fff;
+    .with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+    .with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+    .with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+        color: #428bca;
+        background-color: #fff;
+        border-color: #428bca;
+        border-bottom-color: transparent;
+    }
+
+    .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
+        background-color: #428bca;
+        border-color: #3071a9;
+    }
+
+        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
+            color: #fff;
+        }
+
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
                 background-color: #3071a9;
-                border-color: transparent;
             }
 
-        .with-nav-tabs.panel-primary .nav-tabs > li.active > a,
-        .with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
-        .with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
-            color: #428bca;
-            background-color: #fff;
-            border-color: #428bca;
-            border-bottom-color: transparent;
+        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+            background-color: #4a9fe9;
         }
-
-        .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
-            background-color: #428bca;
-            border-color: #3071a9;
-        }
-
-            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
-                color: #fff;
-            }
-
-                .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-                .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
-                    background-color: #3071a9;
-                }
-
-            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-            .with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
-                background-color: #4a9fe9;
-            }
-    </style>
+</style>
 
