@@ -30,9 +30,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             return View();
         }
-        public ActionResult AddContract()
-        {
-            return PartialView("IndexLite");
-        }
+        
     }
 }
