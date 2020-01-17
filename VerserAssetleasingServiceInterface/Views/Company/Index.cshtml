@@ -355,10 +355,10 @@
                                         }
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
                                     </div>
                                 </div>
 
@@ -707,7 +707,73 @@
                });
 
         });
+         $('#addEndUser').click(function () {
+                var AddSiteURL = '@Url.Action("AddEndUser", "RegisterEndUsers")'
+                $.ajax({
+                    type: "GET",
+                    url: AddSiteURL,
 
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: '',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            }
+                        });
+
+                    }
+                });
+           });
+
+           $('#editEndUser').click(function () {
+                var updateSiteURL = '@Url.Action("UpdateEndUser", "RegisterEndusers")'
+                $.ajax({
+                    type: "GET",
+                    url: updateSiteURL,
+
+                    success: function (data) {
+
+                        $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: '',
+                            content: data,
+                            closeIcon: true,
+
+                            buttons: {
+                                Add: function () {
+
+                                    return true;
+                                }
+                            },
+                            onOpen: function () {
+                                // after the modal is displayed.
+                                var table = $('#mainTable1').DataTable();
+                                var selData = table.rows(".selected").data();
+                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
+                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                                $(".jconfirm").find($("#state")).val(selData[0][3]);
+                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
+                            }
+                        });
+
+
+                    }
+               });
+
+        });
 
          $('#addAsset').click(function () {
                 var AddSiteURL = '@Url.Action("AddAssets", "RegisterAssets")'
@@ -788,7 +854,7 @@
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: 'Add Site',
+                            title: '',
                             content: data,
                             closeIcon: true,
 
@@ -804,8 +870,10 @@
                 });
            });
 
+       
+
            $('#editContract').click(function () {
-                var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
+                var updateSiteURL = '@Url.Action("UpdateContract", "RegisterContract")'
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,

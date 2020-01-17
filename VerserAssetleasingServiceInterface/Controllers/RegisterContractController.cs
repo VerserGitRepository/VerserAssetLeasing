@@ -9,6 +9,17 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class RegisterContractController : Controller
     {
+        // GET: Assets
+        public ActionResult AddContract()
+        {
+
+            return PartialView();
+        }
+        public ActionResult UpdateContract()
+        {
+
+            return PartialView();
+        }
         // GET: RegisterContract
         public ActionResult Index()
         {
