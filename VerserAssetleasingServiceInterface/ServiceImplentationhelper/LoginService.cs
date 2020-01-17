@@ -39,7 +39,7 @@ namespace VerserAssetleasingServiceInterface.ServiceHelper
                      ReturnID = await response.Content.ReadAsAsync<int>();
                 }
             }
-            return 100000;
+            return ReturnID;
         }
     }
 }
