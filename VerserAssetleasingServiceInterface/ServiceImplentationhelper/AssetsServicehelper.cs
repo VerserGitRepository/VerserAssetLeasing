@@ -26,7 +26,6 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
-
                     foreach (var p in projects)
                     {
                         projectsList.Add(p);
@@ -52,14 +51,11 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                         if (ReturnResult.Message == null || ReturnResult.Message == string.Empty)
                         {
                             ReturnResult.Message = "User has been registered successfully.";
-
                         }
-
                     }
                     else
                     {
                         ReturnResult.Message = "There is an issue with registration. The detail are " + response.ReasonPhrase;
-
                     }
                 }
                 catch (Exception ex)

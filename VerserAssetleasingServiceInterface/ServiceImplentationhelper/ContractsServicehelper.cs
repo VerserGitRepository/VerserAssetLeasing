@@ -14,7 +14,6 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
     public class ContractsServicehelper
     {
         public static string BaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
-
         public static async Task<List<ContractsListViewModel>> Projects()
         {
             List<ContractsListViewModel> projectsList = new List<ContractsListViewModel>();
