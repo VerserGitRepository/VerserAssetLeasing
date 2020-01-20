@@ -33,7 +33,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 if (login.UserName !=null)
                 {
                     int _CompanyId = LoginService.UserCompanyId(login.UserName).Result;
-                    Session["CompanyID"] = _CompanyId;
+                    if (_CompanyId >0)
+                    {
+                        Session["CompanyID"] = _CompanyId;
+                    }
+                    else
+                    {
+                        Session["CompanyID"]  = 100000;
+                    }                 
+                   
                 }
                 Session["ErrorMessage"] = null;
                 return RedirectToAction("Index", "Company");

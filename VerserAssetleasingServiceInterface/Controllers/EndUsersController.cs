@@ -15,7 +15,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             List<EndUsersListViewModel> enduserdata = new List<EndUsersListViewModel>();
 
-            enduserdata = EndUsersServicehelper.Projects().Result;
+            enduserdata = EndUsersServicehelper.EndUsersList().Result;
 
             return View(enduserdata);
         }
