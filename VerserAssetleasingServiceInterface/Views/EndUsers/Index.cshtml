@@ -4,8 +4,10 @@
     ViewBag.Title = "Index";
 }
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />s
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -14,11 +16,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <h4 align="center" style="color:GrayText;font-weight:600;"></h4>
 <br>
+<div class="container" style="padding-top:0px;padding-bottom:0px;margin-right:0px;padding-left:1px;padding-right:10px;width:140%">
 
+    <div class="row pull-right">
+        <div class="col-md-2">
+            @using (Html.BeginForm("ExportTimesSheetToExcel", "EndUsers", FormMethod.Post))
+            {
+                <input type="image" src="~/Images/excel.png" alt="Submit" width="25" height="25">
+            }
+        </div>
+        @*<div class="col-md-1">
+                <a href="@Url.Action("Index", "RegisterCompany")">
+                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
+                </a>
+            </div>*@
+    </div>
+</div>
 <div class="container" style="margin-left:12px;padding-top:2px">
     <div class="row" style="width:120%">
         <div class="col-md-12">
-            <table class="table table-bordered  table-responsive table-hover" id="mainTable" @*style="font-size:14px;width:132%;margin-right:10px;color:black"*@>
+            <table class="table table-bordered  table-responsive table-hover" id="mainTable" style="font-family: sans-serif">
                 <thead style="background-color: #428bca; color:white">
                     <tr>
                         <th>
@@ -55,17 +72,17 @@
                             @Html.DisplayNameFor(model => model.Created)
                         </th>
                         @*<th>
-                    @Html.DisplayNameFor(model => model.ModifiedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Modified)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndUser_Company)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndUser_Site)
-                </th>*@
+                                @Html.DisplayNameFor(model => model.ModifiedBy)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Modified)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EndUser_Company)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EndUser_Site)
+                            </th>*@
 
                     </tr>
                 </thead>
@@ -107,18 +124,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Created)
                             </td>
-                            @*<td>
-                        @Html.DisplayFor(modelItem => item.modifiedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.modified)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.endUser_Company)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.endUser_Site)
-                    </td>*@
+                  
 
                         </tr>
                     }
@@ -137,7 +143,7 @@
         $(document).ready(function () {
             $('#mainTable').DataTable();
         });
-                //  ExportTimesSheetToExcel", "Candidates"
+                    //  ExportTimesSheetToExcel", "Candidates"
 
     </script>
     <body>
@@ -147,69 +153,74 @@
     </body>
 }
 
-    <style>
-        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-            background-color: #FFA500;
-            border-color: white;
-        }
+<style>
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+    }
 
-        .btn-warning {
-            background-color: #FFA500;
-            font-size: 11px;
-        }
+    .btn-warning {
+        background-color: #FFA500;
+        font-size: 11px;
+    }
 
-        .black {
-            color: black;
-        }
+    .black {
+        color: black;
+    }
 
-        body {
-            padding-top: 50px;
-            padding-bottom: 5px;
-            /*margin-left:5px;*/
-        }
+    body {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        /*margin-left:5px;*/
+    }
+    .table thead > tr > th, .table thead > tr > td {
+        padding: 8px;
+        line-height: 0.6285;
+        vertical-align: top;
+        border-top: 1px solid #dddddd;
+    }
+    /* Set padding to keep content from hitting the edges */
+    .body-content {
+        padding-left: 0px;
+        padding-right: 5px;
+        margin-left: 5px;
+    }
 
-        /* Set padding to keep content from hitting the edges */
-        .body-content {
-            padding-left: 0px;
-            padding-right: 5px;
-            margin-left: 5px;
-        }
+    .dataTables_filter {
+        float: right;
+    }
 
-        .dataTables_filter {
-            float: right;
-        }
+    .container {
+        font-size: 12px;
+        padding-left: 50px;
+        padding-right: 5px;
+    }
 
-        .container {
-            font-size: 12px;
-            padding-left: 50px;
-            padding-right: 5px;
-        }
+    .page-item.active .page-link {
+        color: white !important;
+        background-color: orange !important;
+        border-color: gray !important;
+    }
 
-        .page-item.active .page-link {
-            color: white !important;
-            background-color: orange !important;
-            border-color: gray !important;
-        }
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+    }
 
-        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-            background-color: #FFA500;
-            border-color: white;
-        }
+    .glyphicon {
+        font-size: 15px;
+        color: lightgray;
+    }
 
-        .glyphicon {
-            font-size: 15px;
-            color: lightgray;
-        }
-
-        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-            background-color: #FFA500;
-            border-color: white;
-        }
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+    }
 
 
-        .page-item.active .page-link {
-            color: white !important;
-            background-color: orange !important;
-            border-color: gray !important;
-        }
-    </style>
+    .page-item.active .page-link {
+        color: white !important;
+        background-color: orange !important;
+        border-color: gray !important;
+    }
+</style>
