@@ -13,22 +13,21 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class CompanyController : Controller
     {
-       int CompanyID = 100000;
+        int CompanyID = 100000;
         public ActionResult Index()
         {
-            CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+            int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
             var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
             model.CompanyListViewModel = CompanyServicehelper.Projects(CompanyID).Result;
-            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(CompanyID).Result;
-       // model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(7).Result;
+            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(CompanyID).Result;      
             model.AssetsListViewModel = new List<AssetsListViewModel>();
             model.EndUsersListViewModel = new List<EndUsersListViewModel>();
             model.ContractsListViewModel = new List<ContractsListViewModel>();
-            model.AssetsListViewModel = CompanyServicehelper.Assets().Result;
-            model.EndUsersListViewModel = CompanyServicehelper.EndUsers().Result;
-            model.ContractsListViewModel = CompanyServicehelper.Contracts().Result;          
+            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(CompanyID).Result;
+            model.EndUsersListViewModel = CompanyServicehelper.EndUsersByCompany(CompanyID).Result;
+            model.ContractsListViewModel = CompanyServicehelper.ContractsByCompany(CompanyID).Result;          
             return View(model);
         }
 

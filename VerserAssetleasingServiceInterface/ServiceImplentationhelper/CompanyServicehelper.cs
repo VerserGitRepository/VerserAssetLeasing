@@ -34,7 +34,6 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             return projectsList;
         }
 
-
         public static async Task<List<ListItemViewModel>> CompanyList()
         {
             var companies = new List<ListItemViewModel>();
@@ -112,6 +111,46 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return projectsList;
         }
+
+        public static async Task<List<EndUsersListViewModel>> EndUsersByCompany(int id)
+        {
+           var EndUsers = new List<EndUsersListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format($"EndUsers/{id}/CompanyEndUsers")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<EndUsersListViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        EndUsers.Add(p);
+                    }
+                }
+            }
+            return EndUsers;
+        }
+        public static async Task<List<ContractsListViewModel>> ContractsByCompany(int id)
+        {
+            var Contracts = new List<ContractsListViewModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format($"Contracts/{id}/Contracts")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var projects = await response.Content.ReadAsAsync<List<ContractsListViewModel>>();
+
+                    foreach (var p in projects)
+                    {
+                        Contracts.Add(p);
+                    }
+                }
+            }
+            return Contracts;
+        }
+
         public static async Task<ReturnModel> CompanyAdd(CompanyEntryModel CompanyEntryRecord)
         {
             ReturnModel ReturnResult = new ReturnModel();
