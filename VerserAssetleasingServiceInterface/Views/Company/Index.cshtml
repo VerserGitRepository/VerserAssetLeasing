@@ -193,30 +193,45 @@
                                                     <th>
                                                         @Html.DisplayName("Postcode")
                                                     </th>
+                                                    <th>
+                                                        @Html.DisplayName("SiteCompany")
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("Id")
+                                                    </th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.CompanySitesListViewModel)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            <a href="@Url.Action("Index", "RegisterCompany")">
-                                                                @Html.DisplayName(item.siteName)
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayName(item.addressLine1)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayName(item.suburb)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayName(item.state)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayName(item.postCode)
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>
+
+                                                        @Html.DisplayName(item.siteName)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.addressLine1)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.suburb)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.state)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.postCode)
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.site_Company)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.id.ToString())
+                                                    </td>
+
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -249,16 +264,11 @@
                                             <th>
                                                 @Html.DisplayName("Asset ID")
                                             </th>
-                                            @*<th>
-                                @Html.DisplayName("Serial No")
-                            </th>*@
 
                                             <th>
                                                 @Html.DisplayName("IMEI")
                                             </th>
-                                            @*<th>
-                                @Html.DisplayName("SIM NO")
-                            </th>*@
+
                                             <th>
                                                 @Html.DisplayName("Purchase Order No")
                                             </th>
@@ -267,23 +277,21 @@
                                     <tbody>
                                         @foreach (var item in Model.AssetsListViewModel)
                                         {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayName(item.AssetID)
-                                                </td>
-                                                @*<td>
-                                    @Html.DisplayName(item.SerialNo)
-                                </td>*@
-                                                <td>
-                                                    @Html.DisplayName(item.IMEI)
-                                                </td>
-                                                @*<td>
-                                    @Html.DisplayName(item.SIMNo)
-                                </td>*@
-                                                <td>
-                                                    @Html.DisplayName(item.PurchaseOrderNo)
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayName(item.AssetID)
+                                            </td>
+                                           
+                                            <td>
+                                                @Html.DisplayName(item.IMEI)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayName(item.PurchaseOrderNo)
+                                               
+                                            </td>
+                                            
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -551,7 +559,7 @@
             $("#mainTable1").DataTable().clear();
             var length = Object.keys(data).length;
             if (length == 0) {
-                $('#mainTable1').dataTable().fnAddData(["", "", "", "", ""]);
+                $('#mainTable1').dataTable().fnAddData(["", "", "", "", "","",""]);
             }
             else {
                 for (var i = 0; i <= length; i++) {
@@ -563,7 +571,9 @@
                         customer.addressLine1,
                         customer.suburb,
                         customer.state,
-                        customer.postCode
+                        customer.postCode,
+                        customer.site_Company,
+                          customer.id
                     ]);
                 }
             }
@@ -571,6 +581,7 @@
 
         function populateAssetsDataTable(data) {
                console.log("populating data table...");
+
                // clear the table before populating it with more data
             $("#mainTable2").DataTable().clear();
                var length = Object.keys(data).length;
@@ -583,10 +594,15 @@
 
                        // You could also use an ajax property on the data table initialization
                        $('#mainTable2').dataTable().fnAddData([
+
                            customer.AssetID,
                            customer.IMEI,
                            customer.PurchaseOrderNo
+                           
+                           
                        ]);
+
+
                    }
                }
            }
@@ -656,11 +672,8 @@
                             closeIcon: true,
 
                             buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
-                            }
+                                yes: { isHidden: true }
+                            },
                         });
 
                     }
@@ -683,10 +696,7 @@
                             closeIcon: true,
 
                             buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
+                                yes: { isHidden: true }
                             },
                             onOpen: function () {
                                 // after the modal is displayed.
@@ -723,11 +733,8 @@
                             closeIcon: true,
 
                             buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
-                            }
+                                yes: { isHidden: true }
+                            },
                         });
 
                     }
@@ -749,11 +756,8 @@
                             content: data,
                             closeIcon: true,
 
-                            buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
+                           buttons: {
+                                yes: { isHidden: true }
                             },
                             onOpen: function () {
                                 // after the modal is displayed.
@@ -791,11 +795,8 @@
                             closeIcon: true,
 
                             buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
-                            }
+                                yes: { isHidden: true }
+                            },
                         });
 
                     }
@@ -803,11 +804,13 @@
            });
 
            $('#editAsset').click(function () {
-                var updateSiteURL = '@Url.Action("UpdateAssets", "RegisterAssets")'
+               var updateSiteURL = '@Url.Action("UpdateAssets", "RegisterAssets")'
+                var table1 = $('#mainTable2').DataTable();
+                var selData1 = table1.rows(".selected").data();
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,
-
+                     data: { "AssetId": (selData1[0][0]) },
                     success: function (data) {
 
                         $.confirm({
@@ -818,23 +821,9 @@
                             closeIcon: true,
 
                             buttons: {
-                                Add: function () {
-
-                                    return true;
-                                }
-                            },
-                            onOpen: function () {
-                                // after the modal is displayed.
-                                var table = $('#mainTable1').DataTable();
-                                var selData = table.rows(".selected").data();
-                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
-                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
-                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
-                                $(".jconfirm").find($("#state")).val(selData[0][3]);
-                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
-                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
-                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
+                                yes: { isHidden: true }
                             }
+                            
                         });
 
 

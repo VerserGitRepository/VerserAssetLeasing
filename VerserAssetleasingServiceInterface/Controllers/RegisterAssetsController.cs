@@ -16,10 +16,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return PartialView();
         }
-        public ActionResult UpdateAssets()
+        public ActionResult UpdateAssets(string AssetId)
         {
+            List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
 
-            return PartialView();
+            assetsdata = AssetsServicehelper.AssetsList().Result;
+            AssetsListViewModel model = assetsdata.Where(item => item.AssetID == AssetId).FirstOrDefault();
+            return PartialView(model);
         }
         // GET: RegisterAssets
         public ActionResult Index()
@@ -30,6 +33,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult Index(AssetsListViewModel AssetsRegisterdata)
         {
             ReturnModel model = AssetsServicehelper.AddAsset(AssetsRegisterdata).Result;
+            TempData["StatusMessage"] = model.Message;
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateAsset(AssetsListViewModel AssetsRegisterdata)
+        {
+            ReturnModel model = AssetsServicehelper.UpdateAsset(AssetsRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
             return View("Index");
         }
