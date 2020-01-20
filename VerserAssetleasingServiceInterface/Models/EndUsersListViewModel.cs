@@ -23,8 +23,12 @@ namespace VerserAssetleasingServiceInterface.Models
         public Nullable<DateTime> TerminationDate { get; set; }
         public string UserName { get; set; }
         public string CreatedBy { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTimeOffset> Created { get; set; }
         public string ModifiedBy { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTimeOffset> Modified { get; set; }
         public int EndUser_Company { get; set; }
         public int? EndUser_Site { get; set; }
