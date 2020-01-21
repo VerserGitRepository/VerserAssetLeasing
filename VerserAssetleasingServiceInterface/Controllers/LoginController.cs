@@ -30,6 +30,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             if (userReturn.Result.IsLoggedIn == true)
             {
                 Session["Username"] = login.UserName;
+                //Session["Username"] = null;
                 if (login.UserName !=null)
                 {
                     int _CompanyId = LoginService.UserCompanyId(login.UserName).Result;
