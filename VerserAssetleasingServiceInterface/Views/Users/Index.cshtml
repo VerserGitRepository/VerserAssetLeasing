@@ -10,6 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
 <div class="container" style="margin-left:12px;padding-top:20px">
 
@@ -41,28 +43,9 @@
 
             </tbody>
         </table>
-    </div>   
+    </div>
     <div class="col-md-6" style="">
-        <table class="table table-bordered  table-responsive table-hover" id="companiestable">
-
-            <thead style="background-color:#FFA500; color:white">
-                <tr>
-                    <th>
-                        Companies
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Companylist)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Value)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control", id = "ddlregCustomerID", @multiple = "multiple" })
     </div>
 </div>
 @section Scripts {
@@ -72,7 +55,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
-            $('#companiestable').DataTable();
+           
+        });
+        $('#ddlregCustomerID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '280px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
         });
     </script>
     <body>

@@ -10,6 +10,7 @@ namespace VerserAssetleasingServiceInterface.Models
     {
         public List<UserModel> Usermodel { get; set; }
         public List<RolesModel> Rolemodel { get; set; }
-        public List<ListItemViewModel> Companylist { get; set; }
+        public SelectList Companylist { get; set; }
+        public List<int?> ResourceIDs { get; set; }
     }
 }
