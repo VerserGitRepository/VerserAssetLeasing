@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
+    [MyAuthorize]
     public class CompanyController : Controller
     {
         int CompanyID = 100000;
@@ -30,7 +32,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
             model.ContractsListViewModel = CompanyServicehelper.ContractsByCompany(CompanyID).Result;          
             return View(model);
         }
-
         [HttpGet]
         public ActionResult GetCompanyData(int Id)
         {
@@ -40,7 +41,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return Json(companydata, JsonRequestBehavior.AllowGet);
         }       
-
         [HttpPost]
         public ActionResult ExportTimesSheetToExcel()
         {

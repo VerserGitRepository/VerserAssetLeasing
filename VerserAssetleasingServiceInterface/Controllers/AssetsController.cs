@@ -13,7 +13,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
 {
     public class AssetsController : Controller
     {
-        // GET: Assets
         public ActionResult Index()
         {
             List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
@@ -22,7 +21,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return View(assetsdata);
         }
-
         [HttpGet]
         public ActionResult GetAssetsData(int Id)
         {

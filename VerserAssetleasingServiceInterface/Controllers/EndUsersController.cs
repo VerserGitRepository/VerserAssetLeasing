@@ -32,7 +32,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                Companymodel = EndUsersServicehelper.Projects().Result;
+                Companymodel = EndUsersServicehelper.EndUsersList().Result;
                 GridView gv = new GridView();
                 gv.DataSource = Companymodel;
                 gv.DataBind();
