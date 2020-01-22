@@ -3,73 +3,90 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
 <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/popper.js"></script>
 
 <div class="container" style="margin-left:12px;padding-top:20px">
-
-    <div class="col-md-6">
-        <table class="table table-bordered  table-responsive table-hover" id="mainTable">
-            <thead style="background-color:#FFA500; color:white">
-                <tr>
-                    <th>
-                        User
-                    </th>
-                    <th>
-                        FullName
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model.Usermodel)
-                {
+    @using (Html.BeginForm("Add", "Users", FormMethod.Post))
+    {
+        <div class="col-md-6">
+            <table class="table table-bordered  table-responsive table-hover" id="mainTable">
+                <thead style="background-color:#FFA500; color:white">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LoweredUserName)
-                        </td>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            Company
+                        </th>
+                        <th>
+                            IsAdmin
+                        </th>
+                        <th>
+                            CanEdit
+                        </th>
+                        <th>
+                            Update
+                        </th>
                     </tr>
-                }
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                    @foreach (var item in Model.Usermodel)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(model => model.IsAdmin)
+                                <input data-size="mini" type="checkbox" data-toggle="toggle" value="true" id="adminCheckBox" />
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(model => model.CanEdit)
+                                <input data-size="mini" type="checkbox" data-toggle="toggle" value="true" id="editPermissionCheckBox" />
+                            </td>
+                            <td><input type="submit" value="Update" name="Update" /> </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6" style="">
+
+        </div>
+    }
     </div>
-    <div class="col-md-6" style="">
-        @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control", id = "ddlregCustomerID", @multiple = "multiple" })
-    </div>
-</div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
-    <script src="~/Scripts/datatables.min.js"></script>
+   
     <script type="text/javascript">
         $(document).ready(function () {
             $('#mainTable').DataTable();
-           
+
         });
-        $('#ddlregCustomerID').multiselect({
+        $('.ddlregCustomerID').multiselect({
             includeSelectAllOption: true,
             maxHeight: 250,
-            buttonWidth: '280px',
+            buttonWidth: '380px',
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true
         });
+        $('ddlregCustomerID').val(['Select a Project', 'MAC Enterprises']);
+
     </script>
-    <body>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-        <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
-    </body>
+   
 }
 
 <style>
