@@ -11,104 +11,117 @@
     @Html.AntiForgeryToken()
 
 
-    <div class="table-bordered" style="margin:20px; width:900px">
-        <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
-            <h3 class="panel-title">UPDATE ASSETS</h3>
-        </div>
+   
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
+<div class="container" style="margin:20px; width:800px">
+
+    <div class="row" style="font-size:x-small;color:grey;border-color:gray">
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control", @id = "AssetID" } })
+                    @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "AssetID" } })
                     @Html.HiddenFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @id = "ID" } })
                     @Html.ValidationMessageFor(model => model.AssetID, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control", @id = "SerialNo" } })
+                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SerialNo" } })
                     @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control", @id = "Asset_Company" } })
+                    @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "Asset_Company" } })
                     @Html.ValidationMessageFor(model => model.Asset_Company, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control", @id = "IMEI" } })
+                    @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "IMEI" } })
                     @Html.ValidationMessageFor(model => model.IMEI, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control", @id = "SIMNo" } })
+                    @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SIMNo" } })
                     @Html.ValidationMessageFor(model => model.SIMNo, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control", @id = "PurchaseOrderNo" } })
+                    @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "PurchaseOrderNo" } })
                     @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
                     @if (Model.PurchaseDate.HasValue)
                     {
-                        @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { @type = "date" })
+                        @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker",@type = "date", @id = "PurchaseDate" })
                     }
                     else
                     {
-                        @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control", @id = "PurchaseDate" } })
+                        @Html.TextBoxFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control date-picker", @id = "PurchaseDate" } })
                     }
                     @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control", @id = "PurchasePrice" } })
                     @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.DecomissionDate, new { htmlAttributes = new { @class = "form-control date-picker", Id = "DecomissionDate" } })
+                    @if (Model.DecomissionDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
+                    }
+                    
                     @Html.ValidationMessageFor(model => model.DecomissionDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control", @id = "Condition" } })
                     @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.BuyBackPrice, new { htmlAttributes = new { @class = "form-control", @id = "BuyBackPrice" } })
                     @Html.ValidationMessageFor(model => model.BuyBackPrice, "", new { @class = "text-danger" })
@@ -116,15 +129,23 @@
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.AquisitionDate, new { htmlAttributes = new { @class = "form-control", @id = "AquisitionDate" } })
+                    @if (Model.AquisitionDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
+                    }
                     @Html.ValidationMessageFor(model => model.AquisitionDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.SPMD, new { htmlAttributes = new { @class = "form-control", @id = "SPMD" } })
                     @Html.ValidationMessageFor(model => model.SPMD, "", new { @class = "text-danger" })
@@ -132,100 +153,121 @@
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.FirstCommissionDate, new { htmlAttributes = new { @class = "form-control", @id = "FirstCommissionDate" } })
-                    @Html.ValidationMessageFor(model => model.FirstCommissionDate, "", new { @class = "text-danger" })
+                    @if (Model.FirstCommissionDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
+                    }
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-12">
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.LastCommissionDate, new { htmlAttributes = new { @class = "form-control", @id = "LastCommissionDate" } })
+                    @if (Model.LastCommissionDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
+                    }
                     @Html.ValidationMessageFor(model => model.LastCommissionDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-7" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.LastRepairDate, new { htmlAttributes = new { @class = "form-control", @id = "LastRepairDate" } })
+                    @if (Model.LastRepairDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
+                    }
                     @Html.ValidationMessageFor(model => model.LastRepairDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            </div>
         </div>
         <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
             <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
         </div>
     </div>
-}
+    }
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 
     <style>
-            .form-group {
-                margin-bottom: 2px;
-                padding-right: 0;
-                padding-left: 0;
-                margin: 0px;
-                font-size: 12px;
-                border-radius: 9px;
-                padding-bottom: 5px;
-                margin-top: 2px;
-            }
-            /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
+        .form-group {
+            margin-bottom: 2px;
+            padding-right: 0;
+            padding-left: 0;
+            margin: 0px;
+            font-size: 12px;
+            border-radius: 9px;
+            padding-bottom: 5px;
+            margin-top: 2px;
+        }
+        /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
         }*/
-            .col-md-6 {
-                position: relative;
-                min-height: 1px;
-                padding-right: 0px;
-                padding-left: 0px;
-            }
+        .col-md-6 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
 
-            .inline style {
-                height: 400.7px;
-                max-height: 492.85px;
-                transition-duration: 0.4s;
-                transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
-            }
+        .inline style {
+            height: 400.7px;
+            max-height: 492.85px;
+            transition-duration: 0.4s;
+            transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
+        }
 
-            .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
-                overflow: hidden;
-            }
+        .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+            overflow: hidden;
+        }
 
-            .row.no-pad > [class*='col-'] {
-                padding-right: 0;
-                padding-left: 0;
-            }
+        .row.no-pad > [class*='col-'] {
+            padding-right: 0;
+            padding-left: 0;
+        }
 
-            .btn-warning {
-                background-color: #FFA500;
-                font-size: 14px;
-            }
+        .btn-warning {
+            background-color: #FFA500;
+            font-size: 14px;
+        }
 
-            .form-control {
-                margin-bottom: 2px;
-                padding-right: 0;
-                padding-left: 0;
-                font-size: 12px;
-                border-radius: 9px;
-                padding-bottom: 5px;
-                margin-top: 2px;
-            }
+        .form-control {
+            margin-bottom: 2px;
+            padding-right: 0;
+            padding-left: 0;
+            font-size: 12px;
+            border-radius: 9px;
+            padding-bottom: 5px;
+            margin-top: 2px;
+        }
 
-            .panel-footer {
-                padding: 3px 30px;
-                background-color: #f5f5f5;
-                border-top: 1px solid #dddddd;
-                border-bottom-right-radius: 3px;
-                border-bottom-left-radius: 3px;
-            }
+        .panel-footer {
+            padding: 3px 30px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #dddddd;
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
 
-            .form-group.required .control-label:after {
-                content: "*";
-                color: red;
-                padding-bottom: 15px;
+        .form-group.required .control-label:after {
+            content: "*";
+            color: red;
+            padding-bottom: 15px;
     </style>

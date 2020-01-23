@@ -17,8 +17,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
             var _userroles=new UserRoleModel();
             _userroles.Usermodel = AdminHelperService.Users().Result;
             _userroles.Rolemodel = AdminHelperService.Roles().Result;
-            _userroles.Companylist=CompanyServicehelper.CompanyList().Result;
+            _userroles.Companylist = new SelectList(CompanyServicehelper.CompanyList().Result, "ID", "Value");
             return View(_userroles);
+        }
+        public ActionResult Add(UserRoleModel theModel)
+        {
+          
+            return View();
         }
     }
 }

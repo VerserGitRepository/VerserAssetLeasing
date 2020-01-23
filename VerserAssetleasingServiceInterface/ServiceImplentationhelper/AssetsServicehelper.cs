@@ -36,8 +36,14 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
         }
         public static async Task<ReturnModel> AddAsset(AssetsListViewModel theModel)
         {
-            List<AssetsListViewModel> assetssList = new List<AssetsListViewModel>();
+            theModel.Asset_Contract =1;
+            theModel.Asset_EndUser = 1;
+            theModel.Asset_InventoryItem = 1;
+            theModel.Asset_LifecycleStatus = 1;
+            theModel.Asset_OSVersion = 1;
+
             HttpResponseMessage response = new HttpResponseMessage();
+            var _response = false;
             ReturnModel ReturnResult = new ReturnModel();
             using (HttpClient client = new HttpClient())
             {
@@ -47,14 +53,14 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                     response = client.PostAsJsonAsync(string.Format("Assets/CreateNewAsset"), theModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();
-                        if (ReturnResult.Message == null || ReturnResult.Message == string.Empty)
-                        {
-                            ReturnResult.Message = "User has been registered successfully.";
-                        }
+                        _response = await response.Content.ReadAsAsync<bool>();                        
+                    }
+                    if (_response != false)
+                    {
+                        ReturnResult.Message = "User has been registered successfully.";
                     }
                     else
-                    {
+                    {                    
                         ReturnResult.Message = "There is an issue with registration. The detail are " + response.ReasonPhrase;
                     }
                 }

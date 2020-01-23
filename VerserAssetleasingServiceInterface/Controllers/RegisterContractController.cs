@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
+using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
@@ -32,6 +33,20 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult AddContract(ContractsListViewModel ContractRegisterdata)
+        {
+            ReturnModel model = ContractsServicehelper.AddContract(ContractRegisterdata).Result;
+            TempData["StatusMessage"] = model.Message;
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateContract(ContractsListViewModel ContractRegisterdata)
+        {
+            ReturnModel model = ContractsServicehelper.UpdateContract(ContractRegisterdata).Result;
+            TempData["StatusMessage"] = model.Message;
+            return View("Index");
+        }
     }
 }
