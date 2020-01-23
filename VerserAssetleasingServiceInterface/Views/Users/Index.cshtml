@@ -15,8 +15,7 @@
 <script src="~/Scripts/popper.js"></script>
 
 <div class="container" style="margin-left:12px;padding-top:20px">
-    @using (Html.BeginForm("Add", "Users", FormMethod.Post))
-    {
+    
         <div class="col-md-6">
             <table class="table table-bordered  table-responsive table-hover" id="mainTable">
                 <thead style="background-color:#FFA500; color:white">
@@ -44,20 +43,21 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
+
+                                <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
                             </td>
                             <td>
                                 @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
                             </td>
                             <td>
-                                @Html.CheckBoxFor(model => model.IsAdmin)
-                                <input data-size="mini" type="checkbox" data-toggle="toggle" value="true" id="adminCheckBox" />
+                                @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
+                            
                             </td>
                             <td>
-                                @Html.CheckBoxFor(model => model.CanEdit)
-                                <input data-size="mini" type="checkbox" data-toggle="toggle" value="true" id="editPermissionCheckBox" />
+                                @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+                               
                             </td>
-                            <td><input type="submit" value="Update" name="Update" /> </td>
+                            <td><input type="submit" value="Update" name="Update" onclick="PostUserData(this);" /> </td>
                         </tr>
                     }
 
@@ -65,9 +65,7 @@
             </table>
         </div>
         <div class="col-md-6" style="">
-
         </div>
-    }
     </div>
 @section Scripts {
    
@@ -84,7 +82,29 @@
             enableCaseInsensitiveFiltering: true
         });
         $('ddlregCustomerID').val(['Select a Project', 'MAC Enterprises']);
-
+        function PostUserData(rowId) {
+            var loadUrl = '@Url.Action("Add", "Users")';
+            var row = $(rowId).closest("tr"),
+            data = {
+               
+                'UserName' : row.find("#lblUserName").val(),
+                'ResourceIDs': row.find("#ddlregCustomerID").val(),
+                'IsAdmin': row.find("#isAdmin").val(),
+                'CanEdit': row.find("#canEdit").val()
+                };
+            $.ajax({
+                url: loadUrl,
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                   
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
     </script>
    
 }
