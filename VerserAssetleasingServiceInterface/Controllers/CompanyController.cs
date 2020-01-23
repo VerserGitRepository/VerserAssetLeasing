@@ -15,21 +15,26 @@ namespace VerserAssetleasingServiceInterface.Controllers
     [MyAuthorize]
     public class CompanyController : Controller
     {
-        int CompanyID = 100000;
+        string _user = string.Empty;
         public ActionResult Index()
         {
+            string _user=Session["Username"].ToString();
             int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+
             var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
-            model.CompanyListViewModel = CompanyServicehelper.Projects(CompanyID).Result;
-            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(CompanyID).Result;      
+            model.CompanyListViewModel = CompanyServicehelper.Projects(_user).Result;
+            model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(_user).Result;      
             model.AssetsListViewModel = new List<AssetsListViewModel>();
             model.EndUsersListViewModel = new List<EndUsersListViewModel>();
             model.ContractsListViewModel = new List<ContractsListViewModel>();
-            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(CompanyID).Result;
-            model.EndUsersListViewModel = CompanyServicehelper.EndUsersByCompany(CompanyID).Result;
-            model.ContractsListViewModel = CompanyServicehelper.ContractsByCompany(CompanyID).Result;          
+
+            //Changes required on API
+            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(_user).Result;
+            model.EndUsersListViewModel = CompanyServicehelper.EndUsersByCompany(_user).Result;
+            model.ContractsListViewModel = CompanyServicehelper.ContractsByCompany(_user).Result;          
+
             return View(model);
         }
         [HttpGet]
@@ -51,7 +56,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                Companymodel = CompanyServicehelper.Projects(CompanyID).Result;
+                Companymodel = CompanyServicehelper.Projects(_user).Result;
                 GridView gv = new GridView();
                 gv.DataSource = Companymodel;
                 gv.DataBind();

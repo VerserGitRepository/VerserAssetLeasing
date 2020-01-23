@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
+    [MyAuthorize]
     public class CarriersController : Controller
     {
         // GET: Carriers

@@ -29,21 +29,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             Task<LoginModel> userReturn = LoginService.Login(user);
             if (userReturn.Result.IsLoggedIn == true)
             {
-                Session["Username"] = login.UserName;
-                //Session["Username"] = null;
-                if (login.UserName !=null)
-                {
-                    int _CompanyId = LoginService.UserCompanyId(login.UserName).Result;
-                    if (_CompanyId >0)
-                    {
-                        Session["CompanyID"] = _CompanyId;
-                    }
-                    else
-                    {
-                        Session["CompanyID"]  = 100000;
-                    }                 
-                   
-                }
+                Session["Username"] = login.UserName;     
                 Session["ErrorMessage"] = null;
                 return RedirectToAction("Index", "Company");
             }

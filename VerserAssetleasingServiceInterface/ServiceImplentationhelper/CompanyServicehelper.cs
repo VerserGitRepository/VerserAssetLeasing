@@ -15,12 +15,12 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
     {
     public static string BaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
 
-        public static async Task<List<CompanyListViewModel>> Projects(int CompanyID)
+        public static async Task<List<CompanyListViewModel>> Projects(string _user)
         {            List<CompanyListViewModel> projectsList = new List<CompanyListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"Company/{CompanyID}/CompanyList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"Company/{_user}/CompanyList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<CompanyListViewModel>>();                  
@@ -112,13 +112,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             return projectsList;
         }
 
-        public static async Task<List<EndUsersListViewModel>> EndUsersByCompany(int id)
+        public static async Task<List<EndUsersListViewModel>> EndUsersByCompany(string userId)
         {
            var EndUsers = new List<EndUsersListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"EndUsers/{id}/CompanyEndUsers")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"EndUsers/{userId}/CompanyEndUsers")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<EndUsersListViewModel>>();
@@ -131,13 +131,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return EndUsers;
         }
-        public static async Task<List<ContractsListViewModel>> ContractsByCompany(int id)
+        public static async Task<List<ContractsListViewModel>> ContractsByCompany(string userId)
         {
             var Contracts = new List<ContractsListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"Contracts/{id}/Contracts")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"Contracts/{userId}/Contracts")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<ContractsListViewModel>>();
@@ -150,7 +150,6 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return Contracts;
         }
-
         public static async Task<ReturnModel> CompanyAdd(CompanyEntryModel CompanyEntryRecord)
         {
             ReturnModel ReturnResult = new ReturnModel();
@@ -170,13 +169,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ReturnResult;
         }
-        public static async Task<List<CompanySitesListViewModel>> CompanySites(int CompanyID)
+        public static async Task<List<CompanySitesListViewModel>> CompanySites(string user)
         {
             List<CompanySitesListViewModel> companyList = new List<CompanySitesListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"MasteData/{CompanyID}/CompanySites")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"MasteData/{user}/CompanySites")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     companyList = await response.Content.ReadAsAsync<List<CompanySitesListViewModel>>();
