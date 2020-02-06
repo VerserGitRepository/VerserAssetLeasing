@@ -223,6 +223,7 @@
     <Content Include="Images\plus.png" />
     <Content Include="Images\Verser.png" />
     <Content Include="Images\VerserLogo.png" />
+    <Content Include="Logo\CompanyLogo.jpg" />
     <Content Include="Logo\Verser.png" />
     <Content Include="Logo\VerserLogo1.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
