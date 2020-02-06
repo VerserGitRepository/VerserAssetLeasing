@@ -57,7 +57,7 @@
                                 @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
                                
                             </td>
-                            <td><input type="submit" value="Update" name="Update" onclick="PostUserData(this);" /> </td>
+                            <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
                         </tr>
                     }
 
@@ -86,8 +86,7 @@
             var loadUrl = '@Url.Action("Add", "Users")';
             var row = $(rowId).closest("tr"),
             data = {
-               
-                'UserName' : row.find("#lblUserName").val(),
+                'UserName': row.find("#lblUserName").text(),
                 'ResourceIDs': row.find("#ddlregCustomerID").val(),
                 'IsAdmin': row.find("#isAdmin").val(),
                 'CanEdit': row.find("#canEdit").val()

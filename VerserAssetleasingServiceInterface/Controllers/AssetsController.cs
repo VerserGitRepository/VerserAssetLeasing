@@ -28,7 +28,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             List<AssetsListViewModel> companydata = new List<AssetsListViewModel>();
 
-            companydata = AssetsServicehelper.GetAssetsData(Id).Result;
+            companydata = AssetsServicehelper.GetAssetsData("applogin").Result;
 
             return Json(companydata, JsonRequestBehavior.AllowGet);
         }

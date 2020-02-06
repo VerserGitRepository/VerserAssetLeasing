@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using VerserAssetleasingServiceInterface.Models;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
@@ -51,23 +49,20 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
         }
         public static async Task<ReturnModel> ChangeUserPermissions(UserRoleModel theModel)
         {
-            
             using (HttpClient client = new HttpClient())
             {
-                
                 client.BaseAddress = new Uri(BaseUri);
                 foreach (int val in theModel.ResourceIDs)
                 {
-                    UserRoleModelLite liteModel = new UserRoleModelLite();
-                    liteModel.CompanyId = val;
-                    liteModel.CanEdit = theModel.CanEdit;
-                    liteModel.IsAdmin = theModel.IsAdmin;
-                    liteModel.UserName = theModel.UserName;
-                    HttpResponseMessage response = client.PostAsJsonAsync(string.Format("MasteData/UpdateUsers"),liteModel).Result;
+                    var liteModel = new UserRoleModelLite();
+                    liteModel.CompanyID = val;
+                    liteModel.CanWrite = theModel.CanEdit;
+                    liteModel.ISAdmin = theModel.IsAdmin;
+                    liteModel.UserId = theModel.UserName;
+                    HttpResponseMessage response = client.PostAsJsonAsync(string.Format("Admin/AddPermissionsCompanies"), liteModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         var user = await response.Content.ReadAsAsync<ReturnModel>();
-                        
                     }
                 }
             }

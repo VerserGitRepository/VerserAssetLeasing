@@ -8,11 +8,10 @@ namespace VerserAssetleasingServiceInterface.Models
 {
     public class UserRoleModelLite
     {
-       
-        public int CompanyId { get; set; }
-        public bool IsAdmin { get; set; }
-        public bool CanEdit { get; set; }
-        public string UserName { get; set; }
-       
+        public int ID { get; set; }
+        public string UserId { get; set; }
+        public int CompanyID { get; set; }
+        public bool CanWrite { get; set; }
+        public bool ISAdmin { get; set; }
     }
 }

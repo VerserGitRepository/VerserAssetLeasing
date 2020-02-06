@@ -19,7 +19,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult Index()
         {
             string _user=Session["Username"].ToString();
-            int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+          ///  int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
 
             var model = new CompanyAndSiteListViewModel();
             model.CompanyListViewModel = new List<CompanyListViewModel>();
@@ -29,7 +29,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
             model.AssetsListViewModel = new List<AssetsListViewModel>();
             model.EndUsersListViewModel = new List<EndUsersListViewModel>();
             model.ContractsListViewModel = new List<ContractsListViewModel>();
-
             //Changes required on API
             model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(_user).Result;
             model.EndUsersListViewModel = CompanyServicehelper.EndUsersByCompany(_user).Result;

@@ -193,6 +193,7 @@
     <Compile Include="Models\RolesModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
+    <Compile Include="Models\UserRoleModelLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImplentationhelper\AdminHelperService.cs" />
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />

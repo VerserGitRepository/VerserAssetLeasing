@@ -15,6 +15,5 @@ namespace VerserAssetleasingServiceInterface.Models
         public bool IsAdmin { get; set; }
         public bool CanEdit { get; set; }
         public string UserName { get; set; }
-        public UserModel UsermodelElement { get; set; }
     }
 }

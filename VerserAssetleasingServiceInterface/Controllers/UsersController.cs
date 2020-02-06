@@ -22,7 +22,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
         }
         public ActionResult Add(UserRoleModel theModel)
         {
-          
+            if (theModel.ResourceIDs.Count > 0 && theModel != null)
+            {
+                var retuenedresponse = AdminHelperService.ChangeUserPermissions(theModel).Result;
+            }          
             return View();
         }
     }
