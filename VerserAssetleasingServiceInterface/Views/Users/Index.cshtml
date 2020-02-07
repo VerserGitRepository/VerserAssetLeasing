@@ -40,24 +40,24 @@
 
                 @foreach (var item in Model.Usermodel)
                 {
-                    <tr>
-                        <td>
+                <tr>
+                    <td>
 
-                            <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
-                        </td>
-                        <td>
-                            @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
-                        </td>
-                        <td>
-                            @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
+                        <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
 
-                        </td>
-                        <td>
-                            @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
 
-                        </td>
-                        <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
-                    </tr>
+                    </td>
+                    <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
+                </tr>
                 }
 
             </tbody>
@@ -131,79 +131,81 @@
             <a id="linkClose" href="#" class="close">&times;</a>
             <div id="divErrorText"></div>
         </div>
-        @*</div>*@
-    </div>
+        @*
+    </div>*@
+</div>
 </div>
 @section Scripts {
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            $('#mainTable').DataTable();
+    $(document).ready(function () {
+        $('#mainTable').DataTable();
 
-        });
-        $('.ddlregCustomerID').multiselect({
-            includeSelectAllOption: true,
-            maxHeight: 250,
-            buttonWidth: '380px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('ddlregCustomerID').val(['Select a Project', 'MAC Enterprises']);
-        function PostUserData(rowId) {
-            var loadUrl = '@Url.Action("Add", "Users")';
-            var row = $(rowId).closest("tr"),
+    });
+    $('.ddlregCustomerID').multiselect({
+        includeSelectAllOption: true,
+        maxHeight: 250,
+        buttonWidth: '380px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('ddlregCustomerID').val(['Select a Project', 'MAC Enterprises']);
+    function PostUserData(rowId) {
+        var loadUrl = '@Url.Action("Add", "Users")';
+        var row = $(rowId).closest("tr"),
             data = {
                 'UserName': row.find("#lblUserName").text(),
                 'ResourceIDs': row.find("#ddlregCustomerID").val(),
                 'IsAdmin': row.find("#isAdmin").val(),
                 'CanEdit': row.find("#canEdit").val()
-                };
-            $.ajax({
-                url: loadUrl,
-                type: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
+            };
+        $.ajax({
+            url: loadUrl,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
 
-                },
-                error: function () {
-                    alert("error");
-                }
-            });
-        }
-    </script>
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+</script>
 
     @*Registration ajax code*@
-    @*<script type="text/javascript">
-        $(document).ready(function () {
+    @*
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            //Close the bootstrap alert
-            $('#linkClose').click(function () {
-                $('#divError').hide('fade');
-            });
+        //Close the bootstrap alert
+        $('#linkClose').click(function () {
+            $('#divError').hide('fade');
+        });
 
-            // Save the new user details
-            $('#btnRegister').click(function () {
-                $.ajax({
-                    //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
-                    url: 'api/account/register',
-                    method: 'POST',
-                    data: {
-                        email: $('#txtEmail').val(),
-                        password: $('#txtPassword').val(),
-                        confirmPassword: $('#txtConfirmPassword').val()
-                    },
-                    success: function () {
-                        $('#successModal').modal('show');
-                    },
-                    error: function (jqXHR) {
-                        $('#divErrorText').text(jqXHR.responseText);
-                        $('#divError').show('fade');
-                    }
-                });
+        // Save the new user details
+        $('#btnRegister').click(function () {
+            $.ajax({
+                //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
+                url: 'api/account/register',
+                method: 'POST',
+                data: {
+                    email: $('#txtEmail').val(),
+                    password: $('#txtPassword').val(),
+                    confirmPassword: $('#txtConfirmPassword').val()
+                },
+                success: function () {
+                    $('#successModal').modal('show');
+                },
+                error: function (jqXHR) {
+                    $('#divErrorText').text(jqXHR.responseText);
+                    $('#divError').show('fade');
+                }
             });
         });
-    </script>*@
+    });
+</script>*@
 }
 <style>
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
