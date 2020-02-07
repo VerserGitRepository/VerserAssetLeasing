@@ -16,23 +16,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <br>
-
-@*<div class="container" style="padding-top:1px;padding-bottom:0px;margin-left:5px;padding-left:10px;padding-right:10px">
-
-        <div class="row pull-left">
-            <div class="col-md-1">
-                @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
-                {
-                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
-                }
-            </div>
-            <div class="col-md-1">
-                <a href="@Url.Action("Index", "RegisterCompany")">
-                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
-                </a>
-            </div>
-        </div>
-    </div>*@
 <div class="container-fluid" style="margin-left:0px;padding-top:0px">
     <div class="container" style="width:170%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:0px">
         <div class="col-md-4">
@@ -203,33 +186,33 @@
                                             <tbody>
                                                 @foreach (var item in Model.CompanySitesListViewModel)
                                                 {
-                                                <tr>
-                                                    <td>
+                                                    <tr>
+                                                        <td>
 
-                                                        @Html.DisplayName(item.siteName)
+                                                            @Html.DisplayName(item.siteName)
 
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.addressLine1)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.suburb)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.state)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.postCode)
-                                                        
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.site_Company)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.id.ToString())
-                                                    </td>
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.addressLine1)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.suburb)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.state)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.postCode)
 
-                                                </tr>
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.site_Company)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.id.ToString())
+                                                        </td>
+
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -237,7 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                 
+
                         <div class="tab-pane fade" id="tab2default">
                             <div class="row pull-right">
                                 <div class="col-md-1">
@@ -292,50 +275,50 @@
                                             <th>
                                                 @Html.DisplayName("Buyback")
                                             </th>
-                                          
-                                            
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in Model.AssetsListViewModel)
                                         {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayName(item.AssetID)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.SerialNo == null?"":item.SerialNo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.Asset_Company.ToString())
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.IMEI == null?"":item.IMEI)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.SIMNo == null?"":item.SIMNo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.PurchaseOrderNo == null ? "" : item.PurchaseOrderNo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.PurchaseDate.HasValue ? item.PurchaseDate.Value.ToString("MM/dd/yyyy") : "")
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.DecomissionDate.HasValue ? item.DecomissionDate.Value.ToString("MM/dd/yyyy") : "")
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.Condition == null?"":item.Condition)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
-                                            </td>
-                                           
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayName(item.AssetID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.Asset_Company.ToString())
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.PurchaseOrderNo == null ? "" : item.PurchaseOrderNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.PurchaseDate.HasValue ? item.PurchaseDate.Value.ToString("MM/dd/yyyy") : "")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.DecomissionDate.HasValue ? item.DecomissionDate.Value.ToString("MM/dd/yyyy") : "")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.Condition == null ? "" : item.Condition)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
+                                                </td>
 
-                                        </tr>
+
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -363,7 +346,7 @@
                                 <table class="table-bordered" style="margin:10px; width:980px" id="mainTable3">
                                     <thead style="background-color:#428bca; color:white">
                                         <tr>
-                                          
+
                                             <th>
                                                 @Html.DisplayName("Start Date")
                                             </th>
@@ -388,29 +371,29 @@
                                     <tbody>
                                         @foreach (var item in Model.ContractsListViewModel)
                                         {
-                                        <tr>
-                                            
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.startDate)
-                                                @Html.HiddenFor(modelItem => item.id, new { @id = "hiddenContractId" })
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.endDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.serviceNo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.contract_Company)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.contract_EndUser)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.contract_Plan)
-                                            </td>
+                                            <tr>
 
-                                        </tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.startDate)
+                                                    @Html.HiddenFor(modelItem => item.id, new { @id = "hiddenContractId" })
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.endDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.serviceNo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.contract_Company)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.contract_EndUser)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.contract_Plan)
+                                                </td>
+
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -677,8 +660,8 @@
                            customer.DecomissionDate,
                            customer.Condition,
                            customer.BuyBackPrice
-                         
-                          
+
+
                     ]);
 
 
@@ -902,7 +885,7 @@
                             buttons: {
                                 yes: { isHidden: true }
                             }
-                            
+
                         });
 
 
@@ -935,7 +918,7 @@
                 });
            });
 
-       
+
 
            $('#editContract').click(function () {
                 var updateSiteURL = '@Url.Action("UpdateContract", "RegisterContract")'
@@ -955,14 +938,39 @@
                             buttons: {
                                 yes: { isHidden: true }
                             }
-                            
+
                         });
 
 
                     }
                });
 
-            });
+        });
+
+        function getAge(dateString) {
+
+            var val = $("#txtDOB").val();
+            var birthYear = val.split('-')[2];
+            var birthMonth = val.split('-')[1];
+            var birthDay = val.split('-')[0];
+
+
+            todayDate = new Date();
+            todayYear = todayDate.getFullYear();
+            todayMonth = todayDate.getMonth();
+            todayDay = todayDate.getDate();
+            age = todayYear - birthYear;
+
+            if (todayMonth < birthMonth - 1) {
+                age--;
+            }
+
+            if (birthMonth - 1 == todayMonth && todayDay < birthDay) {
+                age--;
+            }
+            $("#txtAge").val(age);
+//            return age;
+        }
     </script>
     <body>
 
