@@ -32,7 +32,7 @@
                     @foreach (var item in Model.CompanyListViewModel)
                     {
                         <tr>
-                            <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@Convert.ToBase64String(@item.logo)','@item.state','@item.suburb','@item.postcode');">
+                            <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1','@item.phone','@item.fax','@item.email','@if (item.logo != null) {@Convert.ToBase64String(@item.logo)}','@item.state','@item.suburb','@item.postcode');">
                                 <font style="font-weight:1000;color:#515151">
                                     @Html.DisplayFor(modelItem => item.companyName)
                                     <input type="hidden" value="@item" id="hiddenModelId" />
@@ -40,7 +40,7 @@
                                 <font style="color:gray">
                                     @Html.DisplayFor(modelItem => item.addressLine1)
                                 </font>
-                                @if (Convert.ToBase64String(@item.logo).Length > 0)
+                                @if (item.logo != null && Convert.ToBase64String(@item.logo).Length > 0)
                                 {
                                     <br />
                                     <img src="data:image/jpeg;base64,@(Convert.ToBase64String(@item.logo))" style="height:45px; width:65px;" class="image-border">

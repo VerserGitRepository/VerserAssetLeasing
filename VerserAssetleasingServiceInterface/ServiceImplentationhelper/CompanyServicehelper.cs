@@ -20,7 +20,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"Company/{_user}/CompanyList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{_user}/CompanyList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<CompanyListViewModel>>();                  
