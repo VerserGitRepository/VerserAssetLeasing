@@ -12,6 +12,8 @@
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 <script src="~/Scripts/popper.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <div class="container" style="margin-left:12px;padding-top:20px">
 
@@ -40,69 +42,35 @@
 
                 @foreach (var item in Model.Usermodel)
                 {
-                <tr>
-                    <td>
+                    <tr>
+                        <td>
 
-                        <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
-                    </td>
-                    <td>
-                        @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
+                            <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
+                        </td>
+                        <td>
+                            @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
 
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+                        </td>
+                        <td>
+                            @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
 
-                    </td>
-                    <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
-                </tr>
+                        </td>
+                        <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
+                    </tr>
                 }
 
             </tbody>
         </table>
-    </div>
-
+    </div> <br />
+    <span style="margin-left:150px;">
+        <input id="btnRegister" class="btn btn-success" type="button" value="New User" onclick="ShowModalRegistration();" />
+    </span>
     @*register code*@
     <div class="col-md-8">
 
-        <table class="table table-bordered">
-            <thead>
-                <tr class="success">
-                    <th colspan="2">
-                        New User Registration
-                        @*<a class="btn btn-success pull-right" href="Login.html">Login</a>*@
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Email</td>
-                    <td><input type="text" id="txtEmail" placeholder="Email" /> </td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <input type="password" id="txtPassword"
-                               placeholder="Password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Confirm Password</td>
-                    <td>
-                        <input type="password" id="txtConfirmPassword"
-                               placeholder="Confirm Password" />
-                    </td>
-                </tr>
-                <tr class="success">
-                    <td colspan="2">
-                        <input id="btnRegister" class="btn btn-success"
-                               type="button" value="Register" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <div class="modal fade" tabindex="-1" id="successModal"
              data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-sm">
@@ -132,14 +100,17 @@
             <div id="divErrorText"></div>
         </div>
         @*
-    </div>*@
+            </div>*@
+    </div>
 </div>
-</div>
+
+
 @section Scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
 
     $(document).ready(function () {
         $('#mainTable').DataTable();
+        $('input[type="search"]').val = "";
 
     });
     $('.ddlregCustomerID').multiselect({
@@ -149,6 +120,29 @@
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true
     });
+
+    function ShowModalRegistration() {
+         var sliderURL = '@Url.Action("GetRegristrationModal", "Users")'
+        $.ajax({
+            type: "GET",
+            url: sliderURL,
+            
+            success: function (data) {
+                $.confirm({
+       
+                    title: ' ',
+                    closeIcon: true,
+                    content:data,
+                    boxWidth: '370px',
+                    useBootstrap: false,
+                    buttons: {
+                        yes: { isHidden: true }
+                    }
+                });
+            }
+        });
+    }
+
     $('ddlregCustomerID').val(['Select a Project', 'MAC Enterprises']);
     function PostUserData(rowId) {
         var loadUrl = '@Url.Action("Add", "Users")';
@@ -172,40 +166,40 @@
             }
         });
     }
-</script>
+    </script>
 
     @*Registration ajax code*@
     @*
-<script type="text/javascript">
-    $(document).ready(function () {
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-        //Close the bootstrap alert
-        $('#linkClose').click(function () {
-            $('#divError').hide('fade');
-        });
+                //Close the bootstrap alert
+                $('#linkClose').click(function () {
+                    $('#divError').hide('fade');
+                });
 
-        // Save the new user details
-        $('#btnRegister').click(function () {
-            $.ajax({
-                //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
-                url: 'api/account/register',
-                method: 'POST',
-                data: {
-                    email: $('#txtEmail').val(),
-                    password: $('#txtPassword').val(),
-                    confirmPassword: $('#txtConfirmPassword').val()
-                },
-                success: function () {
-                    $('#successModal').modal('show');
-                },
-                error: function (jqXHR) {
-                    $('#divErrorText').text(jqXHR.responseText);
-                    $('#divError').show('fade');
-                }
+                // Save the new user details
+                $('#btnRegister').click(function () {
+                    $.ajax({
+                        //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
+                        url: 'api/account/register',
+                        method: 'POST',
+                        data: {
+                            email: $('#txtEmail').val(),
+                            password: $('#txtPassword').val(),
+                            confirmPassword: $('#txtConfirmPassword').val()
+                        },
+                        success: function () {
+                            $('#successModal').modal('show');
+                        },
+                        error: function (jqXHR) {
+                            $('#divErrorText').text(jqXHR.responseText);
+                            $('#divError').show('fade');
+                        }
+                    });
+                });
             });
-        });
-    });
-</script>*@
+        </script>*@
 }
 <style>
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {

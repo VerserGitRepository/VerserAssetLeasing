@@ -28,5 +28,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }          
             return View();
         }
+        [HttpGet]
+        public ActionResult GetRegristrationModal()
+        {
+            return PartialView("NewUserRegistration");
+        }
+        [HttpPost]
+        public ActionResult NewUserRegistration()
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

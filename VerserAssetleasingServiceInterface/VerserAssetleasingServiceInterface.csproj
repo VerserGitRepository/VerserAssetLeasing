@@ -370,6 +370,7 @@
     <Content Include="Views\RegisterEndUsers\AddEndUser.cshtml" />
     <Content Include="Views\RegisterEndUsers\UpdateEndUser.cshtml" />
     <Content Include="Views\Login\RegisterNewUser.cshtml" />
+    <Content Include="Views\Users\NewUserRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
