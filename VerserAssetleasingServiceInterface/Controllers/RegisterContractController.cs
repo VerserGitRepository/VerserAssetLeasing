@@ -38,7 +38,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             ReturnModel model = ContractsServicehelper.AddContract(ContractRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
-            return View("Index");
+            return RedirectToAction("Index", "Company");
         }
 
         [HttpPost]

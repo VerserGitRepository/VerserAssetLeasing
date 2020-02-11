@@ -51,5 +51,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             return RedirectToAction("Index", "Company");
         }
+        [HttpGet]
+        public ActionResult GetContractsData(int CompanyId)
+        {
+            List<ContractsListViewModel> contractdata = new List<ContractsListViewModel>();
+
+            contractdata = ContractsServicehelper.Projects().Result;
+            contractdata = contractdata.Where(i => i.contract_Company == Convert.ToString(CompanyId)).ToList();
+
+            return View(contractdata);
+        }
     }
 }

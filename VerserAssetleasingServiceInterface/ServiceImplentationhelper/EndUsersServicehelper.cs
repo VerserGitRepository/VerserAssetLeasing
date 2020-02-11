@@ -21,7 +21,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("EndUsers/EndUsersList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("AssetLeasing/EndUsersList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<EndUsersListViewModel>>();
@@ -43,7 +43,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 try
                 {
                     client.BaseAddress = new Uri(BaseUri);
-                    response = client.PostAsJsonAsync(string.Format("EndUsers/Create"), theModel).Result;
+                    response = client.PostAsJsonAsync(string.Format("AssetLeasing/AddNewEndUser"), theModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();

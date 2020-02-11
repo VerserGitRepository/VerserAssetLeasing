@@ -20,7 +20,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("Contracts/ContractsList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("AssetLeasing/ContractsList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<ContractsListViewModel>>();
@@ -43,7 +43,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 try
                 {
                     client.BaseAddress = new Uri(BaseUri);
-                    response = client.PostAsJsonAsync(string.Format("Contracts/CreateNewContract"), theModel).Result;
+                    response = client.PostAsJsonAsync(string.Format("AssetLeasing/AddNewContract"), theModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();
@@ -75,7 +75,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 try
                 {
                     client.BaseAddress = new Uri(BaseUri);
-                    response = client.PostAsJsonAsync(string.Format("Contracts/UpdateContract"), theModel).Result;
+                    response = client.PostAsJsonAsync(string.Format("AssetLeasing/UpdateContract"), theModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();

@@ -621,6 +621,22 @@
                     alert("Dynamic content load failed.");
                 }
             });
+
+            $.ajax({
+
+                type: "GET",
+                url: loadContractsUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "CompanyId": theId },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    populateContractsDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
         }
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 
@@ -695,7 +711,35 @@
                 ]
             });
            }
+        function populateContractsDataTable(data) {
+            console.log("populating data table...");
 
+            // clear the table before populating it with more data
+            $("#mainTable3").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable3').dataTable().fnAddData(["", "", "", "", "", ""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var customer = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+                    $('#mainTable3').dataTable().fnAddData([
+
+                        customer.startDate,
+                        customer.endDate,
+                        customer.serviceNo,
+                        customer.contract_Company,
+                        customer.contract_EndUser,
+                        customer.contract_Plan
+
+                    ]);
+
+
+                }
+            }
+        }
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
