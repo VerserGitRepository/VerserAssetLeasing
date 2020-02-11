@@ -153,16 +153,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorize\MyAuthorizeAttribute.cs" />
     <Compile Include="Controllers\SitesController.cs" />
-    <Compile Include="Controllers\AssetsController.cs" />
-    <Compile Include="Controllers\CarriersController.cs" />
-    <Compile Include="Controllers\ColoursController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ContractsController.cs" />
-    <Compile Include="Controllers\DeviceCategoriesController.cs" />
     <Compile Include="Controllers\EndUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InventoryItemsController.cs" />
-    <Compile Include="Controllers\LifecycleStatusController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterAssetsController.cs" />
     <Compile Include="Controllers\RegisterCompanyController.cs" />
@@ -197,15 +191,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImplentationhelper\AdminHelperService.cs" />
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />
-    <Compile Include="ServiceImplentationhelper\CarriersServicehelper.cs" />
-    <Compile Include="ServiceImplentationhelper\ColoursServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\SitesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CompanyServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
-    <Compile Include="ServiceImplentationhelper\DeviceCategoriesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\EndUsersServicehelper.cs" />
-    <Compile Include="ServiceImplentationhelper\InventoryItemsServicehelper.cs" />
-    <Compile Include="ServiceImplentationhelper\LifecycleStatusServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\LoginService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -342,15 +331,6 @@
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Contracts\Index.cshtml" />
     <Content Include="Views\RegisterCompany\Index.cshtml" />
-    <Content Include="Views\Carriers\Index.cshtml" />
-    <Content Include="Views\Colours\Index.cshtml" />
-    <Content Include="Views\DeviceCategories\Index.cshtml" />
-    <Content Include="Views\InventoryItems\Index.cshtml" />
-    <Content Include="Views\RegisterContract\Index.cshtml" />
-    <Content Include="Views\EndUsers\Index.cshtml" />
-    <Content Include="Views\RegisterEndUsers\Index.cshtml" />
-    <Content Include="Views\Assets\Index.cshtml" />
-    <Content Include="Views\RegisterAssets\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -364,18 +344,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Sites\AddSite.cshtml" />
     <Content Include="Views\Sites\UpdateSite.cshtml" />
-    <Content Include="Views\RegisterAssets\AddAssets.cshtml" />
-    <Content Include="Views\RegisterAssets\UpdateAssets.cshtml" />
-    <Content Include="Views\RegisterContract\AddContract.cshtml" />
-    <Content Include="Views\RegisterContract\UpdateContract.cshtml" />
-    <Content Include="Views\RegisterEndUsers\AddEndUser.cshtml" />
-    <Content Include="Views\RegisterEndUsers\UpdateEndUser.cshtml" />
     <Content Include="Views\Login\RegisterNewUser.cshtml" />
     <Content Include="Views\Users\NewUserRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LifecycleStatus\" />
     <Folder Include="Views\Roles\" />
   </ItemGroup>
   <ItemGroup>
