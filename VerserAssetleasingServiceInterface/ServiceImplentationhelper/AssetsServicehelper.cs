@@ -77,7 +77,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"Assets/{userId}/CompanyAssets")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{userId}/ProjectAssets")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     assetsList = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();

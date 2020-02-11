@@ -422,6 +422,20 @@
 
                         <div class="tab-pane fade" id="tab5default">
                             <div class="row pull-right">
+                                <div>
+                                    @Html.Hidden("Resume", null, new { @id = "hiddenCertificate" })
+                                    <span class="input-group-btn-override">
+                                        <i class="fas fa-file-download"></i>
+                                       
+                                    </span>
+                                    <!-- don't give a name === doesn't send on POST/GET -->
+                                    <span class="input-group-btn-override" style="padding-left:125px">
+                                        <input id="Certificateimgupload" type="file" style="display:none;">
+                                        <button type="button" id="btnCertificates" class="btn btn-sm btn-labeled btn-outline-secondary" style="padding-left:20px;border-color:gray">
+                                            <span class="btn-label"><i class="glyphicon glyphicon-folder-open"></i> </span>Import
+                                        </button>
+                                    </span>
+                                </div>
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {
@@ -607,6 +621,8 @@
         }
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 
+        $('#btnCertificates').click(function () { $('#Certificateimgupload').trigger('click'); });
+
         function populateDataTable(data) {
             console.log("populating data table...");
             // clear the table before populating it with more data
@@ -681,6 +697,38 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        $('#Certificateimgupload').on('change', function (event) {
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('Certificateimgupload');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+           
+            formdata.append("FileUpload", "CertificateUpload");
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Assets/ImportAssets');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function (data) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                     $.confirm({
+
+                content: 'The file has been uploaded successfully.',
+                boxWidth: '370px',
+                useBootstrap: false,
+                buttons: {
+                    OK: function () {
+
+                    }
+                }
+                    });
+                }
+            }
+        });
+
         $('#updateBtn').on('click', function (e) {
             {
                 // alert(data);
