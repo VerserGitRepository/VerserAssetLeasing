@@ -543,7 +543,15 @@
 
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
-            $('#mainTable2').DataTable();
+           
+            $('#mainTable2').DataTable({
+                "pageLength": 20,
+                "lengthMenu": [10, 15, 20, 25, 50],
+                "aoColumnDefs": [
+                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
+
+                ]
+            });
             $('#mainTable3').DataTable();
             $('#mainTable4').DataTable();
             $('#mainTable5').DataTable();
@@ -664,7 +672,7 @@
                        // You could also use an ajax property on the data table initialization
                        $('#mainTable2').dataTable().fnAddData([
 
-                           customer.AssetID,
+                           customer.SerialNo,
                            customer.SerialNo,
                            customer.Asset_Company,
                            customer.IMEI,
@@ -681,7 +689,15 @@
 
 
                    }
-               }
+            }
+            $('#mainTable2').DataTable({
+                "pageLength": 20,
+                "lengthMenu": [10, 15, 20, 25, 50],
+                "aoColumnDefs": [
+                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
+
+                ]
+            });
            }
 
         function readURL(input) {
