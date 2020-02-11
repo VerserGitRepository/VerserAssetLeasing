@@ -59,7 +59,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             contractdata = ContractsServicehelper.Projects().Result;
             contractdata = contractdata.Where(i => i.contract_Company == Convert.ToString(CompanyId)).ToList();
 
-            return View(contractdata);
+            return Json(contractdata, JsonRequestBehavior.AllowGet);
         }
     }
 }
