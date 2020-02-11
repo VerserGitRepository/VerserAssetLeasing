@@ -22,47 +22,39 @@
             <thead style="background-color:#FFA500; color:white">
                 <tr>
                     <th>
-                        User
+                        USERS
                     </th>
                     <th>
-                        Company
+                        PROJECTS
+                    </th>
+                                        <th>
+                        GRANT ACCESS
                     </th>
                     <th>
-                        IsAdmin
-                    </th>
-                    <th>
-                        CanEdit
-                    </th>
-                    <th>
-                        Update
+                        SAVE CHANGES
                     </th>
                 </tr>
             </thead>
-            <tbody>
-
-                @foreach (var item in Model.Usermodel)
+          
+                @foreach (var item in Model.UserIDs)
                 {
                     <tr>
                         <td>
-
-                            <span id="lblUserName">@Html.DisplayFor(model => item.UserName) </span>
+                             @Html.DisplayFor(model =>model.UserName)
                         </td>
                         <td>
                             @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
                         </td>
-                        <td>
-                            @Html.CheckBoxFor(model => model.IsAdmin, new { @id = "isAdmin" })
-
-                        </td>
+                      
                         <td>
                             @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
 
                         </td>
-                        <td><input type="submit" value="Update" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
+                        <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
                     </tr>
                 }
 
-            </tbody>
+         
         </table>
     </div> <br />
     <span style="margin-left:150px;">

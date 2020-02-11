@@ -8,18 +8,16 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script type='text/javascript'>
-        var appInsights=window.appInsights||function(config)
-        {
-            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } }
             var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f; for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js',
                 u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax']; i.length;) r('track' + i.pop());
-            return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o)
-            { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
+            return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
         }({
-            instrumentationKey:'93a0c5df-77c5-4c09-ad45-fbdecd2c6578'
+            instrumentationKey: '93a0c5df-77c5-4c09-ad45-fbdecd2c6578'
         });
 
-        window.appInsights=appInsights;
+        window.appInsights = appInsights;
         appInsights.trackPageView();
     </script>
 </head>
@@ -40,71 +38,19 @@
             <div class="navbar-collapse collapse">
                 @if (@Session["Username"] != null)
                 {
-                <ul class="nav navbar-nav">
-                    @Html.ActionLink("VERSER ASSET LEASING", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    @*<li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            TASKS
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li> @Html.ActionLink("Create End Users", "Index", "RegisterEndUsers")</li>
-                            <li> @Html.ActionLink("Create Company", "Index", "RegisterCompany")</li>
-                            <li>@Html.ActionLink("Create Assets", "Index", "RegisterAssets")</li>
-                            <li>@Html.ActionLink("Create Contract", "Index", "RegisterContract")</li>
+                    <ul class="nav navbar-nav">
 
-                        </ul>
-                    </li>*@
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            LISTS
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>  @Html.ActionLink("Company List", "Index", "Company")</li>
+                        <li>  @Html.ActionLink("CUSTOMERS", "Index", "Company")</li>
 
+                        <li>@Html.ActionLink("ADMINISTRATOR", "Index", "Users")</li>
 
+                        <ul class="nav navbar-nav" style="float:right">
+                            @if (Session["FullUserName"] != null)
+                            {
+                                <li style="font-size:small;color:white;font-weight:100;float:right">@Html.ActionLink("Logout", "Login", "Login")</li>
+                            }
                         </ul>
-                    </li>
-                    @*<li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            MASTER  DATA
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Assets", "Index", "assets")</li>
-                            <li>@Html.ActionLink("EndUsers", "Index", "EndUsers")</li>
-                            <li>@Html.ActionLink("Contracts", "Index", "Contracts")</li>
-                            <li>@Html.ActionLink("Carriers", "Index", "Carriers")</li>
-                            <li>@Html.ActionLink("Colours", "Index", "Colours")</li>
-                            <li>@Html.ActionLink("DeviceCategories", "Index", "Categories")</li>
-                            <li>@Html.ActionLink("InventoryItems", "Index", "Inventory")</li>
-                        </ul>
-                    </li>*@
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            ADMINISTRATION
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            @*<li>@Html.ActionLink("Roles", "Index", "Roles")</li>*@
-                          
-                        </ul>
-                    </li>
-                    <ul class="nav navbar-nav" style="float:right">
-                        @if (Session["FullUserName"] != null)
-                        {
-                            <li style="font-size:small;color:white;font-weight:100;float:right">@Html.ActionLink("Logout", "Login", "Login")</li>
-                        }
-                        @*else
-            {
-                <li style="font-size:small;color:white;font-weight:100;float:right">@Html.ActionLink("Login", "Login", "Login")</li>
-            }*@
                     </ul>
-
-                </ul>
                     <ul class="nav navbar-nav" style="float:right">
                         <li>@Html.ActionLink("LOGOUT", "Logout", "Login")</li>
                     </ul>
@@ -115,13 +61,13 @@
                         <li class="nav navbar-nav" style="float:right">@Html.ActionLink("LOGIN", "Login", "Login")</li>
                     </ul>
                 }
-                @*@Html.Partial("_LoginPartial")*@
+
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr/>
+        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Verser Technology Lifecycles</p>
         </footer>

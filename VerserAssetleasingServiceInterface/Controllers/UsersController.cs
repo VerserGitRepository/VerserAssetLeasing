@@ -15,8 +15,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult Index()
         {
             var _userroles=new UserRoleModel();
-            _userroles.Usermodel = AdminHelperService.Users().Result;
-            _userroles.Rolemodel = AdminHelperService.Roles().Result;
+
+            _userroles.UserIDs =new SelectList(AdminHelperService.Users().Result);
+   
             _userroles.Companylist = new SelectList(CompanyServicehelper.CompanyList().Result, "ID", "Value");
             return View(_userroles);
         }

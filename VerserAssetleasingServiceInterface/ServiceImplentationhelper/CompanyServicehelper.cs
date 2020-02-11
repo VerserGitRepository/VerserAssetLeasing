@@ -40,7 +40,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("MasteData/CompanyList")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("inventorycontrol/projects/listitems")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var projects = await response.Content.ReadAsAsync<List<ListItemViewModel>>();

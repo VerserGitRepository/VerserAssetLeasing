@@ -11,42 +11,38 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
     {
         public static string BaseUri = ConfigurationManager.AppSettings["AssetleasingAPIBaseURL"];
 
-        public static async Task<List<UserModel>> Users()
+        public static async Task<List<string>> Users()
         {
-            var users = new List<UserModel>();
+            var users = new List<string>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("MasteData/Users")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("inventorycontrol/JMSUsers")).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var user = await response.Content.ReadAsAsync<List<UserModel>>();
-                    foreach (var p in user)
-                    {
-                        users.Add(p);
-                    }
+                    users = await response.Content.ReadAsAsync<List<string>>();                   
                 }
             }
             return users;
         }
-        public static async Task<List<RolesModel>> Roles()
-        {
-            var roles = new List<RolesModel>();
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format("MasteData/Users")).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var role = await response.Content.ReadAsAsync<List<RolesModel>>();
-                    foreach (var p in role)
-                    {
-                        roles.Add(p);
-                    }
-                }
-            }
-            return roles;
-        }
+        //public static async Task<List<RolesModel>> Roles()
+        //{
+        //    var roles = new List<RolesModel>();
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri(BaseUri);
+        //        HttpResponseMessage response = client.GetAsync(string.Format("MasteData/Users")).Result;
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var role = await response.Content.ReadAsAsync<List<RolesModel>>();
+        //            foreach (var p in role)
+        //            {
+        //                roles.Add(p);
+        //            }
+        //        }
+        //    }
+        //    return roles;
+        //}
         public static async Task<ReturnModel> ChangeUserPermissions(UserRoleModel theModel)
         {
             using (HttpClient client = new HttpClient())
