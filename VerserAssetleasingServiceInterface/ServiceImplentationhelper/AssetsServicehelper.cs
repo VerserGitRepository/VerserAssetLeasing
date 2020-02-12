@@ -95,7 +95,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 try
                 {
                     client.BaseAddress = new Uri(BaseUri);
-                    response = client.PostAsJsonAsync(string.Format("Assets/UpdateAsset"), theModel).Result;
+                    response = client.PostAsJsonAsync(string.Format("AssetLeasing/UpdateAsset"), theModel).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         ReturnResult = await response.Content.ReadAsAsync<ReturnModel>();

@@ -18,11 +18,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return PartialView();
         }
-        public ActionResult UpdateAssets(string AssetId)
+        public ActionResult UpdateAssets(string AssetId,string companyId)
         {
             List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
-
-            assetsdata = AssetsServicehelper.AssetsList().Result;
+           
+            assetsdata = AssetsServicehelper.GetAssetsData(companyId).Result;
             AssetsListViewModel model = assetsdata.Where(item => item.AssetID == AssetId).FirstOrDefault();
             return PartialView(model);
         }

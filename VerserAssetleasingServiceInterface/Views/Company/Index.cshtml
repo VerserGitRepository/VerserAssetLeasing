@@ -362,7 +362,9 @@
                                 <table class="table-bordered" style="margin:10px; width:980px" id="mainTable3">
                                     <thead style="background-color:#428bca; color:white">
                                         <tr>
-
+                                            <th>
+                                                @Html.DisplayName("Id")
+                                            </th>
                                             <th>
                                                 @Html.DisplayName("Start Date")
                                             </th>
@@ -388,7 +390,9 @@
                                         @foreach (var item in Model.ContractsListViewModel)
                                         {
                                             <tr>
-
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.id )
+                                                </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.startDate)
                                                     @Html.HiddenFor(modelItem => item.id, new { @id = "hiddenContractId" })
@@ -426,10 +430,10 @@
                                         }
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser1">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser1">
                                     </div>
                                 </div>
 
@@ -454,16 +458,19 @@
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEnduser">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEndUser">
                                 </div>
                             </div>
                             <div class="row pull-left" style="margin-left:-1px">
                                 <table class="table-bordered" style="margin:5px; width:980px" id="mainTable5">
                                     <thead style="background-color:#428bca; color:white">
                                         <tr>
+                                            <th>
+                                                @Html.DisplayName("Id")
+                                            </th>
                                             <th>
                                                 @Html.DisplayName("FirstName")
                                             </th>
@@ -501,37 +508,40 @@
                                         @foreach (var item in Model.EndUsersListViewModel)
                                         {
 
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.LastName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EmployeeNo)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Department)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CostCode)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EndUserStatus)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CommencementDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.TerminationDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.UserName)
-                                                </td>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FirstName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LastName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EmployeeNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Department)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CostCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndUserStatus)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CommencementDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TerminationDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
 
 
-                                            </tr>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -653,6 +663,22 @@
                     alert("Dynamic content load failed.");
                 }
             });
+
+            $.ajax({
+
+                type: "GET",
+                url: loadEndusersUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "CompanyId": theId },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    populateEndusersDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
         }
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 
@@ -734,7 +760,7 @@
             $("#mainTable3").DataTable().clear();
             var length = Object.keys(data).length;
             if (length == 0) {
-                $('#mainTable3').dataTable().fnAddData(["", "", "", "", "", ""]);
+                $('#mainTable3').dataTable().fnAddData(["","", "", "", "", "", ""]);
             }
             else {
                 for (var i = 0; i <= length; i++) {
@@ -742,7 +768,7 @@
 
                     // You could also use an ajax property on the data table initialization
                     $('#mainTable3').dataTable().fnAddData([
-
+                        customer.id,
                         customer.startDate,
                         customer.endDate,
                         customer.serviceNo,
@@ -756,6 +782,42 @@
                 }
             }
         }
+
+        function populateEndusersDataTable(data) {
+            console.log("populating data table...");
+
+            // clear the table before populating it with more data
+            $("#mainTable5").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable5').dataTable().fnAddData(["", "", "", "", "", "", "","","",""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var customer = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+                    $('#mainTable5').dataTable().fnAddData([
+                        customer.Id,
+                        customer.FirstName,
+                        customer.LastName,
+                        customer.EmployeeNo,
+                        customer.Department,
+                        customer.CostCode,
+                        customer.EndUserStatus,
+                        customer.CommencementDate,
+                        customer.TerminationDate,
+                        customer.UserName
+
+                        
+
+                    ]);
+
+
+                }
+            }
+        }
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -898,8 +960,9 @@
                });
 
         });
-         $('#addEndUser').click(function () {
-                var AddSiteURL = '@Url.Action("AddEndUser", "RegisterEndUsers")'
+        $('#addEndUser').click(function () {
+           
+                var AddSiteURL = '@Url.Action("AddEnduser", "RegisterEndUsers")'
                 $.ajax({
                     type: "GET",
                     url: AddSiteURL,
@@ -922,12 +985,15 @@
                 });
            });
 
-           $('#editEndUser').click(function () {
+        $('#editEndUser').click(function () {
                 var updateSiteURL = '@Url.Action("UpdateEndUser", "RegisterEndusers")'
+                var table1 = $('#mainTable5').DataTable();
+                var selData1 = table1.rows(".selected").data();
+             
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,
-
+                    data: { "Id": (selData1[0][0]) },
                     success: function (data) {
 
                         $.confirm({
@@ -937,22 +1003,17 @@
                             content: data,
                             closeIcon: true,
 
-                           buttons: {
+                            buttons: {
                                 yes: { isHidden: true }
-                            },
-                            onOpen: function () {
-                                // after the modal is displayed.
-                                var table = $('#mainTable1').DataTable();
-                                var selData = table.rows(".selected").data();
-                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
-                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
-                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
-                                $(".jconfirm").find($("#state")).val(selData[0][3]);
-                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
-                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
-                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
                             }
+
                         });
+
+
+                    },
+                    error: function (data) {
+
+                        alert("Data cannot be loaded.");
 
 
                     }
@@ -991,7 +1052,7 @@
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,
-                     data: { "AssetId": (selData1[0][0]) },
+                    data: { "AssetId": (selData1[0][0]), "companyId": $("#hiddenId").val()},
                     success: function (data) {
 
                         $.confirm({
@@ -1039,18 +1100,20 @@
 
 
 
-           $('#editContract').click(function () {
+        $('#editContract').click(function () {
+            var table1 = $('#mainTable3').DataTable();
+            var selData1 = table1.rows(".selected").data();
                 var updateSiteURL = '@Url.Action("UpdateContract", "RegisterContract")'
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,
-
+                    data: { "Id": (selData1[0][0])},
                     success: function (data) {
 
                         $.confirm({
                             boxWidth: '800px',
                             useBootstrap: false,
-                            title: 'Add Site',
+                            title: '',
                             content: data,
                             closeIcon: true,
 
@@ -1059,6 +1122,12 @@
                             }
 
                         });
+
+
+                    },
+                    error: function (data) {
+
+                        alert("Data cannot be loaded.");
 
 
                     }

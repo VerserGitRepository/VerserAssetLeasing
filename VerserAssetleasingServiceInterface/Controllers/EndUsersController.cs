@@ -50,5 +50,16 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             return RedirectToAction("Index", "Company");
         }
+
+        [HttpGet]
+        public ActionResult GetEndusersData(int CompanyId)
+        {
+            List<EndUsersListViewModel> contractdata = new List<EndUsersListViewModel>();
+
+            contractdata = EndUsersServicehelper.EndUsersList().Result;
+            contractdata = contractdata.Where(i => i.EndUser_Company == Convert.ToInt32(CompanyId)).ToList();
+
+            return Json(contractdata, JsonRequestBehavior.AllowGet);
+        }
     }
 }

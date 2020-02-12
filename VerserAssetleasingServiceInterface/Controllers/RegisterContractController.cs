@@ -46,7 +46,18 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             ReturnModel model = ContractsServicehelper.UpdateContract(ContractRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
-            return View("Index");
+            return RedirectToAction("Index", "Company");
+        }
+        [HttpGet]
+        public ActionResult UpdateContract(string Id)
+        {
+            List<ContractsListViewModel> contractdata = new List<ContractsListViewModel>();
+
+            contractdata = ContractsServicehelper.Projects().Result;
+            contractdata = contractdata.Where(i => i.id == Convert.ToInt32(Id)).ToList();
+
+           
+            return PartialView(contractdata[0]);
         }
     }
 }
