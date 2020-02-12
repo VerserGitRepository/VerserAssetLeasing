@@ -223,7 +223,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="tab2default">
+                        <div class="tab-pane fade" id="tab2default" style="margin-bottom:10px">
                             <div class="row pull-right">
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
@@ -237,56 +237,69 @@
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset">
                                 </div>
-                            </div>
+                            </div><br>
 
 
-                            <div class="row pull-left" style="margin-left:-1px">
-                                <table class="table-bordered" style="margin:10px; width:160px" id="mainTable2">
-                                    <thead style="background-color:#428bca; color:white">
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayName("AssetID")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Serial")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Company")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("IMEI")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("SIM")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Order")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Date")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Price")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Decommission")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Condition")
-                                            </th>
-                                            <th>
-                                                @Html.DisplayName("Buyback")
-                                            </th>
+                            <div class="row pull-left" style="margin-left:10px">
+                                <div class="col-md-12">
+                                    <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
+                                        <thead style="background-color:#428bca; color:white">
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayName("SSN")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Make")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Model")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Serial")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Company")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("IMEI")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("SIM")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Order")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Date")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Price")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Decommission")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Condition")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Buyback")
+                                                </th>
 
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.AssetsListViewModel)
-                                        {
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.AssetsListViewModel)
+                                            {
                                             <tr>
                                                 <td>
-                                                    @Html.DisplayName(item.AssetID)
+                                                    @Html.DisplayName(item.SSN)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.Make)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.Model)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
@@ -321,9 +334,10 @@
 
 
                                             </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -343,7 +357,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row pull-left" style="margin-left:-1px">
+                            <div class="row pull-left" style="margin-left:-1px;margin-top:5px">
 
                                 <table class="table-bordered" style="margin:10px; width:980px" id="mainTable3">
                                     <thead style="background-color:#428bca; color:white">
@@ -423,17 +437,16 @@
                         </div>
 
                         <div class="tab-pane fade" id="tab5default">
-                            <div class="row pull-right">
+                            <div class="row pull-right" style="padding-right:20px">
                                 <div>
                                    
-                                    <!-- don't give a name === doesn't send on POST/GET -->
-                                    <span class="input-group-btn-override" style="padding-left:125px">
+                                    <span class="input-group-btn-override" style="padding-left:100px">
                                         <input id="Certificateimgupload" type="file" style="display:none;">
                                         <button type="button" id="btnCertificates" class="btn btn-sm btn-labeled btn-outline-secondary" style="padding-left:20px;border-color:gray">
-                                            <span class="btn-label"><i class="glyphicon glyphicon-folder-open"></i> </span>Import
+                                            <span class="btn-label"><i class="glyphicon glyphicon-import"></i> </span>
                                         </button>
                                     </span>
-                                </div>
+                                </div> <br>
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {

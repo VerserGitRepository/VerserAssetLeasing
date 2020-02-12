@@ -47,5 +47,10 @@ namespace VerserAssetleasingServiceInterface.Models
         [Required(ErrorMessage = "Inventory Item is Required")]
         public int Asset_InventoryItem { get; set; }
         public int? Asset_OSVersion { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string SSN { get; set; }
+
+
     }
 }
