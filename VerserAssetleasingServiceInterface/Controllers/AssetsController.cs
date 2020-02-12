@@ -18,6 +18,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
     [MyAuthorize]
     public class AssetsController : Controller
     {
+        [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
