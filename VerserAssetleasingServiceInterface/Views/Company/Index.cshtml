@@ -453,6 +453,9 @@
                                     <thead style="background-color:#428bca; color:white">
                                         <tr>
                                             <th>
+                                                @Html.DisplayName("Id")
+                                            </th>
+                                            <th>
                                                 @Html.DisplayName("FirstName")
                                             </th>
                                             <th>
@@ -489,37 +492,40 @@
                                         @foreach (var item in Model.EndUsersListViewModel)
                                         {
 
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.LastName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EmployeeNo)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Department)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CostCode)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EndUserStatus)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.CommencementDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.TerminationDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.UserName)
-                                                </td>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FirstName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LastName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EmployeeNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Department)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CostCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndUserStatus)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CommencementDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TerminationDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
 
 
-                                            </tr>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -641,6 +647,22 @@
                     alert("Dynamic content load failed.");
                 }
             });
+
+            $.ajax({
+
+                type: "GET",
+                url: loadEndusersUrl,
+                contentType: "application/json; charset=utf-8",
+                data: { "CompanyId": theId },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    populateEndusersDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
         }
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 
@@ -744,6 +766,42 @@
                 }
             }
         }
+
+        function populateEndusersDataTable(data) {
+            console.log("populating data table...");
+
+            // clear the table before populating it with more data
+            $("#mainTable5").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable5').dataTable().fnAddData(["", "", "", "", "", "", "","","",""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var customer = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+                    $('#mainTable5').dataTable().fnAddData([
+                        customer.Id,
+                        customer.FirstName,
+                        customer.LastName,
+                        customer.EmployeeNo,
+                        customer.Department,
+                        customer.CostCode,
+                        customer.EndUserStatus,
+                        customer.CommencementDate,
+                        customer.TerminationDate,
+                        customer.UserName
+
+                        
+
+                    ]);
+
+
+                }
+            }
+        }
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
