@@ -39,7 +39,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             ReturnModel model = EndUsersServicehelper.AddEndUser(theModel).Result;
             TempData["StatusMessage"] = model.Message;
-            return View("Index");
+            return RedirectToAction("Index", "Company");
         }
 
         [HttpPost]

@@ -448,7 +448,7 @@
                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEndUser">
                                 </div>
                             </div>
                             <div class="row pull-left" style="margin-left:-1px">
@@ -948,7 +948,7 @@
 
         });
         $('#addEndUser').click(function () {
-            alert('test');
+           
                 var AddSiteURL = '@Url.Action("AddEnduser", "RegisterEndUsers")'
                 $.ajax({
                     type: "GET",
@@ -972,12 +972,15 @@
                 });
            });
 
-           $('#editEndUser').click(function () {
+        $('#editEndUser').click(function () {
                 var updateSiteURL = '@Url.Action("UpdateEndUser", "RegisterEndusers")'
+                var table1 = $('#mainTable5').DataTable();
+                var selData1 = table1.rows(".selected").data();
+             
                 $.ajax({
                     type: "GET",
                     url: updateSiteURL,
-
+                    data: { "Id": (selData1[0][0]) },
                     success: function (data) {
 
                         $.confirm({
@@ -987,22 +990,17 @@
                             content: data,
                             closeIcon: true,
 
-                           buttons: {
+                            buttons: {
                                 yes: { isHidden: true }
-                            },
-                            onOpen: function () {
-                                // after the modal is displayed.
-                                var table = $('#mainTable1').DataTable();
-                                var selData = table.rows(".selected").data();
-                                $(".jconfirm").find($("#siteName")).val(selData[0][0]);
-                                $(".jconfirm").find($("#address1")).val(selData[0][1]);
-                                $(".jconfirm").find($("#suburb")).val(selData[0][2]);
-                                $(".jconfirm").find($("#state")).val(selData[0][3]);
-                                $(".jconfirm").find($("#postcode")).val(selData[0][4]);
-                                $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
-                                $(".jconfirm").find($("#siteId")).val(selData[0][6]);
                             }
+
                         });
+
+
+                    },
+                    error: function (data) {
+
+                        alert("Data cannot be loaded.");
 
 
                     }
