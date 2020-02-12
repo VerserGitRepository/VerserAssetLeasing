@@ -18,6 +18,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return View();
         }
         // GET: Assets
+        [HttpGet]
         public ActionResult AddEnduser()
         {
 
@@ -42,19 +43,19 @@ namespace VerserAssetleasingServiceInterface.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateEndUser(ContractsListViewModel ContractRegisterdata)
+        public ActionResult UpdateEndUser(EndUsersListViewModel ContractRegisterdata)
         {
-            ReturnModel model = ContractsServicehelper.UpdateContract(ContractRegisterdata).Result;
+            ReturnModel model = EndUsersServicehelper.UpdateEnduser(ContractRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
             return RedirectToAction("Index", "Company");
         }
         [HttpGet]
-        public ActionResult UpdateContract(string Id)
+        public ActionResult UpdateEndUser(string Id)
         {
-            List<ContractsListViewModel> contractdata = new List<ContractsListViewModel>();
+            List<EndUsersListViewModel> contractdata = new List<EndUsersListViewModel>();
 
-            contractdata = ContractsServicehelper.Projects().Result;
-            contractdata = contractdata.Where(i => i.id == Convert.ToInt32(Id)).ToList();
+            contractdata = EndUsersServicehelper.EndUsersList().Result;
+            contractdata = contractdata.Where(i => i.Id == Convert.ToInt32(Id)).ToList();
 
 
             return PartialView(contractdata[0]);

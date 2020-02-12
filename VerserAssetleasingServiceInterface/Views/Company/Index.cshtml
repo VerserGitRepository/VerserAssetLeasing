@@ -416,10 +416,10 @@
                                         }
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser1">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser1">
                                     </div>
                                 </div>
 
@@ -445,7 +445,7 @@
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEnduser">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
                                 </div>
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser">
@@ -947,8 +947,9 @@
                });
 
         });
-         $('#addEndUser').click(function () {
-                var AddSiteURL = '@Url.Action("AddEndUser", "RegisterEndUsers")'
+        $('#addEndUser').click(function () {
+            alert('test');
+                var AddSiteURL = '@Url.Action("AddEnduser", "RegisterEndUsers")'
                 $.ajax({
                     type: "GET",
                     url: AddSiteURL,
