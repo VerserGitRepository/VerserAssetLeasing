@@ -717,7 +717,7 @@
             $("#mainTable2").DataTable().clear();
                var length = Object.keys(data).length;
                if (length == 0) {
-                   $('#mainTable2').dataTable().fnAddData(["", "","","","","","","","","",""]);
+                   $('#mainTable2').dataTable().fnAddData(["", "","","","","","","","","","","",""]);
                }
                else {
                    for (var i = 0; i <= length; i++) {
@@ -726,7 +726,9 @@
                        // You could also use an ajax property on the data table initialization
                        $('#mainTable2').dataTable().fnAddData([
 
-                           customer.SerialNo,
+                           customer.SSN,
+                           customer.Make,
+                           customer.Model,
                            customer.SerialNo,
                            customer.Asset_Company,
                            customer.IMEI,
