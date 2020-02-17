@@ -33,24 +33,29 @@
             }
     </style>
 
-    <div class="container" style="margin:20px; width:800px">
+    <div class="table-bordered" style="margin:20px; width:700px">
+        <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
+            <h3 class="panel-title">UPDATE SITE</h3>
+        </div><br>
+
+
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @if (TempData["StatusMessage"] != null)
         {
             <p><h6> @TempData["StatusMessage"].ToString()</h6></p>
         }
-        <div class="row" style="font-size:x-small;color:grey;border-color:gray">
+        <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
 
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group  col-sm-6">
 
                     @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-5" })
                     @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteName" } })
                     @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
 
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label col-md-5" })
 
                     @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address1" } })
@@ -58,13 +63,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label col-md-5" })
 
                     @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "address2" } })
                     @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group  col-sm-6">
                     @Html.Label("Suburb", htmlAttributes: new { @class = "control-label col-md-5" })
 
                     @Html.EditorFor(model => model.suburb, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "suburb" } })
@@ -73,24 +78,24 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "state" } })
                     @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Post Code", htmlAttributes: new { @class = "control-label col-md-5" })
                     @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "postcode" } })
                     @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Site Company", htmlAttributes: new { @class = "control-label col-md-5" })
                     @Html.EditorFor(model => model.site_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteCompany" } })
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Site Id", htmlAttributes: new { @class = "control-label col-md-7" })
                     @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "siteId" } })
                 </div>
@@ -98,80 +103,82 @@
             @*<input type="submit" value="UPDATE" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />*@
         </div>
         <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
-            <input type="submit" value="Update" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+            <input type="submit" value="Update" class="btn btn-warning" style="height:32px;vertical-align:top" />
         </div>
     </div>
 
-}
+        }
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 
 
-<style>
-    .form-group {
-        margin-bottom: 2px;
-        padding-right: 0;
-        padding-left: 0;
-        margin: 0px;
-        font-size: 12px;
-        border-radius: 9px;
-        padding-bottom: 5px;
-        margin-top: 2px;
-    }
-    /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
-    }*/
-    .col-md-6 {
-        position: relative;
-        min-height: 1px;
-        padding-right: 0px;
-        padding-left: 0px;
-    }
+        <style>
+                    .form-group {
+                        margin-bottom: 2px;
+                        padding-right: 0;
+                        padding-left: 0;
+                        margin: 0px;
+                        font-size: 12px;
+                        border-radius: 9px;
+                        padding-bottom: 5px;
+                        margin-top: 2px;
+                    }
+                    /*.jconfirm.jconfirm - box div.jconfirm - content - pane.jconfirm - content {overflow:hidden,
+            }*/
+                    .col-md-6 {
+                        position: relative;
+                        min-height: 1px;
+                        padding-right: 0px;
+                        padding-left: 0px;
+                    }
 
-    .inline style {
-        height: 400.7px;
-        max-height: 492.85px;
-        transition-duration: 0.4s;
-        transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
-    }
+                    .inline style {
+                        height: 400.7px;
+                        max-height: 492.85px;
+                        transition-duration: 0.4s;
+                        transition-timing-function: cubic-bezier(0.36, 0.55, 0.19, 1);
+                    }
 
-    .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
-        overflow: hidden;
-    }
+                    .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+                        overflow: hidden;
+                    }
 
-    .row.no-pad > [class*='col-'] {
-        padding-right: 0;
-        padding-left: 0;
-    }
+                    .row.no-pad > [class*='col-'] {
+                        padding-right: 0;
+                        padding-left: 0;
+                    }
 
-    .btn-warning {
-        background-color: #FFA500;
+                     .btn-warning {
+        background-color: #428bca;
         font-size: 14px;
+        border-color: #428bca;
     }
 
-    .form-control {
-        margin-bottom: 2px;
-        padding-right: 0;
-        padding-left: 0;
-        font-size: 12px;
-        border-radius: 9px;
-        padding-bottom: 5px;
-        margin-top: 2px;
-    }
 
-    .panel-footer {
-        padding: 3px 30px;
-        background-color: #f5f5f5;
-        border-top: 1px solid #dddddd;
-        border-bottom-right-radius: 3px;
-        border-bottom-left-radius: 3px;
-    }
+                    .form-control {
+                        margin-bottom: 2px;
+                        padding-right: 0;
+                        padding-left: 0;
+                        font-size: 12px;
+                        border-radius: 9px;
+                        padding-bottom: 5px;
+                        margin-top: 2px;
+                    }
 
-    .form-group.required .control-label:after {
-        content: "*";
-        color: red;
-        padding-bottom: 15px;
-</style>
+                    .panel-footer {
+                        padding: 3px 30px;
+                        background-color: #f5f5f5;
+                        border-top: 1px solid #dddddd;
+                        border-bottom-right-radius: 3px;
+                        border-bottom-left-radius: 3px;
+                    }
+
+                    .form-group.required .control-label:after {
+                        content: "*";
+                        color: red;
+                        padding-bottom: 15px;
+        </style>

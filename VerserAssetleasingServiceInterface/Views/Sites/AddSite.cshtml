@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Register End Users";
- }
+}
 
 
 
@@ -36,19 +36,21 @@
             }
     </style>
 
-    <div class="container" style="margin:20px; width:800px">
+    <div class="table-bordered" style="margin:20px; width:700px">
+        <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
+            <h3 class="panel-title">ADD SITE</h3>
+        </div><br>
 
-
-        <div class="row" style="font-size:x-small;color:grey;border-color:gray">
+        <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
 
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("SiteName", htmlAttributes: new { @class = "control-label col-md-7" })
                     @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
 
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("AddressLine1", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.addressLine1, new { htmlAttributes = new { @class = "form-control col-md-5" } })
@@ -56,13 +58,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("AddressLine2", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.addressLine2, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.addressLine2, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Suburb", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.suburb, new { htmlAttributes = new { @class = "form-control col-md-5" } })
@@ -71,20 +73,20 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("PostCode", htmlAttributes: new { @class = "control-label col-md-7" })
                     @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control col-md-5" } })
                     @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group  col-sm-6">
                     @Html.Label("Company", htmlAttributes: new { @class = "control-label col-md-7" })
 
                     @Html.EditorFor(model => model.site_Company, new { htmlAttributes = new { @class = "form-control col-md-5" } })
@@ -117,9 +119,11 @@
         padding-bottom: 5px;
         margin-top: 2px;
     }
+
     .jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
         overflow: hidden;
     }
+
     .col-md-6 {
         position: relative;
         min-height: 1px;
@@ -133,8 +137,9 @@
     }
 
     .btn-warning {
-        background-color: #FFA500;
+        background-color: #428bca;
         font-size: 14px;
+        border-color: #428bca;
     }
 
     .form-control {

@@ -15,187 +15,190 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<div class="container" style="margin:20px; width:800px">
-
-    <div class="row" style="font-size:x-small;color:grey;border-color:gray">
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "AssetID" } })
-                    @Html.HiddenFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @id = "ID" } })
-                    @Html.ValidationMessageFor(model => model.AssetID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SerialNo" } })
-                    @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="table-bordered" style="margin:20px; width:800px">
+        <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
+            <h3 class="panel-title">UPDATE ASSETS</h3>
         </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "Asset_Company" } })
-                    @Html.ValidationMessageFor(model => model.Asset_Company, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "IMEI" } })
-                    @Html.ValidationMessageFor(model => model.IMEI, "", new { @class = "text-danger" })
+        <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "AssetID" } })
+                        @Html.HiddenFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @id = "ID" } })
+                        @Html.ValidationMessageFor(model => model.AssetID, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SIMNo" } })
-                    @Html.ValidationMessageFor(model => model.SIMNo, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "PurchaseOrderNo" } })
-                    @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SerialNo" } })
+                        @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.PurchaseDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker",@type = "date", @id = "PurchaseDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control date-picker", @id = "PurchaseDate" } })
-                    }
-                    @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "Asset_Company" } })
+                        @Html.ValidationMessageFor(model => model.Asset_Company, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control", @id = "PurchasePrice" } })
-                    @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "IMEI" } })
+                        @Html.ValidationMessageFor(model => model.IMEI, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.DecomissionDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
-                    }
-                    
-                    @Html.ValidationMessageFor(model => model.DecomissionDate, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SIMNo" } })
+                        @Html.ValidationMessageFor(model => model.SIMNo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control", @id = "Condition" } })
-                    @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "PurchaseOrderNo" } })
+                        @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.BuyBackPrice, new { htmlAttributes = new { @class = "form-control", @id = "BuyBackPrice" } })
-                    @Html.ValidationMessageFor(model => model.BuyBackPrice, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.PurchaseDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @id = "PurchaseDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control date-picker", @id = "PurchaseDate" } })
+                        }
+                        @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.AquisitionDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
-                    }
-                    @Html.ValidationMessageFor(model => model.AquisitionDate, "", new { @class = "text-danger" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control", @id = "PurchasePrice" } })
+                        @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.SPMD, new { htmlAttributes = new { @class = "form-control", @id = "SPMD" } })
-                    @Html.ValidationMessageFor(model => model.SPMD, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.DecomissionDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.DecomissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "DecomissionDate" })
+                        }
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.FirstCommissionDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
-                    }
+                        @Html.ValidationMessageFor(model => model.DecomissionDate, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.LastCommissionDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
-                    }
-                    @Html.ValidationMessageFor(model => model.LastCommissionDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group col-md-5 col-sm-6">
-                @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-7" })
-                <div class="col-md-6">
-                    @if (Model.LastRepairDate.HasValue)
-                    {
-                        @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
-                    }
-                    @Html.ValidationMessageFor(model => model.LastRepairDate, "", new { @class = "text-danger" })
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control", @id = "Condition" } })
+                        @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.BuyBackPrice, new { htmlAttributes = new { @class = "form-control", @id = "BuyBackPrice" } })
+                        @Html.ValidationMessageFor(model => model.BuyBackPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.AquisitionDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.AquisitionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "AquisitionDate" })
+                        }
+                        @Html.ValidationMessageFor(model => model.AquisitionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.SPMD, new { htmlAttributes = new { @class = "form-control", @id = "SPMD" } })
+                        @Html.ValidationMessageFor(model => model.SPMD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.FirstCommissionDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.FirstCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "FirstCommissionDate" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.LastCommissionDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.LastCommissionDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastCommissionDate" })
+                        }
+                        @Html.ValidationMessageFor(model => model.LastCommissionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5 col-sm-6">
+                    @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <div class="col-md-6">
+                        @if (Model.LastRepairDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.LastRepairDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @Id = "LastRepairDate" })
+                        }
+                        @Html.ValidationMessageFor(model => model.LastRepairDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
@@ -244,8 +247,9 @@
         }
 
         .btn-warning {
-            background-color: #FFA500;
+            background-color: #789fbb;
             font-size: 14px;
+            border-color: #789fbb;
         }
 
         .form-control {
