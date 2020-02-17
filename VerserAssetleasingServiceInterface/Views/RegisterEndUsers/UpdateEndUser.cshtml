@@ -4,98 +4,100 @@
     ViewBag.Title = "Register Contract";
 }
 
-
-<div class="table-bordered" style="margin:20px; width:750px">
-
-
-    @using (Html.BeginForm("UpdateEnduser", "RegisterEndUsers", FormMethod.Post))
-    {
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
-
-        <div class="form-group col-md-6">
-            @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-7" })
-
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
-        </div>
-        <div class="form-group col-md-6">
-            @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-7" })
-
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    <div class="table-bordered" style="margin:20px; width:750px">
+        <div class="panel-heading" align="center" style="height:30PX;background-color:#789fbb;color:white; vertical-align:top">
+            <h3 class="panel-title">UPDATE END USER</h3>
         </div>
 
 
-        <div class="form-group col-md-6">
-            @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-5" })
+        @using (Html.BeginForm("UpdateEnduser", "RegisterEndUsers", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            @Html.EditorFor(model => model.EmployeeNo, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.EmployeeNo, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.Label("Department", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
 
-            @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                <div class="form-group col-md-6">
+                    @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-7" })
 
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-7" })
 
-        </div>
-
-
-        <div class="form-group col-md-6">
-            @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-5" })
-
-            @Html.EditorFor(model => model.CommencementDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.CommencementDate, "", new { @class = "date" })
-        </div>
-
-        <div class="form-group col-md-6">
-            @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-5" })
-
-            @Html.EditorFor(model => model.TerminationDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.TerminationDate, "", new { @class = "date" })
-        </div>
-
-        <div class="form-group col-md-6">
-            @Html.Label("CostCode", htmlAttributes: new { @class = "control-label col-md-5" })
-
-            @Html.EditorFor(model => model.CostCode, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.CostCode, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.Label("EndUserStatus", htmlAttributes: new { @class = "control-label col-md-5" })
-
-            @Html.EditorFor(model => model.EndUserStatus, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.EndUserStatus, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
 
 
-        </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-5" })
 
-        <div class="form-group col-md-6">
-            @Html.Label("EndUser_Company", htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.EditorFor(model => model.EmployeeNo, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.EmployeeNo, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("Department", htmlAttributes: new { @class = "control-label col-md-5" })
 
-            @Html.EditorFor(model => model.EndUser_Company, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.EndUser_Company, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.Label("EndUser_Site", htmlAttributes: new { @class = "control-label col-md-5" })
-
-            @Html.EditorFor(model => model.EndUser_Site, new { htmlAttributes = new { @class = "form-control col-md-5" } })
-            @Html.ValidationMessageFor(model => model.EndUser_Site, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
 
 
-        </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.CommencementDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.CommencementDate, "", new { @class = "date" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.TerminationDate, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.TerminationDate, "", new { @class = "date" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.Label("CostCode", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.CostCode, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.CostCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("EndUserStatus", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.EndUserStatus, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.EndUserStatus, "", new { @class = "text-danger" })
+
+
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.Label("EndUser_Company", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.EndUser_Company, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.EndUser_Company, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("EndUser_Site", htmlAttributes: new { @class = "control-label col-md-5" })
+
+                    @Html.EditorFor(model => model.EndUser_Site, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                    @Html.ValidationMessageFor(model => model.EndUser_Site, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+
+
+            <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
+                <input type="submit" value="Add" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
+            </div>
+        }
     </div>
-
-
-    <div class="panel-footer primary" align="left" style="height:50px;vertical-align:top;">
-        <input type="submit" value="Add" class="btn btn-default btn-warning" style="height:32px;vertical-align:top" />
-    </div>
-    }
-</div>
 
 
 @section Scripts {
@@ -128,9 +130,10 @@
     }
 
     .btn-warning {
-        background-color: #FFA500;
-        font-size: 14px;
-    }
+            background-color: #789fbb;
+            font-size: 14px;
+            border-color: #789fbb;
+        }
 
     .form-control {
         margin-bottom: 2px;
