@@ -553,8 +553,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -567,14 +565,7 @@
             $('#mainTable').DataTable();
             $('#mainTable1').DataTable();
            
-            $('#mainTable2').DataTable({
-                "pageLength": 20,
-                "lengthMenu": [10, 15, 20, 25, 50],
-                "aoColumnDefs": [
-                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
-
-                ]
-            });
+            $('#mainTable2').DataTable();
             $('#mainTable3').DataTable();
             $('#mainTable4').DataTable();
             $('#mainTable5').DataTable();
@@ -747,14 +738,14 @@
 
                    }
             }
-            $('#mainTable2').DataTable({
-                "pageLength": 20,
-                "lengthMenu": [10, 15, 20, 25, 50],
-                "aoColumnDefs": [
-                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
+            //$('#mainTable2').DataTable({
+            //    "pageLength": 20,
+            //    "lengthMenu": [10, 15, 20, 25, 50],
+            //    "aoColumnDefs": [
+            //        { "bSearchable": true, "bVisible": false, "aTargets": [1] }
 
-                ]
-            });
+            //    ]
+            //});
            }
         function populateContractsDataTable(data) {
             console.log("populating data table...");           
@@ -808,13 +799,9 @@
                         customer.CostCode,
                         customer.EndUserStatus,
                         new Date(moment(customer.CommencementDate)).toLocaleDateString(),
-                        new Date(moment(customer.TerminationDate)).toLocaleDateString(),                        
+                        new Date(moment(customer.TerminationDate)).toLocaleDateString(),
                         customer.UserName
-
-                        
-
                     ]);
-
 
                 }
             }
