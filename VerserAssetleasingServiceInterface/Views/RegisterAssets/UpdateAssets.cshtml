@@ -22,7 +22,7 @@
 
         <div class="panel-body" style="font-size:x-small;color:grey;border-color:gray">
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Asset ID", htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.AssetID, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "AssetID" } })
@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Serial No", htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SerialNo" } })
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("Asset Company", htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.Asset_Company, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "Asset_Company" } })
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.Label("IMEI", htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.IMEI, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "IMEI" } })
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.SIMNo, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.SIMNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "SIMNo" } })
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "PurchaseOrderNo" } })
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.PurchaseDate.HasValue)
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control", @id = "PurchasePrice" } })
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.DecomissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.DecomissionDate.HasValue)
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control", @id = "Condition" } })
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.BuyBackPrice, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.BuyBackPrice, new { htmlAttributes = new { @class = "form-control", @id = "BuyBackPrice" } })
@@ -131,7 +131,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.AquisitionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.AquisitionDate.HasValue)
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.SPMD, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.SPMD, new { htmlAttributes = new { @class = "form-control", @id = "SPMD" } })
@@ -155,7 +155,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.FirstCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.FirstCommissionDate.HasValue)
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.LastCommissionDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.LastCommissionDate.HasValue)
@@ -185,7 +185,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-5 col-sm-6">
+                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.LastRepairDate, htmlAttributes: new { @class = "control-label col-md-7" })
                     <div class="col-md-6">
                         @if (Model.LastRepairDate.HasValue)
