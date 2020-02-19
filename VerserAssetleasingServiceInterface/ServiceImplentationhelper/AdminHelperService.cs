@@ -20,7 +20,8 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 HttpResponseMessage response = client.GetAsync(string.Format("inventorycontrol/JMSUsers")).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    users = await response.Content.ReadAsAsync<List<string>>();                   
+                    users = await response.Content.ReadAsAsync<List<string>>();
+                    
                 }
             }
             return users;
@@ -48,17 +49,20 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                foreach (int val in theModel.ResourceIDs)
+                foreach (string val in theModel.ResourceIDs)
                 {
-                    var liteModel = new UserRoleModelLite();
-                    liteModel.CompanyID = val;
-                    liteModel.CanWrite = theModel.CanEdit;
-                    liteModel.ISAdmin = theModel.IsAdmin;
-                    liteModel.UserId = theModel.UserName;
-                    HttpResponseMessage response = client.PostAsJsonAsync(string.Format("Admin/AddPermissionsCompanies"), liteModel).Result;
-                    if (response.IsSuccessStatusCode)
+                    foreach (int companyId in theModel.CompanyIDs)
                     {
-                        var user = await response.Content.ReadAsAsync<ReturnModel>();
+                        var liteModel = new UserRoleModelLite();
+                        liteModel.CompanyID = companyId;
+                        liteModel.UserId = Convert.ToString(val);
+                        liteModel.CanWrite = theModel.CanEdit;
+                        liteModel.ISAdmin = theModel.IsAdmin;
+                        HttpResponseMessage response = client.PostAsJsonAsync(string.Format("Admin/AddPermissionsCompanies"), liteModel).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var user = await response.Content.ReadAsAsync<ReturnModel>();
+                        }
                     }
                 }
             }

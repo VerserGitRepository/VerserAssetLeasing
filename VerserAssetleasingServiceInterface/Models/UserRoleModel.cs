@@ -12,7 +12,8 @@ namespace VerserAssetleasingServiceInterface.Models
         public SelectList UserIDs { get; set; }
         public List<RolesModel> Rolemodel { get; set; }
         public SelectList Companylist { get; set; }
-        public List<int?> ResourceIDs { get; set; }
+        public List<string> ResourceIDs { get; set; }
+        public List<int?> CompanyIDs { get; set; }
         public bool IsAdmin { get; set; }
         public bool CanEdit { get; set; }
         public string UserName { get; set; }
