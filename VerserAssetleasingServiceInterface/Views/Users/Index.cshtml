@@ -78,7 +78,7 @@
 
                     </td>
                     <td>
-                        @Html.DropDownListFor(model => model.ResourceIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
+                        @Html.DropDownListFor(model => model.CompanyIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCompanyID", id = "ddlregCompanyID", @multiple = "multiple" })
                     </td>
 
                     <td>
@@ -144,7 +144,14 @@
         buttonWidth: '380px',
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true
-    });
+        });
+        $('.ddlregCompanyID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '380px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+        });
 
     function ShowModalRegistration() {
          var sliderURL = '@Url.Action("GetRegristrationModal", "Users")'
@@ -175,6 +182,7 @@
             data = {
                 'UserName': row.find("#lblUserName").text(),
                 'ResourceIDs': row.find("#ddlregCustomerID").val(),
+                'CompanyIDs': row.find("#ddlregCompanyID").val(),
                 'IsAdmin': row.find("#isAdmin").val(),
                 'CanEdit': row.find("#canEdit").val()
             };
