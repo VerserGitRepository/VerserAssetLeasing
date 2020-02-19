@@ -16,6 +16,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
     public class CompanyController : Controller
     {
         string _user = string.Empty;
+        [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             string _user=Session["Username"].ToString();

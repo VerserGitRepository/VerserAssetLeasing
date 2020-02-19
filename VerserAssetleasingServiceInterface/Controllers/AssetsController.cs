@@ -28,6 +28,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return View(assetsdata);
         }
         [HttpGet]
+        [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult GetAssetsData(int Id)
         {
             List<AssetsListViewModel> companydata = new List<AssetsListViewModel>();
