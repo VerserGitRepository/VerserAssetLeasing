@@ -633,8 +633,9 @@
                 datatype: "json",  
                 beforeSend: function () {
                     obj = $.alert({
-
-                        title: 'In Progress',
+                        boxWidth: '50px',
+                        useBootstrap: false,
+                        title: '',
                         content: $("#spinner").html(),
                         buttons: {
                             yes: { isHidden: true }
