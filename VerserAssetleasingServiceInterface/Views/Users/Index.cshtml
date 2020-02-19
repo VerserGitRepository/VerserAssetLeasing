@@ -16,11 +16,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <div class="container" style="padding-top:20px">    
-        <button type="button" id="btnRegister" class="btn btn-success" value="New User" onclick="ShowModalRegistration();">
-            <span class="glyphicon glyphicon-user"></span> NEW USER
-        </button>       
+    <div style="padding-left:20px;padding-bottom:10px;">
+        <button type="button" id="btnRegister" class="btn btn-success btn-sm" value="New User" onclick="ShowModalRegistration();">
+            <span class="glyphicon glyphicon-user"></span> ADD
+        </button>
+    </div>
+         
         <div class="col-md-8">
-
             <div class="modal fade" tabindex="-1" id="successModal"
                  data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog modal-sm">
@@ -66,7 +68,6 @@
                             PERMISSION
                         </th>
                         <th>
-
                         </th>
                     </tr>
                 </thead>
