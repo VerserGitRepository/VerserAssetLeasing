@@ -83,7 +83,7 @@
                         }
                         else
                         {
-                            @Html.TextBoxFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control date-picker", @id = "PurchaseDate" } })
+                            @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-picker", @type = "date", @id = "PurchaseDate" })
                         }
                         @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                     </div>
