@@ -26,24 +26,24 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return users;
         }
-        //public static async Task<List<RolesModel>> Roles()
-        //{
-        //    var roles = new List<RolesModel>();
-        //    using (HttpClient client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(BaseUri);
-        //        HttpResponseMessage response = client.GetAsync(string.Format("MasteData/Users")).Result;
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var role = await response.Content.ReadAsAsync<List<RolesModel>>();
-        //            foreach (var p in role)
-        //            {
-        //                roles.Add(p);
-        //            }
-        //        }
-        //    }
-        //    return roles;
-        //}
+        public static async Task<List<ProjectLoginsModel>> ProjectLoginUserList()
+        {
+            var ProjectLoginUsers = new List<ProjectLoginsModel>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                HttpResponseMessage response = client.GetAsync(string.Format("AssetLeasing/ProjectLoginsList")).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ProjectLoginUsers = await response.Content.ReadAsAsync<List<ProjectLoginsModel>>();
+                    //foreach (var p in role)
+                    //{
+                    //    ProjectLoginUsers.Add(p);
+                    //}
+                }
+            }
+            return ProjectLoginUsers;
+        }
         public static async Task<ReturnModel> ChangeUserPermissions(UserRoleModel theModel)
         {
             using (HttpClient client = new HttpClient())
