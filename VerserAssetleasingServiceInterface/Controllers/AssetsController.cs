@@ -38,8 +38,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return Json(companydata, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult ExportTimesSheetToExcel()
+        public ActionResult ExportTimesSheetToExcel(FormCollection form)
         {
+           
+            string Orderno = form["hiddenAssetId"];
             List<AssetsListViewModel> Companymodel = new List<AssetsListViewModel>();
             if (Session["Username"] == null)
             {
@@ -47,7 +49,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                Companymodel = AssetsServicehelper.AssetsList().Result;
+                Companymodel = AssetsServicehelper.GetAssetsData(Orderno).Result;
                 GridView gv = new GridView();
                 gv.DataSource = Companymodel;
                 gv.DataBind();

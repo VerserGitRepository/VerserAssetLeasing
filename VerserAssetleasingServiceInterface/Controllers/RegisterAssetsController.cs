@@ -29,14 +29,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
         // GET: RegisterAssets
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Company");
         }
         [HttpPost]
         public ActionResult Index(AssetsListViewModel AssetsRegisterdata)
         {
             ReturnModel model = AssetsServicehelper.AddAsset(AssetsRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
-            return View("Index");
+            return RedirectToAction("Index", "Company");
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             ReturnModel model = AssetsServicehelper.UpdateAsset(AssetsRegisterdata).Result;
             TempData["StatusMessage"] = model.Message;
-            return View("Index");
+            return RedirectToAction("Index", "Company");
         }
     }
 }

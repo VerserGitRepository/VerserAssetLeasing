@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+
 namespace VerserAssetleasingServiceInterface.Models
 {
     public class ContractsListViewModel
@@ -27,5 +29,9 @@ namespace VerserAssetleasingServiceInterface.Models
         public string contract_Company { get; set; }
         public string contract_EndUser { get; set; }
         public string contract_Plan { get; set; }
+        public SelectList CompanyList { get; set; }
+        public SelectList ServiceList { get; set; }
+        public SelectList EnduserList { get; set; }
+        public SelectList PlanList { get; set; }
     }
 }

@@ -230,6 +230,7 @@
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {
+                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId"/>
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
                                     }
                                 </div>
@@ -463,7 +464,7 @@
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEndUser">
                                 </div>
-                            </div><br />
+                            </div>
                             <div class="row pull-left" style="margin-left:-1px">
                                 <table class="table-bordered" style="margin:5px; width:980px" id="mainTable5">
                                     <thead style="background-color:#428bca; color:white">
@@ -596,6 +597,7 @@
             $("#txtFax").val(fax);
             $("#txtEmail").val(email);
             $("#hiddenId").val(theId);
+            $("#hiddenAssetId").val(theId);
             $("#hiddenState").val(state);
             $("#hiddenSuburb").val(suburb);
             $("#txtState").val(state);
