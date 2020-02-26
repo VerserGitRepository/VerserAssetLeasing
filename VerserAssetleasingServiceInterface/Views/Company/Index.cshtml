@@ -146,14 +146,14 @@
                                             <div class="col-md-1">
                                                 @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
                                                 {
-                                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                                 }
                                             </div>
                                             <div class="col-md-1">
-                                                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite">
+                                                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite" data-toggle="tooltip" data-placement="left" title="Add">
                                             </div>
                                             <div class="col-md-1">
-                                                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite">
+                                                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite" data-toggle="tooltip" data-placement="left" title="Edit">
                                             </div>
                                         </div>
                                         <table class="table-bordered" style="margin:5px; width:980px" id="mainTable1">
@@ -231,14 +231,15 @@
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {
                                         <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId"/>
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                        
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
                                 </div>
                             </div><br>
 
@@ -349,14 +350,14 @@
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addContract">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addContract" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editContract">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editContract" data-toggle="tooltip" data-placement="left" title="Edit">
                                 </div>
                             </div>
                             <br>
@@ -429,14 +430,14 @@
                                     <div class="col-md-1">
                                         @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                         {
-                                            <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                            <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                         }
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser1">
+                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser1" data-toggle="tooltip" data-placement="left" title="Add">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser1">
+                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEnduser1" data-toggle="tooltip" data-placement="left" title="Edit">
                                     </div>
                                 </div>
 
@@ -445,24 +446,25 @@
 
                         <div class="tab-pane fade" id="tab5default">
                             <div class="row pull-right" style="padding-right:20px">
-                                <div class="col-md-1" style="padding-right:45px">
-                                 <input id="Certificateimgupload" type="file" style="display:none;">
-                                        <button type="button" id="btnCertificates" class="btn btn-sm btn-labeled btn-outline-secondary" style="padding-left:20px;border-color:gray">
-                                            <span class="btn-label"><i class="glyphicon glyphicon-import"></i> </span>
-                                        </button>
-                                   
+                                <div class="col-md-1" style="padding-right:10px">
+                                    <input id="Certificateimgupload" type="file" style="display:none;">
+                                    <input type="image" src="~/Images/import.png" alt="Submit" width="20" height="20" id="btnCertificates" data-toggle="tooltip" data-placement="left" title="Import">
+                                    @*<button type="button" id="btnCertificates" class="btn btn-sm btn-labeled btn-outline-secondary" style="padding-left:20px;border-color:gray">
+                                        <span class="btn-label"><i class="glyphicon glyphicon-import"></i> </span>
+                                    </button>*@
+
                                 </div>
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
                                     {
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20">
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addEndUser" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEndUser">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editEndUser" data-toggle="tooltip" data-placement="left" title="Edit">
                                 </div>
                             </div>
                             <div class="row pull-left" style="margin-left:-1px">
@@ -1318,7 +1320,7 @@
     }
 
     .table-hover tbody tr:hover > td {
-        background-color: gray;
+        background-color: #d3d3d3;
     }
 
     .datatable tr:nth-child(odd) {
