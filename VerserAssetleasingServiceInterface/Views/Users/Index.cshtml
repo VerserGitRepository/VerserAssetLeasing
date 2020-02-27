@@ -68,6 +68,9 @@
                         PERMISSION
                     </th>
                     <th>
+                        REMOVE
+                    </th>
+                    <th>
                     </th>
                 </tr>
             </thead>
@@ -83,6 +86,10 @@
 
                 <td>
                     @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.CanRemove, new { @id = "canEdit" })
 
                 </td>
                 <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
@@ -122,6 +129,10 @@
 
                 <td>
                     @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.CanRemove, new { @id = "canEdit" })
 
                 </td>
                 <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
