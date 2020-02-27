@@ -76,6 +76,7 @@
             </thead>
 
             <tr>
+
                 <td>
                     @Html.DropDownListFor(model => model.ResourceIDs, Model.UserIDs, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
 
@@ -105,41 +106,20 @@
             <thead style="background-color:#fdad5c; color:white">
                 <tr>
                     <th>
-                        USERS
+                        PROJECT
                     </th>
                     <th>
-                        COMPANY
-                    </th>
-                    <th>
-                        PERMISSION
-                    </th>
-                    <th>
+                        USERID
                     </th>
                 </tr>
             </thead>
-
-            <tr>
-                <td>
-                    @Html.DropDownListFor(model => model.ResourceIDs, Model.UserIDs, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
-
-                </td>
-                <td>
-                    @Html.DropDownListFor(model => model.CompanyIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCompanyID", id = "ddlregCompanyID", @multiple = "multiple" })
-                </td>
-
-                <td>
-                    @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
-
-                </td>
-                <td>
-                    @Html.CheckBoxFor(model => model.CanRemove, new { @id = "canEdit" })
-
-                </td>
-                <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
-            </tr>
-
-
-
+            @foreach (var item in Model.ProjectLoginUserList)
+            {
+                <tr>
+                    <td>@item.Project</td>
+                    <td>@item.UserID</td>
+                </tr>
+            }
         </table>
     </div>
 

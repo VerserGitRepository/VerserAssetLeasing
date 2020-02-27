@@ -188,6 +188,7 @@
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ProjectLoginsModel.cs" />
     <Compile Include="Models\ReturnModel.cs" />
     <Compile Include="Models\RolesModel.cs" />
     <Compile Include="Models\UserModel.cs" />
