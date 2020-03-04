@@ -61,7 +61,6 @@
                 <div class="panel-heading">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab1default" data-toggle="tab">COMPANY DETAILS</a></li>
-                        <li><a href="#tab2default" data-toggle="tab">ASSETS</a></li>
                         <li><a href="#tab3default" data-toggle="tab">CONTRACTS</a></li>
                         @*<li><a href="#tab4default" data-toggle="tab">CATALOUGES</a></li>*@
                         <li><a href="#tab5default" data-toggle="tab">END USERS</a></li>
@@ -73,69 +72,122 @@
                         <div class="tab-pane fade in active" id="tab1default">
                             <div class="col-md-6" style="padding-left:0px">
                                 <div class="row">
+                                    
                                     <form>
-                                        <div class="container table-bordered" style="margin:20px; width:1000px;padding-top:5px;padding-bottom:5px">
-                                            <div class="form-group row">
-                                                <input type="hidden" value="" id="hiddenId" />
-                                                <input type="hidden" value="" id="hiddenState" />
-                                                <input type="hidden" value="" id="hiddenSuburb" />
-                                                <input type="hidden" value="" id="hiddenPostcode" />
 
-                                                <div class="col-sm-6">
+                                        <div class="row pull-left" style="margin-left:10px">
+                                            <div class="row pull-right">
+                                                <div class="col-md-1">
+                                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                                    {
+                                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
 
-                                                    <div class="col-sm-10">
-                                                        <img id="image" class="image-border form-control form-control-sm">
-                                                        <input type="file" @*id="imgupload"*@ style="display:none" onchange="readURL(this);" />
-                                                    </div>
+                                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                                    }
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company</label>
-                                                    <div class="col-sm-10">
+                                                <div class="col-md-1">
+                                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+                                                </div>
+                                            </div><br>
+                                            <div class="col-md-12">
+                                                <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
+                                                    <thead style="background-color:#428bca; color:white">
+                                                        <tr>
+                                                            <th>
+                                                                @Html.DisplayName("SSN")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Make")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Model")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Serial")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Company")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("IMEI")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("SIM")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Order")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Date")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Price")
+                                                            </th>
+                                                            @*<th>
+                                                                @Html.DisplayName("Decommission")
+                                                            </th>*@
+                                                            <th>
+                                                                @Html.DisplayName("Condition")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Buyback")
+                                                            </th>
 
-                                                        <input type="text" class="" id="txtCompany" placeholder="Company" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="" id="txtAddress" placeholder="Address" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Phone</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="classname" id="txtPhone" placeholder="Phone" readonly />
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">State</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="classname" id="txtState" placeholder="State" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="classname" id="txtSuburb" placeholder="Suburb" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">PostCode</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="classname" id="txtPostCode" placeholder="PostCode" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="classname" id="txtEmail" placeholder="Email" readonly />
-                                                    </div>
-                                                </div>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model.AssetsListViewModel)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayName(item.SSN)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.Make)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.Model)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.Asset_Company.ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.PurchaseOrderNo == null ? "" : item.PurchaseOrderNo)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.PurchaseDate.HasValue ? item.PurchaseDate.Value.ToString("MM/dd/yyyy") : "")
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
+                                                                </td>
+                                                                @*<td>
+                                                                    @Html.DisplayName(item.DecomissionDate.HasValue ? item.DecomissionDate.Value.ToString("MM/dd/yyyy") : "")
+                                                                </td>*@
+                                                                <td>
+                                                                    @Html.DisplayName(item.Condition == null ? "" : item.Condition)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
+                                                                </td>
 
-                                            </div>
-                                            <div style="font-size:smaller;color:deepskyblue">
 
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </form>
@@ -223,127 +275,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="tab2default" style="margin-bottom:10px">
-                            <div class="row pull-right">
-                                <div class="col-md-1">
-                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
-                                    {
-                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId"/>
-                                        
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
-                                    }
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                </div>
-                            </div><br>
-
-
-                            <div class="row pull-left" style="margin-left:10px">
-                                <div class="col-md-12">
-                                    <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
-                                        <thead style="background-color:#428bca; color:white">
-                                            <tr>
-                                                <th>
-                                                    @Html.DisplayName("SSN")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Make")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Model")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Serial")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Company")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("IMEI")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("SIM")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Order")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Date")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Price")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Decommission")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Condition")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Buyback")
-                                                </th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model.AssetsListViewModel)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayName(item.SSN)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.Make)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.Model)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.Asset_Company.ToString())
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.PurchaseOrderNo == null ? "" : item.PurchaseOrderNo)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.PurchaseDate.HasValue ? item.PurchaseDate.Value.ToString("MM/dd/yyyy") : "")
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.DecomissionDate.HasValue ? item.DecomissionDate.Value.ToString("MM/dd/yyyy") : "")
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.Condition == null ? "" : item.Condition)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
-                                                    </td>
-
-
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
 
                         <div class="tab-pane fade" id="tab3default">
                             <div class="row pull-right" style="margin-bottom:5px">
@@ -566,9 +498,25 @@
         $(document).ready(function () {
 
             $('#mainTable').DataTable();
-            $('#mainTable1').DataTable();
+            $('#mainTable1').DataTable({
+                stateSave: true,
+                "pageLength": 5,
+                "lengthMenu": [5,10, 15, 20, 25],
+                "aoColumnDefs": [
+                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
+
+                ]
+            });
            
-            $('#mainTable2').DataTable();
+            $('#mainTable2').DataTable({
+                stateSave: true,
+                "pageLength": 5,
+                "lengthMenu": [5,10, 15, 20, 25],
+                "aoColumnDefs": [
+                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
+
+                ]
+            });
             $('#mainTable3').DataTable();
             $('#mainTable4').DataTable();
             $('#mainTable5').DataTable();
