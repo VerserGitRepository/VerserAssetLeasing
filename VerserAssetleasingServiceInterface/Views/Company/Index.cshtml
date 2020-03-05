@@ -497,7 +497,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('#mainTable').DataTable();
+            $('#mainTable').DataTable({
+                "initComplete": function (settings, json) {
+                    $("#mainTable tr").children('td:first').click();
+                }
+            });
             $('#mainTable1').DataTable({
                 stateSave: true,
                 "pageLength": 5,
@@ -537,9 +541,9 @@
                 }
             });
 
-            $("#mainTable tr").find("td:first").click();
+        
         });
-                    //  ExportTimesSheetToExcel", "Candidates"
+              //  ExportTimesSheetToExcel", "Candidates"
         function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo,state,suburb,postcode) {
            // alert(data);
             $("#spinner").show();
