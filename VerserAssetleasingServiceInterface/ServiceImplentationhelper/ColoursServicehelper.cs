@@ -1,13 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using System.Net.Http;
-using Microsoft.AspNet;
 using VerserAssetleasingServiceInterface.Models;
-using Newtonsoft.Json;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {

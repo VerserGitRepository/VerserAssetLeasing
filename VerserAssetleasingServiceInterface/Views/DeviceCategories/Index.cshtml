@@ -22,55 +22,55 @@
 <div class="container" style="margin-left:12px;padding-top:2px">
     <div class="row" style="width:120%">
         <div class="col-md-12">
-            <table class="table table-bordered  table-responsive table-hover" id="mainTable"style="font-family: sans-serif">
-                <thead style="background-color:#FFA500; color:white">
+            <table class="table table-bordered  table-responsive table-hover" id="mainTable" style="font-family: sans-serif">
+            <thead style="background-color: #428bca; color:white;height:1">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Device Category")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Created By")
+                    </th>
+                    <th>
+                        @Html.DisplayName("created")
+                    </th>
+                    <th>
+                        @Html.DisplayName("modifiedBy")
+                    </th>
+                    <th>
+                        @Html.DisplayName("modified")
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
                     <tr>
-                        <th>
-                            @Html.DisplayName("Device Category")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Created By")
-                        </th>
-                        <th>
-                            @Html.DisplayName("created")
-                        </th>
-                        <th>
-                            @Html.DisplayName("modifiedBy")
-                        </th>
-                        <th>
-                            @Html.DisplayName("modified")
-                        </th>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.deviceCategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.createdBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.modifiedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.modified)
+                        </td>
+                        @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>*@
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.deviceCategoryName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.createdBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.created)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.modifiedBy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.modified)
-                            </td>
-                            @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                                </td>*@
-                        </tr>
-                    }
-                </tbody>
+                }
+            </tbody>
 
             </table>
         </div>
@@ -81,13 +81,10 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
     <script src="~/Scripts/datatables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <script type="text/javascript">$(document).ready(function () {
             $('#mainTable').DataTable();
         });
-                        //  ExportTimesSheetToExcel", "Candidates"
-
-    </script>
+                        //  ExportTimesSheetToExcel", "Candidates"</script>
     <body>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
@@ -95,9 +92,17 @@
     </body>
 }
 <style>
+
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
         background-color: #FFA500;
         border-color: white;
+    }
+    
+    .table thead > tr > th, .table thead > tr > td {
+        padding: 8px;
+        line-height: 0.6;
+        vertical-align: top;
+        border-top: 1px solid #dddddd;
     }
 
     .btn-warning {

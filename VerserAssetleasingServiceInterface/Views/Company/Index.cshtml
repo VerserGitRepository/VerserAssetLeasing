@@ -136,7 +136,9 @@
                                                             <th>
                                                                 @Html.DisplayName("Buyback")
                                                             </th>
-
+                                                            <th>
+                                                                @Html.DisplayName("Asset History")
+                                                            </th>
 
                                                         </tr>
                                                     </thead>
@@ -198,88 +200,89 @@
                         </div>
 
                         <div class="tab-pane fade" id="tab4default">
-                            
-                                <div class="row pull-right"style="margin-bottom:5px">
-                                    <div class="col-md-1">
-                                        @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+
+                            <div class="row pull-right" style="margin-bottom:5px">
+                                <div class="col-md-1">
+                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
+                                    {
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                    }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite" data-toggle="tooltip" data-placement="left" title="Add">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite" data-toggle="tooltip" data-placement="left" title="Edit">
+                                </div>
+                            </div><br>
+                            <div class="row pull-left" style="max-width:200%;margin-left:-1px;margin-top:5px">
+
+                                <table class="col-md-12 table-bordered" style="margin:10px; width:1580px" id="mainTable1">
+                                    <thead style="background-color:#428bca; color:white">
+                                        <tr>
+                                            <th style="width:20%">
+                                                @Html.DisplayName("Site")
+                                            </th>
+                                            <th style="width:20%">
+                                                @Html.DisplayName("Address")
+                                            </th>
+
+                                            <th style="width:20%">
+                                                @Html.DisplayName("Suburb")
+                                            </th>
+                                            <th style="width:20%">
+                                                @Html.DisplayName("State")
+                                            </th>
+                                            <th width:20%>
+                                                @Html.DisplayName("Postcode")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("SiteCompany")
+                                            </th>
+                                            <th>
+                                                @Html.DisplayName("Id")
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.CompanySitesListViewModel)
                                         {
-                                            <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
-                                        }
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addSite" data-toggle="tooltip" data-placement="left" title="Add">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editSite" data-toggle="tooltip" data-placement="left" title="Edit">
-                                    </div>
-                                </div><br>
-                                <div class="row pull-left" style="margin-left:20px;margin-top:5px;">
-                                    <table class="table-bordered" style="margin:5px; width:900px; max-width: 200%" id="mainTable1">
-                                        <thead style="background-color:#428bca; color:white">
                                             <tr>
-                                                <th style="width:20%">
-                                                    @Html.DisplayName("Site")
-                                                </th>
-                                                <th style="width:20%">
-                                                    @Html.DisplayName("Address")
-                                                </th>
+                                                <td>
 
-                                                <th style="width:20%">
-                                                    @Html.DisplayName("Suburb")
-                                                </th>
-                                                <th style="width:20%">
-                                                    @Html.DisplayName("State")
-                                                </th>
-                                                <th width:20%>
-                                                    @Html.DisplayName("Postcode")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("SiteCompany")
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayName("Id")
-                                                </th>
+                                                    @Html.DisplayName(item.siteName)
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model.CompanySitesListViewModel)
-                                            {
-                                                <tr>
-                                                    <td>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.addressLine1)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.suburb)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayName(item.state)
+                                                </td>
+                                                <td style="width:1%">
+                                                    @Html.DisplayName(item.postCode)
 
-                                                        @Html.DisplayName(item.siteName)
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.addressLine1)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.suburb)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayName(item.state)
-                                                    </td>
-                                                    <td style="width:1%">
-                                                        @Html.DisplayName(item.postCode)
-
-                                                    </td>
-                                                    @*<td>
+                                                </td>
+                                                @*<td>
                                 @Html.DisplayName(item.site_Company)
                             </td>
                             <td>
                                 @Html.DisplayName(item.id.ToString())
                             </td>*@
 
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="spinner" style="display:none;">
-                                    <img src="~/Images/ajax-loader.gif" />
-                                </div>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
+                            <div id="spinner" style="display:none;">
+                                <img src="~/Images/ajax-loader.gif" />
+                            </div>
+                        </div>
                            
 
                         <div class="tab-pane fade" id="tab3default">

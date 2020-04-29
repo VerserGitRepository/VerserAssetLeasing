@@ -16,11 +16,137 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <div class="container" style="padding-top:20px">
-    <div style="padding-left:20px;padding-bottom:10px;">
-        <button type="button" id="btnRegister" class="btn btn-success btn-sm" value="New User" onclick="ShowModalRegistration();">
-            <span class="glyphicon glyphicon-user"></span> ADD
-        </button>
+
+    <div class="panel with-nav-tabs panel-default" style="width:130%;margin-bottom:0px">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab3default" data-toggle="tab">USERS</a></li>
+                <li><a href="#tab4default" data-toggle="tab">UPDATE USER</a></li>
+                 <li><a href="#tab1default" data-toggle="tab">NEW USER REGISTERATION</a></li>
+
+            </ul>
+        </div>
+        <div class="panel-body" style="margin-bottom:0px;margin-top:0px;padding:2px">
+            <div class="tab-content">
+                <div class="tab-pane fade" id="tab1default">
+                    <table class="table table-bordered" style="width:150px;margin-left:20px">
+                        @*<thead>
+                            <tr class="success">
+                                <th colspan="2">
+                                    New User Registration
+                                    <a class="btn btn-success pull-right" href="Login.html">Login</a>
+                                </th>
+                            </tr>
+                        </thead>*@
+                        <tbody>
+                            <tr>
+                                <td>Email</td>
+                                <td><input type="text" placeholder="Email" /> </td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td>
+                                    <input type="password" id="txtPassword"
+                                           placeholder="Password" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Confirm Password</td>
+                                <td>
+                                    <input type="password" id="txtConfirmPassword"
+                                           placeholder="Confirm Password" />
+                                </td>
+                            </tr>
+                            <tr class="success">
+                                <td colspan="2">
+                                    <input id="btnRegister" class="btn btn-success"
+                                           type="button" value="Register" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="tab4default">
+                    <div class="col-md-12">
+                        <table class="table table-bordered  table-responsive table-hover" id="mainTable">
+                            <thead style="background-color:#fdad5c; color:white">
+                                <tr>
+                                    <th>
+                                        USERS
+                                    </th>
+                                    <th>
+                                        PROJECTS
+                                    </th>
+                                    <th>
+                                        ADD PERMISSION
+                                    </th>
+                                    <th>
+                                        REMOVE PERMISSION
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tr>
+
+                                <td>
+                                    @Html.DropDownListFor(model => model.ResourceIDs, Model.UserIDs, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
+
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.CompanyIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCompanyID", id = "ddlregCompanyID", @multiple = "multiple" })
+                                </td>
+
+                                <td>
+                                    @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
+
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(model => model.CanRemove, new { @id = "canEdit" })
+
+                                </td>
+                                <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
+                            </tr>
+
+
+
+                        </table>
+                    </div> <br />
+
+                </div>
+
+
+                <div class="tab-pane fade in active" id="tab3default">
+                    <div class="col-md-8">
+                        <table class="table table-bordered  table-responsive table-hover" id="mainTable1">
+                            <thead style="background-color:#fdad5c; color:white">
+                                <tr>
+                                    <th>
+                                        PROJECT
+                                    </th>
+                                    <th>
+                                        USERID
+                                    </th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.ProjectLoginUserList)
+                            {
+                                <tr>
+                                    <td>@item.Project</td>
+                                    <td>@item.UserID</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
     </div>
+   
 
     <div class="col-md-8">
         <div class="modal fade" tabindex="-1" id="successModal"
@@ -54,74 +180,9 @@
         @*
             </div>*@
     </div>
-    <div class="col-md-12">
-        <table class="table table-bordered  table-responsive table-hover" id="mainTable">
-            <thead style="background-color:#fdad5c; color:white">
-                <tr>
-                    <th>
-                        USERS
-                    </th>
-                    <th>
-                        PROJECTS
-                    </th>
-                    <th>
-                        PERMISSION
-                    </th>
-                    <th>
-                        REMOVE
-                    </th>
-                    <th>
-                    </th>
-                </tr>
-            </thead>
+    
 
-            <tr>
-
-                <td>
-                    @Html.DropDownListFor(model => model.ResourceIDs, Model.UserIDs, "Select a Project", new { @class = "form-control ddlregCustomerID", id = "ddlregCustomerID", @multiple = "multiple" })
-
-                </td>
-                <td>
-                    @Html.DropDownListFor(model => model.CompanyIDs, Model.Companylist, "Select a Project", new { @class = "form-control ddlregCompanyID", id = "ddlregCompanyID", @multiple = "multiple" })
-                </td>
-
-                <td>
-                    @Html.CheckBoxFor(model => model.CanEdit, new { @id = "canEdit" })
-
-                </td>
-                <td>
-                    @Html.CheckBoxFor(model => model.CanRemove, new { @id = "canEdit" })
-
-                </td>
-                <td><input type="submit" value="SAVE CHANGES" class="btn-success" name="Update" onclick="PostUserData(this);" /> </td>
-            </tr>
-
-
-
-        </table>
-    </div> <br />
-
-    <div class="col-md-12">
-        <table class="table table-bordered  table-responsive table-hover" id="mainTable1">
-            <thead style="background-color:#fdad5c; color:white">
-                <tr>
-                    <th>
-                        PROJECT
-                    </th>
-                    <th>
-                        USERID
-                    </th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.ProjectLoginUserList)
-            {
-                <tr>
-                    <td>@item.Project</td>
-                    <td>@item.UserID</td>
-                </tr>
-            }
-        </table>
-    </div>
+   
 
 
     <div class="col-md-8">
@@ -164,7 +225,7 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#mainTable').DataTable();
+        //$('#mainTable').DataTable();
         $('#mainTable1').DataTable();
         $('input[type="search"]').val = "";
 

@@ -16,26 +16,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <h4 align="center" style="color:GrayText;font-weight:600;"></h4>
 <br>
-<div class="container" style="padding-top:0px;padding-bottom:0px;margin-right:0px;padding-left:1px;padding-right:10px;width:140%">
+@*<div class="container" style="padding-top:0px;padding-bottom:0px;margin-right:0px;padding-left:1px;padding-right:10px;width:140%">
 
-        <div class="row pull-right">
-            <div class="col-md-2">
-                @using (Html.BeginForm("ExportTimesSheetToExcel", "Colours", FormMethod.Post))
-                {
-                    <input type="image" src="~/Images/excel.png" alt="Submit" width="25" height="25">
-                }
-            </div>
-            @*<div class="col-md-1">
+    <div class="row pull-right">
+        <div class="col-md-2">
+            @using (Html.BeginForm("ExportTimesSheetToExcel", "Colours", FormMethod.Post))
+            {
+                <input type="image" src="~/Images/excel.png" alt="Submit" width="25" height="25">
+            }
+        </div>
+        <div class="col-md-1">
                 <a href="@Url.Action("Index", "RegisterCompany")">
                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20">
                 </a>
-            </div>*@
-        </div>
+            </div>
     </div>
+</div>*@
 <div class="container" style="margin-left:12px;padding-top:2px">
     <div class="row" style="width:120%">
         <div class="col-md-12">
-            <table class="table table-bordered  table-responsive table-hover" id="mainTable"style="font-family: sans-serif">
+            <table class="table table-bordered  table-responsive table-hover" id="mainTable" style="font-family: sans-serif">
                 <thead style="background-color: #428bca; color:white">
                     <tr>
                         <th>
@@ -98,7 +98,7 @@
         $(document).ready(function () {
             $('#mainTable').DataTable();
         });
-                            //  ExportTimesSheetToExcel", "Candidates"
+                                //  ExportTimesSheetToExcel", "Candidates"
 
     </script>
     <body>
@@ -108,6 +108,7 @@
     </body>
 }
 <style>
+
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
         background-color: #FFA500;
         border-color: white;
@@ -138,6 +139,7 @@
     .dataTables_filter {
         float: right;
     }
+
     .table thead > tr > th, .table thead > tr > td {
         padding: 8px;
         line-height: 0.4285;

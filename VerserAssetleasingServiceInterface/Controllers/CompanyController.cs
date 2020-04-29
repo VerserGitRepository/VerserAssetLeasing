@@ -46,6 +46,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             return Json(companydata, JsonRequestBehavior.AllowGet);
         }       
+
+
         [HttpPost]
         public ActionResult ExportTimesSheetToExcel()
         {
@@ -80,5 +82,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
             var result = CompanyServicehelper.UpdateCompany(theModel);
             return Json(result);
         }
+        [HttpGet]
+        public ActionResult SSNDetails(string SSN)
+        {            
+            CompanyAndSiteListViewModel model = new CompanyAndSiteListViewModel();
+            model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
+            return PartialView("SSNDetails", model);
+        }
+
+
     }
 }
