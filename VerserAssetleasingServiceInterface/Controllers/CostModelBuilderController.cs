@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
 
@@ -101,6 +104,45 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 return PartialView("CostModelServicePopup", model);
 
             }
+        }
+
+        [HttpPost]
+        public ActionResult ExportTimesSheetToExcel()
+        {
+
+            List<JBHIFiCostModelQuoteRequests> QuoteModel = new List<JBHIFiCostModelQuoteRequests>();
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+               
+                GridView gv = new GridView();
+                gv.DataSource = QuoteModel;
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=OpportunityList.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+            return RedirectToAction("GenerateQuote", "CostModelBuilder");
+        }
+        [HttpGet]
+        public ActionResult CostModelOppDetails()
+        {
+
+            JBHiFiCostmodelServiceRequestDetailsModel model = new JBHiFiCostmodelServiceRequestDetailsModel();
+
+          
+            return PartialView("CostModelOppDetails", model);
         }
         [HttpGet]
         public ActionResult AddSalesForceOpportunity()

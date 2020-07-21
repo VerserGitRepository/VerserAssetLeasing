@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js"></script>
 @using (Ajax.BeginForm("CreateSalesForceOpportunity", "CostModelBuilder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
 {
-    <div class="panel-heading panel-title">Basic Info</div>
+    <div class="panel-heading panel-title" style="background-color:lightgray">Basic Info</div>
 
     <div class="panel-body">
         <div class="row">
@@ -41,41 +41,62 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6">
-                @Html.Label("EMail")
-                @Html.TextBoxFor(x => x.Email, new { @class = "form-control required", @id = "txtEmail" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @Html.Label("Opportunity Number")
+                @Html.TextBoxFor(x => x.OpportunityNumber, new { @class = "form-control required", @id = "txtOpportunityNumber" })
+                @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
-                @Html.Label("Start Date")
-                @Html.TextBoxFor(x => x.StartDate, new { @type = "date", @class = "form-control datepicker required", @id = "txtStartDate" })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                @Html.Label("Sales Manager")
+                @Html.TextBoxFor(x => x.SalesManager, new { @class = "form-control required", @id = "txtSalesManager" })
+                @Html.ValidationMessageFor(model => model.SalesManager, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.Label("Project Manager")
+                @Html.TextBoxFor(x => x.ProjectManager, new { @class = "form-control required", @id = "txtProjectManager" })
+                @Html.ValidationMessageFor(model => model.ProjectManager, "", new { @class = "text-danger" })
+            </div>
 
-    </div>
+            
+                <div class="form-group col-md-6">
+                    @Html.Label("EMail")
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control required", @id = "txtEmail" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.Label("Start Date")
+                    @Html.TextBoxFor(x => x.StartDate, new { @type = "date", @class = "form-control datepicker required", @id = "txtStartDate" })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="footer">
-        <input type="submit" class="btn-primary btn-lg" value="Add Opportunity" id="btnCreateSalesForceOppn" />
-    </div>
-}
-<script>
-    var uniqueId = 1;
-    function OnSuccess(data) {
+        </div>
 
-        $("#btnCreateSalesForceOppn").attr('disabled', true);
+        <div class="footer">
+            <input type="submit" class="btn-primary btn-lg" value="Add Opportunity" id="btnCreateSalesForceOppn" />
+        </div>
+        }
 
 
-        var str = data.split('-')[0];
-        var strId = data.split('-')[1];
-        str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
-        strId = strId.replace("Id:", "");
-        $("#txtSalesForceOpportunity").text('Opportunity:' + str);
-        $("#hdnQuoteId").val(strId);
-        $("#btnSubmit").val("ADD SERVICE");
-        $(".jconfirm").hide();
-    }
-    function OnFailure() {
-        alert('Error has occurred in the request.');
-    }
-</script>
+        <script>
+            var uniqueId = 1;
+            function OnSuccess(data) {
+
+                $("#btnCreateSalesForceOppn").attr('disabled', true);
+
+
+                var str = data.split('-')[0];
+                var strId = data.split('-')[1];
+                str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
+                strId = strId.replace("Id:", "");
+                $("#txtSalesForceOpportunity").text('Opportunity:' + str);
+                $("#hdnQuoteId").val(strId);
+                $("#btnSubmit").val("ADD SERVICE");
+                $(".jconfirm").hide();
+            }
+            function OnFailure() {
+                alert('Error has occurred in the request.');
+            }
+        </script>
 

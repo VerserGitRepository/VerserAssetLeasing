@@ -1,20 +1,23 @@
 ﻿@*@model IEnumerable<TelstraTickets.Models.JBHIFiCostModelQuoteRequests>*@
 @model  VerserAssetleasingServiceInterface.Models.JBHIFiCostModelQuoteRequests
 
-
 <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
-<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-
 <br>
 <div class="container-fluid" style="margin-left:0px;padding-top:0px">
     <div class="container" style="width:100%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:0px">
@@ -34,8 +37,25 @@
 
                 </ul>
                 <div class="tab-content">
+
                     <div class="tab-pane active" id="tab_default_1">
                         <div class="container">
+                            <div class="pull-right">
+                                <div class="col-md-1">
+                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
+                                    {
+                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
+
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                    }
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+                                </div>
+                            </div><br>
                             <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
                                 <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
                                     <tr>
@@ -50,11 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (TelstraTickets.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
+                                    @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.OpportunityNumber)
+                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.OpportunityNumber">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                                @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.OpportunityName)
@@ -170,6 +191,21 @@
     </div>
 
 </div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<div id='EditModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='EditModalContent'></div>
+        </div>
+    </div>
+</div>
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
@@ -178,21 +214,42 @@
         $(document).ready(function () {
 
             $('#mainTable').DataTable();
+                });
 
-            var i = 1;
-            $("#add_row").click(function () {
-                $('#addr' + i).html("<td><input name='name" + i + "' type='text' placeholder='New Goal' class='form-control input-md'  /> </td><td><input  name='mail" + i + "' type='Date' placeholder='Date'  class='form-control input-md'></td><td><input  name='mobile" + i + "' type='text' placeholder='Description'  class='form-control input-md'></td>");
-
-                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
-                i++;
-            });
-            $("#delete_row").click(function () {
-                if (i > 1) {
-                    $("#addr" + (i - 1)).html('');
-                    i--;
+         $('#edit').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+      var CandidateDetailsURL = './CostModelOppDetails';
+    $(function () {
+        $("#mainTable").on("click", ".OpportunityDetail", function () {
+            // debugger;
+            var $buttonClicked = $(this);
+            var OpportunityNumber = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: CandidateDetailsURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "OpportunityNumber": OpportunityNumber },
+                datatype: "json",
+                success: function (data) {
+                    // debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
                 }
             });
         });
+          $("#closbtn").click(function () {
+            $('#myModal').modal('hide');
+        });
+    });
         function AddOpportunity() {
 
             if ($("#txtSalesForceOpportunity").text().replace('Opportunity:','').trim() == "") {
@@ -324,6 +381,9 @@
                 }
             });
         }
+
+
+  
     </script>
 }
 <style>
@@ -460,15 +520,7 @@
         background-color: lightgray;
     }
 
-    /*.nav-tabs > li.active > a,
-        .nav-tabs > li.active > a:hover,
-        .nav-tabs > li.active > a:focus {
-            color: #555555;
-            cursor: default;
-            background-color: orange;
-            border: 1px solid #dddddd;
-            border-bottom-color: transparent;
-        }*/
+   
 
     .table-hover > tbody > tr:hover > td,
     .table-hover > tbody > tr:hover > th {
@@ -503,23 +555,6 @@
         background: #fff;
     }
 
-    /* Active State */
-    /*.x-tab-pane > .active > a, .x-tab-pane > .active > a:hover {
-            background-color: #f0f0f0;
-        }
-
-        .tab-pane {
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            border-top: 1px solid #ddd;
-            border-radius: 0px 0px 5px 5px;
-            padding: 10px;
-        }
-
-        .tab-content > .active, .pill-content > .active {
-            display: inline-block;
-        }*/
 
     .form-control {
         display: block;

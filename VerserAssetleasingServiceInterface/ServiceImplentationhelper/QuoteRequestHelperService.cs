@@ -12,51 +12,67 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {
     public class QuoteRequestHelperService
     {
-            private static readonly string CostModelAPIBase = ConfigurationManager.AppSettings["CostModelAPIBase"] + ConfigurationManager.AppSettings["CostModelAPIRoot"];
-            public static async Task<PostQuoteReturnModel> PostQuoteRequest(PostQuoteRequestModel model)
-            {
-                string SerialisedPostModel = JsonConvert.SerializeObject(model);
+        private static readonly string CostModelAPIBase = ConfigurationManager.AppSettings["CostModelAPIBase"] + ConfigurationManager.AppSettings["CostModelAPIRoot"];
+        public static async Task<PostQuoteReturnModel> PostQuoteRequest(PostQuoteRequestModel model)
+        {
+            string SerialisedPostModel = JsonConvert.SerializeObject(model);
 
-                var returnmodel = new PostQuoteReturnModel();
-                using (HttpClient client = new HttpClient())
+            var returnmodel = new PostQuoteReturnModel();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(CostModelAPIBase);
+                HttpResponseMessage response = client.PostAsJsonAsync(string.Format("JBHiFICostModelServices/RequestCostModelServiceQuote"), model).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    client.BaseAddress = new Uri(CostModelAPIBase);
-                    HttpResponseMessage response = client.PostAsJsonAsync(string.Format("JBHiFICostModelServices/RequestCostModelServiceQuote"), model).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        returnmodel = await response.Content.ReadAsAsync<PostQuoteReturnModel>();
-                    }
+                    returnmodel = await response.Content.ReadAsAsync<PostQuoteReturnModel>();
                 }
-                return returnmodel;
             }
+            return returnmodel;
+        }
 
-            public static async Task<List<PostQuoteRequestModel>> GetTQuotes()
+        public static async Task<List<PostQuoteRequestModel>> GetTQuotes()
+        {
+            var ResponseListModel = new List<PostQuoteRequestModel>();
+            using (HttpClient client = new HttpClient())
             {
-                var ResponseListModel = new List<PostQuoteRequestModel>();
-                using (HttpClient client = new HttpClient())
+                client.BaseAddress = new Uri(CostModelAPIBase);
+                HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFiCostModelQuoteRequestList")).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    client.BaseAddress = new Uri(CostModelAPIBase);
-                    HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFiCostModelQuoteRequestList")).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        ResponseListModel = await response.Content.ReadAsAsync<List<PostQuoteRequestModel>>();
-                    }
+                    ResponseListModel = await response.Content.ReadAsAsync<List<PostQuoteRequestModel>>();
                 }
-                return ResponseListModel;
             }
-            public static async Task<ReturnModel> AddQuoteServiceItems(List<JBHIFiCostModelServiceItems> RequestQuoteModel)
+            return ResponseListModel;
+        }
+        public static async Task<ReturnModel> AddQuoteServiceItems(List<JBHIFiCostModelServiceItems> RequestQuoteModel)
+        {
+            var ResponseListModel = new ReturnModel();
+            using (HttpClient client = new HttpClient())
             {
-                var ResponseListModel = new ReturnModel();
-                using (HttpClient client = new HttpClient())
+                client.BaseAddress = new Uri(CostModelAPIBase);
+                HttpResponseMessage response = client.PostAsJsonAsync(string.Format("JBHiFICostModelServices/AddQuoteServiceItems"), RequestQuoteModel).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    client.BaseAddress = new Uri(CostModelAPIBase);
-                    HttpResponseMessage response = client.PostAsJsonAsync(string.Format("JBHiFICostModelServices/AddQuoteServiceItems"), RequestQuoteModel).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        ResponseListModel = await response.Content.ReadAsAsync<ReturnModel>();
-                    }
+                    ResponseListModel = await response.Content.ReadAsAsync<ReturnModel>();
                 }
-                return ResponseListModel;
             }
+            return ResponseListModel;
+        }
+
+
+        public static async Task<JBHiFiCostmodelServiceRequestDetailsModel> JBHiFiCostmodelServiceRequestDetails(int id)
+        {
+            var ResponseListModel = new JBHiFiCostmodelServiceRequestDetailsModel();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(CostModelAPIBase);
+                HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFiCostModelQuoteRequestDetails/{0}", id)).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
+                }
+            }
+            return ResponseListModel;
         }
     }
+}

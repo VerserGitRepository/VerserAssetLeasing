@@ -1,0 +1,177 @@
+﻿
+@model  VerserAssetleasingServiceInterface.Models.JBHiFiCostmodelServiceRequestDetailsModel
+    @{
+        ViewBag.Title = "Opportunity Details";
+    }
+
+
+
+    <div >
+        <div class="modal-header" style="background-color:lightgray;width:1228px">
+            <h5 class="modal-title text-center">Opportunity Details</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <br>
+        <div class="container" style="font-size:14px;color:grey;border-color:gray">
+
+            <div class="form-horizontal">
+                <div class="form-group">
+
+                    <div class="row col-md-12 well" style="width:800px;margin-left:5px;height:200px">
+                        <div class="col-md-6">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group required">
+                                @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.CostModelQuoteRequestModel.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.CostModelQuoteRequestModel.CustomerName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Date Started", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label(" Salesforce Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.OpportunityName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityName, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.OpportunityName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityName, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="col-md-6" style="border-color:gray">
+                            <div class="form-group required">
+                                @Html.Label("Customer Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Salesforce Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.JBHIFiCostModelQuoteRequests.opportu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OpportunityNumber, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class=" row col-md-12 well" style="width:1050px;height:270px;margin-left:5px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                   
+                                    <th>Service Description</th>
+                                    <th>totalPrice</th>
+                                    <th>Qty</th>
+                                    <th>totaL_Excl_GSTe</th>
+                                    <th>GST</th>
+                                    <th style="width: 36px;">totaL_Incl_GST</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table">
+                                @foreach (var item in Model.ServiceItemsLists)
+                                {
+                                    <tr>
+                                        <td>  @Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>  @Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                        <td>  @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>  @Html.DisplayFor(modelItem => item.TOTAL_Excl_GST)</td>
+                                        <td>  @Html.DisplayFor(modelItem => item.GST_10)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                        </td>
+                                    </tr>}
+                                </tbody>
+                            </table>
+</div>
+                
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <style>
+        .modal-dialog {
+            width: 1250px;
+            margin: 30px auto;
+            margin-bottom: 10px;
+            font-size:14px;
+        }
+
+        .table-hover > tbody > tr:hover > td,
+        .table-hover > tbody > tr:hover > th {
+            background-color: lightgray;
+        }
+
+        .selected {
+            color: black;
+            background-color: lightgray;
+        }
+
+        .btn {
+            font-size: 10px;
+        }
+
+        table tr.active {
+            background: red;
+        }
+
+        a.btn {
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.6);
+            -o-transform: scale(0.6);
+            -webkit-transition-duration: 0.5s;
+            -moz-transition-duration: 0.5s;
+            -o-transition-duration: 0.5s;
+        }
+    </style>

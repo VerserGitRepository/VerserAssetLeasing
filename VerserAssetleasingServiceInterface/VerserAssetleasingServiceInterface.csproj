@@ -194,6 +194,7 @@
     <Compile Include="Models\JBHIFICostModel.cs" />
     <Compile Include="Models\JBHIFiCostModelQuoteRequests.cs" />
     <Compile Include="Models\JBHIFiCostModelServiceItems.cs" />
+    <Compile Include="Models\JBHiFiCostmodelServiceRequestDetailsModel.cs" />
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -448,6 +449,7 @@
     <Content Include="Web References\VerserSalesForce\sObject.datasource" />
     <Content Include="Web References\VerserSalesForce\UndeleteResult.datasource" />
     <Content Include="Web References\VerserSalesForce\UpsertResult.datasource" />
+    <Content Include="Views\CostModelBuilder\CostModelOppDetails.cshtml" />
     <None Include="Web References\VerserSalesForce\wsdl.wsdl" />
   </ItemGroup>
   <ItemGroup>

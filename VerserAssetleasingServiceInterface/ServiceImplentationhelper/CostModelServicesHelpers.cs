@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using TelstraTickets.VerserSalesForce;
 using VerserAssetleasingServiceInterface.Models;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
@@ -31,7 +33,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             var SfdcBinding = new SforceService();
             LoginResult CurrentLoginResult = null;
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
+            //CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
             SfdcBinding.Url = CurrentLoginResult.serverUrl;
             SfdcBinding.SessionHeaderValue = new SessionHeader();
             SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
