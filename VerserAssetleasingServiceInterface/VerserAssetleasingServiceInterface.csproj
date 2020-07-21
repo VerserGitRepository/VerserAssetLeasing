@@ -186,6 +186,7 @@
     <Compile Include="Models\CompanyListViewModel.cs" />
     <Compile Include="Models\CompanySitesListViewModel.cs" />
     <Compile Include="Models\ContractsListViewModel.cs" />
+    <Compile Include="Models\CostServiceModel.cs" />
     <Compile Include="Models\datetime.cs" />
     <Compile Include="Models\DeviceCategoriesListViewModel.cs" />
     <Compile Include="Models\EndUsersListViewModel.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\EndUsersServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\LoginService.cs" />
+    <Compile Include="Web References\VerserSalesForce\Reference.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -392,6 +394,61 @@
     <Content Include="Views\EndUsers\Index.cshtml" />
     <Content Include="Views\CostModelBuilder\GenerateQuote.cshtml" />
     <Content Include="Views\CostModelBuilder\CostModelServicePopup.cshtml" />
+    <Content Include="Web References\VerserSalesForce\ChangeOwnPasswordResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DeleteByExampleResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DeleteResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeAppMenuItem.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeApprovalLayout.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeAvailableQuickActionResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeCompactLayout.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeCompactLayoutsResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupStructureResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryMappingResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeGlobalResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeGlobalTheme.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeLayoutResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeNounResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribePathAssistant.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeQuickActionResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSearchableEntityResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSearchLayoutResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSearchScopeOrderResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSObjectResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSoftphoneLayoutResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeSoqlListView.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeTab.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeTabSetResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeThemeItem.datasource" />
+    <Content Include="Web References\VerserSalesForce\DescribeVisualForceResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\EmptyRecycleBinResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\ExecuteListViewResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\FindDuplicatesResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\GetDeletedResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\GetServerTimestampResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\GetUpdatedResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\GetUserInfoResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\InvalidateSessionsResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\KnowledgeSettings.datasource" />
+    <Content Include="Web References\VerserSalesForce\LeadConvertResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\LoginResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\MergeResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\PerformQuickActionResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\ProcessResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\QueryResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\QuickActionTemplateResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\Reference.map" />
+    <Content Include="Web References\VerserSalesForce\RenderEmailTemplateResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\RenderStoredEmailTemplateResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\ResetPasswordResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\SaveResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\SearchResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\SendEmailResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\SetPasswordResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\sObject.datasource" />
+    <Content Include="Web References\VerserSalesForce\UndeleteResult.datasource" />
+    <Content Include="Web References\VerserSalesForce\UpsertResult.datasource" />
+    <None Include="Web References\VerserSalesForce\wsdl.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,8 +23,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 //  Quotesmodel. = 
 
                 Quotesmodel.PostQuoteRequestModelLIST = QuoteRequestHelperService.GetTQuotes().Result;
-                Quotesmodel.CostModelServices = new SelectList(ServiceImplentationhelper.GetCostModelServices().Result, "ID", "Value");
-                Quotesmodel.CostModelServicesCategories = new SelectList(TicketService.GetCostModelServiceCategories().Result, "ID", "Value");
+                Quotesmodel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+                Quotesmodel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
                 return View(Quotesmodel);
             }
         }
@@ -38,7 +38,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                if (TicketService.CreateSalesForceOpportunity(opportunity, out opportunityNumber))
+                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber))
                 {
 
                     var RequestQuoteModel = new PostQuoteRequestModel();
@@ -95,9 +95,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                CostServiceModel model = new CostServiceModel();
-                model.CostModelServices = new SelectList(TicketService.GetCostModelServices().Result, "ID", "Value");
-                model.CostModelServicesCategories = new SelectList(TicketService.GetCostModelServiceCategories().Result, "ID", "Value");
+                var model = new CostServiceModel();
+                model.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+                model.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
                 return PartialView("CostModelServicePopup", model);
 
             }
@@ -105,16 +105,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [HttpGet]
         public ActionResult AddSalesForceOpportunity()
         {
-
             if (Session["Username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-
                 return PartialView("CostModelServicePopup");
-
             }
         }
         [HttpGet]
@@ -127,7 +124,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                var result = TicketService.GetPrice(value1, value2).Result;
+                var result = CostModelServicesHelpers.GetPrice(value1, value2).Result;
                 return new JsonResult { Data = result.TotalPrice, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }
