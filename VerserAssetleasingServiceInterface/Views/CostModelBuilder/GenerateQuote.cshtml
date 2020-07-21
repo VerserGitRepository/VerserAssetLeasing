@@ -1,0 +1,619 @@
+﻿@*@model IEnumerable<TelstraTickets.Models.JBHIFiCostModelQuoteRequests>*@
+@model  VerserAssetleasingServiceInterface.Models.JBHIFiCostModelQuoteRequests
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<br>
+<div class="container-fluid" style="margin-left:0px;padding-top:0px">
+    <div class="container" style="width:100%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:0px">
+        <div class="tabbable-panel" style="width:120%">
+            <div class="tabbable-line">
+                <ul class="nav nav-tabs ">
+                    <li class="active">
+                        <a href="#tab_default_1" data-toggle="tab">
+                            SERVICE REQUESTS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tab_default_2" data-toggle="tab">
+                            QUOTE
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_default_1">
+                        <div class="container">
+                            <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
+                                <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
+                                    <tr>
+                                        <th>OPPORTUNITY</th>
+                                        <th>PROJECT</th>
+                                        <th>CUSTOMER </th>
+                                        <th>START</th>
+                                        <th>SUMMARY</th>
+                                        <th>SITEADDRESS</th>
+                                        <th>SALESMANAGER</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (TelstraTickets.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.OpportunityNumber)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.OpportunityName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerContactName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDate)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SiteAddress)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SalesManager)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_default_2">
+                        @*<div class="col-md-8">*@
+                        <div class="panel panel-default" style="width:30%">
+                            <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:</label>
+                        </div>
+
+                        <div class="container" id="containerDiv" style="display:none">
+                            <input type="hidden" id="hdnQuoteId" />
+                            <div class="row" style="padding-top:10px;padding-left:20px" id="rowDiv">
+                                <table class="table table-hover table-bordered table-striped" id="rowTable">
+                                    <tr>
+                                        <td>
+                                            <label class="control-label">Service Categories</label>
+                                            @Html.DropDownListFor(model => model.CostModelServiceCategoryId, Model.CostModelServicesCategories, "Service Category", new { @class = "form-control ", id = "ddlserviceCategory" })
+                                            <input type="hidden" id="hdnserviceCategory" />
+
+                                            <br />
+                                        </td>
+                                        <td>
+                                            <label class="control-label">Services</label>
+                                            @Html.DropDownListFor(model => model.CostModelServiceId, Model.CostModelServices, "Service", new { @class = "form-control ", id = "ddlservice" })
+                                            <input type="hidden" id="hdnservice" />
+                                        </td>
+                                        <td>
+                                            <label class="control-label">Quantity</label>
+                                            <input type="text" style="width:60px" placeholder="Qty" class="form-control" onchange="CalculatePrice(this);" />
+                                            <input type="hidden" id="hdnQuantity" />
+                                        </td>
+                                        <td>
+                                            <label class="control-label">Price</label>
+                                            <input type="text" style="width:80px" placeholder="Price" class="form-control" id="txtprice" readonly />
+                                            <input type="hidden" id="hdnsPrice" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                        @*</div>*@
+                        <div id="divFooter" style="margin-left:820px;display:none;">
+                            <div class="row" style="width:80px">
+                                <div>
+                                    <label style="width:110px;">
+                                        Price(Excl.GST)
+                                    </label>
+                                    <input type="text" class="form-control" id="txtPrice" />
+                                </div>
+                            </div>
+                            <div class="row" style="width:80px">
+                                <div>
+                                    <label class="control-label">
+                                        GST 10%
+                                    </label>
+                                    <input type="text" class="form-control" id="txtGST" />
+                                </div>
+                            </div>
+                            <div class="row" style="width:80px">
+                                <div>
+                                    <label class="control-label">
+                                        TOTAL(Incl.GST)
+                                    </label>
+                                    <input type="text" class="form-control" id="txtTotalPrice" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row">
+
+                                <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
+                                <input type="submit" class="btn-primary btn-lg" value="Export to Excel" id="btnExportExcel" style="display:none;" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#mainTable').DataTable();
+
+            var i = 1;
+            $("#add_row").click(function () {
+                $('#addr' + i).html("<td><input name='name" + i + "' type='text' placeholder='New Goal' class='form-control input-md'  /> </td><td><input  name='mail" + i + "' type='Date' placeholder='Date'  class='form-control input-md'></td><td><input  name='mobile" + i + "' type='text' placeholder='Description'  class='form-control input-md'></td>");
+
+                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+                i++;
+            });
+            $("#delete_row").click(function () {
+                if (i > 1) {
+                    $("#addr" + (i - 1)).html('');
+                    i--;
+                }
+            });
+        });
+        function AddOpportunity() {
+
+            if ($("#txtSalesForceOpportunity").text().replace('Opportunity:','').trim() == "") {
+                AddSalesForceOpportunity();
+                //$("#txtSalesForceOpportunity").val("123456");
+                //return false;
+               // alert('true');
+            }
+            else {
+                if ($('#containerDiv').is(':visible')) {
+                    AddService();
+                }
+                else {
+
+                    $('#containerDiv').show();
+                    $('#divFooter').show();
+                    $('#btnSubmitQuote').show();
+                    $('#btnExportExcel').show();
+
+                }
+
+            }
+
+        }
+        function AddService() {
+
+            $('#containerDiv').append($("#rowDiv").clone());
+            $('#containerDiv').find('table').each(function () {
+                $(this).attr('id', $(this).attr('id') + uniqueId);
+                uniqueId++;
+            });
+        }
+
+        function AddSalesForceOpportunity() {
+            var CostModelDetailsURL = './AddSalesForceOpportunity';
+            $.ajax({
+                type: "GET",
+                url: CostModelDetailsURL,
+                contentType: "application/json; charset=utf-8",
+
+                datatype: "json",
+                success: function (data) {
+                    $.confirm({
+                        boxWidth: '700px',
+                        useBootstrap: false,
+
+                        title: '',
+                        content: data,
+                        closeIcon: true,
+
+                        buttons: {
+                            OK: { isHidden: true }
+                        }
+                    });
+                },
+                error: function (error) {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }
+
+        function CalculatePrice(control) {
+        var CostModelDetailsURL = '@Url.Action("GetTotalPrice", "CostModelBuilder")';
+            var ctrl = control.parentElement.parentElement;
+            var totalPrice = 0;
+        $.getJSON(CostModelDetailsURL, { value1: $(ctrl).find($($(ctrl).children()[1])).find('select').val(), value2: $(ctrl).find($($(ctrl).children()[2])).find('input').val() }, function (response) {
+            var resr = $(ctrl).find($($(ctrl).children()[3])).find('input').val(response);
+            $(ctrl).find($($(ctrl).children()[0])).find('input').val($(ctrl).find($($(ctrl).children()[0])).find('select').val());
+            $(ctrl).find($($(ctrl).children()[1])).find('input').val($(ctrl).find($($(ctrl).children()[1])).find('select').val());
+
+            $("#containerDiv").find('table tr').each(function () {
+
+                var row = $(this);
+
+                totalPrice += +row.find("td").eq(3).find('input').val();
+
+            });
+            $("#txtPrice").val(totalPrice);
+            var gst = ((10 / 100) * totalPrice).toFixed(2);
+            $("#txtGST").val(gst);
+            $("#txtTotalPrice").val(+totalPrice + +gst);
+
+        });
+
+
+        }
+
+
+        $("body").on("click", "#btnSubmitQuote", function () {
+
+
+            $.confirm({
+                boxWidth: '700px',
+                useBootstrap: false,
+
+                title: '',
+                content: "Are you sure to submit the Quote?",
+                closeIcon: true,
+
+                buttons: {
+                    OK: function () { GenerateQuote(); },
+                    CANCEL: function () { return;}
+                }
+            });
+                //Loop through the Table rows and build a JSON array.
+
+            });
+        function GenerateQuote() {
+            var CostModelRateCardArr = new Array();
+            $("#containerDiv").find('table tr').each(function () {
+                var row = $(this);
+                var CostModelRateCard = {};
+                CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hdnQuoteId").val();
+                CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").eq(1).find('select').val();
+                CostModelRateCard.Quantity = row.find("td").eq(2).find('input').val();
+                CostModelRateCard.TotalPrice = row.find("td").eq(3).find('input').val();
+                CostModelRateCardArr.push(CostModelRateCard);
+            });
+
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "./SubmitQuote",
+                data: JSON.stringify(CostModelRateCardArr),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+        }
+    </script>
+}
+<style>
+    .tabbable-panel {
+        border: 1px solid #eee;
+        padding: 10px;
+    }
+
+    /* Default mode */
+    .tabbable-line > .nav-tabs {
+        border: none;
+        margin: 0px;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+        max-width: 100%;
+    }
+
+    .container {
+        padding-left: 0px;
+        padding-right: 5px;
+        max-width: 75%;
+    }
+
+    .tabbable-line > .nav-tabs > li {
+        margin-right: 2px;
+    }
+
+        .tabbable-line > .nav-tabs > li > a {
+            border: 0;
+            margin-right: 0;
+            color: #737373;
+        }
+
+            .tabbable-line > .nav-tabs > li > a > i {
+                color: #a6a6a6;
+            }
+
+        .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+            border-bottom: 4px solid #fbcdcf;
+        }
+
+            .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+                border: 0;
+                background: none !important;
+                color: #333333;
+            }
+
+                .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+                    color: #a6a6a6;
+                }
+
+            .tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+                margin-top: 0px;
+            }
+
+        .tabbable-line > .nav-tabs > li.active {
+            border-bottom: 4px solid #f3565d;
+            position: relative;
+        }
+
+            .tabbable-line > .nav-tabs > li.active > a {
+                border: 0;
+                color: #333333;
+            }
+
+                .tabbable-line > .nav-tabs > li.active > a > i {
+                    color: #404040;
+                }
+
+    .tabbable-line > .tab-content {
+        margin-top: -3px;
+        background-color: #fff;
+        border: 0;
+        border-top: 1px solid #eee;
+        padding: 15px 0;
+    }
+
+    .portlet .tabbable-line > .tab-content {
+        padding-bottom: 0;
+    }
+
+    /* Below tabs mode */
+
+    .tabbable-line.tabs-below > .nav-tabs > li {
+        border-top: 4px solid transparent;
+    }
+
+        .tabbable-line.tabs-below > .nav-tabs > li > a {
+            margin-top: 0;
+        }
+
+        .tabbable-line.tabs-below > .nav-tabs > li:hover {
+            border-bottom: 0;
+            border-top: 4px solid #fbcdcf;
+        }
+
+        .tabbable-line.tabs-below > .nav-tabs > li.active {
+            margin-bottom: -2px;
+            border-bottom: 0;
+            border-top: 4px solid #f3565d;
+        }
+
+    .tabbable-line.tabs-below > .tab-content {
+        margin-top: -10px;
+        border-top: 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+
+    .textarea {
+        max-width: 280px;
+        font-size: 10px;
+        border: 2px;
+        outline: 2px;
+    }
+
+    .container {
+        padding-right: 15px;
+        padding-left: 5px;
+        margin-right: auto;
+        margin-left: 22px;
+    }
+
+    .selected {
+        color: black;
+        background-color: lightgray;
+    }
+
+    /*.nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+            color: #555555;
+            cursor: default;
+            background-color: orange;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+        }*/
+
+    .table-hover > tbody > tr:hover > td,
+    .table-hover > tbody > tr:hover > th {
+        background-color: lightgray;
+    }
+
+    .form-group {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 10px;
+        border-radius: 9px;
+        padding-bottom: 2px;
+        margin-top: 0px;
+    }
+
+    .btn, .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #FFA500;
+        border-color: white;
+        font-size: 10px;
+    }
+
+
+    .page-item.active .page-link {
+        color: white !important;
+        background-color: orange !important;
+        border-color: gray !important;
+    }
+
+    /* Default State */
+    .x-nav-tabs > li > a {
+        background: #fff;
+    }
+
+    /* Active State */
+    /*.x-tab-pane > .active > a, .x-tab-pane > .active > a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .tab-pane {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-top: 1px solid #ddd;
+            border-radius: 0px 0px 5px 5px;
+            padding: 10px;
+        }
+
+        .tab-content > .active, .pill-content > .active {
+            display: inline-block;
+        }*/
+
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 40px;
+        padding: 10px 15px;
+        font-size: 15px;
+        line-height: 1.4285;
+        color: #2c3e50;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #dce4ec;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+
+    .form-group {
+        margin-bottom: 2px;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 10px;
+        border-radius: 9px;
+        padding-bottom: 2px;
+        margin-top: 0px;
+    }
+
+
+    .row-group {
+        width: 47%;
+        min-height: 100px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-bottom: 20px;
+        background-color: whitesmoke;
+        border: 1px solid #e3e3e3;
+        border-radius: 2px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    }
+
+    .selected {
+        color: black;
+        background-color: lightgray;
+    }
+
+    .btn-success {
+        background-color: green;
+    }
+
+    input[type="checkbox"] {
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        outline: 0;
+        background: lightgray;
+        height: 6px;
+        width: 6px;
+        border: 1px solid white;
+    }
+
+        input[type="checkbox"]:checked {
+            background: #2aa1c0;
+        }
+
+        input[type="checkbox"]:hover {
+            filter: brightness(90%);
+        }
+
+        input[type="checkbox"]:disabled {
+            background: #e6e6e6;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        input[type="checkbox"]:after {
+            content: '';
+            position: relative;
+            left: 40%;
+            top: 20%;
+            width: 15%;
+            height: 40%;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: none;
+        }
+
+        input[type="checkbox"]:checked:after {
+            display: block;
+        }
+</style>

@@ -159,6 +159,7 @@
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\CarriersController.cs" />
     <Compile Include="Controllers\ColoursController.cs" />
+    <Compile Include="Controllers\CostModelBuilderController.cs" />
     <Compile Include="Controllers\DeviceCategoriesController.cs" />
     <Compile Include="Controllers\InventoryItemsController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
@@ -189,12 +190,18 @@
     <Compile Include="Models\DeviceCategoriesListViewModel.cs" />
     <Compile Include="Models\EndUsersListViewModel.cs" />
     <Compile Include="Models\InventoryItemsListViewModel.cs" />
+    <Compile Include="Models\JBHIFICostModel.cs" />
+    <Compile Include="Models\JBHIFiCostModelQuoteRequests.cs" />
+    <Compile Include="Models\JBHIFiCostModelServiceItems.cs" />
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PostQuoteRequestModel.cs" />
+    <Compile Include="Models\PostQuoteReturnModel.cs" />
     <Compile Include="Models\ProjectLoginsModel.cs" />
     <Compile Include="Models\ReturnModel.cs" />
     <Compile Include="Models\RolesModel.cs" />
+    <Compile Include="Models\SalesForceOpportunity.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\UserRoleModelLite.cs" />
@@ -203,8 +210,12 @@
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CarriersServiceHelper.cs" />
     <Compile Include="ServiceImplentationhelper\ColoursServiceHelper.cs" />
+    <Compile Include="ServiceImplentationhelper\CostModelRateCard.cs" />
+    <Compile Include="ServiceImplentationhelper\CostModelServicesHelpers.cs" />
     <Compile Include="ServiceImplentationhelper\DeviceCategoriesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\InventoryItemsServicehelper.cs" />
+    <Compile Include="ServiceImplentationhelper\ListItems.cs" />
+    <Compile Include="ServiceImplentationhelper\QuoteRequestHelperService.cs" />
     <Compile Include="ServiceImplentationhelper\SitesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CompanyServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
@@ -379,6 +390,8 @@
     <Content Include="Views\DeviceCategories\Index.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\EndUsers\Index.cshtml" />
+    <Content Include="Views\CostModelBuilder\GenerateQuote.cshtml" />
+    <Content Include="Views\CostModelBuilder\CostModelServicePopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,6 +408,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

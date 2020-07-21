@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -21,10 +20,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
-            List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
-
-            assetsdata = AssetsServicehelper.AssetsList().Result;
-
+            var assetsdata = new List<AssetsListViewModel>();
+           // assetsdata = AssetsServicehelper.AssetsList().Result;
             return View(assetsdata);
         }
         [HttpGet]
@@ -32,9 +29,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult GetAssetsData(int Id)
         {
             List<AssetsListViewModel> companydata = new List<AssetsListViewModel>();
-
             companydata = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
-
             return Json(companydata, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -84,8 +79,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 string mimeType = file.ContentType;
                 if (!Directory.Exists(Server.MapPath(".") + "//UploadFile//"))
                 {
-                    Directory.CreateDirectory(Server.MapPath(".") + "//UploadFile//");
-                  
+                    Directory.CreateDirectory(Server.MapPath(".") + "//UploadFile//");                  
                 }
                 file.SaveAs(Server.MapPath(".") + "//UploadFile//" + file.FileName);
             }
@@ -109,7 +103,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
                     data.CostCode = xlRange.Cells[i, 5].Value2.ToString();
                     data.EndUserStatus = xlRange.Cells[i, 6].Value2.ToString();
 
-
                     string commencementDate = xlRange.Cells[i, 7].Value2.ToString();
                     double d = double.Parse(commencementDate);
                     DateTime conv = DateTime.FromOADate(d);
@@ -124,16 +117,12 @@ namespace VerserAssetleasingServiceInterface.Controllers
                     data.UserName = xlRange.Cells[i, 10].Value2.ToString();
                     data.EndUser_Site = Convert.ToInt32(xlRange.Cells[i, 11].Value2.ToString());
                     var obj = EndUsersServicehelper.AddEndUser(data);
-
                 }
                 catch (Exception ex)
                 {
                     errorOccurred = true;
                     continue;
                 }
-                
-
-
             }
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -149,7 +138,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 System.IO.File.Delete(info);
             }
             Directory.Delete(Server.MapPath(".") + "\\UploadFile\\");
-
             return new JsonResult { Data = "The file is loaded.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }

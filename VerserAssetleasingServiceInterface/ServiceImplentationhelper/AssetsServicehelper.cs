@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Net.Http;
-using Microsoft.AspNet;
 using VerserAssetleasingServiceInterface.Models;
-using Newtonsoft.Json;
 
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
@@ -71,13 +67,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ReturnResult;
         }
-        public static async Task<List<AssetsListViewModel>> GetAssetsData(string userId)
+        public static async Task<List<AssetsListViewModel>> GetAssetsData(string ProjectID)
         {
             List<AssetsListViewModel> assetsList = new List<AssetsListViewModel>();
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{userId}/ProjectAssets")).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{ProjectID}/ProjectAssets")).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     assetsList = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
