@@ -139,11 +139,12 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult CostModelOppDetails()
         {
 
-            JBHiFiCostmodelServiceRequestDetailsModel model = new JBHiFiCostmodelServiceRequestDetailsModel();
-
-          
+            var model = new JBHiFiCostmodelServiceRequestDetailsModel();
+            //var AllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails().Result;
+            //model.ServiceItemsLists = AllRecords.Where(c => c.id == id).ToList;
             return PartialView("CostModelOppDetails", model);
         }
+
         [HttpGet]
         public ActionResult AddSalesForceOpportunity()
         {

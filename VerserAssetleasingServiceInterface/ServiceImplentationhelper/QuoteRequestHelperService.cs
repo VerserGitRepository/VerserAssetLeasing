@@ -69,7 +69,12 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFiCostModelQuoteRequestDetails/{0}", id)).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
+                    //var opp = await response.Content.ReadAsAsync<List<JBHiFiCostmodelServiceRequestDetailsModel>>();
+                    //foreach (var a in opp)
+                    //{
+                    //    ResponseListModel.Add(a);
+                    //}
+                     ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
                 }
             }
             return ResponseListModel;
