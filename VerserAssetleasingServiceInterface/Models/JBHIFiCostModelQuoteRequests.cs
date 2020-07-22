@@ -11,13 +11,12 @@ namespace VerserAssetleasingServiceInterface.Models
         public List<JBHIFiCostModelQuoteRequests> QuoteList { get; set; }
         public List<JBHIFiCostModelServiceItems> QuoteServiceItems { get; set; }
 
-        public List<PostQuoteRequestModel> PostQuoteRequestModelLIST { get; set; }
-
+        public List<PostQuoteRequestModel> PostQuoteRequestModelLIST { get; set; }        
         public JBHIFiCostModelQuoteRequests()
         {
             QuoteList = new List<JBHIFiCostModelQuoteRequests>();
             QuoteServiceItems = new List<JBHIFiCostModelServiceItems>();
-            PostQuoteRequestModelLIST = new List<PostQuoteRequestModel>();
+            PostQuoteRequestModelLIST = new List<PostQuoteRequestModel>();          
         }
         public int Id { get; set; }
         public int opportunityNumber { get; set; }

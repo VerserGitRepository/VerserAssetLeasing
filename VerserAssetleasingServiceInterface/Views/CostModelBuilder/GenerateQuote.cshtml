@@ -71,7 +71,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.OpportunityNumber">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
                                                 @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
                                             </td>
                                             <td>
@@ -229,13 +229,13 @@
         $("#mainTable").on("click", ".OpportunityDetail", function () {
             // debugger;
             var $buttonClicked = $(this);
-            var OpportunityNumber = $buttonClicked.attr('data-id');
+            var Id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
                 url: CandidateDetailsURL,
                 contentType: "application/json; charset=utf-8",
-                data: { "OpportunityNumber": OpportunityNumber },
+                data: { "Id": Id },
                 datatype: "json",
                 success: function (data) {
                     // debugger;

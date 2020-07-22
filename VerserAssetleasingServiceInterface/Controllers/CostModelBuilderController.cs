@@ -136,13 +136,16 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return RedirectToAction("GenerateQuote", "CostModelBuilder");
         }
         [HttpGet]
-        public ActionResult CostModelOppDetails()
+        public ActionResult CostModelOppDetails(int Id)
         {
 
-            var model = new JBHiFiCostmodelServiceRequestDetailsModel();
-            //var AllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails().Result;
-            //model.ServiceItemsLists = AllRecords.Where(c => c.id == id).ToList;
-            return PartialView("CostModelOppDetails", model);
+            var AllRecords = new JBHiFiCostmodelServiceRequestDetailsModel();
+            var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(Id);
+            if (ReturnAllRecords.Result !=null )
+            {
+                AllRecords = ReturnAllRecords.Result;
+            }      
+            return PartialView("CostModelOppDetails", AllRecords);
         }
 
         [HttpGet]
