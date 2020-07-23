@@ -137,15 +137,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return RedirectToAction("GenerateQuote", "CostModelBuilder");
         }
         [HttpGet]
-        public ActionResult CostModelOppDetails(int Id)
+        public ActionResult CostModelOppDetails(int id)
         {
 
             var AllRecords = new JBHiFiCostmodelServiceRequestDetailsModel();
-            var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(Id);
-            if (ReturnAllRecords.Result !=null )
+            var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(id);
+            if (ReturnAllRecords.AsyncState != null)
             {
                 AllRecords = ReturnAllRecords.Result;
-            }      
+            }
             return PartialView("CostModelOppDetails", AllRecords);
         }
 
