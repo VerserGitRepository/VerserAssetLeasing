@@ -194,6 +194,7 @@
     <Compile Include="Models\JBHIFICostModel.cs" />
     <Compile Include="Models\JBHIFiCostModelQuoteRequests.cs" />
     <Compile Include="Models\JBHIFiCostModelServiceItems.cs" />
+    <Compile Include="Models\JBHIFiCostModelServiceItemsSummary.cs" />
     <Compile Include="Models\JBHiFiCostmodelServiceRequestDetailsModel.cs" />
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
@@ -208,6 +209,11 @@
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\UserRoleModelLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ServiceImplentationhelper\AdminHelperService.cs" />
     <Compile Include="ServiceImplentationhelper\AssetsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\CarriersServiceHelper.cs" />
@@ -223,7 +229,11 @@
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\EndUsersServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\LoginService.cs" />
-    <Compile Include="Web References\VerserSalesForce\Reference.cs" />
+    <Compile Include="Web References\VerserSalesForce\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -265,6 +275,10 @@
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -395,61 +409,170 @@
     <Content Include="Views\EndUsers\Index.cshtml" />
     <Content Include="Views\CostModelBuilder\GenerateQuote.cshtml" />
     <Content Include="Views\CostModelBuilder\CostModelServicePopup.cshtml" />
-    <Content Include="Web References\VerserSalesForce\ChangeOwnPasswordResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DeleteByExampleResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DeleteResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeAppMenuItem.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeApprovalLayout.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeAvailableQuickActionResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeCompactLayout.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeCompactLayoutsResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupStructureResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryMappingResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeGlobalResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeGlobalTheme.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeLayoutResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeNounResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribePathAssistant.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeQuickActionResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSearchableEntityResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSearchLayoutResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSearchScopeOrderResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSObjectResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSoftphoneLayoutResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeSoqlListView.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeTab.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeTabSetResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeThemeItem.datasource" />
-    <Content Include="Web References\VerserSalesForce\DescribeVisualForceResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\EmptyRecycleBinResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\ExecuteListViewResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\FindDuplicatesResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\GetDeletedResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\GetServerTimestampResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\GetUpdatedResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\GetUserInfoResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\InvalidateSessionsResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\KnowledgeSettings.datasource" />
-    <Content Include="Web References\VerserSalesForce\LeadConvertResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\LoginResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\MergeResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\PerformQuickActionResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\ProcessResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\QueryResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\QuickActionTemplateResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\Reference.map" />
-    <Content Include="Web References\VerserSalesForce\RenderEmailTemplateResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\RenderStoredEmailTemplateResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\ResetPasswordResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\SaveResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\SearchResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\SendEmailResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\SetPasswordResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\sObject.datasource" />
-    <Content Include="Web References\VerserSalesForce\UndeleteResult.datasource" />
-    <Content Include="Web References\VerserSalesForce\UpsertResult.datasource" />
     <Content Include="Views\CostModelBuilder\CostModelOppDetails.cshtml" />
+    <Content Include="Web References\VerserSalesForce\ChangeOwnPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DeleteByExampleResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DeleteResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeAppMenuItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeApprovalLayout.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeAvailableQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeCompactLayout.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeCompactLayoutsResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryGroupStructureResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeDataCategoryMappingResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeGlobalResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeGlobalTheme.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeNounResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribePathAssistant.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSearchableEntityResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSearchLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSearchScopeOrderResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSObjectResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSoftphoneLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeSoqlListView.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeTab.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeTabSetResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeThemeItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\DescribeVisualForceResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\EmptyRecycleBinResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\ExecuteListViewResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\FindDuplicatesResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\GetDeletedResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\GetServerTimestampResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\GetUpdatedResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\GetUserInfoResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\InvalidateSessionsResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\KnowledgeSettings.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\LeadConvertResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\LoginResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\MergeResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\PerformQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\ProcessResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\QueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\QuickActionTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\RenderEmailTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\RenderStoredEmailTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\ResetPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\SaveResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\SearchResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\SendEmailResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\SetPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\sObject.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\UndeleteResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\VerserSalesForce\UpsertResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\VerserSalesForce\wsdl.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -470,6 +593,22 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://ap15.salesforce.com/soap/wsdl.jsp%3ftype=%2a&amp;v=">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VerserSalesForce\</RelPath>
+      <UpdateFromURL>https://ap15.salesforce.com/soap/wsdl.jsp%3ftype=%2a&amp;v=</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>VerserAssetleasingServiceInterface_VerserSalesForce_SforceService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

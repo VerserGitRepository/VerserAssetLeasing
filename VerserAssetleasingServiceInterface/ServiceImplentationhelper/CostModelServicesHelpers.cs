@@ -6,8 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using TelstraTickets.VerserSalesForce;
 using VerserAssetleasingServiceInterface.Models;
+using VerserAssetleasingServiceInterface.VerserSalesForce;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {

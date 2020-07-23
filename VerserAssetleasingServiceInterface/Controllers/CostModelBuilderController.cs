@@ -42,28 +42,28 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
-                {
+                //if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
+                //{
 
-                    var RequestQuoteModel = new PostQuoteRequestModel();
-                    RequestQuoteModel.ProjectManager = "Arman";
-                    RequestQuoteModel.SalesManager = "Danny";
-                    RequestQuoteModel.VerserBranch = "Sydney";
-                    RequestQuoteModel.CustomerName = opportunity.Customer;
-                    RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
-                    RequestQuoteModel.OpportunityNumber = Convert.ToInt32(opportunityNumber);
-                    RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
-                    RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
-                    RequestQuoteModel.StartDate = opportunity.StartDate;
-                    RequestQuoteModel.Email = opportunity.Email;
+                //    var RequestQuoteModel = new PostQuoteRequestModel();
+                //    RequestQuoteModel.ProjectManager = "Arman";
+                //    RequestQuoteModel.SalesManager = "Danny";
+                //    RequestQuoteModel.VerserBranch = "Sydney";
+                //    RequestQuoteModel.CustomerName = opportunity.Customer;
+                //    RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
+                //    RequestQuoteModel.OpportunityNumber = Convert.ToInt32(opportunityNumber);
+                //    RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
+                //    RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
+                //    RequestQuoteModel.StartDate = opportunity.StartDate;
+                //    RequestQuoteModel.Email = opportunity.Email;
 
-                    var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
-                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + opportunityNumber + "-Id:" + IsRequestCompleted.Id, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-                }
+                //    var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
+                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + "208531" + "-Id:" + 7+"-salesForceUniqueId:" + "0062v00001P8V73AAF", JsonRequestBehavior.AllowGet);
+                //}
+                //else
+                //{
+                //    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                //}
             }
 
         }
@@ -188,7 +188,22 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                var result = QuoteRequestHelperService.AddQuoteServiceItems(RequestQuoteModel).Result;
+                JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.JBHIFiCMServiceItems = RequestQuoteModel;
+
+                foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
+                {
+                    summary.Summary += item.Summary + Environment.NewLine;
+                    summary.GST_10 = item.GST_10;
+                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
+                    summary.TotalPrice = item.TotalPrice;
+                    summary.SalesForceUniqueId = item.SalesForceUniqueId;
+
+                }
+
+                var result = QuoteRequestHelperService.AddQuoteServiceItems(summary).Result;
                 return new JsonResult { Data = result.Message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }

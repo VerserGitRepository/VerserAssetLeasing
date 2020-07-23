@@ -15,5 +15,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public decimal? TOTAL_Excl_GST { get; set; }
         public decimal? TOTAL_Incl_GST { get; set; }
         public decimal? GST_10 { get; set; }
+        public string Summary { get; set; }
+        public string SalesForceUniqueId { get; set; }
     }
 }
