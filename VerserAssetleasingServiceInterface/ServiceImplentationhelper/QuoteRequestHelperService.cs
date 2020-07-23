@@ -88,7 +88,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 Opportunity_Number__c = RequestQuoteModel.OpportunityId,
                 Service_Description__c = RequestQuoteModel.Summary,
                 Id = RequestQuoteModel.SalesForceUniqueId,
-
+                Amount = (double?) RequestQuoteModel.TOTAL_Incl_GST,
                 //Account_Manager__c = opportunity.SalesManager,
 
             };
@@ -99,18 +99,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
             SfdcBinding.Url = CurrentLoginResult.serverUrl;
             SfdcBinding.SessionHeaderValue = new SessionHeader();
-            SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
-
-            //String SOQL = "";
-            //SOQL = salesForceQuery;
-            // "select OwnerId,Name,Opportunity_Number__c from Opportunity where closedate > 2019-01-01 and stageName in('Approved - Pending to be sent to customer', 'Pending Customer Decision', 'Pending PM Allocation', 'Closed', 'Closed Won')";
-
-            //queryResult = SfdcBinding.query(SOQL);
-            // StreamWriter info = new StreamWriter("C:\\temp\\salesforce.txt");
-
-            // Create Query
-            //var addPhoneData = new SalesForceOpportunity { Email__c = "john@gmail.com", FirstName__c = "John", LastName__c = "Doe", Phone__c = 9876543210 };
-            //SfdcBinding.update();
+            SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;            
             SaveResult[] createResults = SfdcBinding.update(new sObject[] { opn });
             if (createResults[0].success)
             {
