@@ -3,16 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using VerserAssetleasingServiceInterface.Models;
+using VerserAssetleasingServiceInterface.VerserSalesForce;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {
     public class QuoteRequestHelperService
     {
         private static readonly string CostModelAPIBase = ConfigurationManager.AppSettings["CostModelAPIBase"] + ConfigurationManager.AppSettings["CostModelAPIRoot"];
+        private static readonly string salesForceUser = ConfigurationManager.AppSettings["salesForceUser"];
+        private static readonly string salesForcePWD = ConfigurationManager.AppSettings["salesForcePWD"];
         public static async Task<PostQuoteReturnModel> PostQuoteRequest(PostQuoteRequestModel model)
         {
             string SerialisedPostModel = JsonConvert.SerializeObject(model);
@@ -44,8 +48,9 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ResponseListModel;
         }
-        public static async Task<ReturnModel> AddQuoteServiceItems(List<JBHIFiCostModelServiceItems> RequestQuoteModel)
+        public static async Task<ReturnModel> AddQuoteServiceItems(JBHIFiCostModelServiceItemsSummary RequestQuoteModel)
         {
+            UpdateSalesForceData(RequestQuoteModel);
             var ResponseListModel = new ReturnModel();
             using (HttpClient client = new HttpClient())
             {
@@ -69,17 +74,44 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFiCostModelQuoteRequestDetails/{0}", id)).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    //var opp = await response.Content.ReadAsAsync<List<JBHiFiCostmodelServiceRequestDetailsModel>>();
-                    //foreach (var a in opp)
-                    //{
-                    //    ResponseListModel.Add(a);
-                    //}
 
                      ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
 
                 }
             }
             return ResponseListModel;
+        }
+        private static bool UpdateSalesForceData(JBHIFiCostModelServiceItemsSummary RequestQuoteModel)
+        {
+            Opportunity opn = new Opportunity
+            {
+                Opportunity_Number__c = RequestQuoteModel.OpportunityId,
+                Service_Description__c = RequestQuoteModel.Summary,
+                Id = RequestQuoteModel.SalesForceUniqueId,
+                Amount = (double?) RequestQuoteModel.TOTAL_Incl_GST,
+                //Account_Manager__c = opportunity.SalesManager,
+
+            };
+
+            var SfdcBinding = new SforceService();
+            LoginResult CurrentLoginResult = null;
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
+            SfdcBinding.Url = CurrentLoginResult.serverUrl;
+            SfdcBinding.SessionHeaderValue = new SessionHeader();
+            SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;            
+            SaveResult[] createResults = SfdcBinding.update(new sObject[] { opn });
+            if (createResults[0].success)
+            {
+                //salesForceUniqueId = createResults[0].id;
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
         }
     }
 }

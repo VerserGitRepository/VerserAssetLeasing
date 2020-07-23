@@ -35,13 +35,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult CreateSalesForceOpportunity(SalesForceOpportunity opportunity)
         {
             string opportunityNumber = "";
+            string salesForceUniqueId = "";
             if (Session["Username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber))
+                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
                 {
 
                     var RequestQuoteModel = new PostQuoteRequestModel();
@@ -57,7 +58,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
                     RequestQuoteModel.Email = opportunity.Email;
 
                     var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
-                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + opportunityNumber + "-Id:" + IsRequestCompleted.Id, JsonRequestBehavior.AllowGet);
+                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + opportunityNumber + "-Id:" + IsRequestCompleted.Id+ "-salesForceUniqueId:" + salesForceUniqueId, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -136,15 +137,15 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return RedirectToAction("GenerateQuote", "CostModelBuilder");
         }
         [HttpGet]
-        public ActionResult CostModelOppDetails(int Id)
+        public ActionResult CostModelOppDetails(int id)
         {
 
             var AllRecords = new JBHiFiCostmodelServiceRequestDetailsModel();
-            var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(Id);
-            if (ReturnAllRecords.Result !=null )
+            var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(id);
+            if (ReturnAllRecords.AsyncState != null)
             {
                 AllRecords = ReturnAllRecords.Result;
-            }      
+            }
             return PartialView("CostModelOppDetails", AllRecords);
         }
 
@@ -187,7 +188,22 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                var result = QuoteRequestHelperService.AddQuoteServiceItems(RequestQuoteModel).Result;
+                JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.JBHIFiCMServiceItems = RequestQuoteModel;
+
+                foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
+                {
+                    summary.Summary += item.Summary + Environment.NewLine;
+                    summary.GST_10 = item.GST_10;
+                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
+                    summary.TotalPrice = item.TotalPrice;
+                    summary.SalesForceUniqueId = item.SalesForceUniqueId;
+
+                }
+
+                var result = QuoteRequestHelperService.AddQuoteServiceItems(summary).Result;
                 return new JsonResult { Data = result.Message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }
