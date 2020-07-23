@@ -74,8 +74,14 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                     //{
                     //    ResponseListModel.Add(a);
                     //}
-
-                     ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
+                    try
+                    {
+                        ResponseListModel = await response.Content.ReadAsAsync<JBHiFiCostmodelServiceRequestDetailsModel>();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Write(ex);
+                    }
 
                 }
             }

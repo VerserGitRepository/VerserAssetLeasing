@@ -106,11 +106,12 @@
                     <div class="tab-pane" id="tab_default_2">
                         @*<div class="col-md-8">*@
                         <div class="panel panel-default" style="width:30%">
-                            <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:1234</label>
+                            <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:</label>
                         </div>
 
                         <div class="container" id="containerDiv" style="display:none">
                             <input type="hidden" id="hdnQuoteId" />
+                            <input type="hidden" id="hdnSalesForceId" />
                             <div class="row" style="padding-top:10px;padding-left:20px" id="rowDiv">
                                 <table class="table table-hover table-bordered table-striped" id="rowTable">
                                     <tr>
@@ -243,7 +244,7 @@
                     $('#myModal').modal(options);
                     $('#myModal').modal('show');
                 },
-                error: function () {
+                error: function (data) {
                     alert("Dynamic content load failed.");
                 }
             });
@@ -343,6 +344,12 @@
 
         function AddSalesForceOpportunity() {
             var CostModelDetailsURL = './AddSalesForceOpportunity';
+            var html = "";
+            var str = "";
+            str = str + "<script src='/Scripts/jquery.validate.js'><\/script>";
+            str = str + "<script src='/Scripts/jquery.validate.min.js'><\/script>";
+            str = str + "<script src='/Scripts/jquery.validate.unobtrusive.js'><\/script>";
+            str = str + "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js'><\/script>";
             $.ajax({
                 type: "GET",
                 url: CostModelDetailsURL,
@@ -350,12 +357,13 @@
 
                 datatype: "json",
                 success: function (data) {
+                    html = str + data;
                     $.confirm({
                         boxWidth: '700px',
                         useBootstrap: false,
 
                         title: '',
-                        content: data,
+                        content: html,
                         closeIcon: true,
 
                         buttons: {
@@ -424,6 +432,12 @@
                 CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").eq(1).find('select').val();
                 CostModelRateCard.Quantity = row.find("td").eq(2).find('input').val();
                 CostModelRateCard.TotalPrice = row.find("td").eq(3).find('input').val();
+                CostModelRateCard.TOTAL_Excl_GST = $("#txtPrice").val();
+                CostModelRateCard.GST_10 = $("#txtGST").val();
+                CostModelRateCard.TOTAL_Incl_GST = $("#txtTotalPrice").val();
+                CostModelRateCard.OpportunityId = $("#txtSalesForceOpportunity").text().replace("Opportunity:", "");
+                CostModelRateCard.Summary = row.find("td").eq(1).find('select').find('option:selected').text();
+                CostModelRateCard.SalesForceUniqueId = $("#hdnSalesForceId").val();
                 CostModelRateCardArr.push(CostModelRateCard);
             });
 
@@ -452,21 +466,7 @@
             buttonWidth: '280px',
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true,
-        });
-        $('#ddlserviceCategory2').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 250,
-            buttonWidth: '280px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
-        $('#ddlservice2').multiselect({
-            includeSelectAllOption: false,
-            maxHeight: 250,
-            buttonWidth: '280px',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true
-        });
+        });       
 
     </script>
 }

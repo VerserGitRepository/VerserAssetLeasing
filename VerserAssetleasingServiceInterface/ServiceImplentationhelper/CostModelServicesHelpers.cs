@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,9 +13,13 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {
     public class CostModelServicesHelpers
     {
-        public static bool CreateSalesForceOpportunity(SalesForceOpportunity opportunity, out string opportunityNumber)
+
+        private static readonly string salesForceUser = ConfigurationManager.AppSettings["salesForceUser"];
+        private static readonly string salesForcePWD = ConfigurationManager.AppSettings["salesForcePWD"];
+        public static bool CreateSalesForceOpportunity(SalesForceOpportunity opportunity, out string opportunityNumber, out string salesForceUniqueId)
         {
             opportunityNumber = "";
+            salesForceUniqueId = "";
             Opportunity opn = new Opportunity
             {
                 Opportunity_Number__c = opportunity.OpportunityNumber,
@@ -33,7 +38,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             var SfdcBinding = new SforceService();
             LoginResult CurrentLoginResult = null;
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            //CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
+            CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
             SfdcBinding.Url = CurrentLoginResult.serverUrl;
             SfdcBinding.SessionHeaderValue = new SessionHeader();
             SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
@@ -51,6 +56,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             SaveResult[] createResults = SfdcBinding.create(new sObject[] { opn });
             if (createResults[0].success)
             {
+                salesForceUniqueId = createResults[0].id;
                 string query = "select Opportunity_Number__c from Opportunity where id = '" + createResults[0].id + "'";
                 queryResult = SfdcBinding.query(query);
                 // StreamWriter info = new StreamWriter("C:\\temp\\salesforce.txt");

@@ -35,13 +35,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult CreateSalesForceOpportunity(SalesForceOpportunity opportunity)
         {
             string opportunityNumber = "";
+            string salesForceUniqueId = "";
             if (Session["Username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber))
+                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
                 {
 
                     var RequestQuoteModel = new PostQuoteRequestModel();

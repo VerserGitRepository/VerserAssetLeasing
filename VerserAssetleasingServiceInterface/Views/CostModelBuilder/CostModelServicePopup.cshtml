@@ -2,11 +2,7 @@
 @{
     ViewBag.Title = "CostModelServicePopup";
 }
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js"></script>
+
 @using (Ajax.BeginForm("CreateSalesForceOpportunity", "CostModelBuilder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
 {
     <div class="panel-heading panel-title" style="background-color:lightgray">Basic Info</div>
@@ -88,10 +84,13 @@
 
                 var str = data.split('-')[0];
                 var strId = data.split('-')[1];
+                var sfId = data.split('-')[2];
                 str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
                 strId = strId.replace("Id:", "");
+                sfId = sfId.replace("salesForceUniqueId:", "");
                 $("#txtSalesForceOpportunity").text('Opportunity:' + str);
                 $("#hdnQuoteId").val(strId);
+                $("#hdnSalesForceId").val(sfId);
                 $("#btnSubmit").val("ADD SERVICE");
                 $(".jconfirm").hide();
             }
