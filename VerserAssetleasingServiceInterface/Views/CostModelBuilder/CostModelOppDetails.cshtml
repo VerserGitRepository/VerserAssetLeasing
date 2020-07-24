@@ -5,9 +5,9 @@
 }
 
 <div>
-    <div class="modal-header" style="background-color:lightgray;width:1228px">
-        <h5 class="modal-title text-center">Opportunity Details</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-header" style="background-color:lightgray;width:820px">
+        <h5 class="modal-title text-center">REQUEST DETAILS</h5>
+        <button type="button"  class="close" data-dismiss="modal">&times;</button>
     </div>
     <br>
     <div class="container" style="font-size:14px;color:grey;border-color:gray">
@@ -86,42 +86,38 @@
                 </div>
 
 <br><br>
-                <div class=" row col-md-12 table-bordered" style="width:1050px;height:270px;margin-left:5px;">
+ <div class=" row col-md-12 table-bordered" style="width:800px;height:270px;margin-left:5px;">
                     <table class="table pull-left table-bordered table-responsive" id="mainTable1" style="font-size:smaller;">
                         <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
                             <tr>
-
-                                <th>Service Description</th>
-                                <th>Total Price</th>
-                                <th>Qty</th>
-                               
+                                <th>SERVICES</th>
+                                <th>QUANTITY</th>
+                                <th>TOTAL PRICE</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.CostModelQuoteRequestModel.QuoteServiceItems)
+                            @foreach (var item in Model.ServiceItemsLists)
                             {
                                 <tr>
-                                    <td>  @Html.DisplayFor(modelItem => item.Id)</td>
-                                    <td>  @Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                    <td>  @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                 
+                                    <td>@item.ServiceDescription  </td>
+                                    <td>@item.Quantity </td>
+                                    <td>@item.TotalPrice</td>
                                 </tr>
                             }
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>Total Excl GST</td>
+                                <td>Total Excl GST @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Excl_GST)</td>
                              </tr>
                         </tfoot>
                         <tfoot>
                             <tr>
-                            <td>GST</td>
-                            
+                                <td>GST @Html.DisplayFor(m => m.CostModelQuoteRequestModel.gsT_10)</td>                            
                             </tr>
                         </tfoot>
                         <tfoot>
                             <tr>
-                                <td>Total Incl GST</td>
+                                <td>Total Incl GS: @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Incl_GST)</td>
                             </tr>
                         </tfoot>
 
@@ -146,7 +142,7 @@
 }
     <style>
         .modal-dialog {
-            width: 1250px;
+            width: 850px;
             margin: 30px auto;
             margin-bottom: 10px;
             font-size:14px;
