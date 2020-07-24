@@ -142,7 +142,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             var AllRecords = new JBHiFiCostmodelServiceRequestDetailsModel();
             var  ReturnAllRecords = QuoteRequestHelperService.JBHiFiCostmodelServiceRequestDetails(id);
-            if (ReturnAllRecords.AsyncState != null)
+            if (ReturnAllRecords.Result != null)
             {
                 AllRecords = ReturnAllRecords.Result;
             }

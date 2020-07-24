@@ -9,6 +9,7 @@ namespace VerserAssetleasingServiceInterface.Models
     {
         public int Id { get; set; }
         public int FK_JBHIFIQuoteRequestID { get; set; }
+        public string ServiceDescription { get; set; }
         public int FK_JBHIFiCostModelServiceID { get; set; }
         public int Quantity { get; set; }
         public decimal? TotalPrice { get; set; }
