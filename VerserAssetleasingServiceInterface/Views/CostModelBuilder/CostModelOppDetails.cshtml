@@ -4,176 +4,182 @@
     ViewBag.Title = "Opportunity Details";
 }
 
-<div>
-    <div class="modal-header" style="background-color:lightgray;width:820px">
-        <h5 class="modal-title text-center">REQUEST DETAILS</h5>
-        <button type="button"  class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <br>
-    <div class="container" style="font-size:14px;color:grey;border-color:gray">
-
-        <div class="form-horizontal">
-            <div class="form-group">
-
-                <div class="row col-md-12  table-bordered" style="width:800px;margin-left:0px;height:150px;font-size:16px;">
-                    <div class="col-md-6">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group required">
-                            @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.CustomerName)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Date Started", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.startDate)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label(" Salesforce Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
-
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
-
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.siteAddress)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6" style="border-color:gray">
-                        <div class="form-group required">
-                            @Html.Label("Customer Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.customerContactName)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label("Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName)
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                            @Html.Label("Salesforce Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-6">
-                                @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-<br><br>
-
- <div class=" row col-md-12 table-bordered" style="width:800px;height:270px;margin-left:1px;padding:1px">
-                    <table class="table pull-left table-bordered table-responsive" id="mainTable1" style="font-size:smaller;">
-                        <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
-                            <tr>
-                                <th>SERVICES</th>
-                                <th>QUANTITY</th>
-                                <th>TOTAL PRICE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.ServiceItemsLists)
-                            {
-                                <tr>
-                                    <td>@item.ServiceDescription  </td>
-                                    <td>@item.Quantity </td>
-                                    <td>@item.TotalPrice</td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>Total Excl GST @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Excl_GST)</td>
-                             </tr>
-                        </tfoot>
-                        <tfoot>
-                            <tr>
-                                <td>GST @Html.DisplayFor(m => m.CostModelQuoteRequestModel.gsT_10)</td>                            
-                            </tr>
-                        </tfoot>
-                        <tfoot>
-                            <tr>
-                                <td>Total Incl GS: @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Incl_GST)</td>
-                            </tr>
-                        </tfoot>
-
-                    </table>
-                </div>
-
-            </div>
+    <div>
+        <div class="modal-header" style="background-color:lightgray;width:820px">
+            <h5 class="modal-title text-center">REQUEST DETAILS</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-    </div>
+        <br>
+        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:15px;padding-top:10px;width:80%">
+            <div class="container" @*style="font-size:14px;color:grey;border-color:gray"*@>
 
+                <div class="form-horizontal">
+                    <div class="form-group">
 
-</div>
-@section Scripts {
+                        <div class="row col-md-12  table-bordered" style="width:800px;margin-left:0px;height:150px;font-size:16px;">
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group required">
+                                    @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.CustomerName)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Date Started", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.startDate)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label(" Salesforce Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
 
-    @Scripts.Render("~/bundles/jqueryval")
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-                        $('#mainTable1').DataTable();
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.siteAddress)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="border-color:gray">
+                                <div class="form-group required">
+                                    @Html.Label("Customer Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.customerContactName)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label("Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName)
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.Label("Salesforce Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                    </div>
+                </div>
+            </div>
+            <div class=" row col-md-12 table-bordered" style="width:800px;height:270px;margin-left:1px;padding:1px">
+                <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;">
+                    <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
+                        <tr>
+                            <th>SERVICES</th>
+                            <th>QUANTITY</th>
+                            <th>TOTAL PRICE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ServiceItemsLists)
+                        {
+                            <tr>
+                                <td>@item.ServiceDescription  </td>
+                                <td>@item.Quantity </td>
+                                <td>@item.TotalPrice</td>
+                            </tr>
+                        }
+                    </tbody>
+                   
+                    <tfoot>
+                        <tr >
+                            <td>Total Excl GST </td>
+                            <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Excl_GST)</td>
+                        </tr>
+                    </tfoot>
+                    <tfoot>
+                        <tr>
+                            <td>GST</td>
+                            <td>@Html.DisplayFor(m => m.CostModelQuoteRequestModel.gsT_10)</td>
+                        </tr>
+                    </tfoot>
+                    <tfoot>
+                        <tr>
+                            <td>Total Incl GS</td>
+                            <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Incl_GST)</td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+            </div>
+
+        </div>
+        @section Scripts {
+
+            @Scripts.Render("~/bundles/jqueryval")
+
+            <script type="text/javascript">
+
+                $('#tblCustomers').dataTable({
+                    responsive: true,
+                    stateSave: true
                 });
-    </script>
-}
-    <style>
-        .modal-dialog {
-            width: 850px;
-            margin: 30px auto;
-            margin-bottom: 10px;
-            font-size:14px;
+            </script>
         }
+        <style>
+            .modal-dialog {
+                width: 850px;
+                margin: 30px auto;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
 
-        .table-hover > tbody > tr:hover > td,
-        .table-hover > tbody > tr:hover > th {
-            background-color: lightgray;
-        }
+            .table-hover > tbody > tr:hover > td,
+            .table-hover > tbody > tr:hover > th {
+                background-color: lightgray;
+            }
 
 
-        .selected {
-            color: black;
-            background-color: lightgray;
-        }
+            .selected {
+                color: black;
+                background-color: lightgray;
+            }
 
-        .btn {
-            font-size: 10px;
-        }
+            .btn {
+                font-size: 10px;
+            }
 
-        table tr.active {
-            background: red;
-        }
+            table tr.active {
+                background: red;
+            }
 
-        a.btn {
-            -webkit-transform: scale(0.9);
-            -moz-transform: scale(0.6);
-            -o-transform: scale(0.6);
-            -webkit-transition-duration: 0.5s;
-            -moz-transition-duration: 0.5s;
-            -o-transition-duration: 0.5s;
-        }
-    </style>
+            a.btn {
+                -webkit-transform: scale(0.9);
+                -moz-transform: scale(0.6);
+                -o-transform: scale(0.6);
+                -webkit-transition-duration: 0.5s;
+                -moz-transition-duration: 0.5s;
+                -o-transition-duration: 0.5s;
+            }
+        </style>
