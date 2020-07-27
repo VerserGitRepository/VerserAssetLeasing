@@ -122,5 +122,44 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return returnmodel;
         }
+        public static List<string> GetAccountAndCustomerNames(out List<string> accountNames)
+        {
+            //opportunityNumber = "";
+            accountNames = new List<string>();
+           // List<string> accountNames = new List<string>();
+
+
+            var SfdcBinding = new SforceService();
+            LoginResult CurrentLoginResult = null;
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
+            SfdcBinding.Url = CurrentLoginResult.serverUrl;
+            SfdcBinding.SessionHeaderValue = new SessionHeader();
+            SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
+            QueryResult queryResult = null;
+            
+               
+            string query = "select Name from account";
+            queryResult = SfdcBinding.query(query);
+            // StreamWriter info = new StreamWriter("C:\\temp\\salesforce.txt");
+            if (queryResult.size > 0)
+            {
+
+              //  Account lead = (Account)queryResult.records;
+              //  accountNames = lead.Opportunity_Number__c;
+
+
+          
+                return null;
+            }
+            else
+            {
+               // string result = createResults[0].errors[0].message;
+               // opportunityNumber = "0";
+                return null;
+            }
+            //SfdcBinding.createCompleted += new createCompletedEventHandler(CreationDone);// (new sObject[] { opn });           
+            //Console.WriteLine("Successfully added the record.");
+        }
     }
 }

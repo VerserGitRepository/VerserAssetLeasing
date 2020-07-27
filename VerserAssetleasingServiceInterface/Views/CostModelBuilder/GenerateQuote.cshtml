@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <br>
 <div class="container-fluid" style="margin-left:0px;padding-top:0px">
     <div class="container" style="width:100%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:0px">
@@ -450,9 +451,60 @@
                 dataType: "json",
                 success: function (r) {
                     alert(r + " record(s) inserted.");
+                    LoadDataTable();
+                    $('a[href="#tab_default_1"]').click();
                 }
             });
         }
+        function LoadDataTable() {
+            var loadUrl = '@Url.Action("GetQuotesList", "CostModelBuilder")';
+
+            $.ajax({
+
+                type: "GET",
+                url: loadUrl,
+                contentType: "application/json; charset=utf-8",              
+                datatype: "json",               
+                success: function (data) {
+                  
+                    populateDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }
+
+        function populateDataTable(data) {
+            console.log("populating data table...");
+            // clear the table before populating it with more data
+            $("#mainTable").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable').dataTable().fnAddData(["", "", "", "", "", "", "",""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var quote = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+
+
+
+                    $('#mainTable').dataTable().fnAddData([
+                        "<a href='javascript:void(0);' class='OpportunityDetail' data-id=" + quote.Id + ">" + quote.OpportunityNumber + "</a>",
+                        quote.OpportunityName,
+                        quote.CustomerContactName,
+                        new Date(moment(quote.startDate)).toLocaleDateString(),
+                        quote.SalesforceOpportunityName,
+                        quote.SiteAddress,
+                        quote.SalesManager,
+                        quote.TOTAL_Incl_GST
+                    ]);
+                }
+            }
+        }
+
         $('#ddlserviceCategory').multiselect({
             includeSelectAllOption: false,
             maxHeight: 250,
