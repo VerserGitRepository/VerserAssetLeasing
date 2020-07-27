@@ -27,6 +27,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
                 Quotesmodel.PostQuoteRequestModelLIST = QuoteRequestHelperService.GetTQuotes().Result;
                 Quotesmodel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+                Quotesmodel.ProjectManagerList = new SelectList(ListItemHelperServices.ProjectManagerList().Result, "ID", "Value");
+                Quotesmodel.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
                 Quotesmodel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
                 return View(Quotesmodel);
             }

@@ -16,6 +16,9 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 
         private static readonly string salesForceUser = ConfigurationManager.AppSettings["salesForceUser"];
         private static readonly string salesForcePWD = ConfigurationManager.AppSettings["salesForcePWD"];
+
+        private static readonly string CostModelAPIURL = ConfigurationManager.AppSettings["CostModelAPIBase"] + ConfigurationManager.AppSettings["CostModelAPIRoot"];    
+        
         public static bool CreateSalesForceOpportunity(SalesForceOpportunity opportunity, out string opportunityNumber, out string salesForceUniqueId)
         {
             opportunityNumber = "";
@@ -85,7 +88,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             List<ListItems> returnmodel = new List<ListItems>();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFIServiceList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -99,7 +102,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             List<ListItems> returnmodel = new List<ListItems>();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/CostModelServiceCategories")).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -113,7 +116,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             CostModelRateCard returnmodel = new CostModelRateCard();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/ServiceCostPerUnitTotal/{0}/{1}", value1, value2)).Result;
                 if (response.IsSuccessStatusCode)
                 {
