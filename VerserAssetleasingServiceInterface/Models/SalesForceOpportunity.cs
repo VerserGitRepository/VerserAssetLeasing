@@ -26,5 +26,6 @@ namespace VerserAssetleasingServiceInterface.Models
         [Required(ErrorMessage = "Customer Name Is Mandatory")]
         public string CustomerContactName { get; set; }
         public string VerserBranch { get; set; }
+        public string Status { get; set; }
     }
 }
