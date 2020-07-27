@@ -3,113 +3,117 @@
 @{
     ViewBag.Title = "Opportunity Details";
 }
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<div>
 
-    <div>
-        <div class="modal-header" style="background-color:lightgray;width:820px">
-            <h5 class="modal-title text-center">REQUEST DETAILS</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <br>
-        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:15px;padding-top:10px;width:80%">
-            <div class="container" @*style="font-size:14px;color:grey;border-color:gray"*@>
+    <br>
+    <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:15px;padding-top:10px;width:80%">
+        <div class="container" @*style="font-size:14px;color:grey;border-color:gray"*@>
 
-                <div class="form-horizontal">
-                    <div class="form-group">
+            <div class="form-horizontal">
+                <div class="form-group">
 
-                        <div class="row col-md-12  table-bordered" style="width:800px;margin-left:0px;height:150px;font-size:16px;">
-                            <div class="col-md-6">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group required">
-                                    @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.CustomerName)
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Date Started", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.startDate)
-                                    </div>
-                                </div>
-                                <div class="form-group required">
-                                    @Html.Label(" Salesforce Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
-
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
-                                    </div>
-                                </div>
-                                <div class="form-group required">
-                                    @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
-
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.siteAddress)
-                                    </div>
-                                </div>
-                                <div class="form-group required">
-                                    @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch)
-                                    </div>
+                    <div class="row col-md-12  table-bordered" style="width:800px;margin-left:0px;height:150px;font-size:16px;">
+                        <div class="col-md-6">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group required">
+                                @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.CustomerName)
                                 </div>
                             </div>
-                            <div class="col-md-6" style="border-color:gray">
-                                <div class="form-group required">
-                                    @Html.Label("Customer Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.customerContactName)
-                                    </div>
+                            <div class="form-group">
+                                @Html.Label("Date Started", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.startDate)
                                 </div>
-                                <div class="form-group required">
-                                    @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager)
-                                    </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label(" Salesforce Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
                                 </div>
-                                <div class="form-group required">
-                                    @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager)
-                                    </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.siteAddress)
                                 </div>
-                                <div class="form-group required">
-                                    @Html.Label("Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName)
-                                    </div>
-                                </div>
-                                <div class="form-group required">
-                                    @Html.Label("Salesforce Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <div class="col-md-6">
-                                        @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
-                                    </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch)
                                 </div>
                             </div>
                         </div>
-
-                        <br />
-
+                        <div class="col-md-6" style="border-color:gray">
+                            <div class="form-group required">
+                                @Html.Label("Customer Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.customerContactName)
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager)
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager)
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName)
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                @Html.Label("Salesforce Opp Name", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesforceOpportunityName)
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <br />
+
                 </div>
             </div>
-            <div class=" row col-md-12 table-bordered" style="width:800px;height:270px;margin-left:1px;padding:1px">
-                <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;">
-                    <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
-                        <tr>
-                            <th>SERVICES</th>
-                            <th>QUANTITY</th>
-                            <th>TOTAL PRICE</th>
-                            <th style="width:5px"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ServiceItemsLists)
-                        {
-                        <tr>
+        </div>
+        <div class=" row col-md-12 table-bordered" style="width:800px;height:270px;margin-left:1px;padding:1px">
+            <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;">
+                <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
+                    <tr>
+                        <th>SERVICES</th>
+                        <th>QUANTITY</th>
+                        <th>TOTAL PRICE</th>
+                        <th style="width:5px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ServiceItemsLists)
+                    {
+                        <tr class="tr_clone">
                             <td>
-                                <span style="width:2px">@item.ServiceDescription</span>
-                                @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceId, Model.CostModelQuoteRequestModel.CostModelServices, "Service", new { @class = "form-control ", id = "ddlservice", @multiple = "multiple",@display="none"})
+                                @Html.Label(@item.ServiceDescription)
+                                @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceId, Model.CostModelQuoteRequestModel.CostModelServices, "Service", new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn", @multiple = "multiple", @style = "display:none" })
+
                             </td>
-                            <td>@item.Quantity </td>
+                            <td>
+                                @Html.Label(@item.Quantity.ToString())
+                                <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" />
+                            </td>
                             <td>@item.TotalPrice</td>
                             <td width="5%">
                                 <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
@@ -132,115 +136,170 @@
                                 </a>
 
                                 @*<a class="Update" href="javascript:;" style="display:none" id="Update">Update</a>
-        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
+                            <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
                                 @*<a class="Delete" href="javascript:;">Delete</a>*@
                             </td>
                         </tr>
-                        }
-                    </tbody>
-                   
-                    <tfoot>
-                        <tr >
-                            <td>Total Excl GST </td>
-                            <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Excl_GST)</td>
-                        </tr>
-                    </tfoot>
-                    <tfoot>
-                        <tr>
-                            <td>GST</td>
-                            <td>@Html.DisplayFor(m => m.CostModelQuoteRequestModel.gsT_10)</td>
-                        </tr>
-                    </tfoot>
-                    <tfoot>
-                        <tr>
-                            <td>Total Incl GS</td>
-                            <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Incl_GST)</td>
-                        </tr>
-                    </tfoot>
+                    }
+                </tbody>
 
-                </table>
-            </div>
-            </div>
+                <tfoot>
+                    <tr>
+                        <td>Total Excl GST </td>
+                        <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Excl_GST)</td>
+                    </tr>
+                </tfoot>
+                <tfoot>
+                    <tr>
+                        <td>GST</td>
+                        <td>@Html.DisplayFor(m => m.CostModelQuoteRequestModel.gsT_10)</td>
+                    </tr>
+                </tfoot>
+                <tfoot>
+                    <tr>
+                        <td>Total Incl GS</td>
+                        <td> @Html.DisplayFor(m => m.CostModelQuoteRequestModel.totaL_Incl_GST)</td>
+                    </tr>
+                </tfoot>
 
+            </table>
+            <input type="button" class="btn-primary btn-lg" value="ADD SERVICE" id="btnSubmit" onclick="AddRow()" />
+            <div class="footerDiv">
+
+
+                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" />
+                <input type="submit" class="btn-primary btn-lg" value="Export to Excel" id="btnExportExcel" />
+            </div>
         </div>
-        @section Scripts {
+    </div>
 
-            @Scripts.Render("~/bundles/jqueryval")
+</div>
 
-            <script type="text/javascript">
-
-                $('#tblCustomers').dataTable({
-                    responsive: true,
-                    stateSave: true
-                });
-            </script>
-        }
 <script>
-    $("body").on("click", "#tblCustomers .Edit", function () {
-        // debugger;
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
-                $(this).find("select").show();
-            //    $(this).find("#txtComments").show();
-                $(this).find("span").hide();
-            //    $(this).toggleClass('selected');
+    $(document).ready(function () {
+
+        $('.ddlserviceNewOpn').removeAttr('multiple')
+        $('.ddlserviceNewOpn').multiselect({
+
+            includeSelectAllOption: false,
+            maxHeight: 250,
+            buttonWidth: '280px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+
+        });
+        $(".ddlserviceNewOpn").next().hide();
+        $("body").on("click", "#tblCustomers .Edit", function () {
+
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
+                $(this).find("span").show();
+                $(this).find($(".ddlserviceNewOpn")).next().show();
+                $('.ddlserviceNewOpn').multiselect('rebuild');
+                $(this).find("#txtActualQuantity").show();
+                $(this).find("label").hide();
+                //    $(this).toggleClass('selected');
+
+                //}
+            });
+            row.find(".Update").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").show();
+
+            //var origVal = row.find("#hdnddlLidt").val();
+
+
+            //if (origVal == "1") {
+            //    row.find("#txtActualQuantity").attr('readonly', true);
 
             //}
+            //else {
+            //    row.find("#txtActualQuantity").attr('readonly', false);
+            //}
+
+            $(this).hide();
         });
-        row.find(".Update").show();
-        row.find(".Cancel").show();
-        row.find(".Delete").show();
 
-        //var origVal = row.find("#hdnddlLidt").val();
+        $("body").on("click", "#tblCustomers .Cancel", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                $(this).find($(".ddlserviceNewOpn")).next().hide();
+                //$('.ddlserviceNewOpn').multiselect('rebuild');
+                $(this).find("#txtActualQuantity").hide();
+                $(this).find("label").show();
+            });
+            row.find(".Edit").show();
+            row.find(".Update").hide();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
 
-
-        //if (origVal == "1") {
-        //    row.find("#txtActualQuantity").attr('readonly', true);
-
-        //}
-        //else {
-        //    row.find("#txtActualQuantity").attr('readonly', false);
-        //}
-
-        $(this).hide();
+       
     });
+    function AddRow() {
+       
+        var table = $('#tblCustomers')[0];
+       // debugger;
+        var lengthtotal = $('#tblCustomers tbody').find('tr').length;
+        var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal-1];
+        //var thisRow = $('#tblCustomers').find('tr')[1];
+        $(thisRow).clone().insertAfter(thisRow);
+
+        var row = $('#tblCustomers tbody').find('tr')[lengthtotal];
+        $("td", row).each(function () {
+            //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
+            $(this).find("span").show();
+            $(this).find($(".ddlserviceNewOpn")).next().show();
+            debugger;
+            $(this).find($(".ddlserviceNewOpn")).next().multiselect();
+          //  $('.ddlserviceNewOpn').multiselect('destroy');
+           // $('.ddlserviceNewOpn').multiselect();
+            $(this).find("#txtActualQuantity").show();
+            $(this).find("label").hide();
+            $(this).find(".Edit").hide();
+            $(this).find(".Update").hide();
+            $(this).find(".Delete").show();
+        });
+
+       
+    }
 </script>
-        <style>
-/*.modal-backdrop {
-   background-color: transparent;
-}*/         .modal-dialog {
-                width: 850px;
-                margin: 30px auto;
-                margin-bottom: 10px;
-                font-size: 14px;
-            }
+<style>
+    /*.modal-backdrop {
+       background-color: transparent;
+    }*/ .modal-dialog {
+        width: 850px;
+        margin: 30px auto;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
 
-            .table-hover > tbody > tr:hover > td,
-            .table-hover > tbody > tr:hover > th {
-                background-color: lightgray;
-            }
+    .table-hover > tbody > tr:hover > td,
+    .table-hover > tbody > tr:hover > th {
+        background-color: lightgray;
+    }
 
 
-            .selected {
-                color: black;
-                background-color: lightgray;
-            }
+    .selected {
+        color: black;
+        background-color: lightgray;
+    }
 
-            .btn {
-                font-size: 10px;
-            }
+    .btn {
+        font-size: 10px;
+    }
 
-            table tr.active {
-                background: red;
-            }
+    table tr.active {
+        background: red;
+    }
 
-            a.btn {
-                -webkit-transform: scale(0.9);
-                -moz-transform: scale(0.6);
-                -o-transform: scale(0.6);
-                -webkit-transition-duration: 0.5s;
-                -moz-transition-duration: 0.5s;
-                -o-transition-duration: 0.5s;
-            }
-        </style>
+    a.btn {
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.6);
+        -o-transform: scale(0.6);
+        -webkit-transition-duration: 0.5s;
+        -moz-transition-duration: 0.5s;
+        -o-transition-duration: 0.5s;
+    }
+</style>

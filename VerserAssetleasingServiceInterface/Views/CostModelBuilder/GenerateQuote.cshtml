@@ -243,9 +243,18 @@
                 datatype: "json",
                 success: function (data) {
                     // debugger;
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(options);
-                    $('#myModal').modal('show');
+                    $.confirm({
+                        boxWidth: '900px',
+                        useBootstrap: false,
+
+                        title: '',
+                        content: data,
+                        closeIcon: true,
+
+                        buttons: {
+                            OK: { isHidden: true }
+                        }
+                    });
                 },
                 error: function (data) {
                     alert("Dynamic content load failed.");
