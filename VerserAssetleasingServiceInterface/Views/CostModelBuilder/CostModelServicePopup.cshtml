@@ -40,8 +40,8 @@
             <div class="form-group col-md-6">
                 @Html.Label("Sales Manager")
 
-                @*@Html.TextBoxFor(x => x.SalesManager, new { @class = "form-control required", @id = "txtSalesManager" })*@
-                @Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })
+                @Html.TextBoxFor(x => x.SalesManager, new { @class = "form-control required", @id = "txtSalesManager" })
+                @*@Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })*@
                 @Html.ValidationMessageFor(model => model.SalesManager, "", new { @class = "text-danger" })
 
 
@@ -55,8 +55,8 @@
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.Label("Project Manager")
-                @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" }))
-                @*@Html.TextBoxFor(x => x.ProjectManager, new { @class = "form-control required", @id = "txtProjectManager" })*@
+                @*@Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" }))*@
+                @Html.TextBoxFor(x => x.ProjectManager, new { @class = "form-control required", @id = "txtProjectManager" })
                 @Html.ValidationMessageFor(model => model.ProjectManager, "", new { @class = "text-danger" })
             </div>
 
