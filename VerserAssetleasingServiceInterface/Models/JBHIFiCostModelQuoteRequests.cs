@@ -38,6 +38,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public int CostModelServiceId { get; set; }
         public SelectList CostModelServicesCategories { get; internal set; }
         public int CostModelServiceCategoryId { get; set; }
+        public string Status { get; set; }
 
 
     }
