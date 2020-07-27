@@ -27,5 +27,6 @@ namespace VerserAssetleasingServiceInterface.Models
         public string CustomerContactName { get; set; }
         public string VerserBranch { get; set; }
         public string Status { get; set; }
+        public JBHIFiCostModelQuoteRequests JBHIFiCostModelQuoteRequest { get; set; }
     }
 }

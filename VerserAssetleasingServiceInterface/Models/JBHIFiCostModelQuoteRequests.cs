@@ -11,6 +11,8 @@ namespace VerserAssetleasingServiceInterface.Models
         public List<JBHIFiCostModelQuoteRequests> QuoteList { get; set; }
         public List<JBHIFiCostModelServiceItems> QuoteServiceItems { get; set; }
 
+        
+
         public List<PostQuoteRequestModel> PostQuoteRequestModelLIST { get; set; }        
         public JBHIFiCostModelQuoteRequests()
         {
@@ -35,11 +37,14 @@ namespace VerserAssetleasingServiceInterface.Models
         public decimal gsT_10 { get; set; }
         public decimal totaL_Excl_GST { get; set; }
         public SelectList CostModelServices { get; internal set; }
+        public SelectList ProjectManagerList { get; internal set; }
+        public SelectList SalesManagerList { get; internal set; }
         public int CostModelServiceId { get; set; }
         public SelectList CostModelServicesCategories { get; internal set; }
         public int CostModelServiceCategoryId { get; set; }
         public string Status { get; set; }
-
+        public string OpportunityVersion { get; set; }
+        public string RequestStatus { get; set; }
 
     }
 }
