@@ -112,19 +112,14 @@
                             </td>
                             <td>
                                 @Html.Label(@item.Quantity.ToString())
-                                <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" />
+                                <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" onchange="CalculatePrice(this);"/>
                             </td>
-                            <td>@item.TotalPrice</td>
+                            <td>  @Html.Label(@item.TotalPrice.ToString())</td>
                             <td width="5%">
                                 <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     <span><strong>Edit</strong></span>
-                                </a>
-
-                                <a class="Update btn btn-success a-btn-slide-text" href="javascript:;" style="display:none" id="Update">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <span><strong>Update</strong></span>
-                                </a>
+                                </a>                               
                                 <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
                                     <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
                                     <span><strong>Delete</strong></span>
@@ -203,7 +198,7 @@
 
                 //}
             });
-            row.find(".Update").show();
+            
             row.find(".Cancel").show();
             row.find(".Delete").show();
 
@@ -230,40 +225,108 @@
                 $(this).find("label").show();
             });
             row.find(".Edit").show();
-            row.find(".Update").hide();
+            
             row.find(".Delete").hide();
             $(this).hide();
         });
 
-       
-    });
-    function AddRow() {
-       
-        var table = $('#tblCustomers')[0];
-       // debugger;
-        var lengthtotal = $('#tblCustomers tbody').find('tr').length;
-        var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal-1];
-        //var thisRow = $('#tblCustomers').find('tr')[1];
-        $(thisRow).clone().insertAfter(thisRow);
-
-        var row = $('#tblCustomers tbody').find('tr')[lengthtotal];
-        $("td", row).each(function () {
-            //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
-            $(this).find("span").show();
-            $(this).find($(".ddlserviceNewOpn")).next().show();
-            debugger;
-            $(this).find($(".ddlserviceNewOpn")).next().multiselect();
-          //  $('.ddlserviceNewOpn').multiselect('destroy');
-           // $('.ddlserviceNewOpn').multiselect();
-            $(this).find("#txtActualQuantity").show();
-            $(this).find("label").hide();
-            $(this).find(".Edit").hide();
-            $(this).find(".Update").hide();
-            $(this).find(".Delete").show();
+        $("body").on("click", "#tblCustomers .Delete", function () {
+            $(this).closest("tr").remove();          
         });
 
        
+    });
+    var tableLength = $('#tblCustomers tbody').find('tr').length;
+    tableLength = tableLength;
+    
+    function AddRow() {
+
+        $("#tblCustomers").find('select').each(function () {
+            //  alert('ddl');
+            $(this).multiselect('destroy');
+        });
+        var table = $('#tblCustomers')[0];
+        //debugger;
+        var lengthtotal = $('#tblCustomers tbody').find('tr').length;
+        var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal-1];
+        //var thisRow = $('#tblCustomers').find('tr')[1];
+        $('#tblCustomers tbody').append($(thisRow).clone());//.insertAfter(thisRow);
+
+        var row = $('#tblCustomers tbody').find("tr:gt("+(tableLength-1)+")");
+        $(row).find('label').hide();
+        $(row).find("#txtActualQuantity").show();
+        $(row).find(".Edit").hide();
+        
+        $(row).find(".Delete").show();
+        $(row).find('select').each(function () {
+            //     alert('ddl');
+            //  $(this).removeAttr('multiple')
+
+            switch (document.readyState) {
+                case "loading":
+                    // The document is still loading.
+                    break;
+                case "interactive":
+                    // The document has finished loading. We can now access the DOM elements.
+                    // But sub-resources such as images, stylesheets and frames are still loading.
+
+                    break;
+                case "complete":
+                    // The page is fully loaded.
+
+                    $(this).multiselect({
+
+                        includeSelectAllOption: false,
+                        maxHeight: 250,
+                        buttonWidth: '280px',
+                        enableFiltering: true,
+                        enableCaseInsensitiveFiltering: true
+
+                    });
+                   
+                    break;
+            }
+            //  $(this).removeAttr('multiple');
+            $(this).multiselect('refresh');
+        });
+        //$("td", row).each(function () {
+        //    //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
+        //   // $(this).find("span").show();
+           
+        //    $(this).find("#txtActualQuantity").show();
+        //    $(this).find("label").hide();
+        //    $(this).find(".Edit").hide();
+        //    $(this).find(".Update").hide();
+        //    $(this).find(".Delete").show();
+        //});
     }
+    function CalculatePrice(control) {
+        
+        var CostModelDetailsURL = '@Url.Action("GetTotalPrice", "CostModelBuilder")';
+            var ctrl = control.parentElement.parentElement;
+            var totalPrice = 0;
+        $.getJSON(CostModelDetailsURL, { value1: $(ctrl).find($($(ctrl).children()[0])).find('select').val(), value2: $(ctrl).find($($(ctrl).children()[1])).find('input').val() }, function (response) {
+            $(ctrl).find($($(ctrl).children()[2])).find('label').show();
+            var resr = $(ctrl).find($($(ctrl).children()[2])).find('label').text(response);
+            //$(ctrl).find($($(ctrl).children()[0])).find('input').val($(ctrl).find($($(ctrl).children()[0])).find('select').val());
+            //$(ctrl).find($($(ctrl).children()[1])).find('input').val($(ctrl).find($($(ctrl).children()[1])).find('select').val());
+
+            //$("#containerDiv").find('table tr').each(function () {
+
+            //    var row = $(this);
+
+            //    totalPrice += +row.find("td").eq(3).find('input').val();
+
+            //});
+            //$("#txtPrice").val(totalPrice);
+            //var gst = ((10 / 100) * totalPrice).toFixed(2);
+            //$("#txtGST").val(gst);
+            //$("#txtTotalPrice").val(+totalPrice + +gst);
+
+        });
+
+
+        }
 </script>
 <style>
     /*.modal-backdrop {
