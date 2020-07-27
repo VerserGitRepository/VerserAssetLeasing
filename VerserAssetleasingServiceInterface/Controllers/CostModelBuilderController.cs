@@ -161,7 +161,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                return PartialView("CostModelServicePopup");
+                SalesForceOpportunity model = new SalesForceOpportunity();
+                model.JBHIFiCostModelQuoteRequest = new JBHIFiCostModelQuoteRequests();
+                model.JBHIFiCostModelQuoteRequest.ProjectManagerList = new SelectList(ListItemHelperServices.ProjectManagerList().Result, "ID", "Value");
+                model.JBHIFiCostModelQuoteRequest.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
+                return PartialView("CostModelServicePopup",model);
             }
         }
         [HttpGet]
