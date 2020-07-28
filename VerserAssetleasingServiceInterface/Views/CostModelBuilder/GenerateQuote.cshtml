@@ -217,7 +217,9 @@
     </div>
 
 </div>
-
+<div id="spinner" style="display:none;">
+    <img src="~/Images/ajax-loader.gif" />
+</div>
 <div id='myModal' class='modal' role="dialog" title="NEW SALESFORCE REQUEST" data-keyboard="false" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -390,13 +392,27 @@
             str = str + "<script src='/Scripts/jquery.validate.min.js'><\/script>";
             str = str + "<script src='/Scripts/jquery.validate.unobtrusive.js'><\/script>";
             str = str + "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js'><\/script>";
+            var obj = null;
             $.ajax({
                 type: "GET",
                 url: CostModelDetailsURL,
                 contentType: "application/json; charset=utf-8",
 
                 datatype: "json",
+                beforeSend: function () {
+                    obj = $.alert({
+                        boxWidth: '50px',
+                        useBootstrap: false,
+                        title: '',
+                        content: $("#spinner").html(),
+                        buttons: {
+                            yes: { isHidden: true }
+                        }
+                    })
+                },
                 success: function (data) {
+                    $("#spinner").hide();
+                    obj.close();
                     html = str + data;
                     $.confirm({
                         boxWidth: '700px',

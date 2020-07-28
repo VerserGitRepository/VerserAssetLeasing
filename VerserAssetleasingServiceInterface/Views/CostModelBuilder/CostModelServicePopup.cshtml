@@ -18,25 +18,12 @@
                 @Html.DropDownListFor(m => m.Customer, Model.AccountNames, "Customer Account", new { @class = "form-control ", @id = "ddlAccount", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.Customer, "", new { @class = "text-danger" })
             </div>
-
-            <div class="form-group col-md-6">
-                @Html.Label("Site Address")
-                @Html.TextBoxFor(x => x.SiteAddress, new { @class = "form-control required", @id = "txtAddress" })
-                @Html.ValidationMessageFor(model => model.SiteAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.Label("Customer Contact Name")
-                @Html.TextBoxFor(x => x.CustomerContactName, new { @class = "form-control required", @id = "txtCustomerName" })
-                @Html.ValidationMessageFor(model => model.CustomerContactName, "", new { @class = "text-danger" })
-            </div>
-
             <div class="form-group col-md-6">
                 @Html.Label("Opportunity Name")
                 @Html.DropDownListFor(m => m.OpportunityName, Model.OpportunityNames, "Opportunity", new { @class = "form-control ", @id = "ddlOpportunity", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.OpportunityName, "", new { @class = "text-danger" })
             </div>
+
         </div>
         <div class="row">
 
@@ -50,17 +37,32 @@
 
             </div>
             <div class="form-group col-md-6">
-                @Html.Label("EMail")
-                @Html.TextBoxFor(x => x.Email, new { @class = "form-control required", @id = "txtEmail" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
                 @Html.Label("Project Manager")
                 @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" })
                 @*@Html.TextBoxFor(x => x.ProjectManager, new { @class = "form-control required", @id = "txtProjectManager" })*@
                 @Html.ValidationMessageFor(model => model.ProjectManager, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.Label("Customer Contact Name")
+                @Html.TextBoxFor(x => x.CustomerContactName, new { @class = "form-control required", @id = "txtCustomerName" })
+                @Html.ValidationMessageFor(model => model.CustomerContactName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.Label("Site Address")
+                @Html.TextBoxFor(x => x.SiteAddress, new { @class = "form-control required", @id = "txtAddress" })
+                @Html.ValidationMessageFor(model => model.SiteAddress, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.Label("EMail")
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control required", @id = "txtEmail" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group col-md-6">
