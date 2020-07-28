@@ -48,12 +48,12 @@
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
-                                <div class="col-md-1">
+                                @*<div class="col-md-1">
                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                </div>
+                                </div>*@
                             </div><br>
                             <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
                                 <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
@@ -65,41 +65,44 @@
                                         <th>SUMMARY</th>
                                         <th>SITEADDRESS</th>
                                         <th>SALESMANAGER</th>
+                                        <th>STATUS</th>
                                         <th>TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
                                     {
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
-                                                @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.OpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CustomerContactName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StartDate)
-                                            </td>
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                            @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerContactName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SiteAddress)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesManager)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
-                                            </td>
-                                        </tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SiteAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesManager)
+                                        </td>
+                                        <td>
+                                            @Html.Display("Status")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -107,6 +110,22 @@
                     </div>
                     <div class="tab-pane" id="tab_default_2">
                         @*<div class="col-md-8">*@
+                        <div class="pull-right col-md-offset-4">
+                            <div class="col-md-1">
+                                @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
+                                {
+                                    <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
+
+                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                }
+                            </div>
+                            <div class="col-md-1">
+                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="txtSalesForceOpportunity" data-toggle="tooltip" data-placement="left" title="Add">
+            </div>
+            <div class="col-md-1">
+                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+            </div>
+                        </div><br>
                         <div class="panel panel-default" style="width:30%">
                             <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:</label>
                         </div>
@@ -114,6 +133,7 @@
                         <div class="container" id="containerDiv" style="display:none">
                             <input type="hidden" id="hdnQuoteId" />
                             <input type="hidden" id="hdnSalesForceId" />
+
                             <div class="row" style="padding-top:10px;padding-left:20px" id="rowDiv">
                                 <table class="table table-hover table-bordered table-striped" id="rowTable">
                                     <tr>
@@ -140,11 +160,11 @@
                                             <input type="hidden" id="hdnsPrice" />
                                         </td>
                                         <td width="5%">
-                                            
+
                                             <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;">
                                                 <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
                                                 <span><strong>Delete</strong></span>
-                                            </a>                                          
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>
@@ -184,7 +204,7 @@
                             <div class="row">
 
                                 <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />                              
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
                             </div>
                         </div>
                     </div>
@@ -198,7 +218,7 @@
 
 </div>
 
-<div id='myModal' class='modal' role="dialog" data-keyboard="false" data-backdrop="false">
+<div id='myModal' class='modal' role="dialog" title="NEW SALESFORCE REQUEST" data-keyboard="false" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -228,16 +248,18 @@
             $('#mainTable').DataTable();
                 });
 
-         $('#edit').on('shown.bs.modal', function () {
+        $('#edit').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
-    })
-    $('#myModal').on('shown.bs.modal', function () {
+         })
+        $('#myModal').on('shown.bs.modal', function () {
+           
         $('#myInput').trigger('focus')
     })
       var CandidateDetailsURL = './CostModelOppDetails';
     $(function () {
         $("#mainTable").on("click", ".OpportunityDetail", function () {
-            // debugger;
+            
+            // debugger; , draggable: true
             var $buttonClicked = $(this);
             var Id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
@@ -561,7 +583,7 @@
     .tabbable-line > .nav-tabs {
         border: none;
         margin: 0px;
-    }
+    }3
 
     .row {
         width: 100%;

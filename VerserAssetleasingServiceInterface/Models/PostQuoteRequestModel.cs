@@ -11,7 +11,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public int OpportunityNumber { get; set; }
         public string OpportunityName { get; set; }
         public string Email { get; set; }
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; }        
         public DateTime StartDate { get; set; }
         public string CustomerContactName { get; set; }
         public string SalesforceOpportunityName { get; set; }
@@ -23,5 +23,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public decimal TOTAL_Incl_GST { get; set; }
         public decimal GST_10 { get; set; }
         public decimal TOTAL_Excl_GST { get; set; }
+        public string OpportunityVersion { get; set; }
+        public string RequestStatus { get; set; }
     }
 }
