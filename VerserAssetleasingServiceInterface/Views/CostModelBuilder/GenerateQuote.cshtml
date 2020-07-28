@@ -48,12 +48,12 @@
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
-                                <div class="col-md-1">
+                                @*<div class="col-md-1">
                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                </div>
+                                </div>*@
                             </div><br>
                             <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
                                 <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
@@ -65,41 +65,44 @@
                                         <th>SUMMARY</th>
                                         <th>SITEADDRESS</th>
                                         <th>SALESMANAGER</th>
+                                        <th>STATUS</th>
                                         <th>TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
                                     {
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
-                                                @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.OpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CustomerContactName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StartDate)
-                                            </td>
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                            @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerContactName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SiteAddress)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesManager)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
-                                            </td>
-                                        </tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SiteAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesManager)
+                                        </td>
+                                        <td>
+                                            @Html.Display("Status")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -192,7 +195,7 @@
 
 </div>
 
-<div id='myModal' class='modal' role="dialog" data-keyboard="false" data-backdrop="false">
+<div id='myModal' class='modal' role="dialog" title="NEW SALESFORCE REQUEST" data-keyboard="false" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -222,16 +225,18 @@
             $('#mainTable').DataTable();
                 });
 
-         $('#edit').on('shown.bs.modal', function () {
+        $('#edit').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
-    })
-    $('#myModal').on('shown.bs.modal', function () {
+         })
+        $('#myModal').on('shown.bs.modal', function () {
+           
         $('#myInput').trigger('focus')
     })
       var CandidateDetailsURL = './CostModelOppDetails';
     $(function () {
         $("#mainTable").on("click", ".OpportunityDetail", function () {
-            // debugger;
+            
+            // debugger; , draggable: true
             var $buttonClicked = $(this);
             var Id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
