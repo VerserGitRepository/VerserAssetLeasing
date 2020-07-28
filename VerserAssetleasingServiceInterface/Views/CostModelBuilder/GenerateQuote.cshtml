@@ -110,6 +110,22 @@
                     </div>
                     <div class="tab-pane" id="tab_default_2">
                         @*<div class="col-md-8">*@
+                        <div class="pull-right col-md-offset-4">
+                            <div class="col-md-1">
+                                @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
+                                {
+                                    <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
+
+                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                }
+                            </div>
+                            <div class="col-md-1">
+                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="txtSalesForceOpportunity" data-toggle="tooltip" data-placement="left" title="Add">
+            </div>
+            <div class="col-md-1">
+                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+            </div>
+                        </div><br>
                         <div class="panel panel-default" style="width:30%">
                             <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:</label>
                         </div>
@@ -117,6 +133,7 @@
                         <div class="container" id="containerDiv" style="display:none">
                             <input type="hidden" id="hdnQuoteId" />
                             <input type="hidden" id="hdnSalesForceId" />
+
                             <div class="row" style="padding-top:10px;padding-left:20px" id="rowDiv">
                                 <table class="table table-hover table-bordered table-striped" id="rowTable">
                                     <tr>
@@ -143,11 +160,11 @@
                                             <input type="hidden" id="hdnsPrice" />
                                         </td>
                                         <td width="5%">
-                                            
+
                                             <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;">
                                                 <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
                                                 <span><strong>Delete</strong></span>
-                                            </a>                                          
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>
@@ -187,7 +204,7 @@
                             <div class="row">
 
                                 <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />                              
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
                             </div>
                         </div>
                     </div>
