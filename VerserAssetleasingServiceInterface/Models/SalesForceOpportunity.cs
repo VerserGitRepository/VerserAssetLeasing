@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace VerserAssetleasingServiceInterface.Models
 {
@@ -27,6 +28,8 @@ namespace VerserAssetleasingServiceInterface.Models
         public string CustomerContactName { get; set; }
         public string VerserBranch { get; set; }
         public string Status { get; set; }
+        public SelectList AccountNames { get; internal set; }
+        public SelectList OpportunityNames { get; internal set; }
         public JBHIFiCostModelQuoteRequests JBHIFiCostModelQuoteRequest { get; set; }
     }
 }

@@ -125,12 +125,12 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return returnmodel;
         }
-        public static List<string> GetAccountAndCustomerNames(out List<string> accountNames)
+        public static List<ListItemViewModel> GetAccountAndCustomerNames(out List<ListItemViewModel> accountNames)
         {
             //opportunityNumber = "";
-            accountNames = new List<string>();
-           // List<string> accountNames = new List<string>();
-
+            accountNames = new List<ListItemViewModel>();
+            List<ListItemViewModel> oppNames = new List<ListItemViewModel>();
+            
 
             var SfdcBinding = new SforceService();
             LoginResult CurrentLoginResult = null;
@@ -140,29 +140,30 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             SfdcBinding.SessionHeaderValue = new SessionHeader();
             SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
             QueryResult queryResult = null;
-            
-               
+            QueryResult oppQueryResult = null;
+
+
             string query = "select Name from account";
             queryResult = SfdcBinding.query(query);
-            // StreamWriter info = new StreamWriter("C:\\temp\\salesforce.txt");
+
+            string oppQuery = "select Name from Opportunity";
+
+            oppQueryResult = SfdcBinding.query(oppQuery);
             if (queryResult.size > 0)
             {
-
-              //  Account lead = (Account)queryResult.records;
-              //  accountNames = lead.Opportunity_Number__c;
-
-
-          
-                return null;
+                for (int i = 0; i < 500; i++)
+                {
+                    accountNames.Add(new ListItemViewModel() {Id= i,Value= ((Account)queryResult.records[i]).Name });
+                }
             }
-            else
+            if (oppQueryResult.size > 0)
             {
-               // string result = createResults[0].errors[0].message;
-               // opportunityNumber = "0";
-                return null;
+                for (int i = 0; i < 500; i++)
+                {
+                    oppNames.Add(new ListItemViewModel() { Id = i, Value = ((Opportunity)oppQueryResult.records[i]).Name });
+                }
             }
-            //SfdcBinding.createCompleted += new createCompletedEventHandler(CreationDone);// (new sObject[] { opn });           
-            //Console.WriteLine("Successfully added the record.");
+            return oppNames;
         }
     }
 }

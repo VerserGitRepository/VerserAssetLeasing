@@ -15,7 +15,7 @@
 
             <div class="form-group col-md-6">
                 @Html.Label("Customer Name")
-                @Html.TextBoxFor(x => x.Customer, new { @class = "form-control required", @id = "txtCustomer" })
+                @Html.DropDownListFor(m => m.Customer, Model.AccountNames, "Customer Account", new { @class = "form-control ", @id = "ddlAccount", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.Customer, "", new { @class = "text-danger" })
             </div>
 
@@ -34,7 +34,7 @@
 
             <div class="form-group col-md-6">
                 @Html.Label("Opportunity Name")
-                @Html.TextBoxFor(x => x.OpportunityName, new { @class = "form-control required", @id = "txtOpportunityName" })
+                @Html.DropDownListFor(m => m.OpportunityName, Model.OpportunityNames, "Opportunity", new { @class = "form-control ", @id = "ddlOpportunity", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.OpportunityName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,7 +58,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.Label("Project Manager")
-                @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" }))
+                @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" })
                 @*@Html.TextBoxFor(x => x.ProjectManager, new { @class = "form-control required", @id = "txtProjectManager" })*@
                 @Html.ValidationMessageFor(model => model.ProjectManager, "", new { @class = "text-danger" })
             </div>
@@ -102,6 +102,12 @@
         $('#txtSalesManager').removeAttr('multiple')
         $('#txtSalesManager').multiselect('rebuild');
 
+        $('#ddlOpportunity').removeAttr('multiple')
+        $('#ddlOpportunity').multiselect('rebuild');
+
+        $('#ddlAccount').removeAttr('multiple')
+        $('#ddlAccount').multiselect('rebuild');
+
         });
 
     var uniqueId = 1;
@@ -133,6 +139,20 @@
         enableCaseInsensitiveFiltering: true
     });
     $('#txtSalesManager').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+    });
+    $('#ddlOpportunity').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#ddlAccount').multiselect({
         includeSelectAllOption: false,
         maxHeight: 250,
         buttonWidth: '280px',
