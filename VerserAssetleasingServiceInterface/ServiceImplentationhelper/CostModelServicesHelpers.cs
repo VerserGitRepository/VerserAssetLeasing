@@ -16,6 +16,9 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 
         private static readonly string salesForceUser = ConfigurationManager.AppSettings["salesForceUser"];
         private static readonly string salesForcePWD = ConfigurationManager.AppSettings["salesForcePWD"];
+
+        private static readonly string CostModelAPIURL = ConfigurationManager.AppSettings["CostModelAPIBase"] + ConfigurationManager.AppSettings["CostModelAPIRoot"];    
+        
         public static bool CreateSalesForceOpportunity(SalesForceOpportunity opportunity, out string opportunityNumber, out string salesForceUniqueId)
         {
             opportunityNumber = "";
@@ -85,7 +88,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             List<ListItems> returnmodel = new List<ListItems>();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFIServiceList")).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -99,7 +102,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             List<ListItems> returnmodel = new List<ListItems>();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/CostModelServiceCategories")).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -113,7 +116,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             CostModelRateCard returnmodel = new CostModelRateCard();
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://versergateway.com.au/TimesheetCostModelServicesDev/");
+                client.BaseAddress = new Uri(CostModelAPIURL);
                 HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/ServiceCostPerUnitTotal/{0}/{1}", value1, value2)).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -121,6 +124,45 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 }
             }
             return returnmodel;
+        }
+        public static List<string> GetAccountAndCustomerNames(out List<string> accountNames)
+        {
+            //opportunityNumber = "";
+            accountNames = new List<string>();
+           // List<string> accountNames = new List<string>();
+
+
+            var SfdcBinding = new SforceService();
+            LoginResult CurrentLoginResult = null;
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            CurrentLoginResult = SfdcBinding.login(salesForceUser, salesForcePWD);
+            SfdcBinding.Url = CurrentLoginResult.serverUrl;
+            SfdcBinding.SessionHeaderValue = new SessionHeader();
+            SfdcBinding.SessionHeaderValue.sessionId = CurrentLoginResult.sessionId;
+            QueryResult queryResult = null;
+            
+               
+            string query = "select Name from account";
+            queryResult = SfdcBinding.query(query);
+            // StreamWriter info = new StreamWriter("C:\\temp\\salesforce.txt");
+            if (queryResult.size > 0)
+            {
+
+              //  Account lead = (Account)queryResult.records;
+              //  accountNames = lead.Opportunity_Number__c;
+
+
+          
+                return null;
+            }
+            else
+            {
+               // string result = createResults[0].errors[0].message;
+               // opportunityNumber = "0";
+                return null;
+            }
+            //SfdcBinding.createCompleted += new createCompletedEventHandler(CreationDone);// (new sObject[] { opn });           
+            //Console.WriteLine("Successfully added the record.");
         }
     }
 }

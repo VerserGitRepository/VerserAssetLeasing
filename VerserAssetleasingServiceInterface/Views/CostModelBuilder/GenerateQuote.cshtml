@@ -16,6 +16,7 @@
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <br>
 <div class="container-fluid" style="margin-left:0px;padding-top:0px">
     <div class="container" style="width:100%; padding-top:15px; margin-left:0px; border-color:lightgray;padding-left:0px">
@@ -47,12 +48,12 @@
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
                                 </div>
-                                <div class="col-md-1">
+                                @*<div class="col-md-1">
                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                 </div>
                                 <div class="col-md-1">
                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                </div>
+                                </div>*@
                             </div><br>
                             <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
                                 <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
@@ -64,41 +65,44 @@
                                         <th>SUMMARY</th>
                                         <th>SITEADDRESS</th>
                                         <th>SALESMANAGER</th>
+                                        <th>STATUS</th>
                                         <th>TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
                                     {
-                                        <tr>
-                                            <td>
-                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
-                                                @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.OpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CustomerContactName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StartDate)
-                                            </td>
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                            @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerContactName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SiteAddress)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.SalesManager)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
-                                            </td>
-                                        </tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SiteAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SalesManager)
+                                        </td>
+                                        <td>
+                                            @Html.Display("Status")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -138,6 +142,13 @@
                                             <input type="text" style="width:80px" placeholder="Price" class="form-control" id="txtprice" readonly />
                                             <input type="hidden" id="hdnsPrice" />
                                         </td>
+                                        <td width="5%">
+                                            
+                                            <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;">
+                                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                                <span><strong>Delete</strong></span>
+                                            </a>                                          
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -176,8 +187,7 @@
                             <div class="row">
 
                                 <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
-                                <input type="submit" class="btn-primary btn-lg" value="Export to Excel" id="btnExportExcel" style="display:none;" />
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />                              
                             </div>
                         </div>
                     </div>
@@ -191,7 +201,7 @@
 
 </div>
 
-<div id='myModal' class='modal' role="dialog" data-keyboard="false" data-backdrop="false">
+<div id='myModal' class='modal' role="dialog" title="NEW SALESFORCE REQUEST" data-keyboard="false" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -221,16 +231,18 @@
             $('#mainTable').DataTable();
                 });
 
-         $('#edit').on('shown.bs.modal', function () {
+        $('#edit').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
-    })
-    $('#myModal').on('shown.bs.modal', function () {
+         })
+        $('#myModal').on('shown.bs.modal', function () {
+           
         $('#myInput').trigger('focus')
     })
       var CandidateDetailsURL = './CostModelOppDetails';
     $(function () {
         $("#mainTable").on("click", ".OpportunityDetail", function () {
-            // debugger;
+            
+            // debugger; , draggable: true
             var $buttonClicked = $(this);
             var Id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
@@ -242,9 +254,18 @@
                 datatype: "json",
                 success: function (data) {
                     // debugger;
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(options);
-                    $('#myModal').modal('show');
+                    $.confirm({
+                        boxWidth: '900px',
+                        useBootstrap: false,
+
+                        title: '',
+                        content: data,
+                        closeIcon: true,
+
+                        buttons: {
+                            OK: { isHidden: true }
+                        }
+                    });
                 },
                 error: function (data) {
                     alert("Dynamic content load failed.");
@@ -272,7 +293,7 @@
                     $('#containerDiv').show();
                     $('#divFooter').show();
                     $('#btnSubmitQuote').show();
-                    $('#btnExportExcel').show();
+                  
 
                 }
 
@@ -424,7 +445,14 @@
             });
                 //Loop through the Table rows and build a JSON array.
 
-            });
+        });
+        $("body").on("click", "#rowTable .Delete", function () {
+            if ($("#rowDiv").find("table").length == 1) {
+                return;
+            }
+            $(this).closest("table").remove();
+            CalculatePrice(this);
+        });
         function GenerateQuote() {
             var CostModelRateCardArr = new Array();
             $("#containerDiv").find('table tr').each(function () {
@@ -451,10 +479,62 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (r) {
-                    alert(r + " record(s) inserted.");
+                    alert(r);
+                   
+                }
+            });
+            LoadDataTable();
+            $('a[href="#tab_default_1"]').click();
+        }
+        function LoadDataTable() {
+            var loadUrl = '@Url.Action("GetQuotesList", "CostModelBuilder")';
+
+            $.ajax({
+
+                type: "GET",
+                url: loadUrl,
+                contentType: "application/json; charset=utf-8",              
+                datatype: "json",               
+                success: function (data) {
+                  
+                    populateDataTable(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
                 }
             });
         }
+
+        function populateDataTable(data) {
+            console.log("populating data table...");
+            // clear the table before populating it with more data
+            $("#mainTable").DataTable().clear();
+            var length = Object.keys(data).length;
+            if (length == 0) {
+                $('#mainTable').dataTable().fnAddData(["", "", "", "", "", "", "",""]);
+            }
+            else {
+                for (var i = 0; i <= length; i++) {
+                    var quote = data[i];
+
+                    // You could also use an ajax property on the data table initialization
+
+
+
+                    $('#mainTable').dataTable().fnAddData([
+                        "<a href='javascript:void(0);' class='OpportunityDetail' data-id=" + quote.Id + ">" + quote.OpportunityNumber + "</a>",
+                        quote.OpportunityName,
+                        quote.CustomerContactName,
+                        new Date(moment(quote.startDate)).toLocaleDateString(),
+                        quote.SalesforceOpportunityName,
+                        quote.SiteAddress,
+                        quote.SalesManager,
+                        quote.TOTAL_Incl_GST
+                    ]);
+                }
+            }
+        }
+
         $('#ddlserviceCategory').multiselect({
             includeSelectAllOption: false,
             maxHeight: 250,

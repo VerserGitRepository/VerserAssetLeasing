@@ -222,6 +222,7 @@
     <Compile Include="ServiceImplentationhelper\CostModelServicesHelpers.cs" />
     <Compile Include="ServiceImplentationhelper\DeviceCategoriesServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\InventoryItemsServicehelper.cs" />
+    <Compile Include="ServiceImplentationhelper\ListItemHelperServices.cs" />
     <Compile Include="ServiceImplentationhelper\ListItems.cs" />
     <Compile Include="ServiceImplentationhelper\QuoteRequestHelperService.cs" />
     <Compile Include="ServiceImplentationhelper\SitesServicehelper.cs" />
