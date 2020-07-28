@@ -44,28 +44,28 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                //if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
-                //{
+                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
+                {
 
-                var RequestQuoteModel = new PostQuoteRequestModel();
-                RequestQuoteModel.ProjectManager = "Arman";
-                RequestQuoteModel.SalesManager = "Danny";
-                RequestQuoteModel.VerserBranch = "Sydney";
-                RequestQuoteModel.CustomerName = opportunity.Customer;
-                RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
-                RequestQuoteModel.OpportunityNumber = Convert.ToInt32("208535");
-                RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
-                RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
-                RequestQuoteModel.StartDate = opportunity.StartDate;
-                RequestQuoteModel.Email = opportunity.Email;
+                    var RequestQuoteModel = new PostQuoteRequestModel();
+                    RequestQuoteModel.ProjectManager = "Arman";
+                    RequestQuoteModel.SalesManager = "Danny";
+                    RequestQuoteModel.VerserBranch = "Sydney";
+                    RequestQuoteModel.CustomerName = opportunity.Customer;
+                    RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
+                    RequestQuoteModel.OpportunityNumber = Convert.ToInt32("208535");
+                    RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
+                    RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
+                    RequestQuoteModel.StartDate = opportunity.StartDate;
+                    RequestQuoteModel.Email = opportunity.Email;
 
-                   var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
-                return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + "208535" + " - Id:" + 7+ "-salesForceUniqueId:" + "0062v00001P94BSAAZ", JsonRequestBehavior.AllowGet);
-                //}
-                //else
-                //{
-                //    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-                //}
+                    var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
+                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + opportunityNumber + " - Id:" + IsRequestCompleted.Id + "-salesForceUniqueId:" + salesForceUniqueId, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
             }
 
         }
@@ -161,7 +161,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                return PartialView("CostModelServicePopup");
+                SalesForceOpportunity model = new SalesForceOpportunity();
+                model.JBHIFiCostModelQuoteRequest = new JBHIFiCostModelQuoteRequests();
+                model.JBHIFiCostModelQuoteRequest.ProjectManagerList = new SelectList(ListItemHelperServices.ProjectManagerList().Result, "ID", "Value");
+                model.JBHIFiCostModelQuoteRequest.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
+                return PartialView("CostModelServicePopup",model);
             }
         }
         [HttpGet]

@@ -142,6 +142,13 @@
                                             <input type="text" style="width:80px" placeholder="Price" class="form-control" id="txtprice" readonly />
                                             <input type="hidden" id="hdnsPrice" />
                                         </td>
+                                        <td width="5%">
+                                            
+                                            <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;">
+                                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                                <span><strong>Delete</strong></span>
+                                            </a>                                          
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -180,8 +187,7 @@
                             <div class="row">
 
                                 <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
-                                <input type="submit" class="btn-primary btn-lg" value="Export to Excel" id="btnExportExcel" style="display:none;" />
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />                              
                             </div>
                         </div>
                     </div>
@@ -287,7 +293,7 @@
                     $('#containerDiv').show();
                     $('#divFooter').show();
                     $('#btnSubmitQuote').show();
-                    $('#btnExportExcel').show();
+                  
 
                 }
 
@@ -439,7 +445,14 @@
             });
                 //Loop through the Table rows and build a JSON array.
 
-            });
+        });
+        $("body").on("click", "#rowTable .Delete", function () {
+            if ($("#rowDiv").find("table").length == 1) {
+                return;
+            }
+            $(this).closest("table").remove();
+            CalculatePrice(this);
+        });
         function GenerateQuote() {
             var CostModelRateCardArr = new Array();
             $("#containerDiv").find('table tr').each(function () {
@@ -466,11 +479,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (r) {
-                    alert(r + " record(s) inserted.");
-                    LoadDataTable();
-                    $('a[href="#tab_default_1"]').click();
+                    alert(r);
+                   
                 }
             });
+            LoadDataTable();
+            $('a[href="#tab_default_1"]').click();
         }
         function LoadDataTable() {
             var loadUrl = '@Url.Action("GetQuotesList", "CostModelBuilder")';

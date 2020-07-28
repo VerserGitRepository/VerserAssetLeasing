@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "CostModelServicePopup";
 }
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 @using (Ajax.BeginForm("CreateSalesForceOpportunity", "CostModelBuilder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
 {
     <div class="panel-heading panel-title" style="background-color:lightgray">NEW SALESFORCE REQUEST</div>
@@ -70,7 +73,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label>Status</label>
-                
+
                 @Html.DropDownListFor(Model => Model.Status, new List<SelectListItem>
                     { new SelectListItem {Text="Requested",Value="1" },
                     new SelectListItem {Text="Active",Value="2" },
@@ -82,35 +85,59 @@
             </div>
 
         </div>
-        </div>
+    </div>
 
-        <div class="footer">
-            <input type="submit" class="btn-primary btn-lg" value="CREATE OPPORTUNITY" id="btnCreateSalesForceOppn" />
-        </div>
-        }
-
-
-        <script>
-            var uniqueId = 1;
-            function OnSuccess(data) {
-
-                $("#btnCreateSalesForceOppn").attr('disabled', true);
+    <div class="footer">
+        <input type="submit" class="btn-primary btn-lg" value="CREATE OPPORTUNITY" id="btnCreateSalesForceOppn" />
+    </div>
+}
 
 
-                var str = data.split('-')[0];
-                var strId = data.split('-')[1];
-                var sfId = data.split('-')[2];
-                str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
-                strId = strId.replace("Id:", "");
-                sfId = sfId.replace("salesForceUniqueId:", "");
-                $("#txtSalesForceOpportunity").text('Opportunity:' + str);
-                $("#hdnQuoteId").val(strId);
-                $("#hdnSalesForceId").val(sfId);
-                $("#btnSubmit").val("ADD SERVICE");
-                $(".jconfirm").hide();
-            }
-            function OnFailure() {
-                alert('Error has occurred in the request.');
-            }
-        </script>
+<script>
+
+    $(document).ready(function () {
+        $('#txtProjectManager').removeAttr('multiple')
+        $('#txtProjectManager').multiselect('rebuild');
+
+        $('#txtSalesManager').removeAttr('multiple')
+        $('#txtSalesManager').multiselect('rebuild');
+
+        });
+
+    var uniqueId = 1;
+    function OnSuccess(data) {
+
+        $("#btnCreateSalesForceOppn").attr('disabled', true);
+
+
+        var str = data.split('-')[0];
+        var strId = data.split('-')[1];
+        var sfId = data.split('-')[2];
+        str = str.replace("Salesforce Opportunity has been successfully created with Opportunity Number :", "");
+        strId = strId.replace("Id:", "");
+        sfId = sfId.replace("salesForceUniqueId:", "");
+        $("#txtSalesForceOpportunity").text('Opportunity:' + str);
+        $("#hdnQuoteId").val(strId);
+        $("#hdnSalesForceId").val(sfId);
+        $("#btnSubmit").val("ADD SERVICE");
+        $(".jconfirm").hide();
+    }
+    function OnFailure() {
+        alert('Error has occurred in the request.');
+    }
+    $('#txtProjectManager').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true
+    });
+    $('#txtSalesManager').multiselect({
+        includeSelectAllOption: false,
+        maxHeight: 250,
+        buttonWidth: '280px',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+    });
+</script>
 
