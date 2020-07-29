@@ -43,9 +43,7 @@
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
                                     {
-                                       
-
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export" id="exportBtn" onclick="alert('alert clicked');">
                                     }
                                 </div>
                                 @*<div class="col-md-1">
@@ -287,7 +285,7 @@
                     // debugger;
                     $("#spinner").hide();
                     obj.close();
-                    $.confirm({
+                    var obj1 = $.confirm({
                         boxWidth: '900px',
                         useBootstrap: false,
 
@@ -299,6 +297,7 @@
                             OK: { isHidden: true }
                         }
                     });
+                    $(obj1).close();
                 },
                 error: function (data) {
                     alert("Dynamic content load failed.");
@@ -428,7 +427,7 @@
                     $("#spinner").hide();
                     obj.close();
                     html = str + data;
-                    $.confirm({
+                    var obj1 = $.confirm({
                         boxWidth: '700px',
                         useBootstrap: false,
 
@@ -440,6 +439,7 @@
                             OK: { isHidden: true }
                         }
                     });
+                    $(obj1).close();
                 },
                 error: function (error) {
                     alert("Dynamic content load failed.");
@@ -477,7 +477,7 @@
         $("body").on("click", "#btnSubmitQuote", function () {
 
 
-            $.confirm({
+           var obj = $.confirm({
                 boxWidth: '700px',
                 useBootstrap: false,
 
@@ -490,6 +490,7 @@
                     CANCEL: function () { return;}
                 }
             });
+            $(obj).close();
                 //Loop through the Table rows and build a JSON array.
 
         });

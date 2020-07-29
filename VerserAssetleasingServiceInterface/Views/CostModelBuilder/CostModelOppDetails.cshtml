@@ -16,7 +16,7 @@
             <div class="form-horizontal">
                 <div class="form-group">
 
-                    <div class="row col-md-12  table-bordered" style="width:120%;margin-left:auto;height:auto;font-size:15px;">
+                    <div class="row col-md-12  table-bordered" style="width:120%;margin-left:auto;height:auto;font-size:15px;" id="divProjectDetails">
                         <div class="col-md-6 ">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group required">
@@ -370,7 +370,7 @@
     $("body").on("click", "#btnSubmitChangeQuote", function () {
 
 
-        $.confirm({
+        var obj = $.confirm({
             boxWidth: '700px',
             useBootstrap: false,
 
@@ -379,15 +379,16 @@
             closeIcon: true,
 
             buttons: {
-                OK: function () { GenerateQuote(); },
+                OK: function () { GenerateChangedQuote(); },
                 CANCEL: function () { return; }
             }
         });
+        $(obj).close();
         //Loop through the Table rows and build a JSON array.
 
     });
 
-    function GenerateQuote() {
+    function GenerateChangedQuote() {
      
         var CostModelRateCardArr = new Array();
         $("#tblCustomers").find('tbody tr').each(function () {
@@ -418,7 +419,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (r) {
-                $.confirm({
+               var obj =  $.confirm({
                     boxWidth: '700px',
                     useBootstrap: false,
 
@@ -427,10 +428,10 @@
                     closeIcon: true,
 
                     buttons: {
-                        OK: function () { GenerateQuote(); },
-                        CANCEL: function () { return; }
+                        OK: { isHidden: true }
                     }
                 });
+                $(obj).close();
 
             }
         });
@@ -453,6 +454,17 @@
                 }
             });
         });
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
+        mainModel.CostModelQuoteRequestModel
         $("#tblCustomers").find('tbody tr').each(function () {
             var row = $(this);
             
@@ -477,23 +489,12 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (r) {
-                $.confirm({
-                    boxWidth: '700px',
-                    useBootstrap: false,
-
-                    title: '',
-                    content: r,
-                    closeIcon: true,
-
-                    buttons: {
-                        OK: function () { GenerateQuote(); },
-                        CANCEL: function () { return; }
-                    }
-                });
+               
+             
 
             }
         });
-
+        $("#exportBtn").click();
     }
 </script>
 <style>

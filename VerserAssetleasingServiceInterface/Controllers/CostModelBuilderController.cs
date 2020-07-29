@@ -122,20 +122,25 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-               
-                GridView gv = new GridView();
-                gv.DataSource = QuoteModel;
-                gv.DataBind();
-                Response.ClearContent();
-                Response.Buffer = true;
-                Response.AddHeader("content-disposition", "attachment; filename=OpportunityList.xls");
+                string CurrentDate;
+                DateTime saveNow = DateTime.Now;
+                CurrentDate = saveNow.Date.ToShortDateString();
+                string reportContent ="";
+
+                Byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\temp\testexcel.xls");
+                using (StreamWriter outfile = new StreamWriter(@"C:\temp\testexcel.xls", true))
+                {
+                    outfile.WriteLine(reportContent);
+                }
+
+                System.IO.FileInfo file = new System.IO.FileInfo(@"C:\temp\testexcel.xls");
+                Response.Clear();
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = System.Text.Encoding.UTF8;
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name);
+                Response.AddHeader("Content-Length", file.Length.ToString());
                 Response.ContentType = "application/ms-excel";
-                Response.Charset = "";
-                StringWriter sw = new StringWriter();
-                HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
-                gv.RenderControl(htw);
-                Response.Output.Write(sw.ToString());
-                Response.Flush();
+                Response.WriteFile(file.FullName);
                 Response.End();
             }
             return RedirectToAction("GenerateQuote", "CostModelBuilder");
@@ -268,32 +273,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             {
                 ExcelHelper.GenerateExcelCostModel(RequestQuoteModel);
 
-                //Byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\temp\testexcel.xls");
-
-                ////Clear the response               
-                //Response.Clear();
-                //Response.ClearContent();
-                //Response.ClearHeaders();
-                //Response.Cookies.Clear();
-                ////Add the header & other information      
-                //Response.Cache.SetCacheability(HttpCacheability.Private);
-                //Response.CacheControl = "private";
-                //Response.Charset = System.Text.UTF8Encoding.UTF8.WebName;
-                //Response.ContentEncoding = System.Text.UTF8Encoding.UTF8;
-                //Response.AppendHeader("Content-Length", fileBytes.Length.ToString());
-                //Response.AppendHeader("Pragma", "cache");
-                //Response.AppendHeader("Expires", "60");
-                //Response.AppendHeader("Content-Disposition",
-                //"attachment; " +
-                //"filename=\"ExcelReport.xlsx\"; " +
-                //"size=" + fileBytes.Length.ToString() + "; " +
-                //"creation-date=" + DateTime.Now.ToString("R") + "; " +
-                //"modification-date=" + DateTime.Now.ToString("R") + "; " +
-                //"read-date=" + DateTime.Now.ToString("R"));
-                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                ////Write it back to the client    
-                //Response.BinaryWrite(fileBytes);
-                //Response.End();
+                
 
 
                 //GridView gv = new GridView();
@@ -311,6 +291,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 //Response.Flush();
                 //Response.End();
                 return new JsonResult { Data = "Exported", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+               
 
 
             }
