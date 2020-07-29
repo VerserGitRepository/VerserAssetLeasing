@@ -63,7 +63,20 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ResponseListModel;
         }
-
+        public static async Task<ReturnModel> SubmitChangedQuote(JBHIFiCostModelServiceItemsSummary RequestQuoteModel)
+        {          
+            var ResponseListModel = new ReturnModel();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(CostModelAPIBase);
+                HttpResponseMessage response = client.PostAsJsonAsync(string.Format("JBHiFICostModelServices/UpdateQuoteServiceItems"), RequestQuoteModel).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    ResponseListModel = await response.Content.ReadAsAsync<ReturnModel>();
+                }
+            }
+            return ResponseListModel;
+        }
 
         public static async Task<JBHiFiCostmodelServiceRequestDetailsModel> JBHiFiCostmodelServiceRequestDetails(int id)
         {

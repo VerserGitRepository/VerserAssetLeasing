@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using VerserAssetleasingServiceInterface.Models;
@@ -164,6 +167,34 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 }
             }
             return oppNames;
+        }
+
+        public static async Task<bool> CostModelMailNotificationRequestor(JBHiFiCostmodelServiceRequestDetailsDto CostModelMailViewModel)
+        {
+            //JBHiFiCostmodelServiceRequestDetailsMailDto CostModelMailViewModel
+            //string MailURl = "http://localhost:52922/EmailService/CostModelMailNotification";
+
+
+
+            bool ReturnFlag = false;
+            string MailURl = "https://customers.verser.com.au/AssetManagementService/EmailService/CostModelMailNotification";
+
+
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(MailURl);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+              
+                var JsonMailRequestModel = JsonConvert.SerializeObject(CostModelMailViewModel);
+                var httpContent = new StringContent(JsonMailRequestModel, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(MailURl, httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    ReturnFlag = true;
+                }
+            }
+            return ReturnFlag;
         }
     }
 }

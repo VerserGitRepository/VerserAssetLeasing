@@ -43,7 +43,7 @@
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
                                     {
-                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
+                                       
 
                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                     }
@@ -75,6 +75,7 @@
                                     <tr>
                                         <td>
                                             <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                            <input type="hidden" value=@item.Id id="hiddenAssetId" name="hiddenAssetId" />
                                             @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
                                         </td>
                                         <td>
@@ -120,10 +121,10 @@
                                 }
                             </div>
                             <div class="col-md-1">
-                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="txtSalesForceOpportunity" data-toggle="tooltip" data-placement="left" title="Add">
+                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20"  data-toggle="tooltip" data-placement="left" title="Add">
             </div>
             <div class="col-md-1">
-                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Edit">
             </div>
                         </div><br>
                         <div class="panel panel-default" style="width:30%">
@@ -260,7 +261,7 @@
       var CandidateDetailsURL = './CostModelOppDetails';
     $(function () {
         $("#mainTable").on("click", ".OpportunityDetail", function () {
-            
+            var obj = null;
             // debugger; , draggable: true
             var $buttonClicked = $(this);
             var Id = $buttonClicked.attr('data-id');
@@ -271,8 +272,21 @@
                 contentType: "application/json; charset=utf-8",
                 data: { "Id": Id },
                 datatype: "json",
+                beforeSend: function () {
+                    obj = $.alert({
+                        boxWidth: '50px',
+                        useBootstrap: false,
+                        title: '',
+                        content: $("#spinner").html(),
+                        buttons: {
+                            yes: { isHidden: true }
+                        }
+                    })
+                },
                 success: function (data) {
                     // debugger;
+                    $("#spinner").hide();
+                    obj.close();
                     $.confirm({
                         boxWidth: '900px',
                         useBootstrap: false,

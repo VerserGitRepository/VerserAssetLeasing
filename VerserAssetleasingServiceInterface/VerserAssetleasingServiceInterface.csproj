@@ -195,6 +195,7 @@
     <Compile Include="Models\JBHIFiCostModelQuoteRequests.cs" />
     <Compile Include="Models\JBHIFiCostModelServiceItems.cs" />
     <Compile Include="Models\JBHIFiCostModelServiceItemsSummary.cs" />
+    <Compile Include="Models\JBHiFiCostmodelServiceRequestDetailsDto.cs" />
     <Compile Include="Models\JBHiFiCostmodelServiceRequestDetailsModel.cs" />
     <Compile Include="Models\LifecycleStatusListViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="ServiceImplentationhelper\CostModelRateCard.cs" />
     <Compile Include="ServiceImplentationhelper\CostModelServicesHelpers.cs" />
     <Compile Include="ServiceImplentationhelper\DeviceCategoriesServicehelper.cs" />
+    <Compile Include="ServiceImplentationhelper\ExcelHelper.cs" />
     <Compile Include="ServiceImplentationhelper\InventoryItemsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\ListItemHelperServices.cs" />
     <Compile Include="ServiceImplentationhelper\ListItems.cs" />
@@ -263,6 +265,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Images\load.webp" />
+    <Content Include="Assets\UploadFile\AssetList %281%29.xls" />
+    <Content Include="Assets\SampleCostModel.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -613,6 +617,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>VerserAssetleasingServiceInterface_VerserSalesForce_SforceService</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

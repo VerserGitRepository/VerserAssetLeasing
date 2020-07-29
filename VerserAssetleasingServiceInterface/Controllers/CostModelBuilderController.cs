@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -14,7 +15,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
     public class CostModelBuilderController : Controller
     {
        
-        public ActionResult GenerateQuote()
+        public  ActionResult GenerateQuote()
         {
             if (Session["Username"] == null)
             {
@@ -22,6 +23,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
+              // await CostModelServicesHelpers.CostModelMailNotificationRequestor(new JBHiFiCostmodelServiceRequestDetailsDto());
                 var Quotesmodel = new JBHIFiCostModelQuoteRequests();
                 //  Quotesmodel. = 
 
@@ -29,7 +31,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 Quotesmodel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
                 Quotesmodel.ProjectManagerList = new SelectList(ListItemHelperServices.ProjectManagerList().Result, "ID", "Value");
                 Quotesmodel.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
-                Quotesmodel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
+                Quotesmodel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");               
                 return View(Quotesmodel);
             }
         }
@@ -148,6 +150,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             {
                 AllRecords = ReturnAllRecords.Result;
             }
+            if (AllRecords.ServiceItemsLists.Count == 0)
+            {
+                JBHIFiCostModelServiceItems item = new JBHIFiCostModelServiceItems();
+                AllRecords.ServiceItemsLists.Add(item);
+            }
             AllRecords.CostModelQuoteRequestModel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
             return PartialView("CostModelOppDetails", AllRecords);
         }
@@ -194,37 +201,119 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult SubmitQuote(List<JBHIFiCostModelServiceItems> RequestQuoteModel)
         {
 
-            //if (Session["Username"] == null)
-            //{
-            //    return RedirectToAction("Login", "Login");
-            //}
-            //else
-            //{
-            //    JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
-            //    summary.JBHIFiCMServiceItems = RequestQuoteModel;
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.JBHIFiCMServiceItems = RequestQuoteModel;
 
-            //    foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
-            //    {
-            //        summary.Summary += item.Summary + Environment.NewLine;
-            //        summary.GST_10 = item.GST_10;
-            //        summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
-            //        summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
-            //        summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
-            //        summary.TotalPrice = item.TotalPrice;
-            //        summary.SalesForceUniqueId = item.SalesForceUniqueId;
+                foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
+                {
+                    summary.Summary += item.Summary + Environment.NewLine;
+                    summary.GST_10 = item.GST_10;
+                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
+                    summary.TotalPrice = item.TotalPrice;
+                    summary.SalesForceUniqueId = item.SalesForceUniqueId;
 
-            //    }
+                }
 
-            return new JsonResult { Data = "2 records inserted", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            //var Quotesmodel = new JBHIFiCostModelQuoteRequests();
-            ////  Quotesmodel. = 
+                var result = QuoteRequestHelperService.AddQuoteServiceItems(summary).Result;
+                return new JsonResult { Data = result.Message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
+        [HttpPost]
+        public ActionResult SubmitChangedQuote(List<JBHIFiCostModelServiceItems> RequestQuoteModel)
+        {
 
-            //Quotesmodel.PostQuoteRequestModelLIST = QuoteRequestHelperService.GetTQuotes().Result;
-            //Quotesmodel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
-            //Quotesmodel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
-            //return View("GenerateQuote",Quotesmodel);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.JBHIFiCMServiceItems = RequestQuoteModel;
 
-            //}
+                foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
+                {
+                    summary.Summary += item.Summary + Environment.NewLine;
+                    summary.GST_10 = item.GST_10;
+                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
+                    summary.TotalPrice = item.TotalPrice;
+                    summary.SalesForceUniqueId = item.SalesForceUniqueId;
+
+                }
+
+                var result = QuoteRequestHelperService.SubmitChangedQuote(summary).Result;
+               
+                return new JsonResult { Data = result.Message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
+        [HttpPost]
+        public ActionResult ExportToExcel(JBHiFiCostmodelServiceRequestDetailsModel RequestQuoteModel)
+        {
+
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                ExcelHelper.GenerateExcelCostModel(RequestQuoteModel);
+
+                //Byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\temp\testexcel.xls");
+
+                ////Clear the response               
+                //Response.Clear();
+                //Response.ClearContent();
+                //Response.ClearHeaders();
+                //Response.Cookies.Clear();
+                ////Add the header & other information      
+                //Response.Cache.SetCacheability(HttpCacheability.Private);
+                //Response.CacheControl = "private";
+                //Response.Charset = System.Text.UTF8Encoding.UTF8.WebName;
+                //Response.ContentEncoding = System.Text.UTF8Encoding.UTF8;
+                //Response.AppendHeader("Content-Length", fileBytes.Length.ToString());
+                //Response.AppendHeader("Pragma", "cache");
+                //Response.AppendHeader("Expires", "60");
+                //Response.AppendHeader("Content-Disposition",
+                //"attachment; " +
+                //"filename=\"ExcelReport.xlsx\"; " +
+                //"size=" + fileBytes.Length.ToString() + "; " +
+                //"creation-date=" + DateTime.Now.ToString("R") + "; " +
+                //"modification-date=" + DateTime.Now.ToString("R") + "; " +
+                //"read-date=" + DateTime.Now.ToString("R"));
+                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                ////Write it back to the client    
+                //Response.BinaryWrite(fileBytes);
+                //Response.End();
+
+
+                //GridView gv = new GridView();
+                //gv.DataSource = null;
+                //gv.DataBind();
+                //Response.ClearContent();
+                //Response.Buffer = true;
+                //Response.AddHeader("content-disposition", "attachment; filename=OpportunityList.xls");
+                //Response.ContentType = "application/ms-excel";
+                //Response.Charset = "";
+                //StringWriter sw = new StringWriter();
+                //HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+                //gv.RenderControl(htw);
+                //Response.Output.Write(sw.ToString());
+                //Response.Flush();
+                //Response.End();
+                return new JsonResult { Data = "Exported", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+
+            }
         }
         [HttpGet]
         public ActionResult GetQuotesList()
@@ -243,5 +332,22 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 return Json(PostQuoteRequestModelLIST, JsonRequestBehavior.AllowGet);
             }
         }
+
+        //[HttpPost]
+        //public ActionResult ExportToExcel(JBHiFiCostmodelServiceRequestDetailsDto CostModelMailViewModel)
+        //{
+        //    if (Session["Username"] == null)
+        //    {
+        //        return RedirectToAction("Login", "Login");
+        //    }
+        //    else
+        //    {
+        //        var Quotesmodel = new JBHIFiCostModelQuoteRequests();
+        //        //  Quotesmodel. = 
+        //        var result = CostModelServicesHelpers.CostModelMailNotification(CostModelMailViewModel).Result;
+        //        return Json(result, JsonRequestBehavior.AllowGet);
+
+        //    }
+        //}
     }
 }

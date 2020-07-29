@@ -100,20 +100,22 @@
         </div>
         <div class="row col-md-12 table-bordered" style="width:auto;height:auto;margin:2px;">
             <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;margin-top:15px">
-                <th>SERVICES</th>
-                <th>QUANTITY</th>
+                
                 <thead style="background-color:#FFB605; color:white;height:0.2px;font-size:11px;padding-bottom:0px;">
                     <tr>
+                        <th>SERVICES</th>
+                        <th>QUANTITY</th>
                         <th>TOTALPRICE</th>
                         <th style="width:5px"></th>
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach (var item in Model.ServiceItemsLists)
                     {
                         <tr class="tr_clone">
                             <td>
-                                @Html.Label(@item.ServiceDescription)
+                                @Html.Label(@item.ServiceDescription==null?string.Empty:item.ServiceDescription)
                                 @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceId, Model.CostModelQuoteRequestModel.CostModelServices, "Service", new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn", @multiple = "multiple", @style = "display:none" })
 
                             </td>
@@ -168,8 +170,8 @@
          
             <div class="footerDiv" style="margin:5PX">
                 <input type="button" class="btn-primary btn-sm" value="ADD SERVICE" id="btnSubmit" onclick="AddRow()" />
-                <input type="submit" class="btn-primary btn-sm" value="Save Changes" id="btnSubmitQuote" />
-                <input type="submit" class="btn-primary btn-sm" value="Export to Excel" id="btnExportExcel" />
+                <input type="submit" class="btn-primary btn-sm" value="Save Changes" id="btnSubmitChangeQuote" />
+                <input type="submit" class="btn-primary btn-sm" value="Export to Excel" id="btnExportExcel" onclick="ExportToExcel();" />
             </div>
         </div>
     </div>
@@ -177,8 +179,15 @@
 </div>
 
 <script>
+    var theeRow = "";
     $(document).ready(function () {
-
+      
+        if ($("#tblCustomers").find("tbody tr").length == 1) {
+            if ($("#tblCustomers").find("tbody tr").eq(0).find("td").find('label').eq(0).text()=="0") {
+                theeRow = $("#tblCustomers").find("tbody tr").eq(0);
+                $("#tblCustomers").find("tbody tr").remove();     
+            }
+        }
         $('.ddlserviceNewOpn').removeAttr('multiple')
         $('.ddlserviceNewOpn').multiselect({
 
@@ -237,6 +246,10 @@
         });
 
         $("body").on("click", "#tblCustomers .Delete", function () {
+        
+            if ($("#tblCustomers").find("tbody tr").length == 1) {
+                return;
+            }
             $(this).closest("tr").remove();     
             CalculatePrice(this);
         });
@@ -247,65 +260,83 @@
     tableLength = tableLength;
     
     function AddRow() {
-
+      
         $("#tblCustomers").find('select').each(function () {
             //  alert('ddl');
             $(this).multiselect('destroy');
         });
-        var table = $('#tblCustomers')[0];
-        //debugger;
-        var lengthtotal = $('#tblCustomers tbody').find('tr').length;
-        var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal-1];
-        //var thisRow = $('#tblCustomers').find('tr')[1];
-        $('#tblCustomers tbody').append($(thisRow).clone());//.insertAfter(thisRow);
+        var newRow = ""
+        if ($('#tblCustomers tbody').find('tr').length == 0) {
+            $('#tblCustomers tbody').append($(theeRow));
+          
+            var row = $('#tblCustomers tbody').find("tr");
+            $(row).find('label').hide();
+            $(row).find("#txtActualQuantity").show();
+            $(row).find(".Edit").hide();
 
-        var row = $('#tblCustomers tbody').find("tr:gt("+(tableLength-1)+")");
-        $(row).find('label').hide();
-        $(row).find("#txtActualQuantity").show();
-        $(row).find(".Edit").hide();
-        
-        $(row).find(".Delete").show();
-        $(row).find('select').each(function () {
-            //     alert('ddl');
-            //  $(this).removeAttr('multiple')
-
-            switch (document.readyState) {
-                case "loading":
-                    // The document is still loading.
-                    break;
-                case "interactive":
-                    // The document has finished loading. We can now access the DOM elements.
-                    // But sub-resources such as images, stylesheets and frames are still loading.
-
-                    break;
-                case "complete":
-                    // The page is fully loaded.
-
-                    $(this).multiselect({
-
-                        includeSelectAllOption: false,
-                        maxHeight: 250,
-                        buttonWidth: '280px',
-                        enableFiltering: true,
-                        enableCaseInsensitiveFiltering: true
-
-                    });
-                   
-                    break;
-            }
-            //  $(this).removeAttr('multiple');
-            $(this).multiselect('refresh');
-        });
-        //$("td", row).each(function () {
-        //    //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
-        //   // $(this).find("span").show();
+            $(row).find(".Delete").show();
+            var multiselect = $(row).find('select');
+            $(multiselect).removeAttr('multiple');
            
-        //    $(this).find("#txtActualQuantity").show();
-        //    $(this).find("label").hide();
-        //    $(this).find(".Edit").hide();
-        //    $(this).find(".Update").hide();
-        //    $(this).find(".Delete").show();
-        //});
+            $(multiselect).multiselect({
+
+                includeSelectAllOption: false,
+                maxHeight: 250,
+                buttonWidth: '280px',
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                multiple:false
+
+            });
+            $(multiselect).multiselect('refresh');
+           
+          
+        }
+       
+        else
+        {
+            var lengthtotal = $('#tblCustomers tbody').find('tr').length;
+            var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal - 1];
+            //var thisRow = $('#tblCustomers').find('tr')[1];
+            $('#tblCustomers tbody').append($(thisRow).clone());//.insertAfter(thisRow);
+            var row = $('#tblCustomers tbody').find("tr:gt(" + (tableLength - 1) + ")");
+            $(row).find('label').hide();
+            $(row).find("#txtActualQuantity").show();
+            $(row).find(".Edit").hide();
+
+            $(row).find(".Delete").show();
+            $(row).find('select').each(function () {
+                //     alert('ddl');
+                //  $(this).removeAttr('multiple')
+
+                switch (document.readyState) {
+                    case "loading":
+                        // The document is still loading.
+                        break;
+                    case "interactive":
+                        // The document has finished loading. We can now access the DOM elements.
+                        // But sub-resources such as images, stylesheets and frames are still loading.
+
+                        break;
+                    case "complete":
+                        // The page is fully loaded.
+
+                        $(this).multiselect({
+
+                            includeSelectAllOption: false,
+                            maxHeight: 250,
+                            buttonWidth: '280px',
+                            enableFiltering: true,
+                            enableCaseInsensitiveFiltering: true
+
+                        });
+
+                        break;
+                }
+                //  $(this).removeAttr('multiple');
+                $(this).multiselect('refresh');
+            });
+        }
     }
     function CalculatePrice(control) {
        // debugger;
@@ -335,7 +366,135 @@
         });
 
 
-        }
+    }
+    $("body").on("click", "#btnSubmitChangeQuote", function () {
+
+
+        $.confirm({
+            boxWidth: '700px',
+            useBootstrap: false,
+
+            title: '',
+            content: "Are you sure to submit the Quote?",
+            closeIcon: true,
+
+            buttons: {
+                OK: function () { GenerateQuote(); },
+                CANCEL: function () { return; }
+            }
+        });
+        //Loop through the Table rows and build a JSON array.
+
+    });
+
+    function GenerateQuote() {
+     
+        var CostModelRateCardArr = new Array();
+        $("#tblCustomers").find('tbody tr').each(function () {
+            var row = $(this);
+            $(row).find(".ddlserviceNewOpn option").each(function (i) {
+
+                if (($(this).text() == row.find("td").find('label').eq(0).text())) {
+                    $(this).attr('selected', 'selected')
+                }
+            });
+            var CostModelRateCard = {};
+            CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenAssetId").val();
+            CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
+            CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text();
+            CostModelRateCard.TotalPrice = row.find("td").eq(2).find('span').text();
+            CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
+            CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
+            CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
+            
+            CostModelRateCardArr.push(CostModelRateCard);
+        });
+
+        
+        $.ajax({
+            type: "POST",
+            url: "./SubmitChangedQuote",
+            data: JSON.stringify(CostModelRateCardArr),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                $.confirm({
+                    boxWidth: '700px',
+                    useBootstrap: false,
+
+                    title: '',
+                    content: r,
+                    closeIcon: true,
+
+                    buttons: {
+                        OK: function () { GenerateQuote(); },
+                        CANCEL: function () { return; }
+                    }
+                });
+
+            }
+        });
+       
+    }
+
+    function ExportToExcel() {
+        
+        var CostModelRateCardArr = new Array();
+
+        var mainModel = {};
+        mainModel.CostModelQuoteRequestModel = {};
+        mainModel.ServiceItemsLists = new Array();
+        $("#tblCustomers").find('tbody tr').each(function () {
+            var row = $(this);
+            $(row).find(".ddlserviceNewOpn option").each(function (i) {
+
+                if (($(this).text() == row.find("td").find('label').eq(0).text())) {
+                    $(this).attr('selected', 'selected')
+                }
+            });
+        });
+        $("#tblCustomers").find('tbody tr').each(function () {
+            var row = $(this);
+            
+            var CostModelRateCard = {};
+            CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenAssetId").val();
+            CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
+            CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text();
+            CostModelRateCard.TotalPrice = row.find("td").eq(2).find('span').text();
+            CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
+            CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
+            CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
+            CostModelRateCard.ServiceDescription = row.find("td").find('select').find('option:selected').text();
+
+            mainModel.ServiceItemsLists.push(CostModelRateCard);
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: "./ExportToExcel",
+            data: JSON.stringify(mainModel),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                $.confirm({
+                    boxWidth: '700px',
+                    useBootstrap: false,
+
+                    title: '',
+                    content: r,
+                    closeIcon: true,
+
+                    buttons: {
+                        OK: function () { GenerateQuote(); },
+                        CANCEL: function () { return; }
+                    }
+                });
+
+            }
+        });
+
+    }
 </script>
 <style>
     /*.modal-backdrop {
