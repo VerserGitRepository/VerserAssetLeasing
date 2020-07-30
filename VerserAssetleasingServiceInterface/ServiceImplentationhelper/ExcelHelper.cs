@@ -39,7 +39,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
                 mWSheet1.Cells[rowCount + index, 3] = RequestQuoteModel.ServiceItemsLists[index - 1].Quantity;
                 mWSheet1.Cells[rowCount + index, 4] = total;
             }
-            mWorkBook.SaveAs("C:\\temp\\testexcel.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
+            mWorkBook.SaveAs(System.Web.HttpContext.Current.Server.MapPath("~/Assets/CostModelNewQuote.xls"), Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
             Missing.Value, Missing.Value, Missing.Value, Missing.Value, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive,
             Missing.Value, Missing.Value, Missing.Value,
             Missing.Value, Missing.Value);

@@ -126,14 +126,14 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 DateTime saveNow = DateTime.Now;
                 CurrentDate = saveNow.Date.ToShortDateString();
                 string reportContent ="";
-
-                Byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\temp\testexcel.xls");
-                using (StreamWriter outfile = new StreamWriter(@"C:\temp\testexcel.xls", true))
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Assets/CostModelNewQuote.xls");
+                Byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                using (StreamWriter outfile = new StreamWriter(filePath, true))
                 {
                     outfile.WriteLine(reportContent);
                 }
 
-                System.IO.FileInfo file = new System.IO.FileInfo(@"C:\temp\testexcel.xls");
+                System.IO.FileInfo file = new System.IO.FileInfo(filePath);
                 Response.Clear();
                 Response.Charset = "UTF-8";
                 Response.ContentEncoding = System.Text.Encoding.UTF8;
