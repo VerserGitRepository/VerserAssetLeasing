@@ -45,16 +45,19 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             mWSheet1.Cells[5 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.startDate;
             mWSheet1.Cells[6 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.startDate;
             mWSheet1.Cells[7 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.approver;
-            
 
+            int descRowCount = 11;
             for (int index = 1; index < RequestQuoteModel.ServiceItemsLists.Count+1; index++)
             {
                 decimal total = Convert.ToDecimal(RequestQuoteModel.ServiceItemsLists[index-1].TotalPrice) * RequestQuoteModel.ServiceItemsLists[index-1].Quantity;
-                mWSheet1.Cells[rowCount + index, 1] = RequestQuoteModel.ServiceItemsLists[index-1].ServiceDescription;
-                mWSheet1.Cells[rowCount + index, 2] = RequestQuoteModel.ServiceItemsLists[index-1].TotalPrice;
-                mWSheet1.Cells[rowCount + index, 3] = RequestQuoteModel.ServiceItemsLists[index - 1].Quantity;
-                mWSheet1.Cells[rowCount + index, 4] = total;
+                mWSheet1.Cells[descRowCount + index, 1] = RequestQuoteModel.ServiceItemsLists[index-1].ServiceDescription;
+                mWSheet1.Cells[descRowCount + index, 2] = RequestQuoteModel.ServiceItemsLists[index-1].TotalPrice;
+                mWSheet1.Cells[descRowCount + index, 3] = RequestQuoteModel.ServiceItemsLists[index - 1].Quantity;
+                mWSheet1.Cells[descRowCount + index, 4] = total;
             }
+            //mWSheet1.Cells[58, 2] = RequestQuoteModel.CostModelQuoteRequestModel.gsT_10;
+            //mWSheet1.Cells[59, 2] = RequestQuoteModel.CostModelQuoteRequestModel.totaL_Excl_GST;
+            //mWSheet1.Cells[60, 2] = RequestQuoteModel.CostModelQuoteRequestModel.totaL_Excl_GST;
             mWorkBook.SaveAs(System.Web.HttpContext.Current.Server.MapPath("~/Assets/CostModelNewQuote.xls"), Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
             Missing.Value, Missing.Value, Missing.Value, Missing.Value, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive,
             Missing.Value, Missing.Value, Missing.Value,
