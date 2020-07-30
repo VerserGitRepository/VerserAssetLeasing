@@ -33,26 +33,24 @@
                             QUOTE
                         </a>
                     </li>
-
                 </ul>
                 <div class="tab-content">
-
                     <div class="tab-pane active" id="tab_default_1">
                         <div class="container">
-                            <div class="pull-right">
-                                <div class="col-md-1">
-                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
-                                    {
-                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export" id="exportBtn" >
-                                    }
-                                </div>
-                                @*<div class="col-md-1">
-                                    <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
-                                </div>
-                                <div class="col-md-1">
-                                    <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                </div>*@
-                            </div><br>
+                            @*  <div class="pull-right">
+                               <div class="col-md-1">
+            @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
+            {
+                <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export" id="exportBtn" >
+            }
+        </div>
+        <div class="col-md-1">
+            <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
+        </div>
+        <div class="col-md-1">
+            <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
+        </div>
+                            </div><br>*@
                             <table class="table pull-left table-bordered table-responsive" id="mainTable" style="font-size:smaller;">
                                 <thead style="background-color:#FFB605; color:white;height:0.2px;padding-top:0px;font-size:11px;padding-bottom:0px;">
                                     <tr>
@@ -70,61 +68,44 @@
                                 <tbody>
                                     @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
                                     {
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
-                                            <input type="hidden" value=@item.Id id="hiddenAssetId" name="hiddenAssetId" />
-                                            @*@Html.DisplayFor(modelItem => item.OpportunityNumber)*@
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.OpportunityName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerContactName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.StartDate)
-                                        </td>
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:void(0);" class="OpportunityDetail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.OpportunityNumber)</a>
+                                                <input type="hidden" value=@item.Id id="hiddenAssetId" name="hiddenAssetId" />                                             
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.OpportunityName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CustomerContactName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDate)
+                                            </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SiteAddress)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SalesManager)
-                                        </td>
-                                        <td>
-                                            @Html.Display("Status")
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SiteAddress)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SalesManager)
+                                            </td>
+                                            <td>
+                                                @Html.Display("Status")
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TOTAL_Incl_GST)
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="tab-pane" id="tab_default_2">
-                        @*<div class="col-md-8">*@
-                        <div class="pull-right col-md-offset-4">
-                            <div class="col-md-1">
-                                @using (Html.BeginForm("ExportTimesSheetToExcel", "CostModelBuilder", FormMethod.Post))
-                                {
-                                    <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
-
-                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
-                                }
-                            </div>
-                            <div class="col-md-1">
-                <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20"  data-toggle="tooltip" data-placement="left" title="Add">
-            </div>
-            <div class="col-md-1">
-                <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Edit">
-            </div>
-                        </div><br>
+                     
                         <div class="panel panel-default" style="width:30%">
                             <label for="opportunity" id="txtSalesForceOpportunity">Opportunity:</label>
                         </div>
@@ -140,7 +121,6 @@
                                             <label class="control-label">Service Categories</label>
                                             @Html.DropDownListFor(model => model.CostModelServiceCategoryId, Model.CostModelServicesCategories, "Service Category", new { @class = "form-control ", id = "ddlserviceCategory", @multiple = "multiple" })
                                             <input type="hidden" id="hdnserviceCategory" />
-
                                             <br />
                                         </td>
                                         <td>
@@ -168,10 +148,7 @@
                                     </tr>
                                 </table>
                             </div>
-
                         </div>
-
-
                         @*</div>*@
                         <div id="divFooter" style="margin-left:820px;display:none;">
                             <div class="row" style="width:80px">
@@ -201,8 +178,7 @@
                         </div>
                         <div>
                             <div class="row">
-
-                                <input type="button" class="btn-primary btn-lg" value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
+                                <input type="button" class="btn-primary btn-lg"  value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
                                 <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
                             </div>
                         </div>
