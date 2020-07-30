@@ -27,10 +27,26 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             //Get all the sheets in the workbook
             mWorkSheets = mWorkBook.Worksheets;
             //Get the allready exists sheet
-            mWSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)mWorkSheets.get_Item("Pricing Summary");
+            mWSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)mWorkSheets.get_Item("Project Details");
             Microsoft.Office.Interop.Excel.Range range = mWSheet1.UsedRange;
             int colCount = range.Columns.Count;
             int rowCount = range.Rows.Count;
+
+            mWSheet1.Cells[2, 2] = RequestQuoteModel.CostModelQuoteRequestModel.CustomerName;
+            mWSheet1.Cells[3, 2] = RequestQuoteModel.CostModelQuoteRequestModel.opportunityNumber;
+            mWSheet1.Cells[4, 2] = RequestQuoteModel.CostModelQuoteRequestModel.siteAddress;
+            mWSheet1.Cells[5, 2] = RequestQuoteModel.CostModelQuoteRequestModel.customerContactName;
+            mWSheet1.Cells[6, 2] = "No";
+            mWSheet1.Cells[7, 2] = RequestQuoteModel.CostModelQuoteRequestModel.opportunityName;
+            mWSheet1.Cells[8, 2] = RequestQuoteModel.CostModelQuoteRequestModel.salesforceOpportunityName;
+            mWSheet1.Cells[2 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.verserBranch;
+            mWSheet1.Cells[3 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.salesManager ;
+            mWSheet1.Cells[4 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.projectManager;
+            mWSheet1.Cells[5 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.startDate;
+            mWSheet1.Cells[6 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.startDate;
+            mWSheet1.Cells[7 , 4] = RequestQuoteModel.CostModelQuoteRequestModel.approver;
+            
+
             for (int index = 1; index < RequestQuoteModel.ServiceItemsLists.Count+1; index++)
             {
                 decimal total = Convert.ToDecimal(RequestQuoteModel.ServiceItemsLists[index-1].TotalPrice) * RequestQuoteModel.ServiceItemsLists[index-1].Quantity;
