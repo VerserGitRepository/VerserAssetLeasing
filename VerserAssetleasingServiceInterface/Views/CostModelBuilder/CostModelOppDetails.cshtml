@@ -23,25 +23,25 @@
                                 @Html.Label("Customer Name", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
                                     <input type="hidden" value=@Model.CostModelQuoteRequestModel.Id id="hiddenServiceQuoteId" name="hiddenServiceQuoteId" />
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.CustomerName, new { @id = "txtCustName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.CustomerName, new { @id = "txtCustName" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
                                 </div>
                             </div>                         
                             <div class="form-group">
                                 @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.startDate, new { @id = "txtStartDate" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.startDate.ToShortDateString(), new { @id = "txtStartDate" })
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                                 @Html.Label(" Site Address", htmlAttributes: new { @class = "control-label col-md-6" })
 
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.siteAddress, new { @id = "txtSiteAddress" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.siteAddress, new { @id = "txtSiteAddress" })
                                 </div>
                             </div>
                           
@@ -59,32 +59,32 @@
                                 @Html.Label("Opportunity Number", htmlAttributes: new { @class = "control-label col-md-6" })
 
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityNumber, new { @id = "txtSFOpportunityName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.opportunityNumber.ToString(), new { @id = "txtSFOpportunityName" })
                                 </div>
                             </div>
 
                             <div class="form-group required">
                                 @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager, new { @id = "txtSalesManager" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.salesManager, new { @id = "txtSalesManager" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager, new { @id = "txtProjectManager" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.projectManager, new { @id = "txtProjectManager" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("JMS Project", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName, new { @id = "txtOpportunityName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.opportunityName, new { @id = "txtOpportunityName" })
                                 </div>
                             </div>                            
                             <div class="form-group required">
                                 @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch, new { @id = "txtBranch" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.verserBranch, new { @id = "txtBranch" })
                                 </div>
                             </div>
                         </div>
@@ -337,10 +337,13 @@
        // debugger;
         var CostModelDetailsURL = '@Url.Action("GetTotalPrice", "CostModelBuilder")';
             var ctrl = control.parentElement.parentElement;
-            var totalPrice = 0;
-        $.getJSON(CostModelDetailsURL, { value1: $(ctrl).find($($(ctrl).children()[0])).find('select').val(), value2: $(ctrl).find($($(ctrl).children()[1])).find('input').val() }, function (response) {
+        var totalPrice = 0;
+        var quantity = $(ctrl).find($($(ctrl).children()[1])).find('input').val();
+        $.getJSON(CostModelDetailsURL, { value1: $(ctrl).find($($(ctrl).children()[0])).find('select').val(), value2: quantity }, function (response) {
             $(ctrl).find($($(ctrl).children()[2])).find('span').show();
             var resr = $(ctrl).find($($(ctrl).children()[2])).find('span').text(response);
+            $(ctrl).find($($(ctrl).children()[1])).find('input').val(quantity);
+            $(ctrl).find($($(ctrl).children()[1])).find('label').text(quantity);
             //$(ctrl).find($($(ctrl).children()[0])).find('input').val($(ctrl).find($($(ctrl).children()[0])).find('select').val());
             //$(ctrl).find($($(ctrl).children()[1])).find('input').val($(ctrl).find($($(ctrl).children()[1])).find('select').val());
 
@@ -393,11 +396,12 @@
                 if (($(this).text() == row.find("td").find('label').eq(0).text())) {
                     $(this).attr('selected', 'selected')
                 }
-            });          
+            });    
+            
             var CostModelRateCard = {};
             CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenServiceQuoteId").val();
             CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
-            CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text();
+            CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text() == 0 ? row.find("td").eq(1).find('input').text() : row.find("td").eq(1).find('label').text();
             CostModelRateCard.TotalPrice = row.find("td").eq(2).find('span').text();
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
@@ -436,7 +440,7 @@
     function ExportToExcel() {
         
         var CostModelRateCardArr = new Array();
-
+        debugger;
         var mainModel = {};
         mainModel.CostModelQuoteRequestModel = {};
         mainModel.ServiceItemsLists = new Array();
@@ -449,16 +453,16 @@
                 }
             });
         });
-        mainModel.CostModelQuoteRequestModel.CustomerName = $("#txtCustName").val();
-        mainModel.CostModelQuoteRequestModel.customerContactName = $("#txtCustContactName").val();
-        mainModel.CostModelQuoteRequestModel.email = $("#txtEmail").val();
-        mainModel.CostModelQuoteRequestModel.startDate = $("#txtStartDate").val();
-        mainModel.CostModelQuoteRequestModel.siteAddress = $("#txtSiteAddress").val();
-        mainModel.CostModelQuoteRequestModel.opportunityName = $("#txtSFOpportunityName").val();
-        mainModel.CostModelQuoteRequestModel.salesManager = $("#txtSalesManager").val();
-        mainModel.CostModelQuoteRequestModel.projectManager = $("#txtProjectManager").val();
-        mainModel.CostModelQuoteRequestModel.opportunityNumber = $("#txtOpportunityName").val();
-        mainModel.CostModelQuoteRequestModel.verserBranch = $("#txtBranch").val();
+        mainModel.CostModelQuoteRequestModel.CustomerName = $("#txtCustName").text();
+        mainModel.CostModelQuoteRequestModel.customerContactName = $("#txtCustContactName").text();
+        mainModel.CostModelQuoteRequestModel.email = $("#txtEmail").text();
+        mainModel.CostModelQuoteRequestModel.startDate = $("#txtStartDate").text();
+        mainModel.CostModelQuoteRequestModel.siteAddress = $("#txtSiteAddress").text();
+        mainModel.CostModelQuoteRequestModel.opportunityName = $("#txtSFOpportunityName").text();
+        mainModel.CostModelQuoteRequestModel.salesManager = $("#txtSalesManager").text();
+        mainModel.CostModelQuoteRequestModel.projectManager = $("#txtProjectManager").text();
+        mainModel.CostModelQuoteRequestModel.opportunityNumber = $("#txtOpportunityName").text();
+        mainModel.CostModelQuoteRequestModel.verserBranch = $("#txtBranch").text();
         
         $("#tblCustomers").find('tbody tr').each(function () {
             var row = $(this);
