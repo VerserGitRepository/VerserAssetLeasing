@@ -66,13 +66,18 @@
                             <div class="form-group required">
                                 @Html.Label("Sales Manager", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
+                                    @*@Html.DropDownListFor(m => m.CostModelQuoteRequestModel.projectManager, Model.CostModelQuoteRequestModel.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })*@
+
                                     @Html.DisplayFor(m => m.CostModelQuoteRequestModel.salesManager, new { @id = "txtSalesManager" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
+                                    @*@Html.DropDownListFor(m => m.CostModelQuoteRequestModel.projectManager, Model.CostModelQuoteRequestModel.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" })*@
+
                                     @Html.DisplayFor(m => m.CostModelQuoteRequestModel.projectManager, new { @id = "txtProjectManager" })
+
                                 </div>
                             </div>
                             <div class="form-group required">
@@ -80,13 +85,29 @@
                                 <div class="col-md-6">
                                     @Html.DisplayFor(m => m.CostModelQuoteRequestModel.opportunityName, new { @id = "txtOpportunityName" })
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="form-group required">
                                 @Html.Label("Verser Branch", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
                                     @Html.DisplayFor(m => m.CostModelQuoteRequestModel.verserBranch, new { @id = "txtBranch" })
                                 </div>
                             </div>
+                            @*<div class="row">
+            <div class="form-group col-md-6">
+                <label>Status</label>
+
+                @Html.DropDownListFor(Model => Model.CostModelQuoteRequestModel.RequestStatus, new List<SelectListItem>
+                    { new SelectListItem {Text="Requested",Value="1" },
+                    new SelectListItem {Text="Active",Value="2" },
+                    new SelectListItem {Text="Completed",Value="3" },
+                     new SelectListItem {Text="Draft",Value="3" },
+                    }, "Status", new { @class = "form-control" , @id = "txtStatus"})
+                @Html.ValidationMessageFor(model => Model.CostModelQuoteRequestModel.RequestStatus, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>*@
+
                         </div>
                     </div>
 
