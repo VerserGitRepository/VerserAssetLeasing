@@ -213,14 +213,20 @@ namespace VerserAssetleasingServiceInterface.Controllers
             else
             {
                 JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.TOTAL_Excl_GST = 0;
+                summary.TOTAL_Incl_GST = 0;
+                summary.GST_10 = 0;
                 summary.JBHIFiCMServiceItems = RequestQuoteModel;
 
                 foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
                 {
+                    item.GST_10 = ((Convert.ToDecimal(0.1)) * item.TotalPrice);
+                    item.TOTAL_Excl_GST =  item.TotalPrice;
+                    item.TOTAL_Incl_GST = item.GST_10 + item.TOTAL_Excl_GST;
                     summary.Summary += item.Summary + Environment.NewLine;
-                    summary.GST_10 = item.GST_10;
-                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
-                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.GST_10 += item.GST_10;
+                    summary.TOTAL_Incl_GST += item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST += item.TOTAL_Excl_GST;
                     summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
                     summary.TotalPrice = item.TotalPrice;
                     summary.SalesForceUniqueId = item.SalesForceUniqueId;
@@ -242,14 +248,20 @@ namespace VerserAssetleasingServiceInterface.Controllers
             else
             {
                 JBHIFiCostModelServiceItemsSummary summary = new JBHIFiCostModelServiceItemsSummary();
+                summary.TOTAL_Excl_GST = 0;
+                summary.TOTAL_Incl_GST = 0;
+                summary.GST_10 = 0;
                 summary.JBHIFiCMServiceItems = RequestQuoteModel;
 
                 foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel)
                 {
+                    item.GST_10 = ((Convert.ToDecimal(0.1)) * item.TotalPrice);
+                    item.TOTAL_Excl_GST = item.TotalPrice;
+                    item.TOTAL_Incl_GST = item.GST_10 + item.TOTAL_Excl_GST;
                     summary.Summary += item.Summary + Environment.NewLine;
-                    summary.GST_10 = item.GST_10;
-                    summary.TOTAL_Incl_GST = item.TOTAL_Incl_GST;
-                    summary.TOTAL_Excl_GST = item.TOTAL_Excl_GST;
+                    summary.GST_10 += item.GST_10;
+                    summary.TOTAL_Incl_GST += item.TOTAL_Incl_GST;
+                    summary.TOTAL_Excl_GST += item.TOTAL_Excl_GST;
                     summary.ServiceQuoteRequestId = item.FK_JBHIFIQuoteRequestID;
                     summary.TotalPrice = item.TotalPrice;
                     summary.SalesForceUniqueId = item.SalesForceUniqueId;

@@ -29,13 +29,13 @@
                             <div class="form-group required">
                                 @Html.Label("Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.Label(@Model.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.customerContactName==null?"": @Model.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.Label(@Model.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.email == null?"": @Model.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
                                 </div>
                             </div>                         
                             <div class="form-group">
@@ -370,10 +370,13 @@
                 totalPrice += +row.find("td").eq(2).find('span').text();
 
             });
-            $($("#tblCustomers tfoot").find('label')[0]).text(totalPrice);
+            var roundTotal = totalPrice.toFixed(2);
+            $($("#tblCustomers tfoot").find('label')[0]).text(roundTotal);
             //$("#txtPrice").text(totalPrice);
             var gst = ((10 / 100) * totalPrice).toFixed(2);
+            
             var sum = (+totalPrice + +gst).toFixed(2);
+           
             $($("#tblCustomers tfoot").find('label')[1]).text(gst);
             $($("#tblCustomers tfoot").find('label')[2]).text(sum);
 

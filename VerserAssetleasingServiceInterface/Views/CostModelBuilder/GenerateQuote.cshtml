@@ -533,7 +533,7 @@
             $("#mainTable").DataTable().clear();
             var length = Object.keys(data).length;
             if (length == 0) {
-                $('#mainTable').dataTable().fnAddData(["", "", "", "", "", "", "",""]);
+                $('#mainTable').dataTable().fnAddData(["", "", "", "", "", "", "","",""]);
             }
             else {
                 for (var i = 0; i <= length; i++) {
@@ -551,6 +551,7 @@
                         quote.SalesforceOpportunityName,
                         quote.SiteAddress,
                         quote.SalesManager,
+                        quote.RequestStatus,
                         quote.TOTAL_Incl_GST
                     ]);
                 }
