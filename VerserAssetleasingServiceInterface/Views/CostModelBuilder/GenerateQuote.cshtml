@@ -57,8 +57,8 @@
                                         <th>OPPORTUNITY</th>
                                         <th>PROJECT</th>
                                         <th>CUSTOMER </th>
-                                        <th>START</th>
-                                        <th>SUMMARY</th>
+                                        <th>STARTDATE</th>
+                                        <th>OPPORTUNITYNAME</th>
                                         <th>SITEADDRESS</th>
                                         <th>SALESMANAGER</th>
                                         <th>STATUS</th>
@@ -84,7 +84,7 @@
                                             </td>
 
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.SalesforceOpportunityName)
+                                                @Html.DisplayFor(modelItem => item.OpportunityName)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.SiteAddress)
@@ -179,7 +179,7 @@
                         <div>
                             <div class="row">
                                 <input type="button" class="btn-primary btn-lg"  value="ADD OPPORTUNITY" id="btnSubmit" onclick="AddOpportunity()" />
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT QUOTE" id="btnSubmitQuote" style="display:none;" />
+                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT" id="btnSubmitQuote" style="display:none;" />
                             </div>
                         </div>
                     </div>
@@ -187,8 +187,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 </div>
