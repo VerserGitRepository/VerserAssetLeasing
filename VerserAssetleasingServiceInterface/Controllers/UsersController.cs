@@ -19,6 +19,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
             _userroles.UserIDs =new SelectList(AdminHelperService.Users().Result);   
             _userroles.Companylist = new SelectList(CompanyServicehelper.CompanyList().Result, "ID", "Value");
             _userroles.ProjectLoginUserList = AdminHelperService.ProjectLoginUserList().Result;
+            //_userroles.JBHIFiCostModelQuoteRequests.PostQuoteRequestModelLIST = QuoteRequestHelperService.GetTQuotes().Result;
+            //_userroles.JBHIFiCostModelQuoteRequests.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+            //_userroles.JBHIFiCostModelQuoteRequests.ProjectManagerList = new SelectList(ListItemHelperServices.ProjectManagerList().Result, "ID", "Value");
+            //_userroles.JBHIFiCostModelQuoteRequests.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
             return View(_userroles);
         }
         public ActionResult Add(UserRoleModel theModel)

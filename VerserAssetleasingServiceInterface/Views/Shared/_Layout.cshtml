@@ -57,8 +57,10 @@
                             <li>@Html.ActionLink("InventoryItems", "Index", "Inventory")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("ADMINISTRATOR", "Index", "Users")</li>
-
+                    @if (VerserAssetleasingServiceInterface.ServiceImplentationhelper.UserRoles.UserAdminAccess())
+                    {
+                        <li>@Html.ActionLink("ADMINISTRATOR", "Index", "Users")</li>
+                    }
                     <ul class="nav navbar-nav" style="float:right">
                         @if (Session["FullUserName"] != null)
                         {

@@ -22,7 +22,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab3default" data-toggle="tab">USERS</a></li>
                 <li><a href="#tab4default" data-toggle="tab">UPDATE USER</a></li>
-                 <li><a href="#tab1default" data-toggle="tab">NEW USER REGISTERATION</a></li>
+                <li><a href="#tab1default" data-toggle="tab">NEW USER REGISTERATION</a></li>
+                <li><a href="#tab2default" data-toggle="tab">OPPORTUNITIES</a></li>
 
             </ul>
         </div>
@@ -31,13 +32,13 @@
                 <div class="tab-pane fade" id="tab1default">
                     <table class="table table-bordered" style="width:150px;margin-left:20px">
                         @*<thead>
-                            <tr class="success">
-                                <th colspan="2">
-                                    New User Registration
-                                    <a class="btn btn-success pull-right" href="Login.html">Login</a>
-                                </th>
-                            </tr>
-                        </thead>*@
+                    <tr class="success">
+                        <th colspan="2">
+                            New User Registration
+                            <a class="btn btn-success pull-right" href="Login.html">Login</a>
+                        </th>
+                    </tr>
+                </thead>*@
                         <tbody>
                             <tr>
                                 <td>Email</td>
@@ -142,7 +143,77 @@
                     </div>
                 </div>
 
+                <div class="tab-pane fade" id="tab2default">
+                    <table class="table table-bordered table-responsive" id="tblCustomersTable">
+                        <thead style="background-color:lightgray">
+                            <tr>
 
+                                <th>
+                                    Opportunity
+                                </th>
+                                <th>
+                                    Project
+                                </th>
+                                <th>
+                                    ProjectManager
+                                </th>
+                                <th>
+                                    SalesManager
+                                </th>
+                                <th></th>
+                                <th>
+                                    Is Active
+                                </th>
+                            </tr>
+                        </thead>
+
+                        @*@foreach (var item in Model.OpportunitesList)
+
+                {*@
+                        <tr>
+
+                            <td>
+                                @*@item.opportunityNumber
+                        <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.opportunityNumber" />*@
+                            </td>
+
+                            <td>
+                                @*<span>@item.Projectname</span>
+                        @Html.DropDownList("ProjectList", Model.ProjectDetailsList.Select(i => new SelectListItem { Text = i.projectName, Value = i.Id.ToString() }), new { @id = "ddlProject", @style = "display:none" })
+                        <input class="hidden" type="text" id="hdnProject" value="@item.Projectname" />*@
+
+                            </td>
+                            <td>
+                                @*<span>@item.ProjectManager</span>
+                        @Html.DropDownList("PMList", Model.ProjectManagerList.Select(i => new SelectListItem { Text = i.Value, Value = i.Id.ToString() }), new { @id = "ddlPM", @style = "display:none" })
+                        <input class="hidden" type="text" id="hdnPM" value="@item.ProjectManager" />*@
+                            </td>
+                            <td>
+                                @*<span>@item.SalesManager</span>
+                        @Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })
+                        <input class="hidden" type="text" id="hdnSM" value="@item.SalesManager" />*@
+                            </td>
+                            <td>
+                                <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Edit</strong></span>
+                                </a>
+                                <a class="Update btn btn-success a-btn-slide-text" href="javascript:;" style="display:none" id="Update">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Update</strong></span>
+                                </a>
+                                <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    <span><strong>Cancel</strong></span>
+                                </a>
+                            </td>
+                            <td>
+                                @*<input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.Isactive].Assigned" @(item.Isactive ? "checked" : "") value="@item.Isactive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />*@
+                            </td>
+                        </tr>
+                        @*}*@
+                    </table>
+                </div>
             </div>
         </div>
     </div>
