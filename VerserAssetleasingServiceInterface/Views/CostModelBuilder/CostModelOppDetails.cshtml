@@ -29,13 +29,13 @@
                             <div class="form-group required">
                                 @Html.Label("Contact Name", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.Label(@Model.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.customerContactName==null?"": @Model.CostModelQuoteRequestModel.customerContactName, new { @id = "txtCustContactName" })
                                 </div>
                             </div>
                             <div class="form-group required">
                                 @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-6">
-                                    @Html.Label(@Model.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
+                                    @Html.Label(@Model.CostModelQuoteRequestModel.email == null?"": @Model.CostModelQuoteRequestModel.email, new { @id = "txtEmail" })
                                 </div>
                             </div>                         
                             <div class="form-group">
