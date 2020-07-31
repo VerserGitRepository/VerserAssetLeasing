@@ -367,7 +367,7 @@
 
                 var row = $(this);
 
-                totalPrice += +row.find("td").eq(2).find('span').text();
+                totalPrice += row.find("td").eq(2).find('span').text();
 
             });
             $($("#tblCustomers tfoot").find('label')[0]).text(totalPrice);
