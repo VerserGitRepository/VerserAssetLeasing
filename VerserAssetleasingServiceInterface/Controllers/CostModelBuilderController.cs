@@ -55,7 +55,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
                     RequestQuoteModel.VerserBranch = "Sydney";
                     RequestQuoteModel.CustomerName = opportunity.Customer;
                     RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
-                    RequestQuoteModel.OpportunityNumber = Convert.ToInt32("208535");
+                    RequestQuoteModel.OpportunityNumber = Convert.ToInt32(opportunityNumber);
                     RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
                     RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
                     RequestQuoteModel.StartDate = opportunity.StartDate;
