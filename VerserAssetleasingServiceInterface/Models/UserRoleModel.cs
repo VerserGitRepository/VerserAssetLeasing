@@ -19,5 +19,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public bool CanRemove { get; set; }
         public bool CanEdit { get; set; }
         public string UserName { get; set; }
+        public virtual JBHIFiCostModelQuoteRequests JBHIFiCostModelQuoteRequests { get; set; }
+        public List<PostQuoteRequestModel> PostQuoteRequestModelLIST { get; set; }
     }
 }

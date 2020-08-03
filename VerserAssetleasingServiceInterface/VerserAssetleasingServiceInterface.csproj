@@ -232,6 +232,7 @@
     <Compile Include="ServiceImplentationhelper\ContractsServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\EndUsersServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\LoginService.cs" />
+    <Compile Include="ServiceImplentationhelper\UserRoles.cs" />
     <Compile Include="Web References\VerserSalesForce\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

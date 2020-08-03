@@ -160,38 +160,37 @@
                                 <th>
                                     SalesManager
                                 </th>
-                                <th></th>
+                               
                                 <th>
                                     Is Active
                                 </th>
                             </tr>
                         </thead>
 
-                        @*@foreach (var item in Model.OpportunitesList)
+                        @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
 
-                {*@
+                {
                         <tr>
 
                             <td>
-                                @*@item.opportunityNumber
-                        <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.opportunityNumber" />*@
+                                @item.OpportunityNumber
+                        <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.OpportunityNumber" />
                             </td>
 
                             <td>
-                                @*<span>@item.Projectname</span>
-                        @Html.DropDownList("ProjectList", Model.ProjectDetailsList.Select(i => new SelectListItem { Text = i.projectName, Value = i.Id.ToString() }), new { @id = "ddlProject", @style = "display:none" })
-                        <input class="hidden" type="text" id="hdnProject" value="@item.Projectname" />*@
+                                @item.CustomerName
+                                <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.CustomerName" />
 
                             </td>
                             <td>
-                                @*<span>@item.ProjectManager</span>
-                        @Html.DropDownList("PMList", Model.ProjectManagerList.Select(i => new SelectListItem { Text = i.Value, Value = i.Id.ToString() }), new { @id = "ddlPM", @style = "display:none" })
-                        <input class="hidden" type="text" id="hdnPM" value="@item.ProjectManager" />*@
+                                @item.ProjectManager
+                                <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.ProjectManager" />
+
                             </td>
                             <td>
-                                @*<span>@item.SalesManager</span>
-                        @Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })
-                        <input class="hidden" type="text" id="hdnSM" value="@item.SalesManager" />*@
+                                @item.SalesManager
+                                <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.SalesManager" />
+
                             </td>
                             <td>
                                 <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
@@ -207,11 +206,11 @@
                                     <span><strong>Cancel</strong></span>
                                 </a>
                             </td>
-                            <td>
-                                @*<input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.Isactive].Assigned" @(item.Isactive ? "checked" : "") value="@item.Isactive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />*@
-                            </td>
+                            @*<td>
+                                <input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.Isactive].Assigned" @(item.Isactive ? "checked" : "") value="@item.Isactive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />
+                            </td>*@
                         </tr>
-                        @*}*@
+                        }
                     </table>
                 </div>
             </div>
