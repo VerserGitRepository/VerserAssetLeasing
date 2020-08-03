@@ -186,13 +186,19 @@
                             </td>
                             <td>
                                 @item.ProjectManager
-                                <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.ProjectManager" />
+                                <input class="hidden" type="text" id="hdnPM" value="@item.ProjectManager" />
 
+                                @*@Html.DropDownList("PMList", Model.ProjectManagerList.Select(i => new SelectListItem { Text = i.Value, Value = i.p.ToString() }), new { @id = "ddlPM", @style = "display:none" })*@
+                                
+
+                                @Html.DropDownListFor(m => item.ProjectManager, Model.SalesManagerList, "Project Manager", new { @class = "form-control ddlregProjectManagerID ", id = "ddlregProjectManagerID", @multiple = "multiple" })
+                                @Html.ValidationMessageFor(model => model.ProjectManagerList, "", new { @class = "text-danger" })
                             </td>
                             <td>
                                 @item.SalesManager
                                 <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.SalesManager" />
-
+                                @Html.DropDownListFor(m =>item.SalesManager, Model.SalesManagerList, "Sales Manager", new { @class = "form-control ddlregSalesManagerID", id = "ddlregSalesManagerID", @multiple = "multiple" })
+                                @Html.ValidationMessageFor(model => model.SalesManagerList, "", new { @class = "text-danger" })
                             </td>
                             <td>
                                 <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
@@ -302,6 +308,23 @@
         $('input[type="search"]').val = "";
 
     });
+         $("body").on("click", "#tblCustomersTable .Edit", function () {
+        // debugger;
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("select").length > 0 ) {
+                $(this).find("select").show();
+                $(this).find("span").hide();
+                $(this).toggleClass('selected');
+                SetDDLValue(row);
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+       
+
+        $(this).hide();
+    });
     $('.ddlregCustomerID').multiselect({
         includeSelectAllOption: true,
         maxHeight: 250,
@@ -316,6 +339,43 @@
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true
         });
+
+         $('.ddlregProjectManagerID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '380px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+         });
+          $('.ddlregSalesManagerID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '380px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+          });
+          function SetDDLValue(row) {
+        //alert('before document ready');
+       $(row).find("#ddlSM option").each(function (i) {
+           
+            if (($(this).text() == $(row).find("#hdnSM").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+            
+        $(row).find("#ddlPM option").each(function (i) {
+
+            if (($(this).text() == $(row).find("#hdnPM").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+        $(row).find("#ddlProject option").each(function (i) {
+
+            if (($(this).text() == $(row).find("#hdnProject").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+    }
 
     function ShowModalRegistration() {
          var sliderURL = '@Url.Action("GetRegristrationModal", "Users")'

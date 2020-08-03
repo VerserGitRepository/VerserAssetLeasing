@@ -21,5 +21,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public string UserName { get; set; }
         public virtual JBHIFiCostModelQuoteRequests JBHIFiCostModelQuoteRequests { get; set; }
         public List<PostQuoteRequestModel> PostQuoteRequestModelLIST { get; set; }
+        public SelectList ProjectManagerList { get; internal set; }
+        public SelectList SalesManagerList { get; internal set; }
     }
 }
