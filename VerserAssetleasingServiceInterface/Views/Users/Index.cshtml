@@ -160,7 +160,9 @@
                                 <th>
                                     SalesManager
                                 </th>
-                               
+                                <th>
+                                   Changes
+                                </th>
                                 <th>
                                     Is Active
                                 </th>
@@ -206,9 +208,9 @@
                                     <span><strong>Cancel</strong></span>
                                 </a>
                             </td>
-                            @*<td>
-                                <input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.Isactive].Assigned" @(item.Isactive ? "checked" : "") value="@item.Isactive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />
-                            </td>*@
+                            <td>
+                                <input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.IsActive].Assigned" @(item.IsActive ? "checked" : "") value="@item.IsActive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />
+                            </td>
                         </tr>
                         }
                     </table>
@@ -296,7 +298,7 @@
 
     $(document).ready(function () {
         //$('#mainTable').DataTable();
-        $('#mainTable1').DataTable();
+        $('#tblCustomersTable').DataTable();
         $('input[type="search"]').val = "";
 
     });

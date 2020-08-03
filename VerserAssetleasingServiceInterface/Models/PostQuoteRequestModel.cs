@@ -25,5 +25,6 @@ namespace VerserAssetleasingServiceInterface.Models
         public decimal TOTAL_Excl_GST { get; set; }
         public string OpportunityVersion { get; set; }
         public string RequestStatus { get; set; }
+        public bool IsActive { get; set; }
     }
 }
