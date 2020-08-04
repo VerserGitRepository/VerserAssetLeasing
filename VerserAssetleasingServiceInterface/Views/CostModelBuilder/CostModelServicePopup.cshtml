@@ -20,20 +20,20 @@
             </div>
             <div class="form-group col-md-6">
                 @Html.Label("Opportunity Name")
-                @Html.DropDownListFor(m => m.OpportunityName, Model.OpportunityNames, "Opportunity", new { @class = "form-control ", @id = "ddlOpportunity", @multiple = "multiple" })
+                @Html.TextBoxFor(x => x.OpportunityName, new { @class = "form-control ", @id = "ddlOpportunity" })
                 @Html.ValidationMessageFor(model => model.OpportunityName, "", new { @class = "text-danger" })
             </div>
 
         </div>
         @*<div class="row">
             <div class="form-group col-md-6">
-                @Html.Label("Sales Manager")             
+                @Html.Label("Sales Manager")
                 @Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.SalesManager, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
                 @Html.Label("Project Manager")
-                @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" })               
+                @Html.DropDownListFor(m => m.ProjectManager, Model.JBHIFiCostModelQuoteRequest.ProjectManagerList, "Project Manager", new { @class = "form-control ", @id = "txtProjectManager", @multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.ProjectManager, "", new { @class = "text-danger" })
             </div>
         </div>*@
@@ -64,8 +64,15 @@
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6" style="width:280px;">
+                @Html.Label("Description")
+                @Html.TextAreaFor(model => model.Description, new { @id = "txtCommentsRC", placeholder = "Please enter description here.", @class = "form-control", style = "border:solid 1px lightgray;" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        @*<div class="row">
+            @*<div class="row">
             <div class="form-group col-md-6">
                 <label>Status</label>
 
@@ -76,11 +83,11 @@
                      new SelectListItem {Text="Draft",Value="3" },
                     }, "Status", new { @class = "form-control" , @id = "txtStatus"})
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-               
+
             </div>
 
         </div>*@
-    </div>
+        </div>
 
     <div class="footer">
         <input type="submit" class="btn-primary btn-lg" value="CREATE OPPORTUNITY" id="btnCreateSalesForceOppn" />
@@ -96,9 +103,6 @@
 
         $('#txtSalesManager').removeAttr('multiple')
         $('#txtSalesManager').multiselect('rebuild');
-
-        $('#ddlOpportunity').removeAttr('multiple')
-        $('#ddlOpportunity').multiselect('rebuild');
 
         $('#ddlAccount').removeAttr('multiple')
         $('#ddlAccount').multiselect('rebuild');
@@ -140,13 +144,7 @@
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true,
     });
-    $('#ddlOpportunity').multiselect({
-        includeSelectAllOption: false,
-        maxHeight: 250,
-        buttonWidth: '280px',
-        enableFiltering: true,
-        enableCaseInsensitiveFiltering: true
-    });
+    
     $('#ddlAccount').multiselect({
         includeSelectAllOption: false,
         maxHeight: 250,

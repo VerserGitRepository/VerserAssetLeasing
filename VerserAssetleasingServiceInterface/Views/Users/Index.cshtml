@@ -32,13 +32,13 @@
                 <div class="tab-pane fade" id="tab1default">
                     <table class="table table-bordered" style="width:150px;margin-left:20px">
                         @*<thead>
-                    <tr class="success">
-                        <th colspan="2">
-                            New User Registration
-                            <a class="btn btn-success pull-right" href="Login.html">Login</a>
-                        </th>
-                    </tr>
-                </thead>*@
+                                <tr class="success">
+                                    <th colspan="2">
+                                        New User Registration
+                                        <a class="btn btn-success pull-right" href="Login.html">Login</a>
+                                    </th>
+                                </tr>
+                            </thead>*@
                         <tbody>
                             <tr>
                                 <td>Email</td>
@@ -160,64 +160,68 @@
                                 <th>
                                     SalesManager
                                 </th>
-                                <th></th>
+                                <th>
+                                    Changes
+                                </th>
                                 <th>
                                     Is Active
                                 </th>
                             </tr>
                         </thead>
 
-                        @*@foreach (var item in Model.OpportunitesList)
+                        @foreach (VerserAssetleasingServiceInterface.Models.PostQuoteRequestModel item in Model.PostQuoteRequestModelLIST)
 
-                {*@
-                        <tr>
+                        {
+                            <tr>
 
-                            <td>
-                                @*@item.opportunityNumber
-                        <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.opportunityNumber" />*@
-                            </td>
+                                <td>
+                                    @item.OpportunityNumber
+                                    <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.OpportunityNumber" />
+                                </td>
 
-                            <td>
-                                @*<span>@item.Projectname</span>
-                        @Html.DropDownList("ProjectList", Model.ProjectDetailsList.Select(i => new SelectListItem { Text = i.projectName, Value = i.Id.ToString() }), new { @id = "ddlProject", @style = "display:none" })
-                        <input class="hidden" type="text" id="hdnProject" value="@item.Projectname" />*@
+                                <td>
+                                    @item.CustomerName
+                                    <input class="hidden" type="text" id="hdnOpportunitynumber" value="@item.CustomerName" />
 
-                            </td>
-                            <td>
-                                @*<span>@item.ProjectManager</span>
-                        @Html.DropDownList("PMList", Model.ProjectManagerList.Select(i => new SelectListItem { Text = i.Value, Value = i.Id.ToString() }), new { @id = "ddlPM", @style = "display:none" })
-                        <input class="hidden" type="text" id="hdnPM" value="@item.ProjectManager" />*@
-                            </td>
-                            <td>
-                                @*<span>@item.SalesManager</span>
-                        @Html.DropDownListFor(m => m.SalesManager, Model.JBHIFiCostModelQuoteRequest.SalesManagerList, "Sales Manager", new { @class = "form-control ", @id = "txtSalesManager", @multiple = "multiple" })
-                        <input class="hidden" type="text" id="hdnSM" value="@item.SalesManager" />*@
-                            </td>
-                            <td>
-                                <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <span><strong>Edit</strong></span>
-                                </a>
-                                <a class="Update btn btn-success a-btn-slide-text" href="javascript:;" style="display:none" id="Update">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <span><strong>Update</strong></span>
-                                </a>
-                                <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    <span><strong>Cancel</strong></span>
-                                </a>
-                            </td>
-                            <td>
-                                @*<input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.Isactive].Assigned" @(item.Isactive ? "checked" : "") value="@item.Isactive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />*@
-                            </td>
-                        </tr>
-                        @*}*@
+                                </td>
+                                <td>
+                                    <span>@item.ProjectManager</span>
+                                    @Html.DropDownListFor(m => item.ProjectManager, Model.SalesManagerList, "Project Manager", new { @class = "form-control ddlPM ", id = "ddlPM" , @style = "display:none" })
+                                    <input class="hidden" type="text" id="hdnPM" value="@item.ProjectManager" />
+
+                                </td>
+                                <td>
+                                    <span>
+                                        @item.SalesManager</span>
+                                        <input class="hidden" type="text" id="hdnSM" value="@item.SalesManager" />
+                                        @Html.DropDownListFor(m => item.SalesManager, Model.SalesManagerList, "Sales Manager", new { @class = "form-control ddlSM", id = "ddlSM", @style = "display:none" })
+                                  
+                                      </td>
+                                <td>
+                                    <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Edit</strong></span>
+                                    </a>
+                                    <a class="Update btn btn-success a-btn-slide-text" href="javascript:;" style="display:none" id="Update">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span><strong>Update</strong></span>
+                                    </a>
+                                    <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span><strong>Cancel</strong></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <input data-size="mini" type="checkbox" data-toggle="toggle" name="AssignedGroups[@item.IsActive].Assigned" @(item.IsActive ? "checked" : "") value="@item.IsActive" id="OpportunityCheckBoxID" onchange="OpportunityIdChange(this);" />
+                                </td>
+                            </tr>
+                        }
                     </table>
                 </div>
             </div>
         </div>
     </div>
-   
+
 
     <div class="col-md-8">
         <div class="modal fade" tabindex="-1" id="successModal"
@@ -251,10 +255,6 @@
         @*
             </div>*@
     </div>
-    
-
-   
-
 
     <div class="col-md-8">
 
@@ -293,13 +293,78 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
     <script type="text/javascript">
+    </script>
+}
+<script type="text/javascript">
 
     $(document).ready(function () {
         //$('#mainTable').DataTable();
-        $('#mainTable1').DataTable();
+        $('#tblCustomersTable').DataTable();
         $('input[type="search"]').val = "";
 
+    });
+    $("body").on("click", "#tblCustomersTable .Edit", function () {
+        // debugger;
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("select").length > 0 ) {
+                $(this).find("select").show();
+                $(this).find("span").hide();
+                $(this).toggleClass('selected');
+                SetDDLValue(row);
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+       
+
+        $(this).hide();
+    });
+    function SetDDLValue(row) {
+        //alert('before document ready');
+       $(row).find("#ddlSM option").each(function (i) {
+           
+            if (($(this).text() == $(row).find("#hdnSM").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+            
+        $(row).find("#ddlPM option").each(function (i) {
+
+            if (($(this).text() == $(row).find("#hdnPM").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+        $(row).find("#ddlProject option").each(function (i) {
+
+            if (($(this).text() == $(row).find("#hdnProject").val())) {
+                $(this).attr('selected', 'selected')
+            }
+        });
+    }
+
+     //Cancel event handler.
+        $("body").on("click", "#tblCustomersTable .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("select").length > 0 ) {
+                var span = $(this).find("span");
+                var input = $(this).find("select");
+                $(this).removeClass('selected');
+                //input.val(span.html());
+               
+                span.show();
+                input.hide();
+               
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Update").hide();
+      
+        $(this).hide();
     });
     $('.ddlregCustomerID').multiselect({
         includeSelectAllOption: true,
@@ -316,15 +381,30 @@
             enableCaseInsensitiveFiltering: true
         });
 
+         $('.ddlregProjectManagerID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '380px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+         });
+          $('.ddlregSalesManagerID').multiselect({
+            includeSelectAllOption: true,
+            maxHeight: 250,
+            buttonWidth: '380px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+          });
+         
     function ShowModalRegistration() {
          var sliderURL = '@Url.Action("GetRegristrationModal", "Users")'
         $.ajax({
             type: "GET",
             url: sliderURL,
-            
+
             success: function (data) {
                 $.confirm({
-       
+
                     title: ' ',
                     closeIcon: true,
                     content:data,
@@ -362,41 +442,41 @@
             }
         });
     }
-    </script>
+</script>
 
-    @*Registration ajax code*@
-    @*
-        <script type="text/javascript">
-            $(document).ready(function () {
+@*Registration ajax code*@
+@*
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-                //Close the bootstrap alert
-                $('#linkClose').click(function () {
-                    $('#divError').hide('fade');
-                });
+            //Close the bootstrap alert
+            $('#linkClose').click(function () {
+                $('#divError').hide('fade');
+            });
 
-                // Save the new user details
-                $('#btnRegister').click(function () {
-                    $.ajax({
-                        //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
-                        url: 'api/account/register',
-                        method: 'POST',
-                        data: {
-                            email: $('#txtEmail').val(),
-                            password: $('#txtPassword').val(),
-                            confirmPassword: $('#txtConfirmPassword').val()
-                        },
-                        success: function () {
-                            $('#successModal').modal('show');
-                        },
-                        error: function (jqXHR) {
-                            $('#divErrorText').text(jqXHR.responseText);
-                            $('#divError').show('fade');
-                        }
-                    });
+            // Save the new user details
+            $('#btnRegister').click(function () {
+                $.ajax({
+                    //url: 'https://customers.verser.com.au/JMSGatewayAPI/api/account/register',
+                    url: 'api/account/register',
+                    method: 'POST',
+                    data: {
+                        email: $('#txtEmail').val(),
+                        password: $('#txtPassword').val(),
+                        confirmPassword: $('#txtConfirmPassword').val()
+                    },
+                    success: function () {
+                        $('#successModal').modal('show');
+                    },
+                    error: function (jqXHR) {
+                        $('#divErrorText').text(jqXHR.responseText);
+                        $('#divError').show('fade');
+                    }
                 });
             });
-        </script>*@
-}
+        });
+    </script>*@
+
 <style>
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
         background-color: #FFA500;
