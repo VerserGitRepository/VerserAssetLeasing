@@ -149,7 +149,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             string query = "select Name from account";
             queryResult = SfdcBinding.query(query);
 
-            string oppQuery = "select Name from Opportunity";
+            string oppQuery = "select Name from Opportunity where name like '%JB H%'";
 
             oppQueryResult = SfdcBinding.query(oppQuery);
             if (queryResult.size > 0)
@@ -161,7 +161,7 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             if (oppQueryResult.size > 0)
             {
-                for (int i = 0; i < 500; i++)
+                for (int i = 0; i < oppQueryResult.size; i++)
                 {
                     oppNames.Add(new ListItemViewModel() { Id = i, Value = ((Opportunity)oppQueryResult.records[i]).Name });
                 }

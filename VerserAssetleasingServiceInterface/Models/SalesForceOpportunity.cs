@@ -31,5 +31,6 @@ namespace VerserAssetleasingServiceInterface.Models
         public SelectList AccountNames { get; internal set; }
         public SelectList OpportunityNames { get; internal set; }
         public JBHIFiCostModelQuoteRequests JBHIFiCostModelQuoteRequest { get; set; }
+        public string Description { get; set; }
     }
 }
