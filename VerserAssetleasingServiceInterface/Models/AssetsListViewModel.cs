@@ -38,6 +38,8 @@ namespace VerserAssetleasingServiceInterface.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> LastRepairDate { get; set; }
         public string CreatedBy { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTimeOffset> Created { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<DateTimeOffset> Modified { get; set; }
@@ -50,7 +52,10 @@ namespace VerserAssetleasingServiceInterface.Models
         public string Make { get; set; }
         public string Model { get; set; }
         public string SSN { get; set; }
-
-
+        public string DeviceName { get; set; }
+        public string CustomerName { get; set; }
+        public string ConnectTechTicket { get; set; }
+        public string SalesForce { get; set; }
+        public string Status { get; set; }
     }
 }
