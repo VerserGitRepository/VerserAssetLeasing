@@ -9,7 +9,7 @@ namespace VerserAssetleasingServiceInterface.Models
     {
         public List<CompanyListViewModel> CompanyListViewModel { get; set; }
         public List<CompanySitesListViewModel> CompanySitesListViewModel { get; set; }
-        public List<AssetsListViewModel> AssetsListViewModel { get; set; }
+        public List<JBHiFiAssetsModel> AssetsListViewModel { get; set; }
         public List<EndUsersListViewModel> EndUsersListViewModel { get; set; }
         public List<ContractsListViewModel> ContractsListViewModel { get; set; }
 

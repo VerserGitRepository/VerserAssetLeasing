@@ -24,7 +24,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
             model.CompanyListViewModel = CompanyServicehelper.Projects(_user).Result;
             model.CompanySitesListViewModel = CompanyServicehelper.CompanySites(_user).Result;      
-            model.AssetsListViewModel = new List<AssetsListViewModel>();
+            model.AssetsListViewModel = new List<JBHiFiAssetsModel>();
             model.EndUsersListViewModel = new List<EndUsersListViewModel>();
             model.ContractsListViewModel = new List<ContractsListViewModel>();
             //Changes required on API

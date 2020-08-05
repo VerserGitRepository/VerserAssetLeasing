@@ -28,25 +28,25 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult GetAssetsData(int Id)
         {
-            List<AssetsListViewModel> companydata = new List<AssetsListViewModel>();
-            companydata = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
-            return Json(companydata, JsonRequestBehavior.AllowGet);
+            var assets = new List<JBHiFiAssetsModel>();
+            assets = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
+            return Json(assets, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult ExportTimesSheetToExcel(FormCollection form)
         {
            
             string Orderno = form["hiddenAssetId"];
-            List<AssetsListViewModel> Companymodel = new List<AssetsListViewModel>();
+            var assets = new List<JBHiFiAssetsModel>();
             if (Session["Username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
             else
             {
-                Companymodel = AssetsServicehelper.GetAssetsData(Orderno).Result;
+                assets = AssetsServicehelper.GetAssetsData(Orderno).Result;
                 GridView gv = new GridView();
-                gv.DataSource = Companymodel;
+                gv.DataSource = assets;
                 gv.DataBind();
                 Response.ClearContent();
                 Response.Buffer = true;

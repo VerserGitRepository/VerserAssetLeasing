@@ -191,6 +191,7 @@
     <Compile Include="Models\DeviceCategoriesListViewModel.cs" />
     <Compile Include="Models\EndUsersListViewModel.cs" />
     <Compile Include="Models\InventoryItemsListViewModel.cs" />
+    <Compile Include="Models\JBHiFiAssetsModel.cs" />
     <Compile Include="Models\JBHIFICostModel.cs" />
     <Compile Include="Models\JBHIFiCostModelQuoteRequests.cs" />
     <Compile Include="Models\JBHIFiCostModelServiceItems.cs" />

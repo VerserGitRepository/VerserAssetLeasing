@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Net.Http;
 using VerserAssetleasingServiceInterface.Models;
-
+using System.Linq;
 
 namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
 {
@@ -67,16 +67,20 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return ReturnResult;
         }
-        public static async Task<List<AssetsListViewModel>> GetAssetsData(string ProjectID)
+        public static async Task<List<JBHiFiAssetsModel>> GetAssetsData(string ProjectID)
         {
-            List<AssetsListViewModel> assetsList = new List<AssetsListViewModel>();
-            using (HttpClient client = new HttpClient())
+            var assetsList = new List<JBHiFiAssetsModel>();
+
+            if (ProjectID.All(char.IsDigit))
             {
-                client.BaseAddress = new Uri(BaseUri);
-                HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{ProjectID}/ProjectAssets")).Result;
-                if (response.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    assetsList = await response.Content.ReadAsAsync<List<AssetsListViewModel>>();
+                    client.BaseAddress = new Uri(BaseUri);
+                    HttpResponseMessage response = client.GetAsync(string.Format($"AssetLeasing/{ProjectID}/ProjectAssets")).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        assetsList = await response.Content.ReadAsAsync<List<JBHiFiAssetsModel>>();
+                    }
                 }
             }
             return assetsList;

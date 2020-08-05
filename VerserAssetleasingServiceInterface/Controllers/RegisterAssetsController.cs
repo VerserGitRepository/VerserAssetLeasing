@@ -20,10 +20,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
         }
         public ActionResult UpdateAssets(string AssetId,string companyId)
         {
-            List<AssetsListViewModel> assetsdata = new List<AssetsListViewModel>();
+           var assetsdata = new List<JBHiFiAssetsModel>();
            
             assetsdata = AssetsServicehelper.GetAssetsData(companyId).Result;
-            AssetsListViewModel model = assetsdata.Where(item => item.AssetID == AssetId).FirstOrDefault();
+            var model = assetsdata.Where(item => item.AssetID == AssetId).FirstOrDefault();
             return PartialView(model);
         }
         // GET: RegisterAssets

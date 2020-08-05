@@ -13,7 +13,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public string SerialNo { get; set; }
         public int Asset_Company { get; set; }
         public string IMEI { get; set; }
-        public string SIMNo { get; set; }
+        public string SIM { get; set; }
         public string PurchaseOrderNo { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -55,7 +55,7 @@ namespace VerserAssetleasingServiceInterface.Models
         public string DeviceName { get; set; }
         public string CustomerName { get; set; }
         public string ConnectTechTicket { get; set; }
-        public string SalesForce { get; set; }
+        public string SalesForceOpportunity { get; set; }
         public string Connote { get; set; }
         public DateTime? Date { get; set; }
         public string Status { get; set; }
