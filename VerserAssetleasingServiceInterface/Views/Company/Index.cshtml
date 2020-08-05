@@ -85,12 +85,12 @@
                                                         <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
                                                     }
                                                 </div>
-                                                <div class="col-md-1">
+                                                @*<div class="col-md-1">
                                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
-                                                </div>
+                                                </div>*@
                                             </div><br>
                                             <div class="col-md-12">
                                                 <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
@@ -106,10 +106,13 @@
                                                                 @Html.DisplayName("Model")
                                                             </th>
                                                             <th>
+                                                                @Html.DisplayName("DeviceName")
+                                                            </th>
+                                                            <th>
                                                                 @Html.DisplayName("Serial")
                                                             </th>
                                                             <th>
-                                                                @Html.DisplayName("Company")
+                                                                @Html.DisplayName("CustomerName")
                                                             </th>
                                                             <th>
                                                                 @Html.DisplayName("IMEI")
@@ -118,27 +121,21 @@
                                                                 @Html.DisplayName("SIM")
                                                             </th>
                                                             <th>
-                                                                @Html.DisplayName("Order")
+                                                                @Html.DisplayName("ConnectTechTicket")
+                                                            </th>
+
+                                                            <th>
+                                                                @Html.DisplayName("SalesForce")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Connote")
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayName("Status")
                                                             </th>
                                                             <th>
                                                                 @Html.DisplayName("Date")
                                                             </th>
-                                                            <th>
-                                                                @Html.DisplayName("Price")
-                                                            </th>
-                                                            @*<th>
-                                                @Html.DisplayName("Decommission")
-                                            </th>*@
-                                                            <th>
-                                                                @Html.DisplayName("Condition")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Buyback")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Asset History")
-                                                            </th>
-
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -175,17 +172,13 @@
                                                                 <td>
                                                                     @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
                                                                 </td>
-                                                                @*<td>
-                                                    @Html.DisplayName(item.DecomissionDate.HasValue ? item.DecomissionDate.Value.ToString("MM/dd/yyyy") : "")
-                                                </td>*@
+                                                            
                                                                 <td>
                                                                     @Html.DisplayName(item.Condition == null ? "" : item.Condition)
                                                                 </td>
                                                                 <td>
                                                                     @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
                                                                 </td>
-
-
                                                             </tr>
                                                         }
                                                     </tbody>
