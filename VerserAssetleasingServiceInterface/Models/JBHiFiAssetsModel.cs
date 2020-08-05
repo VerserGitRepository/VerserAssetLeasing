@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -35,6 +36,8 @@ namespace VerserAssetleasingServiceInterface.Models
         public string Condition { get; set; }
         public int? Asset_Contract { get; set; }
         public int? Asset_EndUser { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
         public string Connote { get; set; }
         public string JobNo { get; set; }

@@ -34,7 +34,7 @@
                         <tr>
                             <td onclick="LoadAddressData(@item.id,'@item.companyName','@item.login','@item.addressLine1',
                                 '@item.phone','@item.fax','@item.email','@if (item.logo != null) {@Convert.ToBase64String(@item.logo)}',
-                                '@item.state','@item.suburb','@item.postcode');">                               
+                                '@item.state','@item.suburb','@item.postcode');">
                                 <font style="font-weight:1000;color:#515151">
                                     @Html.DisplayFor(modelItem => item.companyName)
                                     <input type="hidden" value="@item" id="hiddenModelId" />
@@ -42,7 +42,7 @@
                                 <font style="color:gray">
                                     @Html.DisplayFor(modelItem => item.addressLine1)
                                 </font>
-                                @if (@item.logo !=null && Convert.ToBase64String(@item.logo).Length > 0)
+                                @if (@item.logo != null && Convert.ToBase64String(@item.logo).Length > 0)
                                 {
                                     <br />
                                     <img src="data:image/jpeg;base64,@(Convert.ToBase64String(@item.logo))" style="height:45px; width:65px;" class="image-border">
@@ -52,7 +52,7 @@
                         </tr>
                     }
                 </tbody>
-            </table>            
+            </table>
         </div>
 
         <div class="col-md-6">
@@ -73,74 +73,73 @@
                             <div class="col-md-6" style="padding-left:0px">
                                 <div class="row">
 
-                                 
 
-                                        <div class="row pull-left" style="margin-left:10px">
-                                            <div class="row pull-right">
-                                                <div class="col-md-1">
-                                                    @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
-                                                    {
-                                                        <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
 
-                                                        <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
-                                                    }
-                                                </div>
-                                                @*<div class="col-md-1">
+                                    <div class="row pull-left" style="margin-left:10px">
+                                        <div class="row pull-right">
+                                            <div class="col-md-1">
+                                                @using (Html.BeginForm("ExportTimesSheetToExcel", "Assets", FormMethod.Post))
+                                                {
+                                                    <input type="hidden" value="" id="hiddenAssetId" name="hiddenAssetId" />
+
+                                                    <input type="image" src="~/Images/excel.png" alt="Submit" width="20" height="20" data-toggle="tooltip" data-placement="left" title="Export">
+                                                }
+                                            </div>
+                                            @*<div class="col-md-1">
                                                     <input type="image" src="~/Images/plus.png" alt="Submit" width="20" height="20" id="addAsset" data-toggle="tooltip" data-placement="left" title="Add">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <input type="image" src="~/Images/pencil.png" alt="Submit" width="20" height="20" id="editAsset" data-toggle="tooltip" data-placement="left" title="Edit">
                                                 </div>*@
-                                            </div><br>
-                                            <div class="col-md-12">
-                                                <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
-                                                    <thead style="background-color:#428bca; color:white">
-                                                        <tr>
-                                                            <th>
-                                                                @Html.DisplayName("SSN")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Make")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Model")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("DeviceName")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Serial")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("CustomerName")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("IMEI")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("SIM")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("ConnectTechTicket")
-                                                            </th>
-
-                                                            <th>
-                                                                @Html.DisplayName("SalesForce")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Connote")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Status")
-                                                            </th>
-                                                            <th>
-                                                                @Html.DisplayName("Date")
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach (var item in Model.AssetsListViewModel)
-                                                        {
+                                        </div><br>
+                                        <div class="col-md-12">
+                                            <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
+                                                <thead style="background-color:#428bca; color:white">
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("SSN")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Make")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Model")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Serial")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("DeviceName")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("IMEI")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("SIM")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Status")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("CustomerName")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("ConnectTechTicket")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("SalesForce")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Connote")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Date")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.AssetsListViewModel)
+                                                    {
                                                         <tr>
                                                             <td>
                                                                 @Html.DisplayName(item.SSN)
@@ -152,47 +151,47 @@
                                                                 @Html.DisplayName(item.Model)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
+                                                                @Html.DisplayName(item.SerialNo)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.Asset_Company.ToString())
+                                                                @Html.DisplayName(item.DeviceName)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
+                                                                @Html.DisplayName(item.IMEI)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
+                                                                @Html.DisplayName(item.SIM)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Status)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.CustomerName == null ? "" : item.CustomerName)
                                                             </td>
                                                             <td>
                                                                 @Html.DisplayName(item.ConnectTechTicket == null ? "" : item.ConnectTechTicket)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.SalesForce == null ? "" : item.SalesForce)
+                                                                @Html.DisplayName((item.SalesForceOpportunity <= 0 ? 0 : item.SalesForceOpportunity).ToString())
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.Connote == null ? "" : item.Connote)
-                                                            </td>
-
-                                                            <td>
-                                                                @Html.DisplayName(item.Status == null ? "" : item.Status)
+                                                                @Html.DisplayName(item.Connote)
                                                             </td>
                                                             <td>
-                                                                @Html.DisplayName(item.Date == null ? "" : item.Date.Value.ToString())
+                                                                @item.Date
                                                             </td>
                                                         </tr>
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
-                                 
+                                    </div>
+
                                 </div>
-                           
+
                             </div>
                         </div>
-
                         <div class="tab-pane fade" id="tab4default">
-
                             <div class="row pull-right" style="margin-bottom:5px">
                                 <div class="col-md-1">
                                     @using (Html.BeginForm("ExportTimesSheetToExcel", "Company", FormMethod.Post))
@@ -260,12 +259,11 @@
 
                                                 </td>
                                                 @*<td>
-                                @Html.DisplayName(item.site_Company)
-                            </td>
-                            <td>
-                                @Html.DisplayName(item.id.ToString())
-                            </td>*@
-
+                                                        @Html.DisplayName(item.site_Company)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayName(item.id.ToString())
+                                                    </td>*@
                                             </tr>
                                         }
                                     </tbody>
@@ -275,8 +273,6 @@
                                 <img src="~/Images/ajax-loader.gif" />
                             </div>
                         </div>
-                           
-
                         <div class="tab-pane fade" id="tab3default">
                             <div class="row pull-right" style="margin-bottom:5px">
                                 <div class="col-md-1">
@@ -355,17 +351,14 @@
                                 </table>
                             </div>
                         </div>
-
-                     
-
                         <div class="tab-pane fade" id="tab5default">
                             <div class="row pull-right" style="padding-right:20px">
                                 <div class="col-md-1" style="padding-right:10px">
                                     <input id="Certificateimgupload" type="file" style="display:none;">
                                     <input type="image" src="~/Images/import.png" alt="Submit" width="20" height="20" id="btnCertificates" data-toggle="tooltip" data-placement="left" title="Import">
                                     @*<button type="button" id="btnCertificates" class="btn btn-sm btn-labeled btn-outline-secondary" style="padding-left:20px;border-color:gray">
-                        <span class="btn-label"><i class="glyphicon glyphicon-import"></i> </span>
-                    </button>*@
+                                            <span class="btn-label"><i class="glyphicon glyphicon-import"></i> </span>
+                                        </button>*@
 
                                 </div>
                                 <div class="col-md-1">
@@ -415,10 +408,6 @@
                                             </th>
                                             <th>
                                                 @Html.DisplayName("UserName")
-
-
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -456,21 +445,18 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.UserName)
                                                 </td>
-
-
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
-   
+    </div>
+
 </div>
 
 @section Scripts {
@@ -492,7 +478,7 @@
 
                 ]
             });
-           
+
             $('#mainTable2').DataTable({
                 stateSave: true,
                 "pageLength": 10,
@@ -522,7 +508,7 @@
                 }
             });
 
-        
+
         });
               //  ExportTimesSheetToExcel", "Candidates"
         function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo,state,suburb,postcode) {
@@ -556,9 +542,9 @@
                 url: loadUrl,
                 contentType: "application/json; charset=utf-8",
                 data: { "Id": theId },
-                datatype: "json",               
+                datatype: "json",
                 success: function (data) {
-                  
+
                     populateDataTable(data);
                 },
                 error: function () {
@@ -572,7 +558,7 @@
                 url: loadAssetsUrl,
                 contentType: "application/json; charset=utf-8",
                 data: { "Id": theId },
-                datatype: "json",  
+                datatype: "json",
                 beforeSend: function () {
                     obj = $.alert({
                         boxWidth: '50px',
@@ -590,10 +576,10 @@
                     populateAssetsDataTable(data);
                 },
                 error: function () {
-                    alert("Dynamic content load failed.");
+                  //  alert("Dynamic content load failed.");
                 }
             });
-            
+
             $.ajax({
 
                 type: "GET",
@@ -601,9 +587,9 @@
                 contentType: "application/json; charset=utf-8",
                 data: { "CompanyId": theId },
                 datatype: "json",
-               
+
                 success: function (data) {
-                   
+
                     populateContractsDataTable(data);
                 },
                 error: function () {
@@ -618,9 +604,9 @@
                 contentType: "application/json; charset=utf-8",
                 data: { "CompanyId": theId },
                 datatype: "json",
-               
+
                 success: function (data) {
-                
+
                     populateEndusersDataTable(data);
                 },
                 error: function () {
@@ -678,17 +664,15 @@
                            customer.Make,
                            customer.Model,
                            customer.SerialNo,
-                           customer.Asset_Company,
+                           customer.DeviceName,                         
                            customer.IMEI,
-                           customer.SIMNo,
-                           customer.PurchaseOrderNo,
-                           customer.PurchaseDate,
-                           customer.PurchasePrice,
-                           customer.DecomissionDate,
-                           customer.Condition,
-                           customer.BuyBackPrice
-
-
+                           customer.SIM,
+                           customer.Status,
+                           customer.CustomerName,
+                           customer.ConnectTechTicket, 
+                           customer.SalesForceOpportunity,                                                    
+                           customer.Connote,                          
+                           customer.Date
                     ]);
 
 
@@ -704,7 +688,7 @@
             //});
            }
         function populateContractsDataTable(data) {
-            console.log("populating data table...");           
+            console.log("populating data table...");
             // clear the table before populating it with more data
             $("#mainTable3").DataTable().clear();
             var length = Object.keys(data).length;
@@ -714,7 +698,7 @@
             else {
                 for (var i = 0; i <= length; i++) {
                     var customer = data[i];
-                  
+
                     // You could also use an ajax property on the data table initialization
                     $('#mainTable3').dataTable().fnAddData([
                         customer.id,
@@ -784,7 +768,7 @@ for (i = 0; i < fileInput.files.length; i++) {
 //Appending each file to FormData object
 formdata.append(fileInput.files[i].name, fileInput.files[i]);
 }
-           
+
 formdata.append("FileUpload", "CertificateUpload");
 //Creating an XMLHttpRequest and sending
 var xhr = new XMLHttpRequest();
@@ -826,113 +810,108 @@ e.stopPropagation();
 
 var loadUrl = '@Url.Action("UpdateCompanyData", "Company")';
 
-$.ajax({
+                        $.ajax({
 
-type: "POST",
-url: loadUrl,
-contentType: "application/json; charset=utf-8",
-data: JSON.stringify(CompanyEdit),
-datatype: "json",
-success: function (result) {
+                            type: "POST",
+                            url: loadUrl,
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(CompanyEdit),
+                            datatype: "json",
+                            success: function (result) {
+                            debugger;
+                            $("#txtCompany").text(result);
+                            },
+                            error: function () {
+                           // alert("Dynamic content load failed.");
+                            }
+                            });
+                            }
+                            });
+                            $('#addSite').click(function () {
+                            var AddSiteURL = '@Url.Action("AddSite", "Sites")'
+                            $.ajax({
+                            type: "GET",
+                            url: AddSiteURL,
 
-debugger;
-$("#txtCompany").text(result);
-},
-error: function () {
-alert("Dynamic content load failed.");
-}
-});
-}
-});
-$('#addSite').click(function () {
-var AddSiteURL = '@Url.Action("AddSite", "Sites")'
-$.ajax({
-type: "GET",
-url: AddSiteURL,
+                            success: function (data) {
 
-success: function (data) {
+                            $.confirm({
+                            boxWidth: '800px',
+                            useBootstrap: false,
+                            title: '',
+                            content: data,
+                            closeIcon: true,
 
-$.confirm({
-boxWidth: '800px',
-useBootstrap: false,
-title: '',
-content: data,
-closeIcon: true,
+                            buttons: {
+                            yes: { isHidden: true }
+                            },
+                            });
+                            }
+                            });
+                            });
+                        $('#editSite').click(function () {
+                        var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
+                        $.ajax({
+                        type: "GET",
+                        url: updateSiteURL,
 
-buttons: {
-yes: { isHidden: true }
-},
-});
+                        success: function (data) {
 
-}
-});
-});
-$('#editSite').click(function () {
-var updateSiteURL = '@Url.Action("UpdateSite", "Sites")'
-$.ajax({
-type: "GET",
-url: updateSiteURL,
+                        $.confirm({
+                        boxWidth: '800px',
+                        useBootstrap: false,
+                        title: '',
+                        content: data,
+                        closeIcon: true,
 
-success: function (data) {
+                        buttons: {
+                        yes: { isHidden: true }
+                        },
+                        onOpen: function () {
+                        // after the modal is displayed.
+                        var table = $('#mainTable1').DataTable();
+                        var selData = table.rows(".selected").data();
+                        $(".jconfirm").find($("#siteName")).val(selData[0][0]);
+                        $(".jconfirm").find($("#address1")).val(selData[0][1]);
+                        $(".jconfirm").find($("#suburb")).val(selData[0][2]);
+                        $(".jconfirm").find($("#state")).val(selData[0][3]);
+                        $(".jconfirm").find($("#postcode")).val(selData[0][4]);
+                        $(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
+                        $(".jconfirm").find($("#siteId")).val(selData[0][6]);
+                        }
+                        });
+                        }
+                        });
 
-$.confirm({
-boxWidth: '800px',
-useBootstrap: false,
-title: '',
-content: data,
-closeIcon: true,
+                        });
+                        $('#addEndUser').click(function () {
 
-buttons: {
-yes: { isHidden: true }
-},
-onOpen: function () {
-// after the modal is displayed.
-var table = $('#mainTable1').DataTable();
-var selData = table.rows(".selected").data();
-$(".jconfirm").find($("#siteName")).val(selData[0][0]);
-$(".jconfirm").find($("#address1")).val(selData[0][1]);
-$(".jconfirm").find($("#suburb")).val(selData[0][2]);
-$(".jconfirm").find($("#state")).val(selData[0][3]);
-$(".jconfirm").find($("#postcode")).val(selData[0][4]);
-$(".jconfirm").find($("#siteCompany")).val(selData[0][5]);
-$(".jconfirm").find($("#siteId")).val(selData[0][6]);
-}
-});
+                        var AddSiteURL = '@Url.Action("AddEnduser", "RegisterEndUsers")'
+                        $.ajax({
+                        type: "GET",
+                        url: AddSiteURL,
 
+                        success: function (data) {
+                        $.confirm({
+                        boxWidth: '800px',
+                        useBootstrap: false,
+                        title: '',
+                        content: data,
+                        closeIcon: true,
 
-}
-});
+                        buttons: {
+                        yes: { isHidden: true }
+                        },
+                        });
 
-});
-$('#addEndUser').click(function () {
-           
-var AddSiteURL = '@Url.Action("AddEnduser", "RegisterEndUsers")'
-$.ajax({
-type: "GET",
-url: AddSiteURL,
-
-success: function (data) {
-
-$.confirm({
-boxWidth: '800px',
-useBootstrap: false,
-title: '',
-content: data,
-closeIcon: true,
-
-buttons: {
-yes: { isHidden: true }
-},
-});
-
-}
-});
-});
+                        }
+                        });
+                        });
 $('#editEndUser').click(function () {
 var updateSiteURL = '@Url.Action("UpdateEndUser", "RegisterEndusers")'
 var table1 = $('#mainTable5').DataTable();
 var selData1 = table1.rows(".selected").data();
-             
+
 $.ajax({
 type: "GET",
 url: updateSiteURL,
@@ -1014,7 +993,8 @@ yes: { isHidden: true }
 });
 
 });
-$('#addContract').click(function () {
+    $('#addContract').click(function ()
+    {
 var AddContractURL = '@Url.Action("AddContract", "RegisterContract")'
 $.ajax({
 type: "GET",
@@ -1037,40 +1017,35 @@ yes: { isHidden: true }
 }
 });
 });
-$('#editContract').click(function () {
-var table1 = $('#mainTable3').DataTable();
-var selData1 = table1.rows(".selected").data();
-var updateSiteURL = '@Url.Action("UpdateContract", "RegisterContract")'
-$.ajax({
-type: "GET",
-url: updateSiteURL,
-data: { "Id": (selData1[0][0])},
-success: function (data) {
+    $('#editContract').click(function () {
+    var table1 = $('#mainTable3').DataTable();
+    var selData1 = table1.rows(".selected").data();
+    var updateSiteURL = '@Url.Action("UpdateContract", "RegisterContract")'
+    $.ajax({
+    type: "GET",
+    url: updateSiteURL,
+    data: { "Id": (selData1[0][0])},
+    success: function (data) {
 
-$.confirm({
-boxWidth: '800px',
-useBootstrap: false,
-title: '',
-content: data,
-closeIcon: true,
+    $.confirm({
+    boxWidth: '800px',
+    useBootstrap: false,
+    title: '',
+    content: data,
+    closeIcon: true,
 
-buttons: {
-yes: { isHidden: true }
-}
+    buttons: {
+    yes: { isHidden: true }
+    }
 
-});
+    });
+    },
+    error: function (data) {
 
-
-},
-error: function (data) {
-
-alert("Data cannot be loaded.");
-
-
-}
-});
-
-});
+    alert("Data cannot be loaded.");
+    }
+    });
+    });
         function getAge(dateString) {
 
             var val = $("#txtDOB").val();
@@ -1102,11 +1077,12 @@ alert("Data cannot be loaded.");
     </body>
 }
 <style>
-    input[readonly]{
-  background-color:transparent;
-  border: transparent;
-  font-size: 14px;
-}
+    input[readonly] {
+        background-color: transparent;
+        border: transparent;
+        font-size: 14px;
+    }
+
     .row.vdivide [class*='col-']:not(:last-child):after {
         background: #e0e0e0;
         width: 1px;
