@@ -65,9 +65,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6" style="width:280px;">
+            <div class="form-group col-md-12" style="width:280px;">
                 @Html.Label("Description")
-                @Html.TextAreaFor(model => model.Description, new { @id = "txtCommentsRC", placeholder = "Please enter description here.", @class = "form-control", style = "border:solid 1px lightgray;" })
+                @Html.TextBoxFor(model => model.Description, new { @id = "txtCommentsRC", placeholder = "Please enter description here.", @class = "form-control", style = "border:solid 1px lightgray;" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>

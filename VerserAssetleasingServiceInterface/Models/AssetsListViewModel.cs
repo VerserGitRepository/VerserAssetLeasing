@@ -56,6 +56,8 @@ namespace VerserAssetleasingServiceInterface.Models
         public string CustomerName { get; set; }
         public string ConnectTechTicket { get; set; }
         public string SalesForce { get; set; }
+        public string Connote { get; set; }
+        public DateTime? Date { get; set; }
         public string Status { get; set; }
     }
 }

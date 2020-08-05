@@ -141,45 +141,45 @@
                                                     <tbody>
                                                         @foreach (var item in Model.AssetsListViewModel)
                                                         {
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayName(item.SSN)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.Make)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.Model)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.Asset_Company.ToString())
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.PurchaseOrderNo == null ? "" : item.PurchaseOrderNo)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.PurchaseDate.HasValue ? item.PurchaseDate.Value.ToString("MM/dd/yyyy") : "")
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.PurchasePrice == null ? "" : item.PurchasePrice.Value.ToString())
-                                                                </td>
-                                                            
-                                                                <td>
-                                                                    @Html.DisplayName(item.Condition == null ? "" : item.Condition)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayName(item.BuyBackPrice == null ? "" : item.BuyBackPrice.Value.ToString())
-                                                                </td>
-                                                            </tr>
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayName(item.SSN)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Make)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Model)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.SerialNo == null ? "" : item.SerialNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Asset_Company.ToString())
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.IMEI == null ? "" : item.IMEI)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.SIMNo == null ? "" : item.SIMNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.ConnectTechTicket == null ? "" : item.ConnectTechTicket)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.SalesForce == null ? "" : item.SalesForce)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Connote == null ? "" : item.Connote)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayName(item.Status == null ? "" : item.Status)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayName(item.Date == null ? "" : item.Date.Value.ToString())
+                                                            </td>
+                                                        </tr>
                                                         }
                                                     </tbody>
                                                 </table>
