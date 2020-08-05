@@ -479,15 +479,7 @@
                 ]
             });
 
-            $('#mainTable2').DataTable({
-                stateSave: true,
-                "pageLength": 10,
-                "lengthMenu": [5,10, 15, 20, 25],
-                "aoColumnDefs": [
-                    { "bSearchable": true, "bVisible": false, "aTargets": [1] }
-
-                ]
-            });
+            $('#mainTable2').DataTable();
             $('#mainTable3').DataTable();
             $('#mainTable4').DataTable();
             $('#mainTable5').DataTable();
@@ -672,7 +664,7 @@
                            customer.ConnectTechTicket, 
                            customer.SalesForceOpportunity,                                                    
                            customer.Connote,                          
-                           customer.Date
+                           new Date(moment(customer.Date)).toLocaleDateString(),
                     ]);
 
 
