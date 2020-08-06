@@ -1,0 +1,71 @@
+﻿@model VerserAssetleasingServiceInterface.Models.CompanyAndSiteListViewModel
+<div class="col-md-12">
+    <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
+        <thead style="background-color:#428bca; color:white">
+            <tr>
+                <th>
+                    @Html.DisplayName("SSN")
+                </th>
+                <th>
+                    @Html.DisplayName("Make")
+                </th>
+                <th>
+                    @Html.DisplayName("Model")
+                </th>
+                <th>
+                    @Html.DisplayName("Serial")
+                </th>
+                <th>
+                    @Html.DisplayName("DeviceName")
+                </th>
+                <th>
+                    @Html.DisplayName("IMEI")
+                </th>
+                <th>
+                    @Html.DisplayName("SIM")
+                </th>
+                <th>
+                    @Html.DisplayName("Status")
+                </th>
+                <th>
+                    @Html.DisplayName("CustomerName")
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AssetsListViewModel)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayName(item.SSN)
+                </td>
+                <td>
+                    @Html.DisplayName(item.Make)
+                </td>
+                <td>
+                    @Html.DisplayName(item.Model)
+                </td>
+                <td>
+                    @Html.DisplayName(item.SerialNo)
+                </td>
+                <td>
+                    @Html.DisplayName(item.DeviceName)
+                </td>
+                <td>
+                    @Html.DisplayName(item.IMEI)
+                </td>
+                <td>
+                    @Html.DisplayName(item.SIM)
+                </td>
+                <td>
+                    @Html.DisplayName(item.Status)
+                </td>
+                <td>
+                    @Html.DisplayName(item.CustomerName == null ? "" : item.CustomerName)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
