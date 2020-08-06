@@ -87,7 +87,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return PartialView("SSNDetails", model);
         }
         [HttpGet]
-        public ActionResult AssetPartialDiv()
+        public ActionResult AssetPartialDiv(int Id)
         {
             string _user = Session["Username"].ToString();
             ///  int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
@@ -96,7 +96,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
            
             model.AssetsListViewModel = new List<JBHiFiAssetsModel>();
            
-            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(_user).Result;
+            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
             return PartialView("AssetPartialDiv",model);
         }
     }

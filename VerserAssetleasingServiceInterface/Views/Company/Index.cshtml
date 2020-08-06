@@ -1076,6 +1076,7 @@ yes: { isHidden: true }
             $.ajax({
                 url: "./AssetPartialDiv",
                 type: "GET",
+                data: { "Id": $("#hiddenId").val() },
                 beforeSend: function () {
                     alert("testing");
                 },
