@@ -86,5 +86,18 @@ namespace VerserAssetleasingServiceInterface.Controllers
             model.CompanySitesListViewModel = new List<CompanySitesListViewModel>();
             return PartialView("SSNDetails", model);
         }
+        [HttpGet]
+        public ActionResult AssetPartialDiv()
+        {
+            string _user = Session["Username"].ToString();
+            ///  int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
+
+            var model = new CompanyAndSiteListViewModel();
+           
+            model.AssetsListViewModel = new List<JBHiFiAssetsModel>();
+           
+            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(_user).Result;
+            return PartialView("AssetPartialDiv",model);
+        }
     }
 }

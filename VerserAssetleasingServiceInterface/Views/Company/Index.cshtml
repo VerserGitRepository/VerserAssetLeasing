@@ -64,6 +64,8 @@
                         <li><a href="#tab3default" data-toggle="tab">CONTRACTS</a></li>
                         @*<li><a href="#tab4default" data-toggle="tab">CATALOUGES</a></li>*@
                         <li><a href="#tab5default" data-toggle="tab">END USERS</a></li>
+                        <li><a href="#tab6default" data-toggle="tab">ASSET ASSIGNMENT</a></li>
+
                     </ul>
                 </div>
                 <div class="panel-body" style="margin-bottom:0px;margin-top:0px;padding:2px">
@@ -447,6 +449,13 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade" id="tab6default">
+                            <div class="row pull-right" style="padding-right:20px">
+                                <div id="content"></div>
+                            </div>
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -495,8 +504,8 @@
                     $(this).addClass('selected');
                 }
             });
-
-
+            //debugger;
+            includeHTML();
         });
               //  ExportTimesSheetToExcel", "Candidates"
         function LoadAddressData(theId,companyName,login,addressLine1,phone,fax,email,logo,state,suburb,postcode) {
@@ -1058,6 +1067,26 @@ yes: { isHidden: true }
             $("#txtAge").val(age);
 //            return age;
         }
+
+        function includeHTML() {
+
+            $.ajax({
+                url: "./AssetPartialDiv",
+                type: "GET",
+                beforeSend: function () {
+                    alert("testing");
+                },
+                success: function (result) {
+                    $("#content").html(result);
+                },
+                error: function (resp) {
+                    alert(resp);
+                }
+            });
+                  
+                }
+           
+       
     </script>
     <body>
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>

@@ -364,6 +364,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\StoreFunction.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -583,6 +584,7 @@
     <Content Include="Web References\VerserSalesForce\UpsertResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Company\AssetPartialDiv.cshtml" />
     <None Include="Web References\VerserSalesForce\wsdl.wsdl" />
   </ItemGroup>
   <ItemGroup>
