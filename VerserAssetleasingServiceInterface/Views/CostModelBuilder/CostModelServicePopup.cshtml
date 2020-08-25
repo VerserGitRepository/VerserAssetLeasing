@@ -15,7 +15,7 @@
 
             <div class="form-group col-md-6">
                 @Html.Label("Customer Name")
-                @Html.DropDownListFor(m => m.Customer, Model.AccountNames, "Customer Account", new { @class = "form-control ", @id = "ddlAccount", @multiple = "multiple" })
+                @Html.TextBoxFor(m => m.Customer, new { @class = "form-control ", @id = "ddlAccount" })
                 @Html.ValidationMessageFor(model => model.Customer, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
@@ -104,8 +104,8 @@
         $('#txtSalesManager').removeAttr('multiple')
         $('#txtSalesManager').multiselect('rebuild');
 
-        $('#ddlAccount').removeAttr('multiple')
-        $('#ddlAccount').multiselect('rebuild');
+        //$('#ddlAccount').removeAttr('multiple')
+        //$('#ddlAccount').multiselect('rebuild');
 
         });
 
@@ -145,12 +145,12 @@
         enableCaseInsensitiveFiltering: true,
     });
     
-    $('#ddlAccount').multiselect({
-        includeSelectAllOption: false,
-        maxHeight: 250,
-        buttonWidth: '280px',
-        enableFiltering: true,
-        enableCaseInsensitiveFiltering: true,
-    });
+    //$('#ddlAccount').multiselect({
+    //    includeSelectAllOption: false,
+    //    maxHeight: 250,
+    //    buttonWidth: '280px',
+    //    enableFiltering: true,
+    //    enableCaseInsensitiveFiltering: true,
+    //});
 </script>
 

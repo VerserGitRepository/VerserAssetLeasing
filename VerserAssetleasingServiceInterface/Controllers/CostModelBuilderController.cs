@@ -179,9 +179,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 model.JBHIFiCostModelQuoteRequest.SalesManagerList = new SelectList(ListItemHelperServices.SalesManagerList().Result, "ID", "Value");
                 List<ListItemViewModel> accountNames = new List<ListItemViewModel>();
                 List<ListItemViewModel> oppNames = new List<ListItemViewModel>();
-                oppNames = CostModelServicesHelpers.GetAccountAndCustomerNames(out accountNames);
-                model.AccountNames = new SelectList(accountNames, "ID", "Value");
-                model.OpportunityNames = new SelectList(oppNames, "ID", "Value");
+                //oppNames = CostModelServicesHelpers.GetAccountAndCustomerNames(out accountNames);
+                //model.AccountNames = new SelectList(accountNames, "ID", "Value");
+                //model.OpportunityNames = new SelectList(oppNames, "ID", "Value");
                 return PartialView("CostModelServicePopup",model);
             }
         }
