@@ -1075,13 +1075,13 @@ yes: { isHidden: true }
                 type: "GET",
                 data: { "Id": $("#hiddenId").val() },
                 beforeSend: function () {
-                    alert("testing");
+                  
                 },
                 success: function (result) {
                     $("#content").html(result);
                 },
                 error: function (resp) {
-                    alert(resp);
+                  
                 }
             });
                   
