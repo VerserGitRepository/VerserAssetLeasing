@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
+using VerserAssetleasingServiceInterface.Utils;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
@@ -99,5 +100,38 @@ namespace VerserAssetleasingServiceInterface.Controllers
             model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
             return PartialView("AssetPartialDiv",model);
         }
+        [HttpGet]
+        public void DownloadReport(string blancco4filePath,string ssn)
+        {
+            PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, ssn);
+            exporter.GetReportXML();
+
+            if (exporter.ErrorMessage == "MC_EXPORT_REPORT_FAILED NO REPORTS FOUND")
+            {
+                exporter.filePath = blancco4filePath;
+                exporter.GetReportXML();
+
+                //if (exporter.ErrorMessage == "MC_EXPORT_REPORT_FAILED NO REPORTS FOUND")
+                //{
+                //    responseMessage.StatusCode = HttpStatusCode.BadRequest;
+                //    responseMessage.Content = new StringContent("No Blancco report found.");
+                //    return responseMessage;
+                //}
+            }
+            //if (String.IsNullOrEmpty(exporter.ErrorMessage))
+            //{
+            //    //   exporter.ProcessReports();
+            //    responseMessage.StatusCode = HttpStatusCode.OK;
+            //    responseMessage.Content = new StringContent("Blancco Report Syncronised.");
+            //    return responseMessage;
+            //}
+            //else
+            //{
+            //    responseMessage.StatusCode = HttpStatusCode.BadRequest;
+            //    responseMessage.Content = new StringContent(string.Format("An error has occurred: {0}", exporter.ErrorMessage));
+            //    return responseMessage;
+            //}
+        }
+    
     }
 }
