@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Xml.Linq;
 
 using System.Globalization;
+using System.Web.UI;
 
 namespace VerserAssetleasingServiceInterface.Utils
 {
@@ -28,7 +29,7 @@ namespace VerserAssetleasingServiceInterface.Utils
             this.filePath = filePath;
             this.ssn = ssn;
         }
-        public int GetReportXML()
+        public byte[] GetReportXML()
         {
             this.ErrorMessage = null;
             // Read file data
@@ -47,12 +48,12 @@ namespace VerserAssetleasingServiceInterface.Utils
             }
             catch (Exception)
             {
-                return -4;
+                return null;
             }
 
             return ExportReportBytes(data);
         }
-        public int ExportReportBytes(byte[] data)
+        public byte[] ExportReportBytes(byte[] data)
         {
             string serverAddress = ConfigurationManager.AppSettings["ServerAddress"];
             string user = ConfigurationManager.AppSettings["User"];
@@ -78,11 +79,11 @@ namespace VerserAssetleasingServiceInterface.Utils
                 {
                     request = (HttpWebRequest)WebRequest.Create(postURL);
                     if (request == null)
-                        return -5;
+                        return null;
                 }
                 catch (Exception)
                 {
-                    return -5;
+                    return null;
                 }
 
                 // Set so we accept all kinds of ssl certs
@@ -126,7 +127,12 @@ namespace VerserAssetleasingServiceInterface.Utils
 
                 System.IO.File.WriteAllBytes(@"c:/temp/" + ssn + ".pdf", bytes);
                 // sr.Read(ds, 0, ds.Length);
+
+               
+                //return RedirectToAction("AllBookingEntries", "Home");
+
                 webResponse.Close();
+                return bytes;
             }
             catch (WebException web)
             {
@@ -148,18 +154,18 @@ namespace VerserAssetleasingServiceInterface.Utils
                     int statusCode = (int)response.StatusCode;
                     if (response != null)
                         response.Close();
-                    return statusCode;
+                    return null;
                 }
                 else
-                    return -10;
+                    return null;
             }
             catch (Exception ex)
             {
                 string str = ex.ToString();
-                return -20;
+                return null;
             }
 
-            return 200;
+            return null;
         }
         public static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {

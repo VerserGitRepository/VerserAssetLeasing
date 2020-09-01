@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +16,10 @@ namespace VerserAssetleasingServiceInterface.Controllers
     [MyAuthorize]
     public class CompanyController : Controller
     {
+        private static string folder = HostingEnvironment.MapPath("~/");
+        private static string blancco4filePath = "";
+        private static string blancco5filePath = "";
+
         string _user = string.Empty;
         [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
@@ -101,36 +108,44 @@ namespace VerserAssetleasingServiceInterface.Controllers
             return PartialView("AssetPartialDiv",model);
         }
         [HttpGet]
-        public void DownloadReport(string blancco4filePath,string ssn)
+        public ActionResult DownloadReport(string ssn)
         {
+            blancco4filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
+            blancco5filePath = Path.Combine(folder, @"web-service-request-export-report5.xml");
+            
             PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, ssn);
-            exporter.GetReportXML();
+            byte[] buffer = exporter.GetReportXML();
+            //Response.Buffer = true;
+            //Response.Charset = "";
 
-            if (exporter.ErrorMessage == "MC_EXPORT_REPORT_FAILED NO REPORTS FOUND")
-            {
-                exporter.filePath = blancco4filePath;
-                exporter.GetReportXML();
+            //Response.AppendHeader("Content-Disposition", "attachment; filename=SSNPDF.pdf"); 
 
-                //if (exporter.ErrorMessage == "MC_EXPORT_REPORT_FAILED NO REPORTS FOUND")
-                //{
-                //    responseMessage.StatusCode = HttpStatusCode.BadRequest;
-                //    responseMessage.Content = new StringContent("No Blancco report found.");
-                //    return responseMessage;
-                //}
-            }
-            //if (String.IsNullOrEmpty(exporter.ErrorMessage))
-            //{
-            //    //   exporter.ProcessReports();
-            //    responseMessage.StatusCode = HttpStatusCode.OK;
-            //    responseMessage.Content = new StringContent("Blancco Report Syncronised.");
-            //    return responseMessage;
-            //}
-            //else
-            //{
-            //    responseMessage.StatusCode = HttpStatusCode.BadRequest;
-            //    responseMessage.Content = new StringContent(string.Format("An error has occurred: {0}", exporter.ErrorMessage));
-            //    return responseMessage;
-            //}
+
+            //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            //Response.ContentType = "application/pdf";
+
+            //Response.BinaryWrite(buffer);
+
+            //Response.Flush();
+
+            //Response.End();
+
+            string fileName = "testFile.pdf";
+
+            byte[] pdfasBytes = buffer;   // Here the fileBytes are already encoded (Encrypt) value. Just convert from string to byte
+            Response.Clear();
+            MemoryStream ms = new MemoryStream(pdfasBytes);
+            Response.ContentType = "application/pdf";
+            Response.Headers.Add("content-disposition", "attachment;filename=" + fileName);
+            Response.Buffer = true;
+            ms.WriteTo(Response.OutputStream);
+            Response.Flush();
+            Response.End();
+            return null;
+
+
+
         }
     
     }

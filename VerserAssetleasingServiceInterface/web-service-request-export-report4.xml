@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+    <export-report>
+        <report mode="original"/>
+        <search path="user_data.fields.SSN" value="17216530" operator="eq" datatype="string" conjunction="false"></search>
+      <pdf-options pdfLanguage="en_US" embedBarcode="false" type="albus_standard"/>
+    </export-report>
+</request>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request
+xmlns="http://www.blancco.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.blancco.com service-request.xsd">
+    <export-report>
+        <report mode="original"/>
+		<!-- Here is an example with search criteria "processor.frequency" -->
+    <search path="user_data.fields.SSN" value="search_value" operator="eq" datatype="string" conjunction="true" />
+
+<!-- The columns (search path) are created dynamically from the xml report. 
+For example processor model column (blancco_data.blancco_hardware_report.processors.processor.model) comes from this xml snippet:  
+
+			<blancco_data>
+				<blancco_hardware_report>
+				  <entries name="processors" >
+				    <entries name="processor" >
+				      <entry name="model" type="string">Pentium III Xeon MMX</entry>
+-->
+    </export-report>
+</request>
+

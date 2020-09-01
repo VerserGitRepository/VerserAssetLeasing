@@ -140,7 +140,8 @@
                                                     {
                                                         <tr>
                                                             <td>
-                                                                @Html.DisplayName(item.SSN)
+                                                                <a href="javascript:DownloadReport('@item.SSN');" > @Html.DisplayName(item.SSN)</a>
+                                                               
                                                             </td>
                                                             <td>
                                                                 @Html.DisplayName(item.Make)
@@ -466,7 +467,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
 
             $('#mainTable').DataTable({
@@ -611,6 +612,27 @@
                 }
             });
         }
+
+        function DownloadReport(ssn)
+        {
+             $.ajax({
+
+                type: "GET",
+                url: './DownloadReport',
+                contentType: "application/json; charset=utf-8",
+                data: { "ssn": ssn },
+                datatype: "json",
+
+                success: function (data) {
+
+                   alert('report downloaded.')
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }
+
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 
         $('#btnCertificates').click(function () { $('#Certificateimgupload').trigger('click'); });
@@ -657,18 +679,18 @@
                        // You could also use an ajax property on the data table initialization
                        $('#mainTable2').dataTable().fnAddData([
 
-                           customer.SSN,
+                          '<a href="javascript:DownloadReport('+customer.SSN+');" >'+customer.SSN+'</a>',
                            customer.Make,
                            customer.Model,
                            customer.SerialNo,
-                           customer.DeviceName,                         
+                           customer.DeviceName,
                            customer.IMEI,
                            customer.SIM,
                            customer.Status,
                            customer.CustomerName,
-                           customer.ConnectTechTicket, 
-                           customer.SalesForceOpportunity,                                                    
-                           customer.Connote,                          
+                           customer.ConnectTechTicket,
+                           customer.SalesForceOpportunity,
+                           customer.Connote,
                            new Date(moment(customer.Date)).toLocaleDateString(),
                     ]);
 
@@ -1075,20 +1097,20 @@ yes: { isHidden: true }
                 type: "GET",
                 data: { "Id": $("#hiddenId").val() },
                 beforeSend: function () {
-                  
+
                 },
                 success: function (result) {
                     $("#content").html(result);
                 },
                 error: function (resp) {
-                  
+
                 }
             });
-                  
+
                 }
-           
-       
-    </script>
+
+
+</script>
     <body>
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
         <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
