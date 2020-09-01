@@ -613,25 +613,24 @@
             });
         }
 
-        function DownloadReport(ssn)
-        {
-             $.ajax({
-
-                type: "GET",
-                url: './DownloadReport',
-                contentType: "application/json; charset=utf-8",
-                data: { "ssn": ssn },
-                datatype: "json",
-
-                success: function (data) {
-
-                   alert('report downloaded.')
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
+    function DownloadReport(ssn) {
+        var datapass = JSON.stringify({
+            'SSNNumber': ssn
             });
-        }
+        $.ajax({
+
+            type: "POST",
+            url: './DownloadReport',
+            contentType: "application/json; charset=utf-8",
+            data: datapass,
+           
+            traditional: true,
+            datatype: "json",
+            success: function (returnValue) {
+                window.location = '/Company/Download?file=' + returnValue.fileName;
+            }
+        });
+    }
 
         $('#image').click(function () { $('#imgupload').trigger('click'); });
 

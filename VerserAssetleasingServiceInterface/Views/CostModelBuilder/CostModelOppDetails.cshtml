@@ -192,11 +192,11 @@
 <script>
     var theeRow = "";
     $(document).ready(function () {
-      
+
         if ($("#tblCustomers").find("tbody tr").length == 1) {
             if ($("#tblCustomers").find("tbody tr").eq(0).find("td").find('label').eq(0).text()=="0") {
                 theeRow = $("#tblCustomers").find("tbody tr").eq(0);
-                $("#tblCustomers").find("tbody tr").remove();     
+                $("#tblCustomers").find("tbody tr").remove();
             }
         }
         $('.ddlserviceNewOpn').removeAttr('multiple')
@@ -211,7 +211,7 @@
         });
         $(".ddlserviceNewOpn").next().hide();
         $("body").on("click", "#tblCustomers .Edit", function () {
-            debugger;
+
             var row = $(this).closest("tr");
             $("td", row).each(function () {
                 //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
@@ -224,7 +224,7 @@
 
                 //}
             });
-            
+
             row.find(".Cancel").show();
             row.find(".Delete").show();
 
@@ -240,6 +240,8 @@
             //}
 
             $(this).hide();
+
+    CalculatePrice($("#tblCustomers").find("tbody"));
         });
 
         $("body").on("click", "#tblCustomers .Cancel", function () {
@@ -251,27 +253,27 @@
                 $(this).find("label").show();
             });
             row.find(".Edit").show();
-            
+
             row.find(".Delete").hide();
             $(this).hide();
         });
 
         $("body").on("click", "#tblCustomers .Delete", function () {
-        
+
             if ($("#tblCustomers").find("tbody tr").length == 1) {
                 return;
             }
-            $(this).closest("tr").remove();     
+            $(this).closest("tr").remove();
             calculateTotal();
         });
 
-       
+
     });
     var tableLength = $('#tblCustomers tbody').find('tr').length;
     tableLength = tableLength;
-    
+
     function AddRow() {
-      
+
         $("#tblCustomers").find('select').each(function () {
             //  alert('ddl');
             $(this).multiselect('destroy');
@@ -279,7 +281,7 @@
         var newRow = ""
         if ($('#tblCustomers tbody').find('tr').length == 0) {
             $('#tblCustomers tbody').append($(theeRow));
-          
+
             var row = $('#tblCustomers tbody').find("tr");
             $(row).find('label').hide();
             $(row).find("#txtActualQuantity").show();
@@ -288,7 +290,7 @@
             $(row).find(".Delete").show();
             var multiselect = $(row).find('select');
             $(multiselect).removeAttr('multiple');
-           
+
             $(multiselect).multiselect({
 
                 includeSelectAllOption: false,
@@ -300,10 +302,10 @@
 
             });
             $(multiselect).multiselect('refresh');
-           
-          
+
+
         }
-       
+
         else
         {
             var lengthtotal = $('#tblCustomers tbody').find('tr').length;
@@ -350,7 +352,7 @@
         }
     }
     function CalculatePrice(control) {
-        debugger;
+
         var CostModelDetailsURL = '@Url.Action("GetTotalPrice", "CostModelBuilder")';
             var ctrl = control.parentElement.parentElement;
         var totalPrice = 0;
@@ -374,9 +376,9 @@
             $($("#tblCustomers tfoot").find('label')[0]).text(roundTotal);
             //$("#txtPrice").text(totalPrice);
             var gst = ((10 / 100) * totalPrice).toFixed(2);
-            
+
             var sum = (+totalPrice + +gst).toFixed(2);
-           
+
             $($("#tblCustomers tfoot").find('label')[1]).text(gst);
             $($("#tblCustomers tfoot").find('label')[2]).text(sum);
 
@@ -426,7 +428,7 @@
     });
 
     function GenerateChangedQuote() {
-     
+
         var CostModelRateCardArr = new Array();
         $("#tblCustomers").find('tbody tr').each(function () {
             var row = $(this);
@@ -435,8 +437,8 @@
                 if (($(this).text() == row.find("td").find('label').eq(0).text())) {
                     $(this).attr('selected', 'selected')
                 }
-            });    
-            
+            });
+
             var CostModelRateCard = {};
             CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenServiceQuoteId").val();
             CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
@@ -445,11 +447,11 @@
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
             CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
-            
+
             CostModelRateCardArr.push(CostModelRateCard);
         });
 
-        
+
         $.ajax({
             type: "POST",
             url: "./SubmitChangedQuote",
@@ -473,13 +475,13 @@
 
             }
         });
-       
+
     }
 
     function ExportToExcel() {
-        
+
         var CostModelRateCardArr = new Array();
-        
+
         var mainModel = {};
         mainModel.CostModelQuoteRequestModel = {};
         mainModel.ServiceItemsLists = new Array();
@@ -502,10 +504,10 @@
         mainModel.CostModelQuoteRequestModel.projectManager = $("#txtProjectManager").text();
         mainModel.CostModelQuoteRequestModel.opportunityNumber = $("#txtOpportunityName").text();
         mainModel.CostModelQuoteRequestModel.verserBranch = $("#txtBranch").text();
-        
+
         $("#tblCustomers").find('tbody tr').each(function () {
             var row = $(this);
-            
+
             var CostModelRateCard = {};
             CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenAssetId").val();
             CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
@@ -527,8 +529,8 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (r) {
-               
-             
+
+
 
             }
         });

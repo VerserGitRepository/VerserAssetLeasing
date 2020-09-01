@@ -11,7 +11,7 @@ using System.Configuration;
 using System.Xml.Linq;
 
 using System.Globalization;
-using System.Web.UI;
+using System.Web.Hosting;
 
 namespace VerserAssetleasingServiceInterface.Utils
 {
@@ -29,7 +29,7 @@ namespace VerserAssetleasingServiceInterface.Utils
             this.filePath = filePath;
             this.ssn = ssn;
         }
-        public byte[] GetReportXML()
+        public int GetReportXML()
         {
             this.ErrorMessage = null;
             // Read file data
@@ -48,12 +48,12 @@ namespace VerserAssetleasingServiceInterface.Utils
             }
             catch (Exception)
             {
-                return null;
+                return -4;
             }
 
             return ExportReportBytes(data);
         }
-        public byte[] ExportReportBytes(byte[] data)
+        public int ExportReportBytes(byte[] data)
         {
             string serverAddress = ConfigurationManager.AppSettings["ServerAddress"];
             string user = ConfigurationManager.AppSettings["User"];
@@ -79,11 +79,11 @@ namespace VerserAssetleasingServiceInterface.Utils
                 {
                     request = (HttpWebRequest)WebRequest.Create(postURL);
                     if (request == null)
-                        return null;
+                        return -5;
                 }
                 catch (Exception)
                 {
-                    return null;
+                    return -5;
                 }
 
                 // Set so we accept all kinds of ssl certs
@@ -125,14 +125,12 @@ namespace VerserAssetleasingServiceInterface.Utils
                     bytes = memstream.ToArray();
                 }
 
-                System.IO.File.WriteAllBytes(@"c:/temp/" + ssn + ".pdf", bytes);
+                System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/") + ssn + ".pdf", bytes);
                 // sr.Read(ds, 0, ds.Length);
 
-               
-                //return RedirectToAction("AllBookingEntries", "Home");
+
 
                 webResponse.Close();
-                return bytes;
             }
             catch (WebException web)
             {
@@ -154,18 +152,18 @@ namespace VerserAssetleasingServiceInterface.Utils
                     int statusCode = (int)response.StatusCode;
                     if (response != null)
                         response.Close();
-                    return null;
+                    return statusCode;
                 }
                 else
-                    return null;
+                    return -10;
             }
             catch (Exception ex)
             {
                 string str = ex.ToString();
-                return null;
+                return -20;
             }
 
-            return null;
+            return 200;
         }
         public static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {
