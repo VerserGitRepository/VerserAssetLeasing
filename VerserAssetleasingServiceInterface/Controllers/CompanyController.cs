@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -100,53 +99,35 @@ namespace VerserAssetleasingServiceInterface.Controllers
             string _user = Session["Username"].ToString();
             ///  int CompanyID = Convert.ToInt32(Session["CompanyID"].ToString());
 
-            var model = new CompanyAndSiteListViewModel();
-           
-            model.AssetsListViewModel = new List<JBHiFiAssetsModel>();
-           
-            model.AssetsListViewModel = AssetsServicehelper.GetAssetsData(Id.ToString()).Result;
+            var model = new SSNModel();           
             return PartialView("AssetPartialDiv",model);
         }
-        [HttpGet]
-        public ActionResult DownloadReport(string ssn)
+        [HttpPost]
+        public JsonResult DownloadReport(string SSNNumber)
         {
             blancco4filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
             blancco5filePath = Path.Combine(folder, @"web-service-request-export-report5.xml");
             
-            PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, ssn);
-            byte[] buffer = exporter.GetReportXML();
-            //Response.Buffer = true;
-            //Response.Charset = "";
-
-            //Response.AppendHeader("Content-Disposition", "attachment; filename=SSNPDF.pdf"); 
-
-
-            //Response.Cache.SetCacheability(HttpCacheability.NoCache);
-
-            //Response.ContentType = "application/pdf";
-
-            //Response.BinaryWrite(buffer);
-
-            //Response.Flush();
-
-            //Response.End();
-
-            string fileName = "testFile.pdf";
-
-            byte[] pdfasBytes = buffer;   // Here the fileBytes are already encoded (Encrypt) value. Just convert from string to byte
-            Response.Clear();
-            MemoryStream ms = new MemoryStream(pdfasBytes);
-            Response.ContentType = "application/pdf";
-            Response.Headers.Add("content-disposition", "attachment;filename=" + fileName);
-            Response.Buffer = true;
-            ms.WriteTo(Response.OutputStream);
-            Response.Flush();
-            Response.End();
-            return null;
+            PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, SSNNumber);
+            exporter.GetReportXML();
+            return Json(new { fileName = HostingEnvironment.MapPath("~/") + SSNNumber + ".pdf", errorMessage = "" });
 
 
 
         }
-    
+        [HttpGet]
+        //Action Filter, it will auto delete the file after download, 
+       
+        public ActionResult Download(string file)
+        {
+            //get the temp folder and file path in server
+            string fullPath =  file;
+
+            //return the file for download, this is an Excel 
+            //so I set the file content type to "application/vnd.ms-excel"
+            return File(fullPath, "application/pdf", "Test.pdf");
+        }
+
+
     }
 }

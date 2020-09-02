@@ -1,71 +1,278 @@
-﻿@model VerserAssetleasingServiceInterface.Models.CompanyAndSiteListViewModel
-<div class="col-md-12">
-    <table class="table-bordered" style="margin-top:10px; width:980px" id="mainTable2">
-        <thead style="background-color:#428bca; color:white">
-            <tr>
-                <th>
-                    @Html.DisplayName("SSN")
-                </th>
-                <th>
-                    @Html.DisplayName("Make")
-                </th>
-                <th>
-                    @Html.DisplayName("Model")
-                </th>
-                <th>
-                    @Html.DisplayName("Serial")
-                </th>
-                <th>
-                    @Html.DisplayName("DeviceName")
-                </th>
-                <th>
-                    @Html.DisplayName("IMEI")
-                </th>
-                <th>
-                    @Html.DisplayName("SIM")
-                </th>
-                <th>
-                    @Html.DisplayName("Status")
-                </th>
-                <th>
-                    @Html.DisplayName("CustomerName")
-                </th>
+﻿
+@model  VerserAssetleasingServiceInterface.Models.SSNModel
+    @{
+        ViewBag.Title = "Opportunity Details";
+    }
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+    <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+    <div>
+        <div class="footerDiv" style="margin:5PX">
+            <input type="button" class="btn-primary btn-sm" value="ADD SSN" id="btnSubmit" onclick="AddRow()" />
+            <input type="submit" class="btn-primary btn-sm" value="Generate BLANCO Report" id="btnSubmitChangeQuote" />
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.AssetsListViewModel)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayName(item.SSN)
-                </td>
-                <td>
-                    @Html.DisplayName(item.Make)
-                </td>
-                <td>
-                    @Html.DisplayName(item.Model)
-                </td>
-                <td>
-                    @Html.DisplayName(item.SerialNo)
-                </td>
-                <td>
-                    @Html.DisplayName(item.DeviceName)
-                </td>
-                <td>
-                    @Html.DisplayName(item.IMEI)
-                </td>
-                <td>
-                    @Html.DisplayName(item.SIM)
-                </td>
-                <td>
-                    @Html.DisplayName(item.Status)
-                </td>
-                <td>
-                    @Html.DisplayName(item.CustomerName == null ? "" : item.CustomerName)
-                </td>
-            </tr>
+        </div>
+
+        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:0px;padding-top:0px;width:40%">
+
+            <div class="row col-md-12 table-bordered" style="width:auto;height:auto;margin:2px;">
+                <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;margin-top:15px">
+
+                    <thead style="background-color:#FFB605; color:white;height:0.2px;font-size:11px;padding-bottom:0px;">
+                        <tr>
+                            <th>SSN</th>
+
+                            <th style="width:5px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr class="tr_clone">
+                            <td>
+
+                                @Html.TextBoxFor(model => model.SSN, new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn" })
+
+                            </td>
+
+                            <td width="5%">
+
+                                <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                    <span><strong>Delete</strong></span>
+                                </a>
+
+
+                                @*<a class="Update" href="javascript:;" style="display:none" id="Update">Update</a>
+                                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
+                                @*<a class="Delete" href="javascript:;">Delete</a>*@
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+    
+
+    <script>
+        var theeRow = "";
+        $(document).ready(function () {
+
+            if ($("#tblCustomers").find("tbody tr").length == 1) {
+                if ($("#tblCustomers").find("tbody tr").eq(0).find("td").find('label').eq(0).text() == "0") {
+                    theeRow = $("#tblCustomers").find("tbody tr").eq(0);
+                    $("#tblCustomers").find("tbody tr").remove();
+                }
             }
-        </tbody>
-    </table>
-</div>
+
+            $(".ddlserviceNewOpn").next().hide();
+            $("body").on("click", "#tblCustomers .Edit", function () {
+
+                var row = $(this).closest("tr");
+                $("td", row).each(function () {
+                    //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
+                    $(this).find("span").show();
+                    $(this).find($(".ddlserviceNewOpn")).next().show();
+                    $('.ddlserviceNewOpn').multiselect('rebuild');
+                    $(this).find("#txtActualQuantity").show();
+                    $(this).find("label").hide();
+                    //    $(this).toggleClass('selected');
+
+                    //}
+                });
+
+                row.find(".Cancel").show();
+                row.find(".Delete").show();
+
+                //var origVal = row.find("#hdnddlLidt").val();
+
+
+                //if (origVal == "1") {
+                //    row.find("#txtActualQuantity").attr('readonly', true);
+
+                //}
+                //else {
+                //    row.find("#txtActualQuantity").attr('readonly', false);
+                //}
+
+                $(this).hide();
+
+                CalculatePrice($("#tblCustomers").find("tbody"));
+            });
+
+            $("body").on("click", "#tblCustomers .Cancel", function () {
+                var row = $(this).closest("tr");
+                $("td", row).each(function () {
+                    $(this).find($(".ddlserviceNewOpn")).next().hide();
+                    //$('.ddlserviceNewOpn').multiselect('rebuild');
+                    $(this).find("#txtActualQuantity").hide();
+                    $(this).find("label").show();
+                });
+                row.find(".Edit").show();
+
+                row.find(".Delete").hide();
+                $(this).hide();
+            });
+
+            $("body").on("click", "#tblCustomers .Delete", function () {
+
+                if ($("#tblCustomers").find("tbody tr").length == 1) {
+                    return;
+                }
+                $(this).closest("tr").remove();
+                calculateTotal();
+            });
+
+
+        });
+        var tableLength = $('#tblCustomers tbody').find('tr').length;
+        tableLength = tableLength;
+
+        function AddRow() {
+
+            $("#tblCustomers").find('select').each(function () {
+                //  alert('ddl');
+                $(this).multiselect('destroy');
+            });
+            var newRow = ""
+            if ($('#tblCustomers tbody').find('tr').length == 0) {
+                $('#tblCustomers tbody').append($(theeRow));
+
+                var row = $('#tblCustomers tbody').find("tr");
+                $(row).find('label').hide();
+                $(row).find("#txtActualQuantity").show();
+                $(row).find(".Edit").hide();
+
+                $(row).find(".Delete").show();
+                var multiselect = $(row).find('select');
+                $(multiselect).removeAttr('multiple');
+
+                $(multiselect).multiselect({
+
+                    includeSelectAllOption: false,
+                    maxHeight: 250,
+                    buttonWidth: '280px',
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                    multiple: false
+
+                });
+                $(multiselect).multiselect('refresh');
+
+
+            }
+
+            else {
+                var lengthtotal = $('#tblCustomers tbody').find('tr').length;
+                var thisRow = $('#tblCustomers tbody').find('tr')[lengthtotal - 1];
+                //var thisRow = $('#tblCustomers').find('tr')[1];
+                $('#tblCustomers tbody').append($(thisRow).clone());//.insertAfter(thisRow);
+                var row = $('#tblCustomers tbody').find("tr:gt(" + (tableLength - 1) + ")");
+                $(row).find('label').hide();
+                $(row).find("#txtActualQuantity").show();
+                $(row).find(".Edit").hide();
+
+                $(row).find(".Delete").show();
+                $(row).find('select').each(function () {
+                    //     alert('ddl');
+                    //  $(this).removeAttr('multiple')
+
+                    switch (document.readyState) {
+                        case "loading":
+                            // The document is still loading.
+                            break;
+                        case "interactive":
+                            // The document has finished loading. We can now access the DOM elements.
+                            // But sub-resources such as images, stylesheets and frames are still loading.
+
+                            break;
+                        case "complete":
+                            // The page is fully loaded.
+
+                            $(this).multiselect({
+
+                                includeSelectAllOption: false,
+                                maxHeight: 250,
+                                buttonWidth: '280px',
+                                enableFiltering: true,
+                                enableCaseInsensitiveFiltering: true
+
+                            });
+
+                            break;
+                    }
+                    //  $(this).removeAttr('multiple');
+                    $(this).multiselect('refresh');
+                });
+            }
+        }
+
+
+        $("body").on("click", "#btnSubmitChangeQuote", function () {
+
+
+            var obj = $.confirm({
+                boxWidth: '700px',
+                useBootstrap: false,
+
+                title: '',
+                content: "Are you sure to submit the Quote?",
+                closeIcon: true,
+
+                buttons: {
+                    OK: function () { GenerateChangedQuote(); },
+                    CANCEL: function () { return; }
+                }
+            });
+            $(obj).close();
+            //Loop through the Table rows and build a JSON array.
+
+        });
+
+
+    </script>
+    <style>
+            /*.modal-backdrop {
+           background-color: transparent;
+        }*/ .modal-dialog {
+                width: 850px;
+                margin: 30px auto;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            .table-hover > tbody > tr:hover > td,
+            .table-hover > tbody > tr:hover > th {
+                background-color: lightgray;
+            }
+
+
+            .selected {
+                color: black;
+                background-color: lightgray;
+            }
+
+            .btn {
+                font-size: 10px;
+            }
+
+            table tr.active {
+                background: red;
+            }
+
+            a.btn {
+                -webkit-transform: scale(0.9);
+                -moz-transform: scale(0.6);
+                -o-transform: scale(0.6);
+                -webkit-transition-duration: 0.5s;
+                -moz-transition-duration: 0.5s;
+                -o-transition-duration: 0.5s;
+            }
+    </style>
