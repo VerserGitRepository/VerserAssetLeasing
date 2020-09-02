@@ -181,6 +181,7 @@
     <Compile Include="Models\AssetsListViewModel.cs" />
     <Compile Include="Models\CarriersListViewModel.cs" />
     <Compile Include="Models\ColoursListViewModel.cs" />
+    <Compile Include="Models\SSNModel.cs" />
     <Compile Include="Models\CompanyAndSiteListViewModel.cs" />
     <Compile Include="Models\CompanyEntryModel.cs" />
     <Compile Include="Models\CompanyListViewModel.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="ServiceImplentationhelper\EndUsersServicehelper.cs" />
     <Compile Include="ServiceImplentationhelper\LoginService.cs" />
     <Compile Include="ServiceImplentationhelper\UserRoles.cs" />
+    <Compile Include="Utils\PDFReportExporter.cs" />
     <Compile Include="Web References\VerserSalesForce\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -369,6 +371,10 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="web-service-request-export-report4.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="web-service-request-export-report5.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
