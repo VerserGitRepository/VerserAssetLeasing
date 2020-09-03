@@ -64,7 +64,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         }
 
         [HttpPost]
-        public ActionResult ImportAssets()
+        public JsonResult ImportSSN()
         {
             var fileType = Request.Form["FileUpload"];
             bool errorOccurred = false;
@@ -86,37 +86,18 @@ namespace VerserAssetleasingServiceInterface.Controllers
             
             Excel.Application xlApp = new Excel.Application();
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open((Server.MapPath(".") + "\\UploadFile\\"+ fileName));
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[Path.GetFileNameWithoutExtension(Server.MapPath(".") + "\\UploadFile\\" + fileName)];
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
             Range cells = xlRange.Worksheet.Cells;
            
             int rowCount = xlRange.Rows.Count;
-            EndUsersListViewModel data = new EndUsersListViewModel();
+            List<string> SSNList = new List<string>();
             for (int i = 2; i < rowCount; i++)
             {
                 try
                 {
-                    data.FirstName = xlRange.Cells[i, 1].Value2.ToString();
-                    data.LastName = xlRange.Cells[i, 2].Value2.ToString();
-                    data.EmployeeNo = xlRange.Cells[i, 3].Value2.ToString();
-                    data.Department = xlRange.Cells[i, 4].Value2.ToString();
-                    data.CostCode = xlRange.Cells[i, 5].Value2.ToString();
-                    data.EndUserStatus = xlRange.Cells[i, 6].Value2.ToString();
-
-                    string commencementDate = xlRange.Cells[i, 7].Value2.ToString();
-                    double d = double.Parse(commencementDate);
-                    DateTime conv = DateTime.FromOADate(d);
-
-                    data.CommencementDate = conv;
-                    string terminationDate = xlRange.Cells[i, 7].Value2.ToString();
-                    double e = double.Parse(terminationDate);
-                    DateTime conv1 = DateTime.FromOADate(e);
-
-                    data.TerminationDate = conv1;
-                    data.EndUser_Company = Convert.ToInt32(xlRange.Cells[i, 9].Value2.ToString());
-                    data.UserName = xlRange.Cells[i, 10].Value2.ToString();
-                    data.EndUser_Site = Convert.ToInt32(xlRange.Cells[i, 11].Value2.ToString());
-                    var obj = EndUsersServicehelper.AddEndUser(data);
+                   
+                    SSNList.Add(xlRange.Cells[i, 1].Value2.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -137,8 +118,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             {
                 System.IO.File.Delete(info);
             }
+            TempData["SSNList"] = SSNList;
             Directory.Delete(Server.MapPath(".") + "\\UploadFile\\");
-            return new JsonResult { Data = "The file is loaded.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            RedirectToAction("GenerateReport", "Company");
+
+            return Json(null);
         }
     }
 }

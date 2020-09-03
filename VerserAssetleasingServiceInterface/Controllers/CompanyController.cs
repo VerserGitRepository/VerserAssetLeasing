@@ -134,6 +134,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [HttpPost]
         public JsonResult GenerateReport(string[] SSNNumber)
         {
+            if (SSNNumber == null)
+            {
+                if (TempData["SSNList"] != null)
+                {
+                    SSNNumber = ((List<string>)TempData["SSNList"]).ToArray();
+                }
+            }
             string tempPath = Path.Combine(folder, "TempFile.xml");
             string filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
             if (System.IO.File.Exists(filePath))
