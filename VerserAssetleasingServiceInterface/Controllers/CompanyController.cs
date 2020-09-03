@@ -125,7 +125,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             //return the file for download, this is an Excel 
             //so I set the file content type to "application/vnd.ms-excel"
-            return File(fullPath, "application/pdf", "Test.pdf");
+            return File(fullPath, "application/pdf", "BlanccoDeviceCertificateReport.pdf");
         }
         [HttpPost]
         public JsonResult GenerateReport(string[] SSNNumber)

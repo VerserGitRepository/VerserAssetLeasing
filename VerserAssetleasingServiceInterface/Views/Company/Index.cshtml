@@ -64,7 +64,8 @@
                         <li><a href="#tab3default" data-toggle="tab">CONTRACTS</a></li>
                         @*<li><a href="#tab4default" data-toggle="tab">CATALOUGES</a></li>*@
                         <li><a href="#tab5default" data-toggle="tab">END USERS</a></li>
-                        <li onclick="DivPopUp(this);"><a href="#tab6default" data-toggle="tab">ASSET ASSIGNMENT</a></li>
+                        <li><a href="#tab6default" data-toggle="tab">ASSET ASSIGNMENT</a></li>
+                        <li onclick="DivPopUp(this);"><a href="#tab7default" data-toggle="tab">BLANCCO CERTIFICATE REPORT</a></li>
 
                     </ul>
                 </div>
@@ -1099,21 +1100,10 @@ yes: { isHidden: true }
                 url: "./AssetPartialDiv",
                 type: "GET",
                 data: { "Id": $("#hiddenId").val() },
-                beforeSend: function () {
-                    obj = $.alert({
-                        boxWidth: '50px',
-                        useBootstrap: false,
-                        title: '',
-                        content: $("#spinner").html(),
-                        buttons: {
-                            yes: { isHidden: true }
-                        }
-                    })
-                },
+               
                 success: function (data) {
                     // debugger;
-                    $("#spinner").hide();
-                    obj.close();
+                  
                     var obj1 = $.confirm({
                         boxWidth: '600px',
                         useBootstrap: false,
