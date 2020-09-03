@@ -35,7 +35,7 @@ namespace VerserAssetleasingServiceInterface.Utils
             this.filePath = filePath;
            
         }
-        public int GetReportXML()
+        public string GetReportXML()
         {
             this.ErrorMessage = null;
             // Read file data
@@ -45,26 +45,23 @@ namespace VerserAssetleasingServiceInterface.Utils
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 data = new byte[fs.Length];
                 fs.Read(data, 0, data.Length);
-
                 string text = Encoding.UTF8.GetString(data);
                 text = text.Replace("search_value", ssn);
-
                 data = Encoding.UTF8.GetBytes(text);
                 fs.Close();
             }
             catch (Exception)
             {
-                return -4;
+                return null;
             }
-
             return ExportReportBytes(data);
         }
-        public int ExportReportBytes(byte[] data)
+        public string ExportReportBytes(byte[] data)
         {
             string serverAddress = ConfigurationManager.AppSettings["ServerAddress"];
             string user = ConfigurationManager.AppSettings["User"];
             string password = ConfigurationManager.AppSettings["Password"];
-
+            string FileName = DateTime.Now.ToString("yyyyMMddTHHmmss") + "-BlanccoCertificate.pdf";
             // Generate post objects
             Dictionary<string, object> postParameters = new Dictionary<string, object>();
             postParameters.Add("xmlRequest", new FileParameter(data, "blanccoXML", "application/xml"));
@@ -85,11 +82,11 @@ namespace VerserAssetleasingServiceInterface.Utils
                 {
                     request = (HttpWebRequest)WebRequest.Create(postURL);
                     if (request == null)
-                        return -5;
+                        return null;
                 }
                 catch (Exception)
                 {
-                    return -5;
+                    return null;
                 }
 
                 // Set so we accept all kinds of ssl certs
@@ -116,11 +113,9 @@ namespace VerserAssetleasingServiceInterface.Utils
                     requestStream.Write(formData, 0, formData.Length);
                     requestStream.Close();
                 }
-
-                HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse();
-
-                // Process response
-                // ExportedReport = XDocument.Load(new StreamReader(webResponse.GetResponseStream()));
+              
+                string PdfFilePath = LocationBlanccoPDFReports + FileName;
+                HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse();               
 
                 Stream stream1 = webResponse.GetResponseStream();
                 StreamReader responseReader1 = new StreamReader(stream1);
@@ -130,8 +125,12 @@ namespace VerserAssetleasingServiceInterface.Utils
                     responseReader1.BaseStream.CopyTo(memstream);
                     bytes = memstream.ToArray();
                 }
-                System.IO.File.WriteAllBytes(LocationBlanccoPDFReports + "BlanccoDeviceCertificateReport.pdf", bytes);
-                // sr.Read(ds, 0, ds.Length);
+                if (File.Exists(PdfFilePath))
+                {
+                    File.Delete(PdfFilePath);
+                }
+                File.WriteAllBytes(PdfFilePath, bytes);
+               
                 webResponse.Close();
             }
             catch (WebException web)
@@ -150,22 +149,20 @@ namespace VerserAssetleasingServiceInterface.Utils
                             ErrorMessage = fullResponse.TrimEnd('\n');
                         }
                     }
-
                     int statusCode = (int)response.StatusCode;
                     if (response != null)
                         response.Close();
-                    return statusCode;
+                    return  FileName ;
                 }
                 else
-                    return -10;
+                    return null;
             }
             catch (Exception ex)
             {
                 string str = ex.ToString();
-                return -20;
+                return null;
             }
-
-            return 200;
+            return FileName;
         }
         public static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {
