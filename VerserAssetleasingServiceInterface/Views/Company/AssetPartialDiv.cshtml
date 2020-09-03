@@ -143,17 +143,13 @@
             var newRow = ""
             if ($('#tblCustomers tbody').find('tr').length == 0) {
                 $('#tblCustomers tbody').append($(theeRow));
-
                 var row = $('#tblCustomers tbody').find("tr");
                 $(row).find('label').hide();
                 $(row).find("#txtActualQuantity").show();
                 $(row).find(".Edit").hide();
-
                 $(row).find(".Delete").show();
                 var multiselect = $(row).find('select');
-                $(multiselect).removeAttr('multiple');
-
-               
+                $(multiselect).removeAttr('multiple');            
 
 
             }
@@ -167,12 +163,9 @@
                 $(row).find('label').hide();
                 $(row).find("#txtActualQuantity").show();
                 $(row).find(".Edit").hide();
-
-                $(row).find(".Delete").show();
-               
+                $(row).find(".Delete").show();               
             }
         }
-
 
         $("body").on("click", "#btnSubmitChangeQuote", function () {
             debugger;
@@ -198,11 +191,9 @@
                     success: function (returnValue) {
                         window.open(returnValue.fileName,"_blank");
                     }
-                });
-         
+                });       
 
         });
-
 
     </script>
     <style>
