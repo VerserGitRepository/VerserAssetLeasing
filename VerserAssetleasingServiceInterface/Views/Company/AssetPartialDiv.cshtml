@@ -1,108 +1,66 @@
 ﻿
 @model  VerserAssetleasingServiceInterface.Models.SSNModel
-    @{
-        ViewBag.Title = "Opportunity Details";
-    }
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="~/Scripts/bootstrap-multiselect.js"></script>
-    <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
-    <div>
-        <div class="panel with-nav-tabs panel-default" style="width:235%;margin-bottom:0px">
-            <div class="panel-heading">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab11default" data-toggle="tab">Tab1</a></li>
-                    <li><a href="#tab14default" data-toggle="tab">Import Excel SSNs List</a></li>
-                     
-                </ul>
-            </div>
-            <div class="panel-body" style="margin-bottom:0px;margin-top:0px;padding:2px">
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab11default">
-                        <div class="footerDiv" style="margin:5PX;width:50%">
-                            <input type="button" class="btn-primary btn-sm" value="ADD SSN" id="btnSubmit" onclick="AddRow()" />
-                            <input type="submit" class="btn-primary btn-sm" value="Generate BLANCO Report" id="btnSubmitChangeQuote" />
-                            @*<input type="submit" class="btn-primary btn-sm" value="Import Excel SSNs List" id="btnSubmitChangeQuote1" />*@
-                        </div>
-                        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:0px;padding-top:0px;width:80%">
+@{
+    ViewBag.Title = "Opportunity Details";
+}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
-                            <div class="row col-md-6 table-bordered" style="width:auto;height:auto;margin:2px;">
-                                <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;margin-top:15px">
+    <div class="panel with-nav-tabs panel-default">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab11default" data-toggle="tab">Individual SSNs Report</a></li>
+                <li><a href="#tab14default" data-toggle="tab">Import Excel SSNs List</a></li>
+            </ul>
+        </div>
+        <div class="panel-body" style="margin-bottom:0px;margin-top:0px;padding:2px;width:90%">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab11default">
+                    <div class="footerDiv" style="margin:5PX;width:100%">
+                        <input type="button" class="btn-primary btn-sm" value="ADD SSN" id="btnSubmit" onclick="AddRow()" />
+                        <input type="submit" class="btn-primary btn-sm" value="GENERATE REPORT" id="btnSubmitChangeQuote" />
+                    </div>
+                    <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:0px;padding-top:0px;">
 
-                                    <thead style="background-color:#FFB605; color:white;height:0.2px;font-size:11px;padding-bottom:0px;">
-                                        <tr>
-                                            <th>SSN</th>
+                        <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;margin-top:15px">
+                            <thead style="background-color:#FFB605; color:white;height:0.2px;font-size:11px;padding-bottom:0px;">
+                                <tr>
+                                    <th>SSN</th>
+                                    <th style="width:5px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tr_clone">
+                                    <td>
+                                        @Html.TextBoxFor(model => model.SSN, new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn" })
+                                    </td>
+                                    <td width="5%">
+                                        <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                            <span><strong>Delete</strong></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                                            <th style="width:5px"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                    </div>
+                </div>
 
-
-                                        <tr class="tr_clone">
-                                            <td>
-
-                                                @Html.TextBoxFor(model => model.SSN, new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn" })
-
-                                            </td>
-
-                                            <td width="5%">
-
-                                                <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
-                                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                                                    <span><strong>Delete</strong></span>
-                                                </a>
-
-
-                                                @*<a class="Update" href="javascript:;" style="display:none" id="Update">Update</a>
-                                    <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
-                                                @*<a class="Delete" href="javascript:;">Delete</a>*@
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-
-
-                            </div>
+                <div class="tab-pane fade" id="tab14default">
+                    <p style="color:Highlight;font-size:smaller">Capation: Choose Excel File First Column Header as SSN (Only One Column In excel Sheet)</p><br />
+                    <div class="row" style="padding-left:10px">
+                        <div class="col-md-12">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" /><br />
+                            <input type="submit" class="btn-primary btn-default" value="SUBMIT" id="btnSubmit"/>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="tab14default">
-                        <div class="row" style="padding-left:20px">
-
-                            <div class="col-md-12">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                           aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                
-                                <input type="submit" class="btn-primary btn-lg" value="SUBMIT" id="btnSubmit" style="display:none;" />
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-        @*<div class="footerDiv" style="margin:5PX">
-            <input type="button" class="btn-primary btn-sm" value="ADD SSN" id="btnSubmit" onclick="AddRow()" />
-            <input type="submit" class="btn-primary btn-sm" value="Generate BLANCO Report" id="btnSubmitChangeQuote" />
-            <input type="submit" class="btn-primary btn-sm" value="Import Excel SSNs List" id="btnSubmitChangeQuote1" />
-        </div>*@
-
-    
-
-  
-    
+    </div>
 
     <script>
         var theeRow = "";
@@ -122,7 +80,7 @@
                 $("td", row).each(function () {
                     //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
                     $(this).find("span").show();
-                  
+
                     $(this).find("#txtActualQuantity").show();
                     $(this).find("label").hide();
                     //    $(this).toggleClass('selected');
@@ -226,7 +184,7 @@
                 $(row).find(".Edit").hide();
                 $(row).find(".Delete").show();
                 var multiselect = $(row).find('select');
-                $(multiselect).removeAttr('multiple');            
+                $(multiselect).removeAttr('multiple');
 
 
             }
@@ -240,74 +198,74 @@
                 $(row).find('label').hide();
                 $(row).find("#txtActualQuantity").show();
                 $(row).find(".Edit").hide();
-                $(row).find(".Delete").show();               
+                $(row).find(".Delete").show();
             }
         }
 
         $("body").on("click", "#btnSubmitChangeQuote", function () {
-            debugger;
+          
             var array = [];
-           $('#tblCustomers>tbody>tr').find('input').each(function () {
-               array.push($(this).val());
-                
+            $('#tblCustomers>tbody>tr').find('input').each(function () {
+                array.push($(this).val());
+
             });
-            var text = JSON.stringify(array);  
-           
-                //var datapass = JSON.stringify({
-                //    'SSNNumber': ssn
-                //});
-                $.ajax({
+            var text = JSON.stringify(array);
 
-                    type: "POST",
-                    url: './GenerateReport',
-                    contentType: "application/json; charset=utf-8",
-                    data:  text ,
+            //var datapass = JSON.stringify({
+            //    'SSNNumber': ssn
+            //});
+            $.ajax({
 
-                    traditional: true,
-                    datatype: "json",
-                    success: function (returnValue) {
-                        window.open(returnValue.fileName,"_blank");
-                    }
-                });       
+                type: "POST",
+                url: './GenerateReport',
+                contentType: "application/json; charset=utf-8",
+                data: text,
+
+                traditional: true,
+                datatype: "json",
+                success: function (returnValue) {
+                    window.open(returnValue.fileName, "_blank");
+                }
+            });
 
         });
 
     </script>
     <style>
-            /*.modal-backdrop {
+        /*.modal-backdrop {
            background-color: transparent;
         }*/ .modal-dialog {
-                width: 850px;
-                margin: 30px auto;
-                margin-bottom: 10px;
-                font-size: 14px;
-            }
+            width: 850px;
+            margin: 30px auto;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
 
-            .table-hover > tbody > tr:hover > td,
-            .table-hover > tbody > tr:hover > th {
-                background-color: lightgray;
-            }
+        .table-hover > tbody > tr:hover > td,
+        .table-hover > tbody > tr:hover > th {
+            background-color: lightgray;
+        }
 
 
-            .selected {
-                color: black;
-                background-color: lightgray;
-            }
+        .selected {
+            color: black;
+            background-color: lightgray;
+        }
 
-            .btn {
-                font-size: 10px;
-            }
+        .btn {
+            font-size: 10px;
+        }
 
-            table tr.active {
-                background: red;
-            }
+        table tr.active {
+            background: red;
+        }
 
-            a.btn {
-                -webkit-transform: scale(0.9);
-                -moz-transform: scale(0.6);
-                -o-transform: scale(0.6);
-                -webkit-transition-duration: 0.5s;
-                -moz-transition-duration: 0.5s;
-                -o-transition-duration: 0.5s;
-            }
+        a.btn {
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.6);
+            -o-transform: scale(0.6);
+            -webkit-transition-duration: 0.5s;
+            -moz-transition-duration: 0.5s;
+            -o-transition-duration: 0.5s;
+        }
     </style>

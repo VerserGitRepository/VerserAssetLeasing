@@ -176,8 +176,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
             xmlWriter.Close();
 
             PDFReportExporter exporter = new PDFReportExporter(filePath, SSNNumber.ToString());
-            exporter.GetReportXML();
-            return Json(new { fileName = VDBlanccoPDFReports + "BlanccoDeviceCertificateReport.pdf", errorMessage = "" });
+          var FileName=  exporter.GetReportXML();
+            return Json(new { fileName = VDBlanccoPDFReports + FileName, errorMessage = "" });
         }
     }
 }
