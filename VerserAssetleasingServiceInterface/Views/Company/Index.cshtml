@@ -618,13 +618,13 @@
         }
 
     function DownloadReport(ssn) {
-        var datapass = JSON.stringify({
-            'SSNNumber': ssn
-            });
+        var array = [];
+        array.push(ssn);
+        var datapass = JSON.stringify(array);  
         $.ajax({
 
             type: "POST",
-            url: './DownloadReport',
+            url: './GenerateReport',
             contentType: "application/json; charset=utf-8",
             data: datapass,
            
@@ -1115,7 +1115,7 @@ yes: { isHidden: true }
                     $("#spinner").hide();
                     obj.close();
                     var obj1 = $.confirm({
-                        boxWidth: '500px',
+                        boxWidth: '600px',
                         useBootstrap: false,
 
                         title: '',

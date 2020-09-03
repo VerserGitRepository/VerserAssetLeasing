@@ -5,6 +5,7 @@ using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml;
 using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
@@ -18,7 +19,6 @@ namespace VerserAssetleasingServiceInterface.Controllers
         private static string folder = HostingEnvironment.MapPath("~/");
         private static string blancco4filePath = "";
         private static string blancco5filePath = "";
-
         string _user = string.Empty;
         [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index()
@@ -126,6 +126,50 @@ namespace VerserAssetleasingServiceInterface.Controllers
             //return the file for download, this is an Excel 
             //so I set the file content type to "application/vnd.ms-excel"
             return File(fullPath, "application/pdf", "Test.pdf");
+        }
+        [HttpPost]
+        public JsonResult GenerateReport(string[] SSNNumber)
+        {
+            string tempPath = Path.Combine(folder, "TempFile.xml");
+            string filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+            XmlWriter xmlWriter = XmlWriter.Create(filePath);
+
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("request");
+            xmlWriter.WriteStartElement("export-report");
+            xmlWriter.WriteStartElement("report");
+            xmlWriter.WriteAttributeString("mode", "original");
+            xmlWriter.WriteEndElement();
+            foreach (string ssn in SSNNumber)
+            {
+                xmlWriter.WriteStartElement("search");
+                xmlWriter.WriteAttributeString("path", "user_data.fields.SSN");
+
+                xmlWriter.WriteAttributeString("value", ssn);
+
+                xmlWriter.WriteAttributeString("operator", "eq");
+                xmlWriter.WriteAttributeString("datatype", "string");
+                xmlWriter.WriteAttributeString("conjunction", "false");
+                xmlWriter.WriteEndElement();
+            }
+            xmlWriter.WriteStartElement("pdf-options");
+            xmlWriter.WriteAttributeString("pdfLanguage", "en_US");
+            xmlWriter.WriteAttributeString("embedBarcode", "false");
+            xmlWriter.WriteAttributeString("type", "albus_standard");
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+
+            PDFReportExporter exporter = new PDFReportExporter(filePath, SSNNumber.ToString());
+            exporter.GetReportXML();
+            return Json(new { fileName = HostingEnvironment.MapPath("~/") + SSNNumber + ".pdf", errorMessage = "" });
+
+
+
         }
 
 

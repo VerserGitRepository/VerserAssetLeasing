@@ -29,6 +29,12 @@ namespace VerserAssetleasingServiceInterface.Utils
             this.filePath = filePath;
             this.ssn = ssn;
         }
+        public PDFReportExporter(string filePath)
+        {
+
+            this.filePath = filePath;
+           
+        }
         public int GetReportXML()
         {
             this.ErrorMessage = null;

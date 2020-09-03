@@ -14,7 +14,7 @@
 
         </div>
 
-        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:0px;padding-top:0px;width:40%">
+        <div style="align-content:flex-start;align-self:flex-start;align-items:flex-start;padding-bottom:15px;padding-left:0px;padding-top:0px;width:60%">
 
             <div class="row col-md-12 table-bordered" style="width:auto;height:auto;margin:2px;">
                 <table class="table pull-left table-bordered table-responsive" id="tblCustomers" style="font-size:smaller;margin-top:15px">
@@ -79,8 +79,7 @@
                 $("td", row).each(function () {
                     //if ($(this).find("input").length > 0 || $(this).find("#txtComments").length > 0) {
                     $(this).find("span").show();
-                    $(this).find($(".ddlserviceNewOpn")).next().show();
-                    $('.ddlserviceNewOpn').multiselect('rebuild');
+                  
                     $(this).find("#txtActualQuantity").show();
                     $(this).find("label").hide();
                     //    $(this).toggleClass('selected');
@@ -154,17 +153,7 @@
                 var multiselect = $(row).find('select');
                 $(multiselect).removeAttr('multiple');
 
-                $(multiselect).multiselect({
-
-                    includeSelectAllOption: false,
-                    maxHeight: 250,
-                    buttonWidth: '280px',
-                    enableFiltering: true,
-                    enableCaseInsensitiveFiltering: true,
-                    multiple: false
-
-                });
-                $(multiselect).multiselect('refresh');
+               
 
 
             }
@@ -180,59 +169,37 @@
                 $(row).find(".Edit").hide();
 
                 $(row).find(".Delete").show();
-                $(row).find('select').each(function () {
-                    //     alert('ddl');
-                    //  $(this).removeAttr('multiple')
-
-                    switch (document.readyState) {
-                        case "loading":
-                            // The document is still loading.
-                            break;
-                        case "interactive":
-                            // The document has finished loading. We can now access the DOM elements.
-                            // But sub-resources such as images, stylesheets and frames are still loading.
-
-                            break;
-                        case "complete":
-                            // The page is fully loaded.
-
-                            $(this).multiselect({
-
-                                includeSelectAllOption: false,
-                                maxHeight: 250,
-                                buttonWidth: '280px',
-                                enableFiltering: true,
-                                enableCaseInsensitiveFiltering: true
-
-                            });
-
-                            break;
-                    }
-                    //  $(this).removeAttr('multiple');
-                    $(this).multiselect('refresh');
-                });
+               
             }
         }
 
 
         $("body").on("click", "#btnSubmitChangeQuote", function () {
-
-
-            var obj = $.confirm({
-                boxWidth: '700px',
-                useBootstrap: false,
-
-                title: '',
-                content: "Are you sure to submit the Quote?",
-                closeIcon: true,
-
-                buttons: {
-                    OK: function () { GenerateChangedQuote(); },
-                    CANCEL: function () { return; }
-                }
+            debugger;
+            var array = [];
+           $('#tblCustomers>tbody>tr').find('input').each(function () {
+               array.push($(this).val());
+                
             });
-            $(obj).close();
-            //Loop through the Table rows and build a JSON array.
+            var text = JSON.stringify(array);  
+           
+                //var datapass = JSON.stringify({
+                //    'SSNNumber': ssn
+                //});
+                $.ajax({
+
+                    type: "POST",
+                    url: './GenerateReport',
+                    contentType: "application/json; charset=utf-8",
+                    data:  text ,
+
+                    traditional: true,
+                    datatype: "json",
+                    success: function (returnValue) {
+                        window.location = '/Company/Download?file=' + returnValue.fileName;
+                    }
+                });
+         
 
         });
 
