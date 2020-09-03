@@ -20,7 +20,7 @@ namespace VerserAssetleasingServiceInterface.Utils
        
         public string filePath;
         public string ssn;
-        bool IsDiskInserted = false;
+       static readonly  string  LocationBlanccoPDFReports = ConfigurationManager.AppSettings["LocationBlanccoPDFReports"];
         public XDocument ExportedReport { get; private set; }
         public string ErrorMessage { get; private set; }
         public PDFReportExporter( string filePath, string ssn)
@@ -130,12 +130,8 @@ namespace VerserAssetleasingServiceInterface.Utils
                     responseReader1.BaseStream.CopyTo(memstream);
                     bytes = memstream.ToArray();
                 }
-
-                System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/") + ssn + ".pdf", bytes);
+                System.IO.File.WriteAllBytes(LocationBlanccoPDFReports + "BlanccoDeviceCertificateReport.pdf", bytes);
                 // sr.Read(ds, 0, ds.Length);
-
-
-
                 webResponse.Close();
             }
             catch (WebException web)

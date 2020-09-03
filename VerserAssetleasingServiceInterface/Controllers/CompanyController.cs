@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
@@ -17,10 +19,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
     public class CompanyController : Controller
     {
         private static string folder = HostingEnvironment.MapPath("~/");
+        string VDBlanccoPDFReports = ConfigurationManager.AppSettings["VDBlanccoPDFReports"];        
+       // string folder = ConfigurationManager.AppSettings["LocationBlanccoPDFReports"];
         private static string blancco4filePath = "";
         private static string blancco5filePath = "";
-        string _user = string.Empty;
-        [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
+        string _user = string.Empty;        
+        [OutputCache(CacheProfile = "OneHour", VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]       
+
         public ActionResult Index()
         {
             string _user=Session["Username"].ToString();
@@ -102,19 +107,16 @@ namespace VerserAssetleasingServiceInterface.Controllers
             var model = new SSNModel();           
             return PartialView("AssetPartialDiv",model);
         }
-        [HttpPost]
-        public JsonResult DownloadReport(string SSNNumber)
-        {
-            blancco4filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
-            blancco5filePath = Path.Combine(folder, @"web-service-request-export-report5.xml");
+        //[HttpPost]
+        //public JsonResult DownloadReport(string SSNNumber)
+        //{            
+        //    blancco4filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
+        //    blancco5filePath = Path.Combine(folder, @"web-service-request-export-report5.xml");
             
-            PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, SSNNumber);
-            exporter.GetReportXML();
-            return Json(new { fileName = HostingEnvironment.MapPath("~/") + SSNNumber + ".pdf", errorMessage = "" });
-
-
-
-        }
+        //    PDFReportExporter exporter = new PDFReportExporter( blancco4filePath, SSNNumber);
+        //    exporter.GetReportXML();
+        //    return Json(new { fileName = VDBlanccoPDFReports + SSNNumber + ".pdf", errorMessage = "" });
+        //}
         [HttpGet]
         //Action Filter, it will auto delete the file after download, 
        
@@ -122,11 +124,13 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             //get the temp folder and file path in server
             string fullPath =  file;
-
             //return the file for download, this is an Excel 
             //so I set the file content type to "application/vnd.ms-excel"
+           
             return File(fullPath, "application/pdf", "BlanccoDeviceCertificateReport.pdf");
+
         }
+
         [HttpPost]
         public JsonResult GenerateReport(string[] SSNNumber)
         {
@@ -166,12 +170,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
 
             PDFReportExporter exporter = new PDFReportExporter(filePath, SSNNumber.ToString());
             exporter.GetReportXML();
-            return Json(new { fileName = HostingEnvironment.MapPath("~/") + SSNNumber + ".pdf", errorMessage = "" });
-
-
-
+            return Json(new { fileName = VDBlanccoPDFReports + "BlanccoDeviceCertificateReport.pdf", errorMessage = "" });
         }
-
-
     }
 }
