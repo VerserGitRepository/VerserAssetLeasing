@@ -632,7 +632,7 @@
             traditional: true,
             datatype: "json",
             success: function (returnValue) {
-                window.location = '/Company/Download?file=' + returnValue.fileName;
+                window.open(returnValue.fileName, "_blank");
             }
         });
     }
