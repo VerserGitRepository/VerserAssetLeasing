@@ -19,8 +19,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
     public class CompanyController : Controller
     {
         private static string folder = HostingEnvironment.MapPath("~/");
-        string VDBlanccoPDFReports = ConfigurationManager.AppSettings["VDBlanccoPDFReports"];        
-       // string folder = ConfigurationManager.AppSettings["LocationBlanccoPDFReports"];
+         string VDBlanccoPDFReports = ConfigurationManager.AppSettings["VDBlanccoPDFReports"];   
+       // string VDBlanccoPDFReports = HostingEnvironment.MapPath("~/");
+        // string folder = ConfigurationManager.AppSettings["LocationBlanccoPDFReports"];
         private static string blancco4filePath = "";
         private static string blancco5filePath = "";
         string _user = string.Empty;        
