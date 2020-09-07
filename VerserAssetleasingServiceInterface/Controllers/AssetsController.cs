@@ -8,9 +8,8 @@ using System.Web.UI.WebControls;
 using VerserAssetleasingServiceInterface.Authorize;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
-using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
-using System.Runtime.InteropServices;
+using System.Data.OleDb;
+using System.Data;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
@@ -21,7 +20,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         public ActionResult Index()
         {
             var assetsdata = new List<AssetsListViewModel>();
-           // assetsdata = AssetsServicehelper.AssetsList().Result;
+            // assetsdata = AssetsServicehelper.AssetsList().Result;
             return View(assetsdata);
         }
         [HttpGet]
@@ -35,7 +34,7 @@ namespace VerserAssetleasingServiceInterface.Controllers
         [HttpPost]
         public ActionResult ExportTimesSheetToExcel(FormCollection form)
         {
-           
+
             string Orderno = form["hiddenAssetId"];
             var assets = new List<JBHiFiAssetsModel>();
             if (Session["Username"] == null)
@@ -68,61 +67,65 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             var fileType = Request.Form["FileUpload"];
             bool errorOccurred = false;
-            string fileName="";
-           // HttpPostedFileBase file = Request.Files["UploadExcelFile"];
+            string fileName = "";
+            List<string> ssnList = new List<string>();
+            // HttpPostedFileBase file = Request.Files["UploadExcelFile"];
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 HttpPostedFileBase file = Request.Files[i]; //Uploaded file
                                                             //Use the following properties to get file's name, size and MIMEType
                 int fileSize = file.ContentLength;
-                fileName = file.FileName;
+                fileName = "SSNList.xls";
                 string mimeType = file.ContentType;
                 if (!Directory.Exists(Server.MapPath(".") + "//UploadFile//"))
                 {
-                    Directory.CreateDirectory(Server.MapPath(".") + "//UploadFile//");                  
+                    Directory.CreateDirectory(Server.MapPath(".") + "//UploadFile//");
                 }
-                file.SaveAs(Server.MapPath(".") + "//UploadFile//" + file.FileName);
+                file.SaveAs(Server.MapPath(".") + "//UploadFile//SSNList.xls");
             }
-            
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open((Server.MapPath(".") + "\\UploadFile\\"+ fileName));
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            Range cells = xlRange.Worksheet.Cells;
-           
-            int rowCount = xlRange.Rows.Count;
-            List<string> SSNList = new List<string>();
-            for (int i = 2; i < rowCount; i++)
-            {
-                try
-                {
-                   
-                    SSNList.Add(xlRange.Cells[i, 1].Value2.ToString());
-                }
-                catch (Exception ex)
-                {
-                    errorOccurred = true;
-                    continue;
-                }
-            }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            Marshal.ReleaseComObject(xlRange);
-            Marshal.ReleaseComObject(xlWorksheet);
 
-            xlWorkbook.Close();
-            Marshal.ReleaseComObject(xlWorkbook);
-            xlApp.Quit();
-            Marshal.ReleaseComObject(xlApp);
-            foreach (string info in Directory.GetFiles(Server.MapPath(".") + "\\UploadFile\\"))
+            string sheetName = "Sheet1$";// Read the whole excel sheet document      
+            DataTable sheetTable = loadSingleSheet(Server.MapPath(".") + "\\UploadFile\\" + fileName, sheetName);
+            foreach (DataRow dr in sheetTable.Rows)
+            {
+                ssnList.Add(dr.ItemArray[0].ToString());
+            }
+            if (ssnList.Count > 0)
+            {
+                TempData["SSNList"] = ssnList;
+            }
+            else
+            {
+                TempData["SSNList"] = null;
+            }
+           
+            foreach (string info in Directory.GetFiles(Server.MapPath(".") + "//UploadFile//"))
             {
                 System.IO.File.Delete(info);
             }
-            TempData["SSNList"] = SSNList;
+            //TempData["SSNList"] = SSNList;
             Directory.Delete(Server.MapPath(".") + "\\UploadFile\\");
             RedirectToAction("GenerateReport", "Company");
 
             return Json(null);
         }
+        private OleDbConnection returnConnection(string fileName)
+        {
+            return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + "; Extended Properties='Excel 12.0 xml;HDR=YES;'");
+        }
+
+        private DataTable loadSingleSheet(string fileName, string sheetName)
+        {
+            DataTable sheetData = new DataTable();
+            using (OleDbConnection conn = this.returnConnection(fileName))
+            {
+                conn.Open();
+                // retrieve the data using data adapter
+                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + sheetName + "]", conn);
+                sheetAdapter.Fill(sheetData);
+            }
+            return sheetData;
+        }
+
     }
 }
