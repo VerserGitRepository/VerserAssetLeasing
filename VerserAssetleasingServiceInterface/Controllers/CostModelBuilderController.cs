@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using VerserAssetleasingServiceInterface.Models;
 using VerserAssetleasingServiceInterface.ServiceImplentationhelper;
+using VerserAssetleasingServiceInterface.Utils;
 
 namespace VerserAssetleasingServiceInterface.Controllers
 {
@@ -40,35 +41,35 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             string opportunityNumber = "";
             string salesForceUniqueId = "";
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
-                {
+            //if (Session["Username"] == null)
+            //{
+            //    return RedirectToAction("Login", "Login");
+            //}
+            //else
+            //{
+            //    if (CostModelServicesHelpers.CreateSalesForceOpportunity(opportunity, out opportunityNumber, out salesForceUniqueId))
+            //    {
 
-                    var RequestQuoteModel = new PostQuoteRequestModel();
-                    RequestQuoteModel.ProjectManager = "Arman";
-                    RequestQuoteModel.SalesManager = "Danny";
-                    RequestQuoteModel.VerserBranch = "Sydney";
-                    RequestQuoteModel.CustomerName = opportunity.Customer;
-                    RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
-                    RequestQuoteModel.OpportunityNumber = Convert.ToInt32(opportunityNumber);
-                    RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
-                    RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
-                    RequestQuoteModel.StartDate = opportunity.StartDate;
-                    RequestQuoteModel.Email = opportunity.Email;
+            //        var RequestQuoteModel = new PostQuoteRequestModel();
+            //        RequestQuoteModel.ProjectManager = "Arman";
+            //        RequestQuoteModel.SalesManager = "Danny";
+            //        RequestQuoteModel.VerserBranch = "Sydney";
+            //        RequestQuoteModel.CustomerName = opportunity.Customer;
+            //        RequestQuoteModel.CustomerContactName = opportunity.CustomerContactName;
+            //        RequestQuoteModel.OpportunityNumber = Convert.ToInt32(opportunityNumber);
+            //        RequestQuoteModel.OpportunityName = opportunity.OpportunityName;
+            //        RequestQuoteModel.SiteAddress = opportunity.SiteAddress;
+            //        RequestQuoteModel.StartDate = opportunity.StartDate;
+            //        RequestQuoteModel.Email = opportunity.Email;
 
-                    var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
-                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + opportunityNumber + " - Id:" + IsRequestCompleted.Id + "-salesForceUniqueId:" + salesForceUniqueId, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-                }
-            }
+            //        var IsRequestCompleted = QuoteRequestHelperService.PostQuoteRequest(RequestQuoteModel).Result;
+                    return Json("Salesforce Opportunity has been successfully created with Opportunity Number :" + 31442 + " - Id:" + 6 + "-salesForceUniqueId:" + 123, JsonRequestBehavior.AllowGet);
+                //}
+                //else
+                //{
+                //    return new JsonResult { Data = "An error occurred while processing the request.", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                //}
+            //}
 
         }
 
@@ -160,7 +161,9 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 JBHIFiCostModelServiceItems item = new JBHIFiCostModelServiceItems();
                 AllRecords.ServiceItemsLists.Add(item);
             }
+
             AllRecords.CostModelQuoteRequestModel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+            AllRecords.CostModelQuoteRequestModel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
             return PartialView("CostModelOppDetails", AllRecords);
         }
 
@@ -274,38 +277,17 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
         }
         [HttpPost]
-        public ActionResult ExportToExcel(JBHiFiCostmodelServiceRequestDetailsModel RequestQuoteModel)
+        public JsonResult ExportToExcel(JBHiFiCostmodelServiceRequestDetailsModel RequestQuoteModel)
         {
 
             if (Session["Username"] == null)
             {
-                return RedirectToAction("Login", "Login");
+                return Json(null);
             }
             else
             {
-                ExcelHelper.GenerateExcelCostModel(RequestQuoteModel);
-
-                
-
-
-                //GridView gv = new GridView();
-                //gv.DataSource = null;
-                //gv.DataBind();
-                //Response.ClearContent();
-                //Response.Buffer = true;
-                //Response.AddHeader("content-disposition", "attachment; filename=OpportunityList.xls");
-                //Response.ContentType = "application/ms-excel";
-                //Response.Charset = "";
-                //StringWriter sw = new StringWriter();
-                //HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
-                //gv.RenderControl(htw);
-                //Response.Output.Write(sw.ToString());
-                //Response.Flush();
-                //Response.End();
-                return new JsonResult { Data = "Exported", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-               
-
-
+                PDFBuilder.generatePFD(RequestQuoteModel);
+                return Json(new { fileName = @"C:\Temp\Test.pdf", errorMessage = "" });
             }
         }
         [HttpGet]

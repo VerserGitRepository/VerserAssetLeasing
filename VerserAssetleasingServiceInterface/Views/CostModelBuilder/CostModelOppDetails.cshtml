@@ -124,37 +124,42 @@
 
                     @foreach (var item in Model.ServiceItemsLists)
                     {
-                        <tr class="tr_clone">
-                            <td>
-                                @Html.Label(@item.ServiceDescription==null?string.Empty:item.ServiceDescription)
-                                @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceId, Model.CostModelQuoteRequestModel.CostModelServices, "Service", new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn", @multiple = "multiple", @style = "display:none" })
+                    <tr class="tr_clone">
+                        <td>
+                            @Html.Label(@item.ServiceCategory == null ? string.Empty : item.ServiceCategory)
+                            @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceCategoryId, Model.CostModelQuoteRequestModel.CostModelServicesCategories, "Service Category", new { @class = "ddlserviceCategory", @id = "ddlserviceCategory", @multiple = "multiple", @style = "display:none" })
 
-                            </td>
-                            <td>
-                                @Html.Label(@item.Quantity.ToString())
-                                <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" onchange="CalculatePrice(this);" />
-                            </td>
-                            <td>  <span>@item.TotalPrice.ToString()</span></td>
-                            <td width="5%">
-                                <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <span><strong>Edit</strong></span>
-                                </a>
-                                <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
-                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                                    <span><strong>Delete</strong></span>
-                                </a>
+                        </td>
+                        <td>
+                            @Html.Label(@item.ServiceDescription == null ? string.Empty : item.ServiceDescription)
+                            @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceId, Model.CostModelQuoteRequestModel.CostModelServices, "Service", new { @class = "ddlserviceNewOpn", @id = "ddlserviceNewOpn", @multiple = "multiple", @style = "display:none" })
 
-                                <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                    <span><strong>Cancel</strong></span>
-                                </a>
+                        </td>
+                        <td>
+                            @Html.Label(@item.Quantity.ToString())
+                            <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" onchange="CalculatePrice(this);" />
+                        </td>
+                        <td>  <span>@item.TotalPrice.ToString()</span></td>
+                        <td width="5%">
+                            <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                <span><strong>Edit</strong></span>
+                            </a>
+                            <a class="Delete btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                <span><strong>Delete</strong></span>
+                            </a>
 
-                                @*<a class="Update" href="javascript:;" style="display:none" id="Update">Update</a>
-                        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
-                                @*<a class="Delete" href="javascript:;">Delete</a>*@
-                            </td>
-                        </tr>
+                            <a class="Cancel btn btn-danger a-btn-slide-text" href="javascript:;" style="display:none">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span><strong>Cancel</strong></span>
+                            </a>
+
+                            @*<a class="Update" href="javascript:;" style="display:none" id="Update">Update</a>
+            <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>*@
+                            @*<a class="Delete" href="javascript:;">Delete</a>*@
+                        </td>
+                    </tr>
                     }
                 </tbody>
 
@@ -209,7 +214,18 @@
             enableCaseInsensitiveFiltering: true
 
         });
+        $('.ddlserviceCategory').removeAttr('multiple')
+        $('.ddlserviceCategory').multiselect({
+
+            includeSelectAllOption: false,
+            maxHeight: 250,
+            buttonWidth: '280px',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true
+
+        });
         $(".ddlserviceNewOpn").next().hide();
+        $(".ddlserviceCategory").next().hide();
         $("body").on("click", "#tblCustomers .Edit", function () {
 
             var row = $(this).closest("tr");
@@ -218,6 +234,8 @@
                 $(this).find("span").show();
                 $(this).find($(".ddlserviceNewOpn")).next().show();
                 $('.ddlserviceNewOpn').multiselect('rebuild');
+                $(this).find($(".ddlserviceCategory")).next().show();
+                $('.ddlserviceCategory').multiselect('rebuild');
                 $(this).find("#txtActualQuantity").show();
                 $(this).find("label").hide();
                 //    $(this).toggleClass('selected');
@@ -248,6 +266,7 @@
             var row = $(this).closest("tr");
             $("td", row).each(function () {
                 $(this).find($(".ddlserviceNewOpn")).next().hide();
+                $(this).find($(".ddlserviceCategory")).next().hide();
                 //$('.ddlserviceNewOpn').multiselect('rebuild');
                 $(this).find("#txtActualQuantity").hide();
                 $(this).find("label").show();
@@ -441,7 +460,7 @@
 
             var CostModelRateCard = {};
             CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenServiceQuoteId").val();
-            CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
+            CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").eq(1).find('select').val();
             CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text() == 0 ? row.find("td").eq(1).find('input').text() : row.find("td").eq(1).find('label').text();
             CostModelRateCard.TotalPrice = row.find("td").eq(2).find('span').text();
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
@@ -530,7 +549,7 @@
             dataType: "json",
             success: function (r) {
 
-
+                window.open(r.fileName, "_blank");
 
             }
         });

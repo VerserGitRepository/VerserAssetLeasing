@@ -146,7 +146,7 @@
             formdata.append("FileUpload", "CertificateUpload");
             //Creating an XMLHttpRequest and sending
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/VerserAssetLease/Assets/ImportSSN');
+            xhr.open('POST', '/Assets/ImportSSN');
             xhr.send(formdata);
             xhr.onreadystatechange = function (data) {
                 if (xhr.readyState == 4 && xhr.status == 200) {

@@ -137,10 +137,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
         {
             if (SSNNumber == null)
             {
-                if (TempData["SSNList"] != null)
-                {
-                    SSNNumber = ((List<string>)TempData["SSNList"]).ToArray();
-                }
+                SSNNumber = ((List<string>)TempData["SSNList"]).ToArray();
+               
             }
             string tempPath = Path.Combine(folder, "TempFile.xml");
             string filePath = Path.Combine(folder, @"web-service-request-export-report4.xml");
