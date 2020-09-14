@@ -127,7 +127,7 @@
                     <tr class="tr_clone">
                         <td>
                             @Html.Label(@item.ServiceCategory == null ? string.Empty : item.ServiceCategory)
-                            @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceCategoryId, Model.CostModelQuoteRequestModel.CostModelServicesCategories, "Service Category", new { @class = "ddlserviceCategory", @id = "ddlserviceCategory", @multiple = "multiple", @style = "display:none" })
+                            @Html.DropDownListFor(model => model.CostModelQuoteRequestModel.CostModelServiceCategoryId, Model.CostModelQuoteRequestModel.CostModelServicesCategories, "Service Category", new { @class = "ddlserviceCategory", @id = "ddlserviceCategory", @multiple = "multiple", @style = "display:none",@onchange= "GetServiceCategories(this);" })
 
                         </td>
                         <td>
@@ -187,7 +187,7 @@
             <div class="footerDiv" style="margin:5PX">
                 <input type="button" class="btn-primary btn-sm" value="ADD SERVICE" id="btnSubmit" onclick="AddRow()" />
                 <input type="submit" class="btn-primary btn-sm" value="Save Changes" id="btnSubmitChangeQuote" />
-                <input type="submit" class="btn-primary btn-sm" value="Export to Excel" id="btnExportExcel" onclick="ExportToExcel();" />
+                <input type="submit" class="btn-primary btn-sm" value="Export to PDF" id="btnExportExcel" onclick="ExportToExcel();" />
             </div>
         </div>
     </div>
@@ -405,7 +405,24 @@
 
 
     }
+    function GetServiceCategories(ctrl) {
+        debugger;
+        var row = $(ctrl).closest("tr");
 
+        var loadUrl = '@Url.Action("FillServiceCategories", "CostModelBuilder")';
+        var loads = $(row).find('#ddlserviceNewOpn');
+        $(row).find('#ddlserviceNewOpn').empty().multiselect('refresh')
+        var id = $(row).find('#ddlserviceCategory').val();
+        $.getJSON(loadUrl, { serviceCategoryId: id }, function (response) {
+                            loads.empty(); // remove any existing options
+            loads.append($('<option></option>').text("Service Category").val(null));
+                            $.each(response, function (index, item) {
+                                loads.append($('<option></option>').text(item.Value).val(item.Id));
+                            });
+            $(row).find('#ddlserviceNewOpn').removeAttr('multiple');
+            $(row).find('#ddlserviceNewOpn').multiselect('rebuild');
+                        });
+    }
     function calculateTotal() {
         var totalPrice = 0;
         $("#tblCustomers tbody").find('tr').each(function () {

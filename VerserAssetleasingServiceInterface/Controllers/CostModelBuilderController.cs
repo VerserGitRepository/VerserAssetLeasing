@@ -162,9 +162,19 @@ namespace VerserAssetleasingServiceInterface.Controllers
                 AllRecords.ServiceItemsLists.Add(item);
             }
 
-            AllRecords.CostModelQuoteRequestModel.CostModelServices = new SelectList(CostModelServicesHelpers.GetCostModelServices().Result, "ID", "Value");
+            AllRecords.CostModelQuoteRequestModel.CostModelServices = new SelectList(new List<ListItems>(), "ID", "Value");
             AllRecords.CostModelQuoteRequestModel.CostModelServicesCategories = new SelectList(CostModelServicesHelpers.GetCostModelServiceCategories().Result, "ID", "Value");
             return PartialView("CostModelOppDetails", AllRecords);
+        }
+
+        [HttpGet]
+        public JsonResult FillServiceCategories(int serviceCategoryId)
+        {
+
+            var AllRecords = new JBHiFiCostmodelServiceRequestDetailsModel();
+            
+            List<ListItems> list = CostModelServicesHelpers.GetCostModelServices(serviceCategoryId).Result;
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

@@ -114,6 +114,20 @@ namespace VerserAssetleasingServiceInterface.ServiceImplentationhelper
             }
             return returnmodel;
         }
+        public static async Task<List<ListItems>> GetCostModelServices(int serviceCategoryId)
+        {
+            List<ListItems> returnmodel = new List<ListItems>();
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(CostModelAPIURL);
+                HttpResponseMessage response = client.GetAsync(string.Format("JBHiFICostModelServices/JBHIFIServiceList/{0}", serviceCategoryId)).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    returnmodel = await response.Content.ReadAsAsync<List<ListItems>>();
+                }
+            }
+            return returnmodel;
+        }
         public static async Task<CostModelRateCard> GetPrice(int value1, int value2)
         {
             CostModelRateCard returnmodel = new CostModelRateCard();
