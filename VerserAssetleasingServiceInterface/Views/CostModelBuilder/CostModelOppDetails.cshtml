@@ -517,7 +517,7 @@
     }
 
     function ExportToExcel() {
-
+        debugger;
         var CostModelRateCardArr = new Array();
 
         var mainModel = {};
@@ -554,7 +554,7 @@
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
             CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
-            CostModelRateCard.ServiceDescription = row.find("td").find('select').find('option:selected').text();
+            CostModelRateCard.ServiceDescription = row.find("td")[1].find('#ddlserviceNewOpn').find('option:selected').text();
 
             mainModel.ServiceItemsLists.push(CostModelRateCard);
         });
