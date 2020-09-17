@@ -114,6 +114,7 @@
                 
                 <thead style="background-color:#FFB605; color:white;height:0.2px;font-size:11px;padding-bottom:0px;">
                     <tr>
+                        <th>SERVICE CATAGORIES</th>
                         <th>SERVICES</th>
                         <th>QUANTITY</th>
                         <th>TOTALPRICE</th>
@@ -139,7 +140,7 @@
                             @Html.Label(@item.Quantity.ToString())
                             <input type="text" id="txtActualQuantity" value="@item.Quantity" style="display:none;width:30px" onchange="CalculatePrice(this);" />
                         </td>
-                        <td>  <span>@item.TotalPrice.ToString()</span></td>
+                        <td>  <span id="spanTotalPrice">@item.TotalPrice.ToString()</span></td>
                         <td width="5%">
                             <a class="Edit btn btn-warning a-btn-slide-text" href="javascript:;">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -371,16 +372,16 @@
         }
     }
     function CalculatePrice(control) {
-
+        debugger;
         var CostModelDetailsURL = '@Url.Action("GetTotalPrice", "CostModelBuilder")';
             var ctrl = control.parentElement.parentElement;
         var totalPrice = 0;
-        var quantity = $(ctrl).find($($(ctrl).children()[1])).find('input').val();
-        $.getJSON(CostModelDetailsURL, { value1: $(ctrl).find($($(ctrl).children()[0])).find('select').val(), value2: quantity }, function (response) {
+        var quantity = $(control).val();
+        $.getJSON(CostModelDetailsURL, { value1: $($(ctrl).find('select')[1]).val(), value2: quantity }, function (response) {
             $(ctrl).find($($(ctrl).children()[2])).find('span').show();
-            var resr = $(ctrl).find($($(ctrl).children()[2])).find('span').text(response);
-            $(ctrl).find($($(ctrl).children()[1])).find('input').val(quantity);
-            $(ctrl).find($($(ctrl).children()[1])).find('label').text(quantity);
+            var resr = $(ctrl).find("#spanTotalPrice").text(response);
+            //$(ctrl).find($($(ctrl).children()[1])).find('input').val(quantity);
+            //$(ctrl).find($($(ctrl).children()[1])).find('label').text(quantity);
             //$(ctrl).find($($(ctrl).children()[0])).find('input').val($(ctrl).find($($(ctrl).children()[0])).find('select').val());
             //$(ctrl).find($($(ctrl).children()[1])).find('input').val($(ctrl).find($($(ctrl).children()[1])).find('select').val());
 
@@ -388,7 +389,7 @@
 
                 var row = $(this);
 
-                totalPrice += +row.find("td").eq(2).find('span').text();
+                totalPrice += +row.find("td").eq(3).find('span').text();
 
             });
             var roundTotal = totalPrice.toFixed(2);
@@ -410,17 +411,18 @@
         var row = $(ctrl).closest("tr");
 
         var loadUrl = '@Url.Action("FillServiceCategories", "CostModelBuilder")';
-        var loads = $(row).find('#ddlserviceNewOpn');
-        $(row).find('#ddlserviceNewOpn').empty().multiselect('refresh')
-        var id = $(row).find('#ddlserviceCategory').val();
+        var loads = $(row).find('.ddlserviceNewOpn');
+        $(row).find('.ddlserviceNewOpn').empty().multiselect('refresh')
+        var id = $(row).find('.ddlserviceCategory').val();
         $.getJSON(loadUrl, { serviceCategoryId: id }, function (response) {
                             loads.empty(); // remove any existing options
             loads.append($('<option></option>').text("Service Category").val(null));
                             $.each(response, function (index, item) {
-                                loads.append($('<option></option>').text(item.Value).val(item.Id));
+                                loads.append($('<option></option>').text(item.Value).val(item.ID));
                             });
-            $(row).find('#ddlserviceNewOpn').removeAttr('multiple');
-            $(row).find('#ddlserviceNewOpn').multiselect('rebuild');
+            $(row).find('.ddlserviceNewOpn').removeAttr('multiple');
+            $(row).find('.ddlserviceNewOpn').multiselect('rebuild');
+            $(row).find('.ddlserviceNewOpn').multiselect('refresh');
                         });
     }
     function calculateTotal() {
@@ -429,7 +431,7 @@
 
             var row = $(this);
 
-            totalPrice += +row.find("td").eq(2).find('span').text();
+            totalPrice += +row.find("td").eq(3).find('span').text();
 
         });
         var roundTotal = totalPrice.toFixed(2);
@@ -515,7 +517,7 @@
     }
 
     function ExportToExcel() {
-
+        debugger;
         var CostModelRateCardArr = new Array();
 
         var mainModel = {};
@@ -552,7 +554,7 @@
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
             CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
-            CostModelRateCard.ServiceDescription = row.find("td").find('select').find('option:selected').text();
+            CostModelRateCard.ServiceDescription = row.find("td")[1].find('#ddlserviceNewOpn').find('option:selected').text();
 
             mainModel.ServiceItemsLists.push(CostModelRateCard);
         });

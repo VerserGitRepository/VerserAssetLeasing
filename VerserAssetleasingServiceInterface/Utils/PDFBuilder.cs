@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using VerserAssetleasingServiceInterface.Models;
 
@@ -66,20 +67,19 @@ namespace VerserAssetleasingServiceInterface.Utils
                 
             var page1 = document.AddPage();
             var gfx1 = XGraphics.FromPdfPage(page1);
+            //XTextFormatter format = new XGraphics.XTextFormatter();
 
-            gfx1.DrawString("By signing you accept that the deliverables stated in this document have been completed in totality or partially due to issues", font, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 40, 100);
-            gfx1.DrawString("arising and those issues being documented accordingly.", font, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 40, 110);
-           
-            gfx1.DrawString("Date Signed : " + DateTime.Now.ToShortDateString(), fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 40, 170);
-
-            gfx1.DrawString("Date Signed : " + DateTime.Now.ToShortDateString(), fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 300, 170);
+        
 
             gfx1.DrawRectangle(new XPen(XColor.FromArgb(0, 0, 0)), 10, 315, 550, 350);
             int i = 10;
 
-            XRect Addrrect1 = new XRect(20, 240, 180, 50);
-            gfx.DrawRectangle(XBrushes.White, Addrrect);
-
+            XRect Addrrect1 = new XRect(20, 315, 550, 350);
+            gfx1.DrawRectangle(XBrushes.Beige, Addrrect1);
+            gfx.DrawString("CATEGORY", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 20, 380);
+            gfx.DrawString("SERVICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 180, 380);
+            gfx.DrawString("QUANTITY", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 400, 380);
+            gfx.DrawString("PRICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 500, 380);
             foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel.ServiceItemsLists)
             {
                 gfx.DrawString(item.ServiceDescription + " Quantity - " + item.Quantity +" Total -"+ item.TotalPrice, font11, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 20, 420 + i);
@@ -87,13 +87,21 @@ namespace VerserAssetleasingServiceInterface.Utils
             }
 
 
-
-
-            gfx1.DrawString("If a risk is considered H or M, ensure that either:", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 20, 600);
-            gfx1.DrawString("-   The customer controls the risk; and/or", fontItalic, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 40, 620);
-            gfx1.DrawString("-   The Company has considered the risk and applied safety controls", fontItalic, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 40, 630);
-
-
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Quote Terms & Conditions	IMPORTANT - When placing orders please include full End User information - Company Name, Street Address, Phone Number, Contact Name and Email Address.");
+            sb.Append("PLEASE NOTE: The goods and services as set out in this quotation are accepted as per Ingram Micro's Pty Limited’s (Verser) Customer Terms of Sale. Please refer to Verser Australia website for full details.");
+            sb.Append("Unless otherwise stated, all prices quoted are in Australian Dollar Currency(AUD) and are exclusive of GST, freight, and configuration charges.");
+            sb.Append("Freight costs are based on standard road delivery.Air freight or any other form of special delivery will incur additional costs.");
+            sb.Append("Freight costs are based on standard road delivery.Air freight or any other form of special delivery will incur additional costs.");
+            sb.Append("xThe pricing specified above is not combinable with any other offer.");
+            sb.Append("Bundle pricing is subject to change in the event amendments are made to the quantity and/or bundle components ordered.Please contact your account manager should you require changes to the bundle lines.");
+            sb.Append("This quotation is valid only to the company whose name appears above.");
+            sb.Append("This quote has been prepared for one end user only. If this quotation is for more than one end user, please request separate quotations for each end user.");
+            sb.Append("The Ingram Micro reference number and all part numbers product descriptions and pricing specified in this quote must be included in your order.");
+            sb.Append("All trademarks, brand names, and product names are the property of their respective owners.");
+            sb.Append("The items quoted above are correct at time of publishing and issuing the quotation. All errors and omissions are excluded and no other discounts apply.Ingram Micro is not responsible for compensating the customer should the item(s) listed in this quote be withdrawn by the Vendor.");
+            gfx1.DrawString(sb.ToString(), fontBold, XBrushes.Black, Addrrect1, XStringFormats.TopLeft);
+          
             var fileName = Path.Combine(@"C:\Temp\"+Guid.NewGuid()+".pdf");
             document.Save(fileName);
         }
