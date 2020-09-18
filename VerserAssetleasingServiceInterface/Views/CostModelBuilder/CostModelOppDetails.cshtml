@@ -554,7 +554,8 @@
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
             CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
-            CostModelRateCard.ServiceDescription = row.find("td")[1].find('#ddlserviceNewOpn').find('option:selected').text();
+            CostModelRateCard.ServiceDescription = $(row.find("td")[1]).find('#ddlserviceNewOpn').find('option:selected').text() == "Service" ? $(row.find("td")[1]).find('label').text() : $(row.find("td")[1]).find('#ddlserviceNewOpn').find('option:selected').text();
+            CostModelRateCard.ServiceCategory = ($(row.find("td")[2]).find('#ddlserviceCategory').find('option:selected').text() == "Service Category" || $(row.find("td")[2]).find('#ddlserviceCategory').find('option:selected').text() == "") ? $(row.find("td")[2]).find('label').text() : $(row.find("td")[2]).find('#ddlserviceNewOpn').find('option:selected').text();
 
             mainModel.ServiceItemsLists.push(CostModelRateCard);
         });
@@ -568,8 +569,9 @@
             dataType: "json",
             success: function (r) {
 
-                window.open(r.fileName, "_blank");
-
+               
+                window.location.href = "./ExportTimesSheetToExcel?path=" + r.fileName;
+             
             }
         });
         $("#exportBtn").click();

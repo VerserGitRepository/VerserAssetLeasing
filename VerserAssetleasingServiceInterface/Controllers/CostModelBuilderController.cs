@@ -112,39 +112,11 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult ExportTimesSheetToExcel()
+       
+        public FileResult ExportTimesSheetToExcel(string path)
         {
 
-            List<JBHIFiCostModelQuoteRequests> QuoteModel = new List<JBHIFiCostModelQuoteRequests>();
-            if (Session["Username"] == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                string CurrentDate;
-                DateTime saveNow = DateTime.Now;
-                CurrentDate = saveNow.Date.ToShortDateString();
-                string reportContent ="";
-                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Assets/CostModelNewQuote.xls");
-                Byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-                using (StreamWriter outfile = new StreamWriter(filePath, true))
-                {
-                    outfile.WriteLine(reportContent);
-                }
-
-                System.IO.FileInfo file = new System.IO.FileInfo(filePath);
-                Response.Clear();
-                Response.Charset = "UTF-8";
-                Response.ContentEncoding = System.Text.Encoding.UTF8;
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name);
-                Response.AddHeader("Content-Length", file.Length.ToString());
-                Response.ContentType = "application/ms-excel";
-                Response.WriteFile(file.FullName);
-                Response.End();
-            }
-            return RedirectToAction("GenerateQuote", "CostModelBuilder");
+            return File(path, MimeMapping.GetMimeMapping(path), "CostModelQuote.pdf");
         }
         [HttpGet]
         public ActionResult CostModelOppDetails(int id)
@@ -296,8 +268,8 @@ namespace VerserAssetleasingServiceInterface.Controllers
             }
             else
             {
-                PDFBuilder.generatePFD(RequestQuoteModel);
-                return Json(new { fileName = @"C:\Temp\Test.pdf", errorMessage = "" });
+                string filePath = PDFBuilder.generatePFD(RequestQuoteModel);
+                return Json(new { fileName = filePath, errorMessage = "" });
             }
         }
         [HttpGet]
