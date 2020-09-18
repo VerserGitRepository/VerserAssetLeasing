@@ -42,21 +42,23 @@
 
                     <li>  @Html.ActionLink("CUSTOMERS", "Index", "Company")</li>
                     <li>@Html.ActionLink("GENERATE QUOTE", "GenerateQuote", "CostModelBuilder")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            MASTER  DATA
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Assets", "Index", "Assets")</li>
-                            <li>@Html.ActionLink("EndUsers", "Index", "EndUsers")</li>
-                            <li>@Html.ActionLink("Contracts", "Index", "Contracts")</li>
-                            <li>@Html.ActionLink("Carriers", "Index", "Carriers")</li>
-                            <li>@Html.ActionLink("Colours", "Index", "Colours")</li>
-                            <li>@Html.ActionLink("DeviceCategories", "Index", "DeviceCategories")</li>
-                            <li>@Html.ActionLink("InventoryItems", "Index", "Inventory")</li>
-                        </ul>
-                    </li>
+                    <li><a href="https://customers.verser.com.au/VerserDocsOnline/" target="_blank"></a></li>
+                    
+                    @*<li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                MASTER  DATA
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Assets", "Index", "Assets")</li>
+                <li>@Html.ActionLink("EndUsers", "Index", "EndUsers")</li>
+                <li>@Html.ActionLink("Contracts", "Index", "Contracts")</li>
+                <li>@Html.ActionLink("Carriers", "Index", "Carriers")</li>
+                <li>@Html.ActionLink("Colours", "Index", "Colours")</li>
+                <li>@Html.ActionLink("DeviceCategories", "Index", "DeviceCategories")</li>
+                <li>@Html.ActionLink("InventoryItems", "Index", "Inventory")</li>
+            </ul>
+        </li>*@
                     @if (VerserAssetleasingServiceInterface.ServiceImplentationhelper.UserRoles.UserAdminAccess())
                     {
                         <li>@Html.ActionLink("ADMINISTRATOR", "Index", "Users")</li>
