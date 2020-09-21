@@ -48,9 +48,9 @@ namespace VerserAssetleasingServiceInterface.Utils
             Stream stream = new MemoryStream(imgdata);
             image = XImage.FromStream(stream);
             gfx.DrawRectangle(new XPen(XColor.FromArgb(0, 0, 0)), 10, 50, 550, 180);
-            gfx.DrawImage(image, 400, 180, 100, 70);
+            gfx.DrawImage(image, 420, 80, 120, 100);
             gfx.DrawString("COST MODEL INFORMATION ", fontBoldHeadingUL17, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 150, 30);
-            XRect Addrrect = new XRect(20, 50, 180, 50);
+            XRect Addrrect = new XRect(20, 180, 180, 50);
             gfx.DrawRectangle(XBrushes.White, Addrrect);
 
 
@@ -80,28 +80,33 @@ namespace VerserAssetleasingServiceInterface.Utils
 
            
             gfx.DrawString("CATEGORY", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 20, 380);
-            gfx.DrawString("SERVICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 180, 380);
+            gfx.DrawString("SERVICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 200, 380);
             gfx.DrawString("QUANTITY", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 400, 380);
             gfx.DrawString("PRICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 500, 380);
             XTextFormatter tf = new XTextFormatter(gfx);
+           
             foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel.ServiceItemsLists)
             {
+                XRect serviceCategory = new XRect(20, 410+i, 180, 400);
+                XRect serviceDesc = new XRect(200, 410+i, 180, 400);
+                XRect quantity = new XRect(400, 410+i, 180, 400);
+                XRect price = new XRect(500, 410+i, 180, 400);
+                gfx.DrawRectangle(XBrushes.White, serviceDesc);
+                gfx.DrawRectangle(XBrushes.White, serviceCategory);
+                gfx.DrawRectangle(XBrushes.White, quantity);
+                gfx.DrawRectangle(XBrushes.White, price);
 
-                XRect serviceCategory = new XRect(20, 410, 180, 400 + i);
-                XRect serviceDesc = new XRect(180, 410, 180, 400 + i);
-                XRect quantity = new XRect(400, 410, 180, 400 + i);
-                XRect price = new XRect(500, 410, 180, 400+i);
-                gfx.DrawRectangle(XBrushes.Beige, serviceDesc);
-                tf.DrawString(item.ServiceCategory.Substring(0,50) , font, XBrushes.Black, serviceCategory, XStringFormats.TopLeft);
-                tf.DrawString(item.ServiceDescription , font, XBrushes.Black,serviceDesc, XStringFormats.TopLeft);
+
+                tf.DrawString(item.ServiceCategory.Substring(0, 50), font, XBrushes.Black, serviceCategory, XStringFormats.TopLeft);
+                tf.DrawString(item.ServiceDescription, font, XBrushes.Black, serviceDesc, XStringFormats.TopLeft);
                 tf.DrawString(item.Quantity.ToString(), font, XBrushes.Black, quantity, XStringFormats.TopLeft);
                 tf.DrawString(item.TotalPrice.ToString(), font, XBrushes.Black, price, XStringFormats.TopLeft);
-                i = i + 20;
+                i = i + 30;
             }
 
 
             StringBuilder sb = new StringBuilder();
-            XRect sb1 = new XRect(40, 70, 500, 450);
+            XRect sb1 = new XRect(40, 70, 500, 400);
             gfx1.DrawRectangle(XBrushes.Beige, sb1);
             XTextFormatter tf1 = new XTextFormatter(gfx1);
            
