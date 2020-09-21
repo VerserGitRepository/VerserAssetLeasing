@@ -549,13 +549,13 @@
             var CostModelRateCard = {};
             CostModelRateCard.FK_JBHIFIQuoteRequestID = $("#hiddenAssetId").val();
             CostModelRateCard.FK_JBHIFiCostModelServiceID = row.find("td").find('select').val();
-            CostModelRateCard.Quantity = row.find("td").eq(1).find('label').text();
-            CostModelRateCard.TotalPrice = row.find("td").eq(2).find('span').text();
+            CostModelRateCard.Quantity = row.find("td").eq(2).find('label').text();
+            CostModelRateCard.TotalPrice = row.find("td").eq(3).find('span').text();
             CostModelRateCard.TOTAL_Excl_GST = $("#tblCustomers").find('tfoot tr').eq(0).find('label').text();
             CostModelRateCard.GST_10 = $("#tblCustomers").find('tfoot tr').eq(1).find('label').text();
             CostModelRateCard.TOTAL_Incl_GST = $("#tblCustomers").find('tfoot tr').eq(2).find('label').text();
             CostModelRateCard.ServiceDescription = $(row.find("td")[1]).find('#ddlserviceNewOpn').find('option:selected').text() == "Service" ? $(row.find("td")[1]).find('label').text() : $(row.find("td")[1]).find('#ddlserviceNewOpn').find('option:selected').text();
-            CostModelRateCard.ServiceCategory = ($(row.find("td")[2]).find('#ddlserviceCategory').find('option:selected').text() == "Service Category" || $(row.find("td")[2]).find('#ddlserviceCategory').find('option:selected').text() == "") ? $(row.find("td")[2]).find('label').text() : $(row.find("td")[2]).find('#ddlserviceNewOpn').find('option:selected').text();
+            CostModelRateCard.ServiceCategory = ($(row.find("td")[0]).find('#ddlserviceCategory').find('option:selected').text() == "Service Category" || $(row.find("td")[0]).find('#ddlserviceCategory').find('option:selected').text() == "") ? $(row.find("td")[0]).find('label').text() : $(row.find("td")[0]).find('#ddlserviceNewOpn').find('option:selected').text();
 
             mainModel.ServiceItemsLists.push(CostModelRateCard);
         });

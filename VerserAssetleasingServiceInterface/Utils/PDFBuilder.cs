@@ -43,10 +43,14 @@ namespace VerserAssetleasingServiceInterface.Utils
             var imageName = Directory.GetCurrentDirectory() + "\\frogs.jpg";
             XImage image;
             XImage image1;
+           // Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "abc.txt");
+            byte[] imgdata = System.IO.File.ReadAllBytes(Directory.GetParent(HttpContext.Current.Server.MapPath("."))+"\\Images\\VerserLogo.png");
+            Stream stream = new MemoryStream(imgdata);
+            image = XImage.FromStream(stream);
             gfx.DrawRectangle(new XPen(XColor.FromArgb(0, 0, 0)), 10, 50, 550, 180);
-
+            gfx.DrawImage(image, 400, 180, 100, 70);
             gfx.DrawString("COST MODEL INFORMATION ", fontBoldHeadingUL17, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 150, 30);
-            XRect Addrrect = new XRect(20, 180, 180, 50);
+            XRect Addrrect = new XRect(20, 50, 180, 50);
             gfx.DrawRectangle(XBrushes.White, Addrrect);
 
 
@@ -79,16 +83,19 @@ namespace VerserAssetleasingServiceInterface.Utils
             gfx.DrawString("SERVICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 180, 380);
             gfx.DrawString("QUANTITY", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 400, 380);
             gfx.DrawString("PRICE", fontBold, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 500, 380);
-            
+            XTextFormatter tf = new XTextFormatter(gfx);
             foreach (JBHIFiCostModelServiceItems item in RequestQuoteModel.ServiceItemsLists)
             {
-                XTextFormatter tf = new XTextFormatter(gfx);
-                XRect serviceDesc = new XRect(180, 380, 180+i, 400+i);
+
+                XRect serviceCategory = new XRect(20, 410, 180, 400 + i);
+                XRect serviceDesc = new XRect(180, 410, 180, 400 + i);
+                XRect quantity = new XRect(400, 410, 180, 400 + i);
+                XRect price = new XRect(500, 410, 180, 400+i);
                 gfx.DrawRectangle(XBrushes.Beige, serviceDesc);
-                gfx.DrawString(item.ServiceCategory , font, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 20, 400 + i);
+                tf.DrawString(item.ServiceCategory.Substring(0,50) , font, XBrushes.Black, serviceCategory, XStringFormats.TopLeft);
                 tf.DrawString(item.ServiceDescription , font, XBrushes.Black,serviceDesc, XStringFormats.TopLeft);
-                gfx.DrawString(item.Quantity.ToString(), font, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 400, 400 + i);
-                gfx.DrawString(item.TotalPrice.ToString(), font, new XSolidBrush(XColor.FromArgb(0, 0, 0)), 500, 400 + i);
+                tf.DrawString(item.Quantity.ToString(), font, XBrushes.Black, quantity, XStringFormats.TopLeft);
+                tf.DrawString(item.TotalPrice.ToString(), font, XBrushes.Black, price, XStringFormats.TopLeft);
                 i = i + 20;
             }
 
