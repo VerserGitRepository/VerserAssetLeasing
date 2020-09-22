@@ -107,7 +107,7 @@ namespace VerserAssetleasingServiceInterface.Utils
 
             StringBuilder sb = new StringBuilder();
             XRect sb1 = new XRect(40, 70, 500, 400);
-            gfx1.DrawRectangle(XBrushes.Beige, sb1);
+            gfx1.DrawRectangle(XBrushes.White, sb1);
             XTextFormatter tf1 = new XTextFormatter(gfx1);
            
             sb.Append("Quote Terms & Conditions	IMPORTANT - When placing orders please include full End User information - Company Name, Street Address, Phone Number, Contact Name and Email Address.\r\n\r\n");
